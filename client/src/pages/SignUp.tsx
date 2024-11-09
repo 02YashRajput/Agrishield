@@ -1,0 +1,217 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import theme from "../theme/Theme";
+import logo from "../assets/AgriShieldLogoTransparent.png";
+import Background from "../components/Background";
+import Button from "@mui/material/Button";
+import { IoIosArrowBack } from "react-icons/io";
+import axios from "axios";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Divider,
+
+  IconButton,
+  Paper,
+  Typography,
+  TextField,
+} from "@mui/material";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
+import GoogleLoginButton from "../components/GoogleLoginButton";
+
+type UserType = "Farmer" | "Buyer" | "";
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+console.log(serverUrl);
+const signUpFormSchema = z.object({
+  userName: z.string().min(1, { message: "Name is required" }),
+  phone: z.string().min(10, { message: "Phone No. must be 10 numbers" }).max(10,{ message: "PPhone must be 10 numbers" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .regex(/[a-z]/, {
+      message: "Password must contain at least one lowercase letter",
+    })
+    .regex(/[A-Z]/, {
+      message: "Password must contain at least one uppercase letter",
+    })
+    .regex(/[0-9]/, { message: "Password must contain at least one number" })
+    .regex(/[@!#$%^&*(),.?":{}|<>]/, {
+      message:
+        "Password must contain at least one special character (@, !, #, $, etc.)",
+    }),
+});
+
+type SignUpFormSchema = z.infer<typeof signUpFormSchema>;
+
+const SignUp = () => {
+  const navigate = useNavigate();
+  const [userType, setUserType] = useState<UserType>("");
+  const [showUserTypeInput, setShowUserTypeInput] = useState(true);
+
+  const getColor = (type: UserType) => {
+    if (userType === type) return theme.palette.yellow?.dark;
+    return theme.palette.yellow?.main;
+  };
+
+  const form = useForm<SignUpFormSchema>({
+    resolver: zodResolver(signUpFormSchema),
+    defaultValues: {
+      userName: "",
+      phone: "",
+      email: "",
+      password: "",
+    },
+  });
+
+
+  const handleFormSubmit = async(data: SignUpFormSchema) => {
+   
+    try{
+      const signUpData = {...data, userType};
+     
+      await axios.post(`${serverUrl}/api/local/sign-up`, signUpData);
+      
+      toast.success("Sign up successful");
+      navigate("/");
+    }
+    catch(error:any){
+      toast.error(error.response.data.message || "An error occurred");
+      console.error(error);
+    }
+  }
+
+  return (
+    <div className="relative flex justify-center items-center overflow-hidden min-h-screen min-w-screen">
+      <Background />
+      <Paper sx={{ backgroundColor: "rgba(255,255,255,0.5)" }} className="z-50 flex">
+        <Card sx={{ backgroundColor: "transparent" }} className="flex flex-col items-center justify-center">
+          <CardMedia
+            component="img"
+            alt="AgriShield Logo"
+            image={logo}
+            sx={{ height: "18rem" }}
+          />
+          <CardContent className="flex items-center justify-center">
+            <Typography variant="h5" className="text-black  text-center">
+              Farm with Confidence
+              <br /> Market with Ease.
+            </Typography>
+          </CardContent>
+        </Card>
+        <Divider />
+        <Card sx={{ backgroundColor: "transparent" }} className="flex flex-col gap-5 p-5 items-center justify-center">
+          {showUserTypeInput ? (
+            <div className="flex flex-col gap-10">
+              <div className="flex gap-5 ">
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: getColor("Farmer") }}
+                  onClick={() => setUserType("Farmer")}
+                  className="w-full sm:w-auto"
+                >
+                  Farmer
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: getColor("Buyer") }}
+                  onClick={() => setUserType("Buyer")}
+                  className="w-full sm:w-auto mt-4"
+                >
+                  Buyer
+                </Button>
+              </div>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: (theme) => theme.palette.yellow?.main,
+                }}
+                onClick={() => {
+                  userType === "" ? toast.error("Please select a user type") : setShowUserTypeInput(false);
+                }}
+                className="w-full sm:w-auto mt-4"
+              >
+                Next
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Card sx={{ backgroundColor: "transparent" }} className="p-5">
+                <IconButton sx={{ color: "black", borderRadius: "50%" }} onClick={()=>setShowUserTypeInput(true)}>
+                  <IoIosArrowBack size="30" />
+                </IconButton>
+                <form onSubmit={form.handleSubmit(handleFormSubmit)} className="w-80 flex flex-col gap-5 mt-5">
+                  <TextField
+                    label="Name"
+                    fullWidth
+                    type="text"
+                    {...form.register("userName")}
+                    error={!!form.formState.errors.userName}
+                    helperText={form.formState.errors.userName?.message}
+                    color="secondary"
+                    
+
+                  />
+                  <TextField
+                    label="Phone"
+                    fullWidth
+                    type="text"
+                    {...form.register("phone")}
+                    error={!!form.formState.errors.phone}
+                    helperText={form.formState.errors.phone?.message}
+                   color="secondary"
+                  />
+                  <TextField
+                    label="Email"
+                    fullWidth
+                    type="email"
+                    {...form.register("email")}
+                    error={!!form.formState.errors.email}
+                    helperText={form.formState.errors.email?.message}
+                    color="secondary"
+                  />
+                  <TextField
+                    label="Password"
+                    fullWidth
+                    type="password"
+                    {...form.register("password")}
+                    error={!!form.formState.errors.password}
+                    helperText={form.formState.errors.password?.message}
+                    color="secondary"
+                  />
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                      backgroundColor: (theme) => theme.palette.yellow?.main,
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </form>
+                <Typography variant="h6" sx={{marginTop:"1rem",marginBottom:"1rem"}} className="text-black text-center" >Or</Typography>
+                <GoogleLoginButton userType={userType}/>
+              </Card>
+            </div>
+          )}
+
+          <Typography variant="body1" className="text-black">
+            Already have an account?{" "}
+            <Link to="/login" className="text-red-600">
+              Login
+            </Link>
+          </Typography>
+        </Card>
+      </Paper>
+    </div>
+  );
+};
+
+export default SignUp;
