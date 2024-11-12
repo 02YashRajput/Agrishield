@@ -34,6 +34,7 @@ interface Data {
   message: string;
   user?: {
     name: string;
+    profileImage: string;
   };
 }
 
@@ -44,14 +45,15 @@ const fetcher = (url: string) =>
     })
     .then((res) => res.data);
 
-const serverUrl = import.meta.env.VITE_SERVER_URL;
 const ContactUsForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { data, error } = useSWR<Data>(`${serverUrl}/api/`, fetcher);
+  const { data, error } = useSWR<Data>(`/api/`, fetcher);
 
   // Fallback to 'Guest' if user name is not available or in case of error
-  const name = data?.user?.name || "Guest";
 
+
+  const isLoggedIn = data?.user  ? true : false;
+  // Handle error state
   // Handle error state
   if (error) {
     return <ErrorPage />; // Show error page if there's an error
@@ -96,7 +98,7 @@ const ContactUsForm: React.FC = () => {
 
   return (
     <div>
-      <Header name={name} />
+      <Header name={data?.user?.name} profileImage={data?.user?.profileImage} isLoggedIn = {isLoggedIn} />
 
       <Paper
         sx={{

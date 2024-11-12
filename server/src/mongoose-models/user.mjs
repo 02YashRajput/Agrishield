@@ -27,6 +27,10 @@ const userSchema = new Schema({
     unique:true,
     match: [/^\d{10}$/, "Phone number must be 10 digits long"],
   },
+  profileImage: {
+    type: String,
+
+  },
   password: {
     type: String,
     required: true,
@@ -42,7 +46,10 @@ const userSchema = new Schema({
     enum: ['local', 'google'],
     default: 'local',
   },
-
+  isVerified:{
+    type: Boolean,
+    default: false,
+  }
 });
 
 

@@ -4,6 +4,9 @@ import { validationResult, matchedData } from "express-validator";
 import { hashPassword } from "../utils/hashPassword.mjs";
 import "../strategies/local-strategy.mjs";
 import { User } from "../mongoose-models/user.mjs";
+import jwt from 'jsonwebtoken';
+import { sendVerifcationEmail } from "../utils/sendEmail.mjs";
+
 
 const router = Router();
 
@@ -23,25 +26,19 @@ router.post("/api/local/sign-up", signUpLocalSchema, async (req, res) => {
     // Hash the password
     data.password = await hashPassword(data.password);
     data.provider = "local";
-    
+    data.profileImage = "";
     // Create a new user and save to the database
     const newUser = new User(data);
     const savedUser = await newUser.save();
     
     // Log the user in after successful signup
-    req.login(savedUser, async (err) => {
-      if (err) {
-        console.error("Error during login:", err);
-        return res
-          .status(500)
-          .send({ msg: "Error creating user and logging in" });
-      }
 
-      return res
+    const jwt_secret = process.env.JWT_SECRET
+    const token = jwt.sign({userId:savedUser.userId},jwt_secret);
+    sendVerifcationEmail(savedUser.email,token);
+    return res
         .status(201)
         .json({ msg: "User created and logged in successfully",success:true });
-    });
-
   } catch (err) {
     // Handle duplicate email error
     if (err.code === 11000 && err.keyPattern && err.keyPattern.email) {

@@ -10,11 +10,10 @@ const fetcher = (url: string) =>
     .get(url, { withCredentials: true })
     .then((res) => res.data);
 
-const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 const AdminDashboard: React.FC = () => {
   // Use SWR to fetch data from the API
-  const { data, error } = useSWR(`${serverUrl}/api/admin/dashboard`, fetcher);
+  const { data, error } = useSWR(`/api/admin/dashboard`, fetcher);
 
   // If there’s an error, render the ErrorPage component
   if (error) return <ErrorPage />;

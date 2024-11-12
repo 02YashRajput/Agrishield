@@ -25,19 +25,22 @@ router.post(
       return res.status(400).json({success:true, message: "Cannot log in using this method. Please use the correct provider." });
     }
 
-    console.log(req.user);
-    // Proceed with login if provider is 'local'
+    if(req.user.isVerified === false){
+      return res.status(400).json({ success:false, message: "Your account is not verified. Please verify your email." });
+    }
+
+  
     req.login(req.user, async (err) => {
       if (err) {
         console.error("Error during login:", err);
         return res
           .status(500)
-          .send({ msg: "Error logging in" });
+          .send({success:false, message: "Error logging in" });
       }
 
       return res
         .status(200)
-        .json({ msg: "User logged in successfully",success:true });
+        .json({ message: "User logged in successfully",success:true });
     });
 
   }

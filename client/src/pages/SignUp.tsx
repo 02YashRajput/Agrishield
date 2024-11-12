@@ -24,7 +24,6 @@ import toast from "react-hot-toast";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 
 type UserType = "Farmer" | "Buyer" | "";
-const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 
 const signUpFormSchema = z.object({
@@ -83,12 +82,14 @@ const SignUp:React.FC = () => {
     try{
       const signUpData = {...data, userType};
      
-      await axios.post(`${serverUrl}/api/local/sign-up`, signUpData,{
+      await axios.post(`/api/local/sign-up`, signUpData,{
         withCredentials: true, 
       });
       
       toast.success("Sign up successful");
-      navigate("/");
+      toast("Please verify your email using the link we've sent to your inbox.");
+
+      navigate("/login");
     }
     catch(error:any){
       toast.error(error.response.data.message || "An error occurred");

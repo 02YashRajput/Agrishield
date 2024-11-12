@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 import ContactUs from './pages/ContactUs';
 import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
+import Verification from './pages/Verification';
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
         <Route path="/contact-us" element={<ContactUs/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
+        <Route path="/verify-email" element={<Verification/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />

@@ -7,10 +7,7 @@ const farmerProfileSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  profileImage: {
-    type: String,
-    required: true,
-  },
+
   address: {
     name:{
       type: String,
@@ -104,6 +101,16 @@ const farmerProfileSchema = new mongoose.Schema({
     ],
     
   },
+  notificationPreferences: {
+    message:{
+      type: Boolean,
+      default: false,
+    },
+    email:{
+      type: Boolean,
+      default: false,
+    }
+  }
 }, { timestamps: true });
 
 
@@ -115,13 +122,38 @@ const buyerProfileSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  profileImage: {
-    type: String,
-    required: true,
-  },
+
   address: {
-    type: String,
-    required: true,
+    name:{
+      type: String,
+      required: true,
+    },
+    district:{
+      type: String,
+      required: true,
+    },
+    state:{
+      type: String,
+      required: true,
+    },
+    pinCode:{
+      type:String,
+      required: true,
+      match: /^[0-9]{6}$/,
+    },
+    location: {
+      latitude: {
+        type: Number,
+        min: -90,
+        max: 90,
+      },
+      longitude: {
+        type: Number,
+        min: -180,
+        max: 180,
+      },
+    },
+   
   },
   paymentInformation: {
     bankDetails: {
@@ -141,7 +173,7 @@ const buyerProfileSchema = new mongoose.Schema({
       IFSCCode: {
         type: String,
         required: true,
-        match: /^[A-Z]{4}0[A-Z0-9]{6}$/, // Example validation for IFSC code format
+        match: /^[A-Z]{4}0[A-Z0-9]{6}$/,
       },
     },
     upiDetails: {
@@ -152,22 +184,19 @@ const buyerProfileSchema = new mongoose.Schema({
       upiName: {
         type: String,
       },
-    },
-    CropsPreferences: [
-      {
-        type: String,
-        enum: [
-          'arhar', 'gram', 'masoor', 'rape', 'sunflower',
-          'bajra', 'groundnut', 'moong', 'safflower', 'urad',
-          'barley', 'jowar', 'niger', 'sesamum', 'wheat',
-          'copra', 'jute', 'paddy', 'soyabean',
-          'cotton', 'maize', 'ragi', 'sugarcane'
-        ],
-        
-      },
-    ]
+    }
+   
   },
-
+  notificationPreferences: {
+    message:{
+      type: Boolean,
+      default: false,
+    },
+    email:{
+      type: Boolean,
+      default: false,
+    }
+  }
 }, { timestamps: true });
 
 export const farmProfile =  mongoose.model('FarmerProfile', farmerProfileSchema);

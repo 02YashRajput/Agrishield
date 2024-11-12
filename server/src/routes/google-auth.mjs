@@ -1,5 +1,4 @@
 import { Router } from "express";
-import passport from "passport";
 import dotenv from "dotenv";
 import { OAuth2Client } from "google-auth-library";
 import { hashPassword } from "../utils/hashPassword.mjs";
@@ -64,6 +63,9 @@ router.post("/api/auth/google", async (req, res) => {
         userName: name,
         provider: "google", // Indicate that this user is using Google authentication
         userType: userType, // Add user type if provided in the request
+        isVerified:true,
+        profileImage : "",
+        
       });
 
       const savedUser = await newUser.save();

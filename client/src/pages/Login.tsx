@@ -93,7 +93,7 @@ const Login:React.FC = () => {
               className="w-80 flex flex-col gap-5 mt-5"
             >
               <TextField
-                label="Email"
+                label="Email or Phone Number"
                 fullWidth
                 type="text"
                 {...form.register("identifier")}

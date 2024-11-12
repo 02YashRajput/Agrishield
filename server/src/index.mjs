@@ -8,7 +8,8 @@ import dotenv from 'dotenv';
 import passport from 'passport';
 import AllRoutes from './routes/route.mjs'; 
 import { connectDb } from './config/connect-db.mjs';
-
+const cookie_secret = process.env.COOKIE_SECRET ;
+const session_secret = process.env.SESSION_SECRET;
 dotenv.config();
 
 const app = express();
@@ -23,10 +24,10 @@ app.use(cors(corsOptions));
 connectDb()
 
 app.use(express.json());
-app.use(cookieParser('voidSeekers'));
+app.use(cookieParser(cookie_secret));
 app.use(
   session({
-    secret: 'voidSeekers',
+    secret: session_secret,
     saveUninitialized: false,
     resave: false,
     cookie: {

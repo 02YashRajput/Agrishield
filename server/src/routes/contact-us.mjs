@@ -12,7 +12,7 @@ router.get("/api/contact-us",(req,res)=>{
     res.status(200).json({success:true,message: "User authenticated successfully",user:{name:req.user.userName}})
   }else{
    
-    res.status(200).json({success:false,message: "User not authenticated",user:{name:"Guest"}})
+    res.status(200).json({success:false,message: "User not authenticated"})
   }
 })
 

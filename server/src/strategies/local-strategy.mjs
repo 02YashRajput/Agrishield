@@ -25,9 +25,11 @@ export default passport.use(
     async (identifier, password, done) => {
       try {
         // Find user by email or phone
-        const findUser = await User.findOne({
-          $or: [{ email: identifier }, { phone: identifier }],
-        });
+
+        const searchCriteria = isNaN(identifier)
+        ? { email: identifier } 
+        : {phone: identifier}
+        const findUser = await User.findOne(searchCriteria);
 
         if (!findUser) {
           throw new Error("User not found");
