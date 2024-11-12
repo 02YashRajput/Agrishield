@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
 import { User } from "../mongoose-models/user.mjs";
-import { comparePassword } from "../utils/helper/hashPassword.mjs";
+import { comparePassword } from "../utils/hashPassword.mjs";
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -21,16 +21,23 @@ passport.deserializeUser(async (id, done) => {
 
 export default passport.use(
   new Strategy(
-    { usernameField: "email", passwordField: "password" },
-    async (email, password, done) => {
+    { usernameField: "identifier", passwordField: "password" },
+    async (identifier, password, done) => {
       try {
-        const findUser = await User.findOne({ email });
+        // Find user by email or phone
+        const findUser = await User.findOne({
+          $or: [{ email: identifier }, { phone: identifier }],
+        });
+
         if (!findUser) {
           throw new Error("User not found");
         }
-        if (!comparePassword(password, findUser.password)) {
+
+        const isMatch = await comparePassword(password, findUser.password);
+        if (!isMatch) {
           throw new Error("Invalid password");
         }
+
         done(null, findUser);
       } catch (err) {
         done(err, null);

@@ -7,32 +7,26 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import AllRoutes from './routes/route.mjs'; 
+import { connectDb } from './config/connect-db.mjs';
 
 dotenv.config();
 
 const app = express();
 
-// CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your frontend URL or '*' for all origins
-  credentials: true, // Allow cookies to be sent with requests
+  origin: 'http://localhost:5173',
+  credentials: true, 
 };
 
 app.use(cors(corsOptions));
 
-mongoose.connect(process.env.dbURL)
-  .then(() => {
-    console.log('Connected to database');
-  })
-  .catch((err) => {
-    console.log('Error found while connecting to database', err);
-  });
+connectDb()
 
 app.use(express.json());
-app.use(cookieParser('void'));
+app.use(cookieParser('voidSeekers'));
 app.use(
   session({
-    secret: 'void',
+    secret: 'voidSeekers',
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -41,7 +35,9 @@ app.use(
     store: MongoStore.create({
       client: mongoose.connection.getClient(),
     }),
+    rolling: true
   })
+
 );
 
 app.use(passport.initialize());

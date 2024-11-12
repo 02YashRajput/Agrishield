@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import theme from "../theme/Theme";
-import logo from "../assets/AgriShieldLogoTransparent.png";
+import logo from "../assets/AgriShieldTransparent.png";
 import Background from "../components/Background";
 import Button from "@mui/material/Button";
 import { IoIosArrowBack } from "react-icons/io";
@@ -25,7 +25,8 @@ import GoogleLoginButton from "../components/GoogleLoginButton";
 
 type UserType = "Farmer" | "Buyer" | "";
 const serverUrl = import.meta.env.VITE_SERVER_URL;
-console.log(serverUrl);
+
+
 const signUpFormSchema = z.object({
   userName: z.string().min(1, { message: "Name is required" }),
   phone: z.string().min(10, { message: "Phone No. must be 10 numbers" }).max(10,{ message: "PPhone must be 10 numbers" }),
@@ -47,11 +48,15 @@ const signUpFormSchema = z.object({
       message:
         "Password must contain at least one special character (@, !, #, $, etc.)",
     }),
+    confirmPassword: z.string().min(1, { message: "Password is required" })
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"], 
 });
 
 type SignUpFormSchema = z.infer<typeof signUpFormSchema>;
 
-const SignUp = () => {
+const SignUp:React.FC = () => {
   const navigate = useNavigate();
   const [userType, setUserType] = useState<UserType>("");
   const [showUserTypeInput, setShowUserTypeInput] = useState(true);
@@ -68,6 +73,7 @@ const SignUp = () => {
       phone: "",
       email: "",
       password: "",
+      confirmPassword : ""
     },
   });
 
@@ -77,7 +83,9 @@ const SignUp = () => {
     try{
       const signUpData = {...data, userType};
      
-      await axios.post(`${serverUrl}/api/local/sign-up`, signUpData);
+      await axios.post(`${serverUrl}/api/local/sign-up`, signUpData,{
+        withCredentials: true, 
+      });
       
       toast.success("Sign up successful");
       navigate("/");
@@ -91,7 +99,7 @@ const SignUp = () => {
   return (
     <div className="relative flex justify-center items-center overflow-hidden min-h-screen min-w-screen">
       <Background />
-      <Paper sx={{ backgroundColor: "rgba(255,255,255,0.5)" }} className="z-50 flex">
+      <Paper sx={{ backgroundColor: "rgba(255,255,255,0.5)" }} className="z-50 flex flex-col md:flex-row">
         <Card sx={{ backgroundColor: "transparent" }} className="flex flex-col items-center justify-center">
           <CardMedia
             component="img"
@@ -184,6 +192,15 @@ const SignUp = () => {
                     {...form.register("password")}
                     error={!!form.formState.errors.password}
                     helperText={form.formState.errors.password?.message}
+                    color="secondary"
+                  />
+                  <TextField
+                    label="Confirm Password"
+                    fullWidth
+                    type="confirmPassword"
+                    {...form.register("confirmPassword")}
+                    error={!!form.formState.errors.confirmPassword}
+                    helperText={form.formState.errors.confirmPassword?.message}
                     color="secondary"
                   />
                   <Button

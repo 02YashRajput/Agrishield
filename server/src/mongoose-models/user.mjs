@@ -1,6 +1,10 @@
 import mongoose,{ Schema } from "mongoose";
-
+import Counter from "./counter.mjs";
 const userSchema = new Schema({
+  userId: {
+    type: Number,
+    unique: true,
+  },
   userName: {
     type: String,
     required: [true, "Name cannot be empty"],
@@ -20,7 +24,6 @@ const userSchema = new Schema({
   },
   phone:{
     type:Number,
-    
     unique:true,
     match: [/^\d{10}$/, "Phone number must be 10 digits long"],
   },
@@ -32,7 +35,7 @@ const userSchema = new Schema({
   userType:{
     type: String,
     required: true,
-    enum: ['Farmer', 'Buyer'],
+    enum: ['Farmer', 'Buyer','Admin'],
   },
   provider: {
     type: String,
@@ -41,6 +44,39 @@ const userSchema = new Schema({
   },
 
 });
+
+
+
+
+userSchema.pre("save", async function (next) {
+  const user = this;
+
+
+  if (!user.isNew || user.userId) {
+    return next();
+  }
+
+  try {
+
+    const counter = await Counter.findOneAndUpdate(
+      { id: "userId" },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true } 
+    );
+
+    if (counter) {
+      user.userId = counter.seq; 
+    } else {
+      throw new Error("Counter document not found or created.");
+    }
+
+    next(); 
+  } catch (err) {
+    console.error("Error in pre-save hook:", err);
+    next(err); 
+  }
+});
+
 
 // Export the model
 export const User =  mongoose.model('User', userSchema);

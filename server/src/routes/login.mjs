@@ -2,7 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 import "../strategies/local-strategy.mjs";
 import { validationResult } from "express-validator";
-import { loginSchemaLocal } from "../validation-models/login-validation.mjs";
+import { loginSchemaLocal } from "../middleware/validation-models/login-validation.mjs";
 
 const router = Router();
 
@@ -24,15 +24,22 @@ router.post(
     if (req.user.provider !== "local") {
       return res.status(400).json({success:true, message: "Cannot log in using this method. Please use the correct provider." });
     }
-    
+
+    console.log(req.user);
     // Proceed with login if provider is 'local'
-    req.login(req.user, (err) => {
+    req.login(req.user, async (err) => {
       if (err) {
-        return next(err);
+        console.error("Error during login:", err);
+        return res
+          .status(500)
+          .send({ msg: "Error logging in" });
       }
 
-      return res.status(200).json({success:true, message:"User Logged in Successfully"});
+      return res
+        .status(200)
+        .json({ msg: "User logged in successfully",success:true });
     });
+
   }
 );
 

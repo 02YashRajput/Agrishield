@@ -10,7 +10,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Background from "../components/Background";
-import logo from "../assets/AgriShieldLogoTransparent.png";
+import logo from "../assets/AgriShieldTransparent.png";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -19,22 +19,26 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const loginSchema = z.object({
-  email: z
+  identifier: z
     .string()
-    .min(1, { message: "Email is required" })
-    .email({ message: "Invalid email address" }),
+    .min(1, { message: "Email or Phone no is required" }),
+    
   password: z.string().min(1, { message: "Password is required" }),
 });
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 type LoginFormSchema = z.infer<typeof loginSchema>;
 
-const Login = () => {
+
+
+const Login:React.FC = () => {
   const navigate = useNavigate();
   const handleFormSubmit = async(values: LoginFormSchema) => {
 
     try{
-     await axios.post(`${serverUrl}/api/local/login`, values)
+     await axios.post(`${serverUrl}/api/local/login`, values,{
+      withCredentials: true, 
+    })
       
       toast.success("Login successful");
       navigate("/");
@@ -49,7 +53,7 @@ const Login = () => {
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
+      identifier: "",
       password: "",
     },
   });
@@ -59,11 +63,11 @@ const Login = () => {
       <Background />
       <Paper
         sx={{ backgroundColor: "rgba(255,255,255,0.5)" }}
-        className="z-50 flex"
+        className="z-50 flex flex-col md:flex-row"
       >
         <Card
           sx={{ backgroundColor: "transparent" }}
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center "
         >
           <CardMedia
             component="img"
@@ -91,10 +95,10 @@ const Login = () => {
               <TextField
                 label="Email"
                 fullWidth
-                type="email"
-                {...form.register("email")}
-                error={!!form.formState.errors.email}
-                helperText={form.formState.errors.email?.message}
+                type="text"
+                {...form.register("identifier")}
+                error={!!form.formState.errors.identifier}
+                helperText={form.formState.errors.identifier?.message}
                 color="secondary"
               />
               <TextField

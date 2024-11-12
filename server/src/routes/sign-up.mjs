@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { signUpLocalSchema } from "../validation-models/sign-up-validation.mjs";
+import { signUpLocalSchema } from "../middleware/validation-models/sign-up-validation.mjs";
 import { validationResult, matchedData } from "express-validator";
-import { hashPassword } from "../utils/helper/hashPassword.mjs";
+import { hashPassword } from "../utils/hashPassword.mjs";
 import "../strategies/local-strategy.mjs";
 import { User } from "../mongoose-models/user.mjs";
 

@@ -5,7 +5,10 @@ import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { toast } from 'react-hot-toast'; // Import only `toast` for notifications
 
-const GoogleLoginButton = ({userType}:{userType:string | null}) => {
+interface GoogleLoginProps {
+  userType : string | null; // Define the user type (null for local login)
+}
+const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
   const navigate = useNavigate();
   const serverUrl = import.meta.env.VITE_SERVER_URL;
   const onSuccess = async (credentialResponse:any) => {

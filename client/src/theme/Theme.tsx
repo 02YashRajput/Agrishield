@@ -19,6 +19,9 @@ const theme = createTheme({
       main: '#eab308', 
       dark: '#ca8a04'
     },
+    blue : {
+      main:"#1976d2"
+    }
     // You can define other colors here as needed
   },
 });

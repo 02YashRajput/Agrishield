@@ -2,7 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 import dotenv from "dotenv";
 import { OAuth2Client } from "google-auth-library";
-import { hashPassword } from "../utils/helper/hashPassword.mjs";
+import { hashPassword } from "../utils/hashPassword.mjs";
 import { User } from "../mongoose-models/user.mjs";
 
 import "../strategies/local-strategy.mjs";
