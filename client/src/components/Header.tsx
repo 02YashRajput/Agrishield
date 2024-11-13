@@ -37,15 +37,13 @@ interface HeaderProps {
   name: string | undefined;
   profileImage: string | undefined;
   isLoggedIn: boolean;
+  id:Number | undefined;
 }
 
-const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn }) => {
+const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) => {
 
-  const { t ,i18n } = useTranslation();
+  const { t } = useTranslation('header');
 
-  useEffect(() => {
-    i18n.loadNamespaces('header'); // Dynamically load the 'about' namespace
-  }, [i18n]);
 
   const userName = isLoggedIn ? name : "Guest";
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -56,22 +54,27 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn }) => {
     theme.breakpoints.down("lg")
   );
 
+
   const menuItems = [
     { text: "Home", icon: <FaHome />, to: "/" },
-    { text: "Contact Us", icon: <FaPhoneAlt />, to: "/contact-us" },
+   
   ];
 
   if (!isLoggedIn) {
+    menuItems.push({ text: "Contact Us", icon: <FaPhoneAlt />, to: "/contact-us" }),
     menuItems.push({ text: "Login", icon: <FaUser />, to: "/login" });
   } else {
     menuItems.push(
       { text: "MarketPlace", icon: <FaStore />, to: "/marketplace" },
       { text: "My Contracts", icon: <IoDocumentLockSharp />, to: "/contracts" },
       { text: "My Negotiations", icon: <FaHandshake />, to: "/negotiations" },
-      { text: "Price Predictor", icon: <FaChartLine />, to: "#" }
+      { text: "Price Predictor", icon: <FaChartLine />, to: "#" },
+    { text: "Contact Us", icon: <FaPhoneAlt />, to: "/contact-us" },
+      
     );
     if (isSmallScreen) {
-      menuItems.push({ text: "Profile", icon: <FaUser />, to: "/profile" }),
+      
+      menuItems.push({ text: "Profile", icon: <FaUser />, to:   `/profile/${id}` }),
         menuItems.push({
           text: "My Transactions",
           icon: <FaFileInvoiceDollar />,
@@ -95,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn }) => {
               className="h-20 cursor-pointer object-contain"
             />
           </Link>
-          <Typography variant="h4">{t('Hello')}, {userName}!</Typography>
+          <Typography variant="h4">{t("Hello")}, {userName}!</Typography>
         </Box>
 
         {isSmallScreen ? (
@@ -180,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn }) => {
                         onClick={() => setAvatarOpen(false)}
                         className="flex gap-2 "
                         component={Link}
-                        to="/profile"
+                        to={`/profile/${id}`}
                       >
                         <FaUser />
                         <ListItemText primary="Profile" />

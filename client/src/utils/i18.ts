@@ -16,8 +16,8 @@ i18n
       escapeValue: false,
     },
     backend: {
-      // Dynamically load translation files when needed
-      loadPath: '../locales/{{lng}}/{{ns}}.json',
+
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     detection: {
       order: ['navigator', 'cookie', 'localStorage'],

@@ -29,6 +29,8 @@ interface Data {
   user?: {
     name: string;
     profileImage :string;
+    id:Number;
+
   };
 }
 
@@ -89,11 +91,12 @@ const Home: React.FC = () => {
   if (error) {
     return <ErrorPage />;
   }
+  
 
   console.log({data,  isLoggedIn})
   return (
     <div>
-      <Header name={data?.user?.name} profileImage= {data?.user?.profileImage} isLoggedIn = {isLoggedIn} />
+      <Header name={data?.user?.name} profileImage= {data?.user?.profileImage} isLoggedIn = {isLoggedIn} id = {data?.user?.id} />
       <Paper>
         <Box>
           <video className="w-full object-cover" autoPlay loop muted>

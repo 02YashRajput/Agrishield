@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'; // Importing Route
+import { Routes, Route, useLocation } from 'react-router-dom'; // Importing Route
 import Home from './pages/Home';
 import { Toaster } from 'react-hot-toast'; // Importing Toaster
 import SignUp from './pages/SignUp';
@@ -13,7 +13,14 @@ import ContactUs from './pages/ContactUs';
 import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
 import Verification from './pages/Verification';
-function App() {
+
+
+
+
+
+function App ()  {
+
+
   return (
     <>
       <Routes>
@@ -24,7 +31,7 @@ function App() {
         <Route path = "/contracts" element={<ContractList/>}/>
         <Route path = "/contact/:id" element={<ContractDetails/>} />
         <Route path='/negotiations' element={<NegotiationList  />}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile/:id" element={<Profile/>}/>
         <Route path="/contact-us" element={<ContactUs/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>}/>

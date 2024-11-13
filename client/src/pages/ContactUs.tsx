@@ -35,6 +35,7 @@ interface Data {
   user?: {
     name: string;
     profileImage: string;
+    id: number;
   };
 }
 
@@ -98,7 +99,7 @@ const ContactUsForm: React.FC = () => {
 
   return (
     <div>
-      <Header name={data?.user?.name} profileImage={data?.user?.profileImage} isLoggedIn = {isLoggedIn} />
+      <Header name={data?.user?.name} profileImage={data?.user?.profileImage} isLoggedIn = {isLoggedIn} id = {data?.user?.id} />
 
       <Paper
         sx={{
