@@ -54,6 +54,11 @@ const marketPlaceSchema = new Schema({
     required: true
   }
   ,
+  successfulContracts:{
+    type: Number,
+    required: true,
+    default: 0
+  }
   
 })
 

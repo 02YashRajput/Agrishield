@@ -110,6 +110,14 @@ const farmerProfileSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     }
+  },
+  reviews :{
+    type:[String],
+
+  },
+  rating:{
+    type: Number,
+    default: 0,
   }
 }, { timestamps: true });
 
@@ -196,6 +204,14 @@ const buyerProfileSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     }
+  },  
+  
+  reviews :{
+    type:[String],
+  },
+  rating:{
+    type: Number,
+    default: 0,
   }
 }, { timestamps: true });
 

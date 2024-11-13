@@ -12,7 +12,7 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import logo from "../assets/AgriShieldTransparent.png";
 import {
   FaHome,
@@ -24,10 +24,12 @@ import {
   FaFileInvoiceDollar,
 } from "react-icons/fa";
 import { IoDocumentLockSharp } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
-import ProfileAvatar from "./profileAvatar";
+import ProfileAvatar from "./ProfileAvatar";
+import { useTranslation } from 'react-i18next';
+
 
 import LogoutModal from "./LogoutModal";
 
@@ -38,6 +40,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn }) => {
+
+  const { t ,i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.loadNamespaces('header'); // Dynamically load the 'about' namespace
+  }, [i18n]);
+
   const userName = isLoggedIn ? name : "Guest";
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [avatarOpen, setAvatarOpen] = useState<boolean>(false);
@@ -86,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn }) => {
               className="h-20 cursor-pointer object-contain"
             />
           </Link>
-          <Typography variant="h4">Hello, {userName}!</Typography>
+          <Typography variant="h4">{t('Hello')}, {userName}!</Typography>
         </Box>
 
         {isSmallScreen ? (
