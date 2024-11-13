@@ -70,6 +70,7 @@ router.post("/api/auth/google", async (req, res) => {
 
       const savedUser = await newUser.save();
       // Log in the newly created user
+      
       req.login(savedUser, (err) => {
         if (err) {
           console.error("Error during login:", err);
