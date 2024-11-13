@@ -16,12 +16,11 @@ i18n
       escapeValue: false,
     },
     backend: {
-
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     detection: {
-      order: ['navigator', 'cookie', 'localStorage'],
-      caches: ['cookie', 'localStorage'],
+      order: ['navigator'],
+     
     },
     react: {
       useSuspense: false,

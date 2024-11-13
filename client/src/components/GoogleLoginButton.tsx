@@ -16,7 +16,11 @@ const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
    
     try {
       const { credential } = credentialResponse;
-      const res = await axios.post(`${serverUrl}/api/auth/google`, { credential,userType });
+      const res = await axios.post(
+        `${serverUrl}/api/auth/google`, 
+        { credential, userType },
+        { withCredentials: true } // This ensures cookies are sent along with the request
+      );
       const data = res.data;
 
       if (res.status === 200 || res.status === 201 ) {

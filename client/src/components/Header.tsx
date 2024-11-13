@@ -12,7 +12,7 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../assets/AgriShieldTransparent.png";
 import {
   FaHome,
@@ -56,30 +56,31 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
 
 
   const menuItems = [
-    { text: "Home", icon: <FaHome />, to: "/" },
+    { text: t('Home'), icon: <FaHome />, to: "/" },
    
   ];
 
   if (!isLoggedIn) {
-    menuItems.push({ text: "Contact Us", icon: <FaPhoneAlt />, to: "/contact-us" }),
-    menuItems.push({ text: "Login", icon: <FaUser />, to: "/login" });
+    menuItems.push({ text: t('ContactUs'), icon: <FaPhoneAlt />, to: "/contact-us" }),
+    menuItems.push({ text: t('Login'), icon: <FaUser />, to: "/login" });
   } else {
     menuItems.push(
-      { text: "MarketPlace", icon: <FaStore />, to: "/marketplace" },
-      { text: "My Contracts", icon: <IoDocumentLockSharp />, to: "/contracts" },
-      { text: "My Negotiations", icon: <FaHandshake />, to: "/negotiations" },
-      { text: "Price Predictor", icon: <FaChartLine />, to: "#" },
-    { text: "Contact Us", icon: <FaPhoneAlt />, to: "/contact-us" },
+      { text: t('MarketPlace'), icon: <FaStore />, to: "/marketplace" },
+      { text:t('MyContracts'), icon: <IoDocumentLockSharp />, to: "/contracts" },
+      { text: t('MyNegotiations'), icon: <FaHandshake />, to: "/negotiations" },
+    { text: t('ContactUs'), icon: <FaPhoneAlt />, to: "/contact-us" },
       
     );
     if (isSmallScreen) {
-      
-      menuItems.push({ text: "Profile", icon: <FaUser />, to:   `/profile/${id}` }),
+      menuItems.push({ text:t('PricePredictor'), icon: <FaChartLine />, to: "#" })
+
+      menuItems.push({ text: t('Profile'), icon: <FaUser />, to:   `/profile/${id}` }),
         menuItems.push({
-          text: "My Transactions",
+          text: t('MyTransactions'),
           icon: <FaFileInvoiceDollar />,
           to: "/my-transactions",
         });
+
     }
   }
 
@@ -139,7 +140,7 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
                     className="flex gap-2 "
                     sx={{ color: "red" }}
                   >
-                    <ListItemText primary="Logout" />
+                    <ListItemText primary={t("Logout")} />
                   </ListItemButton>
                 </ListItem>
                 
@@ -186,7 +187,7 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
                         to={`/profile/${id}`}
                       >
                         <FaUser />
-                        <ListItemText primary="Profile" />
+                        <ListItemText primary={t("Profile")} />
                       </ListItemButton>
                     </ListItem>
                     <Divider />
@@ -198,7 +199,19 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
                         to="/my-transactions"
                       >
                         <FaFileInvoiceDollar />
-                        <ListItemText primary="My Transactions" />
+                        <ListItemText primary={t("MyTransactions")} />
+                      </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                      <ListItemButton
+                        onClick={() => setAvatarOpen(false)}
+                        className="flex gap-2 "
+                        component={Link}
+                        to="#"
+                      >
+                        <FaChartLine />
+                        <ListItemText primary={t("PricePredictor")} />
                       </ListItemButton>
                     </ListItem>
                     <Divider />
@@ -208,7 +221,7 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
                         className="flex gap-2 "
                         sx={{ color: "red" }}
                       >
-                        <ListItemText primary="Logout" />
+                        <ListItemText primary={t("Logout")} />
                       </ListItemButton>
                     </ListItem>
                     <Divider />
