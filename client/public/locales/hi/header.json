@@ -1,3 +1,13 @@
 {
-  "Hello":"नमस्ते"
+  "Hello": "नमस्ते",
+  "Profile": "प्रोफ़ाइल",
+  "Home": "होम",
+  "MarketPlace": "मार्केट",
+  "MyContracts": "मेरे कॉन्ट्रैक्ट",
+  "MyNegotiations": "मेरी बातचीत",
+  "PricePredictor": "कीमत अनुमान",
+  "ContactUs": "संपर्क करें",
+  "MyTransactions": "मेरे लेन-देन",
+  "Login": "लॉगिन",
+  "Logout": "लॉगआउट"
 }
