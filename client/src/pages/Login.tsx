@@ -17,26 +17,31 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
-const loginSchema = z.object({
-  identifier: z
-    .string()
-    .min(1, { message: "Email or Phone no is required" }),
-    
-  password: z.string().min(1, { message: "Password is required" }),
-});
-const serverUrl = import.meta.env.VITE_SERVER_URL;
 
-type LoginFormSchema = z.infer<typeof loginSchema>;
 
 
 
 const Login:React.FC = () => {
   const navigate = useNavigate();
+  const {t} = useTranslation('login');
+  
+  const loginSchema = z.object({
+    identifier: z
+      .string()
+      .min(1, { message: "Email or Phone no is required" }),
+      
+    password: z.string().min(1, { message: "Password is required" }),
+  });
+  
+  
+  type LoginFormSchema = z.infer<typeof loginSchema>;
+
   const handleFormSubmit = async(values: LoginFormSchema) => {
 
     try{
-     await axios.post(`${serverUrl}/api/local/login`, values,{
+     await axios.post(`/api/local/login`, values,{
       withCredentials: true, 
     })
       

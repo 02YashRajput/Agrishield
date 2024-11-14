@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
         {/* Navigation Section */}
         <Grid item xs={12} sm={6} md={2}>
           <Typography variant="h6" sx={{ marginBottom: 2 }}>
-            Navigation
+           
           </Typography>
           <Grid container direction="column" spacing={1}>
             <Grid item>
