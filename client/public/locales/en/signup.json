@@ -1,0 +1,57 @@
+{
+  "slogan" : [
+    "Farm with Confidence",
+    " Market with Ease."
+  ],
+  "Farmer":"Farmer",
+  "Buyer":"Buyer",
+  "Next":"Next",
+  "Name":"Name",
+  "Email":"Email",
+  "Password":"Password",
+  "ConfirmPassword":"Confirm Password",
+  "Phone":"Phone",
+  "Submit":"Submit",
+  "Or":"Or",
+  "Login":"Login",
+  "User":"Already have an Account?",
+  "form":{
+    "name":{
+      "messages":[
+        "Name is required"
+      ]
+    },
+    "email":{
+      "messages":[
+        "Email is required",
+        "Invalid email address"
+      ]
+    },
+    "phone":{
+      "messages":[
+        "Phone No. must be 10 numbers",
+        "Phone must be 10 numbers"
+      ]
+    },
+    "password":{
+      "messages":[
+        "Password must be at least 8 characters long",
+        "Password must contain at least one lowercase letter",
+        "Password must contain at least one uppercase letter",
+        "Password must contain at least one number",
+        "Password must contain at least one special character (@, !, #, $, etc.)"
+      ]
+    },
+    "confirmPassword":{
+      "messages":[
+        "Password is required",
+        "Passwords do not match"
+      ]
+    }
+
+        
+
+
+    
+  }
+}

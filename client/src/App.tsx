@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom'; // Importing Route
+import { Routes, Route} from 'react-router-dom'; // Importing Route
 import Home from './pages/Home';
 import { Toaster } from 'react-hot-toast'; // Importing Toaster
 import SignUp from './pages/SignUp';
@@ -14,7 +14,7 @@ import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
 import Verification from './pages/Verification';
 
-const supportedLanguages = ['en', 'hi', 'as', 'bn', 'gu', 'kn', 'mai', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'ur'];
+
 
 
 

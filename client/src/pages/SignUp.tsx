@@ -11,7 +11,6 @@ import {
   CardContent,
   CardMedia,
   Divider,
-
   IconButton,
   Paper,
   Typography,
@@ -22,43 +21,50 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import GoogleLoginButton from "../components/GoogleLoginButton";
+import { useTranslation } from "react-i18next";
 
 type UserType = "Farmer" | "Buyer" | "";
 
-
-const signUpFormSchema = z.object({
-  userName: z.string().min(1, { message: "Name is required" }),
-  phone: z.string().min(10, { message: "Phone No. must be 10 numbers" }).max(10,{ message: "PPhone must be 10 numbers" }),
-  email: z
-    .string()
-    .min(1, { message: "Email is required" })
-    .email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long" })
-    .regex(/[a-z]/, {
-      message: "Password must contain at least one lowercase letter",
-    })
-    .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter",
-    })
-    .regex(/[0-9]/, { message: "Password must contain at least one number" })
-    .regex(/[@!#$%^&*(),.?":{}|<>]/, {
-      message:
-        "Password must contain at least one special character (@, !, #, $, etc.)",
-    }),
-    confirmPassword: z.string().min(1, { message: "Password is required" })
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"], 
-});
-
-type SignUpFormSchema = z.infer<typeof signUpFormSchema>;
-
-const SignUp:React.FC = () => {
+const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const [userType, setUserType] = useState<UserType>("");
   const [showUserTypeInput, setShowUserTypeInput] = useState(true);
+  const {t}= useTranslation("signup");
+  const signUpFormSchema = z
+    .object({
+      userName: z.string().min(1, { message:t('form.name.messages.0') }),
+      phone: z
+        .string()
+        .min(10, { message: t('form.phone.messages.0') })
+        .max(10, { message: t('form.phone.messages.1') }),
+      email: z
+        .string()
+        .min(1, { message: t('form.email.messages.0')})
+        .email({ message:t('form.email.messages.1')  }),
+      password: z
+        .string()
+        .min(8, { message: t('form.password.messages.0')})
+        .regex(/[a-z]/, {
+          message: t('form.password.messages.1'),
+        })
+        .regex(/[A-Z]/, {
+          message: t('form.password.messages.2'),
+        })
+        .regex(/[0-9]/, {
+          message: t('form.password.messages.3'),
+        })
+        .regex(/[@!#$%^&*(),.?":{}|<>]/, {
+          message:
+          t('form.password.messages.4'),
+        }),
+      confirmPassword: z.string().min(1, { message: t('form.confirmPassword.messages.0')}),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t('form.confirmPassword.messages.1'),
+      path: ["confirmPassword"],
+    });
+
+  type SignUpFormSchema = z.infer<typeof signUpFormSchema>;
 
   const getColor = (type: UserType) => {
     if (userType === type) return theme.palette.yellow?.dark;
@@ -72,36 +78,41 @@ const SignUp:React.FC = () => {
       phone: "",
       email: "",
       password: "",
-      confirmPassword : ""
+      confirmPassword: "",
     },
   });
 
+  const handleFormSubmit = async (data: SignUpFormSchema) => {
+    try {
+      const signUpData = { ...data, userType };
 
-  const handleFormSubmit = async(data: SignUpFormSchema) => {
-   
-    try{
-      const signUpData = {...data, userType};
-     
-      await axios.post(`/api/local/sign-up`, signUpData,{
-        withCredentials: true, 
+      await axios.post(`/api/local/sign-up`, signUpData, {
+        withCredentials: true,
       });
-      
+
       toast.success("Sign up successful");
-      toast("Please verify your email using the link we've sent to your inbox.");
+      toast(
+        "Please verify your email using the link we've sent to your inbox."
+      );
 
       navigate("/login");
-    }
-    catch(error:any){
+    } catch (error: any) {
       toast.error(error.response.data.message || "An error occurred");
       console.error(error);
     }
-  }
+  };
 
   return (
     <div className="relative flex justify-center items-center overflow-hidden min-h-screen min-w-screen">
       <Background />
-      <Paper sx={{ backgroundColor: "rgba(255,255,255,0.5)" }} className="z-50 flex flex-col md:flex-row">
-        <Card sx={{ backgroundColor: "transparent" }} className="flex flex-col items-center justify-center">
+      <Paper
+        sx={{ backgroundColor: "rgba(255,255,255,0.5)" }}
+        className="z-50 flex flex-col md:flex-row"
+      >
+        <Card
+          sx={{ backgroundColor: "transparent" }}
+          className="flex flex-col items-center justify-center"
+        >
           <CardMedia
             component="img"
             alt="AgriShield Logo"
@@ -110,13 +121,17 @@ const SignUp:React.FC = () => {
           />
           <CardContent className="flex items-center justify-center">
             <Typography variant="h5" className="text-black  text-center">
-              Farm with Confidence
-              <br /> Market with Ease.
+             {t('slogan.0')}
+             <br/>
+             {t('slogan.1')}
             </Typography>
           </CardContent>
         </Card>
         <Divider />
-        <Card sx={{ backgroundColor: "transparent" }} className="flex flex-col gap-5 p-5 items-center justify-center">
+        <Card
+          sx={{ backgroundColor: "transparent" }}
+          className="flex flex-col gap-5 p-5 items-center justify-center"
+        >
           {showUserTypeInput ? (
             <div className="flex flex-col gap-10">
               <div className="flex gap-5 ">
@@ -126,7 +141,7 @@ const SignUp:React.FC = () => {
                   onClick={() => setUserType("Farmer")}
                   className="w-full sm:w-auto"
                 >
-                  Farmer
+                  {t('Farmer')}
                 </Button>
                 <Button
                   variant="contained"
@@ -134,7 +149,7 @@ const SignUp:React.FC = () => {
                   onClick={() => setUserType("Buyer")}
                   className="w-full sm:w-auto mt-4"
                 >
-                  Buyer
+                 {t('Buyer')}
                 </Button>
               </div>
               <Button
@@ -143,42 +158,48 @@ const SignUp:React.FC = () => {
                   backgroundColor: (theme) => theme.palette.yellow?.main,
                 }}
                 onClick={() => {
-                  userType === "" ? toast.error("Please select a user type") : setShowUserTypeInput(false);
+                  userType === ""
+                    ? toast.error("Please select a user type")
+                    : setShowUserTypeInput(false);
                 }}
                 className="w-full sm:w-auto mt-4"
               >
-                Next
+                {t('Next')}
               </Button>
             </div>
           ) : (
             <div>
               <Card sx={{ backgroundColor: "transparent" }} className="p-5">
-                <IconButton sx={{ color: "black", borderRadius: "50%" }} onClick={()=>setShowUserTypeInput(true)}>
+                <IconButton
+                  sx={{ color: "black", borderRadius: "50%" }}
+                  onClick={() => setShowUserTypeInput(true)}
+                >
                   <IoIosArrowBack size="30" />
                 </IconButton>
-                <form onSubmit={form.handleSubmit(handleFormSubmit)} className="w-80 flex flex-col gap-5 mt-5">
+                <form
+                  onSubmit={form.handleSubmit(handleFormSubmit)}
+                  className="w-80 flex flex-col gap-5 mt-5"
+                >
                   <TextField
-                    label="Name"
+                    label={t('Name')}
                     fullWidth
                     type="text"
                     {...form.register("userName")}
                     error={!!form.formState.errors.userName}
                     helperText={form.formState.errors.userName?.message}
                     color="secondary"
-                    
-
                   />
                   <TextField
-                    label="Phone"
+                    label={t('Phone')}
                     fullWidth
                     type="text"
                     {...form.register("phone")}
                     error={!!form.formState.errors.phone}
                     helperText={form.formState.errors.phone?.message}
-                   color="secondary"
+                    color="secondary"
                   />
                   <TextField
-                    label="Email"
+                    label={t('Email')}
                     fullWidth
                     type="email"
                     {...form.register("email")}
@@ -187,7 +208,7 @@ const SignUp:React.FC = () => {
                     color="secondary"
                   />
                   <TextField
-                    label="Password"
+                    label={t('Password')}
                     fullWidth
                     type="password"
                     {...form.register("password")}
@@ -196,7 +217,7 @@ const SignUp:React.FC = () => {
                     color="secondary"
                   />
                   <TextField
-                    label="Confirm Password"
+                    label={t('ConfirmPassword')}
                     fullWidth
                     type="confirmPassword"
                     {...form.register("confirmPassword")}
@@ -211,19 +232,25 @@ const SignUp:React.FC = () => {
                       backgroundColor: (theme) => theme.palette.yellow?.main,
                     }}
                   >
-                    Submit
+                    {t('Submit')}
                   </Button>
                 </form>
-                <Typography variant="h6" sx={{marginTop:"1rem",marginBottom:"1rem"}} className="text-black text-center" >Or</Typography>
-                <GoogleLoginButton userType={userType}/>
+                <Typography
+                  variant="h6"
+                  sx={{ marginTop: "1rem", marginBottom: "1rem" }}
+                  className="text-black text-center"
+                >
+                  {t('Or')}
+                </Typography>
+                <GoogleLoginButton userType={userType} />
               </Card>
             </div>
           )}
 
           <Typography variant="body1" className="text-black">
-            Already have an account?{" "}
+            {t('User')}{" "}
             <Link to="/login" className="text-red-600">
-              Login
+              {t('Login')}
             </Link>
           </Typography>
         </Card>

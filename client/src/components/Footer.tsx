@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import {
   Grid,
@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
 
 
   return (
-    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5" }}>
+    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5",marginTop:5 }}>
       <Grid container spacing={4} justifyContent="space-between">
         {/* Logo and Info Section */}
         <Grid item xs={12} sm={6} md={4}>

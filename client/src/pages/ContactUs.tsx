@@ -17,6 +17,7 @@ import ErrorPage from "./Error";
 import Header from "../components/Header";
 import toast from "react-hot-toast";
 import { sendContactUsEmail } from "../utils/sendEmail.ts";
+import Footer from "../components/Footer.tsx";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -169,6 +170,7 @@ const ContactUsForm: React.FC = () => {
           </Button>
         </form>
       </Paper>
+      <Footer/>
     </div>
   );
 };
