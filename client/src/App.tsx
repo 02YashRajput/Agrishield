@@ -14,12 +14,12 @@ import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
 import Verification from './pages/Verification';
 
+const supportedLanguages = ['en', 'hi', 'as', 'bn', 'gu', 'kn', 'mai', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'ur'];
 
 
 
 
 function App ()  {
-
 
   return (
     <>

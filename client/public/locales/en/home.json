@@ -1,0 +1,49 @@
+{
+  "features": {
+    "title": "Our Core Features",
+    "contents": [
+      {
+        "icon": "MdEditDocument",
+        "title": "Contract Management",
+        "content": "Negotiate, draft, and finalize farming contracts digitally. Manage quantity, quality, delivery schedules, and payment terms all in one place."
+      },
+      {
+        "icon": "FaHandshake",
+        "title": "Price Negotiation",
+        "content": "Use our dynamic price negotiation tool to agree on fair prices. Leverage real-time market data and demand forecasts for optimal pricing."
+      },
+      {
+        "icon": "GrSecure",
+        "title": "Secure Payments",
+        "content": "Ensure timely and secure payments with our integrated payment gateways and escrow services, protecting both farmers and buyers."
+      },
+      {
+        "icon": "IoLogoWechat",
+        "title": "Communication Channel",
+        "content": "Stay connected with integrated chat. Ensure transparent and efficient communication between farmers and buyers."
+      },
+      {
+        "icon": "FaBoltLightning",
+        "title": "Real-Time Updates",
+        "content": "Get real-time updates on market trends, weather forecasts, and other vital farming information to stay ahead of the curve."
+      },
+      {
+        "icon": "FaRobot",
+        "title": "AI-Powered Insights",
+        "content": "Leverage AI to analyze data and receive personalized insights for your farming practices and contract negotiations."
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "content": "AgriConnect simplifies the contract farming process, providing a seamless experience from contract negotiation to harvest delivery.",
+    "steps": [
+      "Create your farmer or buyer Account.",
+      "Complete your profile.",
+      "Browse or list farming opportunities in Market Place",
+      "Negotiate terms and finalize contracts.",
+      "Manage production and track progress.",
+      "Securely process payments upon deliver"
+    ]
+  }
+}

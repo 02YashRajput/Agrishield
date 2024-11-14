@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { authMiddlewware } from "../middleware/auth_middleware.mjs";
+import { authMiddleware } from "../middleware/auth_middleware.mjs";
 
 const router =Router();
 
 
-router.post("/api/logout",authMiddlewware,(req,res)=>{
+router.post("/api/logout",authMiddleware,(req,res)=>{
   
   req.logOut((err)=>{
         if(err) return res.sendStatus(400);

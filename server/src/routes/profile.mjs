@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { authMiddlewware } from "../middleware/auth_middleware.mjs";
+import { authMiddleware } from "../middleware/auth_middleware.mjs";
 
 const router = Router();
 
-router.get('/api/profile',authMiddlewware,async (req, res) => {
+router.get('/api/profile',authMiddleware,async (req, res) => {
   res.json({
     success: true,
     message: "User profile",

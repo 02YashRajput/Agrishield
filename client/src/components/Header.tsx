@@ -28,8 +28,7 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
 import ProfileAvatar from "./ProfileAvatar";
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from "react-i18next";
 
 import LogoutModal from "./LogoutModal";
 
@@ -37,13 +36,16 @@ interface HeaderProps {
   name: string | undefined;
   profileImage: string | undefined;
   isLoggedIn: boolean;
-  id:Number | undefined;
+  id: Number | undefined;
 }
 
-const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) => {
-
-  const { t } = useTranslation('header');
-
+const Header: React.FC<HeaderProps> = ({
+  name,
+  profileImage,
+  isLoggedIn,
+  id,
+}) => {
+  const { t } = useTranslation("header");
 
   const userName = isLoggedIn ? name : "Guest";
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -54,33 +56,43 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
     theme.breakpoints.down("lg")
   );
 
-
-  const menuItems = [
-    { text: t('Home'), icon: <FaHome />, to: "/" },
-   
-  ];
+  const menuItems = [{ text: t("Home"), icon: <FaHome />, to: "/" }];
 
   if (!isLoggedIn) {
-    menuItems.push({ text: t('ContactUs'), icon: <FaPhoneAlt />, to: "/contact-us" }),
-    menuItems.push({ text: t('Login'), icon: <FaUser />, to: "/login" });
+    menuItems.push({
+      text: t("ContactUs"),
+      icon: <FaPhoneAlt />,
+      to: "/contact-us",
+    }),
+      menuItems.push({ text: t("Login"), icon: <FaUser />, to: "/login" });
   } else {
     menuItems.push(
-      { text: t('MarketPlace'), icon: <FaStore />, to: "/marketplace" },
-      { text:t('MyContracts'), icon: <IoDocumentLockSharp />, to: "/contracts" },
-      { text: t('MyNegotiations'), icon: <FaHandshake />, to: "/negotiations" },
-    { text: t('ContactUs'), icon: <FaPhoneAlt />, to: "/contact-us" },
-      
+      { text: t("MarketPlace"), icon: <FaStore />, to: "/marketplace" },
+      {
+        text: t("MyContracts"),
+        icon: <IoDocumentLockSharp />,
+        to: "/contracts",
+      },
+      { text: t("MyNegotiations"), icon: <FaHandshake />, to: "/negotiations" },
+      { text: t("PricePredictor"), icon: <FaChartLine />, to: "#" }
     );
     if (isSmallScreen) {
-      menuItems.push({ text:t('PricePredictor'), icon: <FaChartLine />, to: "#" })
+      menuItems.push({
+        text: t("PricePredictor"),
+        icon: <FaChartLine />,
+        to: "#",
+      });
 
-      menuItems.push({ text: t('Profile'), icon: <FaUser />, to:   `/profile/${id}` }),
+      menuItems.push({
+        text: t("Profile"),
+        icon: <FaUser />,
+        to: `/profile/${id}`,
+      }),
         menuItems.push({
-          text: t('MyTransactions'),
+          text: t("MyTransactions"),
           icon: <FaFileInvoiceDollar />,
           to: "/my-transactions",
         });
-
     }
   }
 
@@ -99,7 +111,9 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
               className="h-20 cursor-pointer object-contain"
             />
           </Link>
-          <Typography variant="h4">{t("Hello")}, {userName}!</Typography>
+          <Typography variant="h4">
+            {t("Hello")}, {userName}!
+          </Typography>
         </Box>
 
         {isSmallScreen ? (
@@ -119,33 +133,32 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
               <List>
                 {menuItems.map((item, index) => (
                   <>
-                  <ListItem key={index}>
+                    <ListItem key={index}>
+                      <ListItemButton
+                        component={Link}
+                        to={item.to}
+                        onClick={() => setDrawerOpen(false)}
+                        className="flex gap-2"
+                      >
+                        {item.icon}
+                        <ListItemText primary={item.text} />
+                      </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                  </>
+                ))}
+                {isLoggedIn && (
+                  <ListItem>
                     <ListItemButton
-                      component={Link}
-                      to={item.to}
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex gap-2"
+                      onClick={handleLogoutClick}
+                      className="flex gap-2 "
+                      sx={{ color: "red" }}
                     >
-                      {item.icon}
-                      <ListItemText primary={item.text} />
+                      <ListItemText primary={t("Logout")} />
                     </ListItemButton>
                   </ListItem>
-                  <Divider/>
-</>
-                ))}
-                {
-                  isLoggedIn && <ListItem>
-                  <ListItemButton
-                    onClick={handleLogoutClick}
-                    className="flex gap-2 "
-                    sx={{ color: "red" }}
-                  >
-                    <ListItemText primary={t("Logout")} />
-                  </ListItemButton>
-                </ListItem>
-                
-                }
-                 <Divider />
+                )}
+                <Divider />
               </List>
             </Drawer>
           </>
@@ -208,10 +221,10 @@ const Header: React.FC<HeaderProps> = ({ name, profileImage, isLoggedIn,id }) =>
                         onClick={() => setAvatarOpen(false)}
                         className="flex gap-2 "
                         component={Link}
-                        to="#"
+                        to="/contact-us"
                       >
-                        <FaChartLine />
-                        <ListItemText primary={t("PricePredictor")} />
+                        <FaPhoneAlt />
+                        <ListItemText primary={t("ContactUs")} />
                       </ListItemButton>
                     </ListItem>
                     <Divider />

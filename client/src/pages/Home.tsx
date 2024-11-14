@@ -22,6 +22,7 @@ import { IoLogoWechat } from "react-icons/io5";
 import { FaBoltLightning } from "react-icons/fa6";
 import { FaRobot } from "react-icons/fa";
 import Footer from "../components/Footer";
+import { useTranslation } from "react-i18next";
 
 interface Data {
   success: boolean;
@@ -33,46 +34,20 @@ interface Data {
 
   };
 }
+interface Feature {
+  icon: string;
+  title: string;
+  content: string;
+}
 
-const features = [
-  {
-    icon: <MdEditDocument />,
-    title: "Contract Management",
-    content:
-      "Negotiate, draft, and finalize farming contracts digitally. Manage quantity, quality, delivery schedules, and payment terms all in one place.",
-  },
-  {
-    icon: <FaHandshake />,
-    title: "Price Negotiation",
-    content:
-      "Use our dynamic price negotiation tool to agree on fair prices. Leverage real-time market data and demand forecasts for optimal pricing.",
-  },
-  {
-    icon: <GrSecure />,
-    title: "Secure Payments",
-    content:
-      "Ensure timely and secure payments with our integrated payment gateways and escrow services, protecting both farmers and buyers.",
-  },
-  {
-    icon: <IoLogoWechat />,
-    title: "Communication Channel",
-    content:
-      "Stay connected with integrated chat. Ensure transparent and efficient communication between farmers and buyers.",
-  },
-  {
-    icon: <FaBoltLightning />,
-    title: "Real-Time Updates",
-    content:
-      "Get real-time updates on market trends, weather forecasts, and other vital farming information to stay ahead of the curve.",
-  },
-  {
-    icon: <FaRobot />,
-    title: "AI-Powered Insights",
-    content:
-      "Leverage AI to analyze data and receive personalized insights for your farming practices and contract negotiations.",
-  },
-];
-
+const iconComponents: { [key: string]: JSX.Element } = {
+  MdEditDocument: <MdEditDocument />,
+  FaHandshake: <FaHandshake />,
+  GrSecure: <GrSecure />,
+  IoLogoWechat: <IoLogoWechat />,
+  FaBoltLightning: <FaBoltLightning />,
+  FaRobot: <FaRobot />
+};
 
 
 const fetcher = (url: string) =>
@@ -85,9 +60,11 @@ const fetcher = (url: string) =>
 
 const Home: React.FC = () => {
   const { data, error } = useSWR<Data>(`/api/`, fetcher);
-
+  const {t} = useTranslation('home')
   const isLoggedIn = data?.user  ? true : false;
 
+  const features = t("features.contents", { returnObjects: true }) as Feature[];
+  const steps = t("howItWorks.steps", { returnObjects: true }) as string[];
   if (error) {
     return <ErrorPage />;
   }
@@ -109,36 +86,36 @@ const Home: React.FC = () => {
         <Box>
           <Box sx={{ padding: 3, textAlign: "center", marginTop: 8 }}>
             <Typography variant="h4" component="h1" gutterBottom>
-              Our Core Features
+                {t('features.title')}
             </Typography>
           </Box>
 
           {/* Grid to display 6 cards */}
           <Box sx={{ padding: 5, paddingBottom: 10 }}>
-            <Grid container spacing={3} justifyContent="center" wrap="wrap">
-              {features.map((feature, index) => (
-                <Grid item xs={12} sm={6} md={4} key={index}>
-                  <Card>
-                    <CardContent>
-                      <Stack direction="column" alignItems="center">
-                        <Box sx={{ fontSize: 40 }}>{feature.icon}</Box>
-                        <Typography variant="h6" component="h2" sx={{ mt: 2 }}>
-                          {feature.title}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          color="textSecondary"
-                          sx={{ mt: 1, textAlign: "center" }}
-                        >
-                          {feature.content}
-                        </Typography>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+        <Grid container spacing={3} justifyContent="center" wrap="wrap">
+          {Array.isArray(features) && features.map((feature, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card>
+                <CardContent>
+                  <Stack direction="column" alignItems="center">
+                    <Box sx={{ fontSize: 40 }}>{iconComponents[feature.icon]}</Box>
+                    <Typography variant="h6" component="h2" sx={{ mt: 2 }}>
+                      {feature.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      sx={{ mt: 1, textAlign: "center" }}
+                    >
+                      {feature.content}
+                    </Typography>
+                  </Stack>
+                </CardContent>
+              </Card>
             </Grid>
-          </Box>
+          ))}
+        </Grid>
+      </Box>
         </Box>
 
         <Box
@@ -149,43 +126,32 @@ const Home: React.FC = () => {
           }}
         >
           <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: 2 }}>
-            How It Works
+            {
+              t('howItWorks.title')
+            }
           </Typography>
           <Typography
             variant="body1"
             sx={{ lineHeight: 1.7 }}
             className="text-slate-500"
           >
-            AgriConnect simplifies the contract farming process, providing a
-            seamless experience from
-             contract negotiation to harvest delivery.
+                       {
+              t('howItWorks.content')
+            }
           </Typography>
           <List
-            component="ol"
-            sx={{
-              paddingLeft: 3,
-              listStyleType: "decimal", // This ensures the numbering is shown
-            }}
-          >
-            <ListItem>
-              <ListItemText primary="1. Create your farmer or buyer Account." />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="2. Complete your profile." />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="3. Browse or list farming opportunities in Market Place" />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="4. Negotiate terms and finalize contracts." />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="5. Manage production and track progress." />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="6. Securely process payments upon deliver" />
-            </ListItem>
-          </List>
+        component="ol"
+        sx={{
+          paddingLeft: 5,
+          listStyleType: "decimal", // Ensures numbering style is shown
+        }}
+      >
+        {Array.isArray(steps) && steps.map((step, index) => (
+          <ListItem key={index} sx={{ display: "list-item" }}>
+            <ListItemText primary={step} />
+          </ListItem>
+        ))}
+      </List>
         </Box>
         <Box sx={{
             paddingY: 12,

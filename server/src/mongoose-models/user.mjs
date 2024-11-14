@@ -49,6 +49,11 @@ const userSchema = new Schema({
   isVerified:{
     type: Boolean,
     default: false,
+  },
+  language : {
+    type: String,
+    enum: ['en', 'hi','as', 'bn', 'gu', 'kn', 'mai', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'ur',""],
+    default:""
   }
 });
 
