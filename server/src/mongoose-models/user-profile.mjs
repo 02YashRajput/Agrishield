@@ -77,7 +77,7 @@ const farmerProfileSchema = new mongoose.Schema({
       required:true,
     },
     farmSize: {
-      type: Number,
+      type: String,
       required: true,
     },
     sizeUnit: {
@@ -166,7 +166,7 @@ const buyerProfileSchema = new mongoose.Schema({
   paymentInformation: {
     bankDetails: {
       accountNumber: {
-        type: Number,
+        type: String,
         required: true,
         match: /^[0-9]{9,18}$/, 
       },
@@ -215,5 +215,5 @@ const buyerProfileSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export const farmProfile =  mongoose.model('FarmerProfile', farmerProfileSchema);
-export const buyerProfile =  mongoose.model('FarmerProfile', buyerProfileSchema);
+export const FarmerProfile =  mongoose.model('FarmerProfile', farmerProfileSchema);
+export const BuyerProfile =  mongoose.model('BuyerProfile', buyerProfileSchema);

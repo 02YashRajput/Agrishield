@@ -5,3 +5,4 @@ export const cropsArray = [
   'copra', 'jute', 'paddy', 'soyabean',
   'cotton', 'maize', 'ragi', 'sugarcane'
 ]
+export type crops = typeof cropsArray;

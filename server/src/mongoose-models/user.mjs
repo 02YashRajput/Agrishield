@@ -23,7 +23,7 @@ const userSchema = new Schema({
     ],
   },
   phone:{
-    type:Number,
+    type:String,
     unique:true,
     match: [/^\d{10}$/, "Phone number must be 10 digits long"],
   },

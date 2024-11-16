@@ -24,12 +24,13 @@ router.post("/api/local/sign-up", signUpLocalSchema, async (req, res) => {
   
   try {
     // Hash the password
-    data.password = await hashPassword(data.password);
+    data.password = hashPassword(data.password);
     data.provider = "local";
     data.profileImage = "";
     // Create a new user and save to the database
     const newUser = new User(data);
     const savedUser = await newUser.save();
+    
     
     // Log the user in after successful signup
 

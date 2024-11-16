@@ -74,7 +74,6 @@ const ContactUsForm: React.FC = () => {
   // Handle form submission
   const onSubmit = async (data: formInputSchema) => {
     setLoading(true);
-    console.log("Form submitted:", data);
     const emailData = {
       to_name: "Agrishield",
       to_email: import.meta.env.VITE_AGRISHIELD_EMAIL,

@@ -9,12 +9,14 @@ import ProfileRoute from "./profile.mjs"
 import AdminDashboardRoute from "./admin-dashboard.mjs"
 import VerificationRoute from "./verification.mjs"
 import GetLanguageRoute from "./get-language.mjs"
+import UserRoute from "./user.mjs"
 const router = Router();
 
 router.use(SignUpRoute)
 router.use(LoginRoute)
 router.use(LogoutRoute)
 router.use(GoogleRoute)
+router.use(UserRoute);
 router.use(HomeRoute)
 router.use(AdminDashboardRoute);
 router.use(ContactUsRoute)

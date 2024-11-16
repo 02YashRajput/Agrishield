@@ -70,7 +70,6 @@ const Home: React.FC = () => {
   }
   
 
-  console.log({data,  isLoggedIn})
   return (
     <div>
       <Header name={data?.user?.name} profileImage= {data?.user?.profileImage} isLoggedIn = {isLoggedIn} id = {data?.user?.id} />

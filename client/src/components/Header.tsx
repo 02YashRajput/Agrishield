@@ -27,10 +27,10 @@ import { IoDocumentLockSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
-import ProfileAvatar from "./ProfileAvatar";
 import { useTranslation } from "react-i18next";
 
 import LogoutModal from "./LogoutModal";
+import HeaderAvatar from "./HeaderAvatar";
 
 interface HeaderProps {
   name: string | undefined;
@@ -184,7 +184,7 @@ const Header: React.FC<HeaderProps> = ({
                   edge="end"
                   color="inherit"
                 >
-                  <ProfileAvatar profileImage={profileImage} />
+                  <HeaderAvatar profileImage={profileImage} />
                 </IconButton>
                 <Drawer
                   anchor="right"

@@ -1,7 +1,194 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material";
+import { crops } from "../utils/cropsName";
+import useSWR from "swr";
+import axios from "axios";
+import Header from "../components/Header";
+import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import ErrorPage from "./Error";
+import { FaEdit } from "react-icons/fa";
+import ProfileAvatar from "../components/ProfileAvatar";
+import NotFound from "./NotFound";
+import ProfileContentUser from "../components/ProfileContentUser";
+export interface Data {
+  success: boolean;
+  message: string;
+  user?: {
+    name: string;
+    profileImage: string;
+    id: Number;
+  };
+  profileData?: {
+    userName: string;
+    email?: string;
+    phone?: string;
+    profileImage: string;
+    userType: string;
+    address: {
+      name: string;
+      district: string;
+      state: string;
+      pincode: string;
+    };
+    paymentInformation?: {
+      bankDetails: {
+        accountNumber: string;
+        accountHolderName: string;
+        bankName: string;
+        IFSCCode: string;
+      };
+      upiDetails?: {
+        upiId: string;
+        upiName: string;
+      };
+    };
+    farmDetails?: {
+      cropsGrown: crops;
+      farmAddress: string;
+      sizeUnit: string;
+      farmSize: string;
+    };
+    notificationPreferences: {
+      message: boolean;
+      email: boolean;
+    };
+    reviews: string[];
+    rating: number;
+  };
+}
+
+const fetcher = (url: string) =>
+  axios
+    .get(url, {
+      withCredentials: true,
+    })
+    .then((res) => res.data);
 
 const Profile: React.FC = () => {
-  return <div>Profile</div>;
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { data, error, isLoading } = useSWR<Data>(
+    `/api/profile/${id}`,
+    fetcher
+  );
+
+  const [isEditable, setIsEditable] = useState<boolean>(false);
+
+  const [profileData, setProfileData] = useState<Data["profileData"] | null>(
+    null
+  );
+
+  const location = useLocation();
+  const isLoggedIn = data?.user ? true : false;
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const isEditableParam = params.get("isEditable");
+    setIsEditable(isEditableParam === "true");
+  }, [location.search]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setProfileData(data?.profileData);
+    
+    }
+  }, [isLoading]);
+
+  if (error?.response?.status === 401) {
+    toast.error("please login first");
+    navigate("/login");
+  }
+  if (error?.response?.status === 500) {
+    return <ErrorPage />;
+  }
+  if (error?.response?.status === 404) {
+    return <NotFound />;
+  }
+
+      
+     
+     
+  return (
+    <div>
+      <Header
+        name={data?.user?.name}
+        profileImage={data?.user?.profileImage}
+        isLoggedIn={isLoggedIn}
+        id={data?.user?.id}
+      />
+      {!isLoading && profileData?.userName? (
+        <Paper
+          className="bg-[#f7f7f7] min-h-screen p-8"
+          sx={{ backgroundColor: "#f7f7f7" }}
+        >
+          <Card className="max-w-4xl mx-auto bg-white p-6">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" }, // flex-column for small screens, flex-row for md and up
+                gap: 2, // Adds spacing between children
+                alignItems: { xs: "center", md: "center" }, // Center on small screens
+              }}
+            >
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <ProfileAvatar
+                  src={profileData?.profileImage}
+                  isEditable={isEditable}
+                />
+                <Typography
+                  variant="body1"
+                  align="center"
+                  sx={{ color: "gray" }}
+                >
+                  Name: {profileData?.userName}
+                </Typography>
+              </Box>
+              <Box>
+                {profileData?.email && !isEditable && (
+                  <Button
+                    sx={{
+                      backgroundColor: "black",
+                      color: "white",
+                      padding: "10px",
+                      fontSize: "12px",
+                      marginRight: 2,
+                    }}
+                    startIcon={<FaEdit />}
+                    onClick={() => setIsEditable(!isEditable)}
+                  >
+                   Edit
+                  </Button>
+                )}
+              </Box>
+            </Box>
+
+            <CardContent>
+             <ProfileContentUser isEditable={isEditable} profileData={profileData} setIsEditable={setIsEditable}/>
+            </CardContent>
+          </Card>
+        </Paper>
+      ) : (
+        <CircularProgress/>
+      )}
+    </div>
+  );
 };
 
 export default Profile;
