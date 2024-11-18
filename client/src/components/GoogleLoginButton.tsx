@@ -25,7 +25,12 @@ const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
 
       if (res.status === 200 || res.status === 201 ) {
         toast.success(data.msg); // Display success toast
-        navigate(`/profile/${res.data.userId}?isEditable=true`); // Redirect to another route after successful login
+        if(res.data.userId){
+
+          navigate(`/profile/${res.data.userId}?isEditable=true`); // Redirect to another route after successful login
+        }else{
+          navigate("/")
+        }
       } else {
         toast.error(data.msg); // Display error toast
       }
