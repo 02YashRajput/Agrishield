@@ -27,6 +27,7 @@ const fetcher = (url:string) => axios.get(url).then((res) => res.data);
 function App ()  {
 
   const { data: user,isLoading } = useSWR("/api/user", fetcher);
+  console.log(user);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -58,10 +59,10 @@ function App ()  {
         <Route path="/contracts" element={<ContractList />} />
         <Route path="/contact/:id" element={<ContractDetails />} />
         <Route path="/negotiations" element={<NegotiationList />} />
-        <Route path="/profile/:id" element={<Profile />} />
       </Route>
 
-      {/* Public routes */}
+  
+      <Route path="/profile/:id" element={<Profile />} />
       <Route path="/contact-us" element={<ContactUs />} />
       <Route path="/about" element={<About />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />} />

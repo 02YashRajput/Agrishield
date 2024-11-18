@@ -21,7 +21,7 @@ const farmerProfileSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    pinCode:{
+    pincode:{
       type:String,
       required: true,
       match: /^[0-9]{6}$/,
@@ -144,7 +144,7 @@ const buyerProfileSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    pinCode:{
+    pincode:{
       type:String,
       required: true,
       match: /^[0-9]{6}$/,

@@ -163,7 +163,7 @@ const Header: React.FC<HeaderProps> = ({
             </Drawer>
           </>
         ) : (
-          <Box className="flex gap-3">
+          <Box className="flex gap-3 items-center">
             {menuItems.map((item, index) => (
               <Button
                 variant="text"

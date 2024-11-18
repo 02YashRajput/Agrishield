@@ -44,12 +44,12 @@ router.post("/api/local/sign-up", signUpLocalSchema, async (req, res) => {
     // Handle duplicate email error
     if (err.code === 11000 && err.keyPattern && err.keyPattern.email) {
       console.log("Duplicate email error:", err);
-      return res.status(400).send({success:false, message: "Email already exists" });
+      return res.status(400).json({success:false, message: "Email or Phone already exists" });
     }
 
     // Log other unexpected errors and respond with a generic message
     console.error("Error creating user:", err);
-    return res.status(500).send({ success:false,message: "Error creating user" });
+    return res.status(500).json({ success:false,message: "Email or Phone already exists" });
   }
 });
 

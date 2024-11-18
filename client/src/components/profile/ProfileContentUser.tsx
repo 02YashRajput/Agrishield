@@ -14,91 +14,37 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Data } from "../pages/Profile";
+import { Data } from "../../pages/Profile";
 import { IoPersonOutline } from "react-icons/io5";
-import { z } from "zod";
+
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CiLocationOn } from "react-icons/ci";
 import { MdOutlinePayment } from "react-icons/md";
 import { CiBank } from "react-icons/ci";
-import theme from "../theme/Theme";
+import theme from "../../theme/Theme";
 import SaveIcon from "@mui/icons-material/Save";
 import toast from "react-hot-toast";
-import { cropsArray } from "../utils/cropsName";
+import { cropsArray } from "../../utils/cropsName";
 import { FaTractor } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
+import { baseProfileDataSchema, farmerProfileDataSchema } from "./schemas";
+import StarIcon from "@mui/icons-material/Star";
+
+import axios from "axios";
 
 interface ProfileContentUserProps {
   profileData: Data["profileData"];
   isEditable: boolean;
   setIsEditable: React.Dispatch<React.SetStateAction<boolean>>;
+  setProfileData :  React.Dispatch<React.SetStateAction<Data["profileData"] | null>>
 }
-
-const addressSchema = z.object({
-  name: z.string().min(1, { message: "Address name is required." }),
-  district: z.string().min(1, { message: "District is required." }),
-  state: z.string().min(1, { message: "State is required." }),
-  pincode: z
-    .string()
-    .regex(/^\d{6}$/, { message: "Pincode must be a valid 6-digit number." }),
-});
-
-const bankDetailsSchema = z.object({
-  accountNumber: z
-    .string({ message: "Account number is required." })
-    .min(9, { message: "Account Number is required." })
-    .max(18, { message: "Account Number must be less that or equal to 18" }),
-
-  accountHolderName: z
-    .string()
-    .min(1, { message: "Account holder name is required." }),
-  bankName: z.string().min(1, { message: "Bank name is required." }),
-  IFSCCode: z
-    .string()
-    .regex(/^[A-Z]{4}0[A-Z0-9]{6}$/, { message: "Invalid IFSC code format." }),
-});
-
-const upiDetailsSchema = z
-  .object({
-    upiId: z.string().optional(),
-    upiName: z.string().optional(),
-  })
-  .optional();
-
-const notificationPreferencesSchema = z.object({
-  message: z.boolean(),
-  email: z.boolean(),
-});
-
-const baseProfileDataSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
-  phone: z
-    .string()
-    .min(10, { message: "phone number mst be 10 integers" })
-    .max(10, { message: "phone number must b 10 integers" }),
-  address: addressSchema,
-  paymentInformation: z.object({
-    bankDetails: bankDetailsSchema,
-    upiDetails: upiDetailsSchema,
-  }),
-  notificationPreferences: notificationPreferencesSchema,
-});
-
-const farmerProfileDataSchema = baseProfileDataSchema.extend({
-  farmDetails: z.object({
-    cropsGrown: z
-      .array(z.string()) // Ensure it's an array of strings
-      .min(1, { message: "At least one crop must be selected." }),
-    farmAddress: z.string().min(1, { message: "Farm address is required." }),
-    sizeUnit: z.string().min(1, { message: "Size unit is required." }),
-    farmSize: z.string().min(1, { message: "Farm size is required." }),
-  }),
-});
 
 const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
   profileData,
   isEditable,
+  setIsEditable,
+  setProfileData 
 }) => {
   if (!profileData) {
     return null;
@@ -131,15 +77,41 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
     },
   });
 
-  const handleFormSubmit = () => {
-    setUpdating(true);
-    const data = getValues();
+  const handleFormSubmit = async (data : any) => {
+    
+    setUpdating(true); // Indicate the updating process has started
     console.log(data);
-    setTimeout(() => {
+
+    try {
+      // Make the API call to update the profile
+      const response = await axios.post("/api/profile/upload-profile", data, {
+        withCredentials: true, // Include credentials for authentication
+      });
+
+      if (response.status === 200) {
+        setProfileData((prev) => ({
+          ...prev,
+          ...data, // Merge the new data into the previous profileData
+        }));
+        
+        // If the profile was updated successfully
+        toast.success("Profile updated successfully");
+        setIsEditable(false); // Disable the edit mode
+        
+      } else {
+        // Handle unexpected response status
+        toast.error("Unexpected response from the server.");
+      }
+    } catch (err) {
+      // Handle errors during the API call
+      console.error("Error updating profile:", err); // Log the error for debugging
+      toast.error("Error updating profile");
+    } finally {
+      // Ensure `setUpdating` is reset regardless of success or error
       setUpdating(false);
-      toast.success("Profile updated successfully!");
-    }, 2000);
+    }
   };
+
   const cropsGrown = watch("farmDetails.cropsGrown");
 
   const handleCropsSelection = (crop: string) => {
@@ -153,6 +125,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
       setValue("farmDetails.cropsGrown", [...currentCrops, crop]);
     }
   };
+
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="flex  flex-col">
       {profileData?.email && (
@@ -182,7 +155,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           >
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Email:
+                Email
+                {isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}
+                :
               </Typography>
               {isEditable ? (
                 <Controller
@@ -205,7 +184,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Phone:
+                Phone{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
               </Typography>
               {isEditable ? (
                 <Controller
@@ -256,7 +239,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
         >
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Name of City/Village:
+              Name of City/Village{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
             </Typography>
             {isEditable ? (
               <Controller
@@ -283,7 +270,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Name of District:
+              Name of District{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
             </Typography>
             {isEditable ? (
               <Controller
@@ -310,7 +301,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Name of State:
+              Name of State{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
             </Typography>
             {isEditable ? (
               <Controller
@@ -337,7 +332,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Pincode:
+              Pincode{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
             </Typography>
             {isEditable ? (
               <Controller
@@ -409,7 +408,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             >
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Account Number:
+                  Account Number{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -445,7 +448,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Account Holder Name:
+                  Account Holder Name{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -480,7 +487,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Bank Name:
+                  Bank Name{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -513,7 +524,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  IFSC Code:
+                  IFSC Code{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -666,7 +681,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           >
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Farm Address:
+                Farm Address{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
               </Typography>
               {isEditable ? (
                 <Controller
@@ -694,7 +713,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Farm Size:
+                Farm Size{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
               </Typography>
               {isEditable ? (
                 <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -749,7 +772,11 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Crops Grown:
+                Crops Grown{isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}:
               </Typography>
 
               {/* Show chips */}
@@ -791,6 +818,8 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
         </Box>
       )}
+{
+  profileData.email && 
 
       <Box
         sx={{
@@ -820,6 +849,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   <Switch
                     {...field}
                     checked={field.value}
+                    disabled={!isEditable}
                     sx={{
                       "& .MuiSwitch-switchBase.Mui-checked": {
                         color: "blue.main", // Change checked color to blue.main
@@ -847,6 +877,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 control={
                   <Switch
                     {...field}
+                    disabled={!isEditable}
                     checked={field.value}
                     sx={{
                       "& .MuiSwitch-switchBase.Mui-checked": {
@@ -866,8 +897,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           />
         </Box>
       </Box>
-
-          
+}
       {isEditable && (
         <Button
           type="submit"

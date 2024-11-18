@@ -7,6 +7,7 @@ import {
   CardContent,
   CircularProgress,
   Paper,
+  Rating,
   Typography,
 } from "@mui/material";
 import { crops } from "../utils/cropsName";
@@ -17,9 +18,11 @@ import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import ErrorPage from "./Error";
 import { FaEdit } from "react-icons/fa";
-import ProfileAvatar from "../components/ProfileAvatar";
+import ProfileAvatar from "../components/profile/ProfileAvatar";
 import NotFound from "./NotFound";
-import ProfileContentUser from "../components/ProfileContentUser";
+import ProfileContentUser from "../components/profile/ProfileContentUser";
+
+
 export interface Data {
   success: boolean;
   message: string;
@@ -152,13 +155,26 @@ const Profile: React.FC = () => {
                   src={profileData?.profileImage}
                   isEditable={isEditable}
                 />
+                <Box >
+
                 <Typography
                   variant="body1"
-                  align="center"
+                  align="left"
                   sx={{ color: "gray" }}
-                >
+                  >
                   Name: {profileData?.userName}
                 </Typography>
+                <Box sx={{display:"flex",alignItems:"center" , justifyContent:"center"}}>
+
+                    <Rating defaultValue={profileData?.rating} readOnly /> 
+                  
+                  <Typography variant="body1" >
+
+                    {profileData?.reviews?.length} reviews
+                  </Typography>
+                   
+                </Box>
+                  </Box>
               </Box>
               <Box>
                 {profileData?.email && !isEditable && (
@@ -180,7 +196,7 @@ const Profile: React.FC = () => {
             </Box>
 
             <CardContent>
-             <ProfileContentUser isEditable={isEditable} profileData={profileData} setIsEditable={setIsEditable}/>
+             <ProfileContentUser isEditable={isEditable} profileData={profileData} setIsEditable={setIsEditable} setProfileData = {setProfileData}/>
             </CardContent>
           </Card>
         </Paper>

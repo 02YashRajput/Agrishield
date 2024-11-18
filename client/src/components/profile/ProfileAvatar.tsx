@@ -1,4 +1,5 @@
 import { Avatar, IconButton } from '@mui/material';
+import axios from 'axios';
 import React, { useState } from 'react'
 
 interface ProfileAvatarProps {
@@ -10,12 +11,33 @@ const ProfileAvatar :React.FC<ProfileAvatarProps>= ({src,isEditable}) => {
   const [avatarSrc, setAvatarSrc] = useState<string>(
     src || "/assets/img/defaultProfile.jpg"
   );
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onload = async () => {
         setAvatarSrc(reader.result as string);
+
+        try {
+          // Send the file to the backend for Cloudinary upload
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("upload_preset", "your_upload_preset"); // Cloudinary upload preset
+
+          const response = await axios.post('/api/profile/upload-avatar', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            withCredentials: true,
+          });
+
+          
+          if (response.data.url) {
+            setAvatarSrc(response.data.url);
+          }
+        } catch (error) {
+          console.error("Error uploading avatar:", error);
+        }
       };
       reader.readAsDataURL(file);
     }

@@ -30,12 +30,11 @@ router.get("/api/verify-email", async (req, res) => {
    
     req.login(user, (err) => {
       if (err) {
-        console.log(err);
+        console.log("error during verification",err);
         return res.status(400).json({ success: false, message: 'Error during login' });
       }
-
      
-      res.status(200).json({ success: true, message: "Email successfully verified"});
+      res.status(200).json({ success: true, message: "Email successfully verified",userId: user.userId});
     });
 
   } catch (err) {

@@ -1,12 +1,17 @@
 import { Paper, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 import toast from 'react-hot-toast';
 import ErrorPage from './Error';
 import Logo from '../assets/AgriShieldTransparent.png';
+import axios from 'axios';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// Axios fetcher with credentials
+const fetcher = (url: string) =>
+  axios
+    .get(url, { withCredentials: true })
+    .then((res) => res.data);
 
 const Verification: React.FC = () => {
   const location = useLocation();
@@ -19,16 +24,13 @@ const Verification: React.FC = () => {
 
   const { data, error } = useSWR(`/api/verify-email?token=${token}`, fetcher);
 
-
-
   if (error) {
     return <ErrorPage />;
   }
 
-  if(data){
-    toast.success('Email verified successfully! You can now login.');
-    navigate('/profile');
-   
+  if (data) {
+    toast.success('Email verified successfully!');
+    navigate(`/profile/${data.userId}?isEditable=true`);
   }
 
   return (
@@ -38,7 +40,7 @@ const Verification: React.FC = () => {
           <Typography>Redirecting...</Typography>
         ) : (
           <>
-            <img src={Logo} alt="Logo" /> {/* Use img tag for image */}
+            <img src={Logo} alt="Logo" />
             <Typography>Verifying your email...</Typography>
           </>
         )}

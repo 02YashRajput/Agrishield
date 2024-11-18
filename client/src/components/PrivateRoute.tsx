@@ -9,6 +9,7 @@ interface PrivateRouteProps {
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ userId,isLoading }) => {
  if(!isLoading && userId === 0 ) {
+    console.log(userId,isLoading)
    return <Navigate to="/login" />;
  }
 

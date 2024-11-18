@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
     
       }
     } catch (err) {
-      toast.error('Error updating language');
+      toast.error('Please Login First');
     }
   };
 
