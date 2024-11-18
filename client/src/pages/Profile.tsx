@@ -21,7 +21,7 @@ import { FaEdit } from "react-icons/fa";
 import ProfileAvatar from "../components/profile/ProfileAvatar";
 import NotFound from "./NotFound";
 import ProfileContentUser from "../components/profile/ProfileContentUser";
-
+import ReviewsAndRatings from "../components/profile/ReviewsAndRatings";
 
 export interface Data {
   success: boolean;
@@ -65,8 +65,15 @@ export interface Data {
       message: boolean;
       email: boolean;
     };
-    reviews: string[];
+    reviews: 
+      {
+        rating: number;
+        message: string;
+        createdAt:Date
+      }[]
+  ;
     rating: number;
+
   };
 }
 
@@ -103,7 +110,6 @@ const Profile: React.FC = () => {
   useEffect(() => {
     if (!isLoading) {
       setProfileData(data?.profileData);
-    
     }
   }, [isLoading]);
 
@@ -118,9 +124,6 @@ const Profile: React.FC = () => {
     return <NotFound />;
   }
 
-      
-     
-     
   return (
     <div>
       <Header
@@ -129,9 +132,9 @@ const Profile: React.FC = () => {
         isLoggedIn={isLoggedIn}
         id={data?.user?.id}
       />
-      {!isLoading && profileData?.userName? (
+      {!isLoading && profileData?.userName ? (
         <Paper
-          className="bg-[#f7f7f7] min-h-screen p-8"
+          className="bg-[#f7f7f7] min-h-screen p-8 "
           sx={{ backgroundColor: "#f7f7f7" }}
         >
           <Card className="max-w-4xl mx-auto bg-white p-6">
@@ -155,26 +158,29 @@ const Profile: React.FC = () => {
                   src={profileData?.profileImage}
                   isEditable={isEditable}
                 />
-                <Box >
-
-                <Typography
-                  variant="body1"
-                  align="left"
-                  sx={{ color: "gray" }}
+                <Box>
+                  <Typography
+                    variant="body1"
+                    align="left"
+                    sx={{ color: "gray" }}
                   >
-                  Name: {profileData?.userName}
-                </Typography>
-                <Box sx={{display:"flex",alignItems:"center" , justifyContent:"center"}}>
-
-                    <Rating defaultValue={profileData?.rating} readOnly /> 
-                  
-                  <Typography variant="body1" >
-
-                    {profileData?.reviews?.length} reviews
+                    Name: {profileData?.userName}
                   </Typography>
-                   
-                </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Rating value={profileData?.rating} precision={0.1} readOnly />
+
+
+                    <Typography variant="body1">
+                      {profileData?.reviews?.length} reviews
+                    </Typography>
                   </Box>
+                </Box>
               </Box>
               <Box>
                 {profileData?.email && !isEditable && (
@@ -189,19 +195,33 @@ const Profile: React.FC = () => {
                     startIcon={<FaEdit />}
                     onClick={() => setIsEditable(!isEditable)}
                   >
-                   Edit
+                    Edit
                   </Button>
                 )}
               </Box>
             </Box>
 
             <CardContent>
-             <ProfileContentUser isEditable={isEditable} profileData={profileData} setIsEditable={setIsEditable} setProfileData = {setProfileData}/>
+              <ProfileContentUser
+                isEditable={isEditable}
+                profileData={profileData}
+                setIsEditable={setIsEditable}
+                setProfileData={setProfileData}
+              />
+            </CardContent>
+          </Card>
+
+          <Card className="max-w-4xl mx-auto bg-white p-6 mt-5">
+            <CardContent>
+              <ReviewsAndRatings
+                profileData={profileData}
+                setProfileData={setProfileData}
+              />
             </CardContent>
           </Card>
         </Paper>
       ) : (
-        <CircularProgress/>
+        <CircularProgress />
       )}
     </div>
   );

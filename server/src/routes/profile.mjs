@@ -5,9 +5,9 @@ import { FarmerProfile,BuyerProfile } from "../mongoose-models/user-profile.mjs"
 import multer from "multer";
 import cloudinary from '../config/cloudinary.mjs';
 import { profileUpdateValidation } from "../middleware/validation-models/profile-validation.mjs";
-import {validationResult, matchedData } from "express-validator";
+import {check,validationResult, matchedData } from "express-validator";
 import mongoose from "mongoose";
-const { ObjectId } = mongoose.Types;
+import { getLocationCoordinates } from "../utils/get-location.mjs";
 
 const router = Router();
 
@@ -260,6 +260,13 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
   const data = matchedData(req);
   const userId = req.user.id;
   try {
+    const {lat,lng} =await getLocationCoordinates(`${data.address.name}, ${data.address.district}, ${data.address.state}, ${data.address.pincode}, India`)
+    if (!data.address.location) {
+      data.address.location = {};  // Initialize location if not already defined
+    }
+    data.address.location.latitude = lat;
+    data.address.location.longitude = lng;
+    
     // Update user email and phone if they are different
     if (req.user.email !== data.email) {
       await User.findByIdAndUpdate(userId, { email: data.email });
@@ -279,11 +286,12 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
           farmDetails : data.farmDetails,
           address :  data.address,
           notificationPreferences : data.notificationPreferences,
-          paymentInformation : data.paymentInformation
+          paymentInformation : data.paymentInformation,
 
         });
       } else {
         // Create a new FarmerProfile
+
         await FarmerProfile.create({
           userId: userId,
           farmDetails : data.farmDetails,
@@ -332,18 +340,68 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
 });
 
 
-router.put('/profile/update-rating/:id',async(req,res)=>{
-  const {id} = req.params;
-  try{
-    const user = await User.findOne({userId:id});
-    if(user){
-      
-    }
-  }catch (error) {
-    console.error("Error updating rating:", error);
-    res.status(500).json({success:false, message: "Error updating rating." });
+router.post('/api/profile/add-review/:id', authMiddleware, [
+  check('rating').isFloat({ min: 0, max: 5 }).withMessage('Rating must be between 1 and 5'),
+  check('message').notEmpty().withMessage('Message cannot be empty')
+], async (req, res) => {
+  const { id } = req.params;
+
+  // Validate the request body
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, message: 'Invalid data', errors: errors.array() });
   }
-})
+
+  try {
+    const user = await User.findOne({ userId: id });
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    const review = { ...req.body, createdAt: new Date() }; // Ensure createdAt is set to now
+
+    if (user.userType === "Farmer") {
+      const farmerProfile = await FarmerProfile.findOne({ userId: user.id });
+      if (farmerProfile) {
+        // Push the new review to the farmer's reviews array
+        farmerProfile.reviews.push(review);
+
+        // Calculate the new average rating
+        const totalRatings = farmerProfile.reviews.reduce((sum, rev) => sum + rev.rating, 0);
+        const avgRating = totalRatings / farmerProfile.reviews.length;
+
+        // Update the average rating in the profile
+        farmerProfile.rating = avgRating;
+
+        await farmerProfile.save();
+        return res.status(200).json({ success: true, message: "Review added successfully." });
+      } else {
+        return res.status(404).json({ success: false, message: "Farmer profile not found." });
+      }
+    } else {
+      const buyersProfile = await BuyerProfile.findOne({ userId: user.id });
+      if (buyersProfile) {
+        // Push the new review to the buyer's reviews array
+        buyersProfile.reviews.push(review);
+
+        // Calculate the new average rating
+        const totalRatings = buyersProfile.reviews.reduce((sum, rev) => sum + rev.rating, 0);
+        const avgRating = totalRatings / buyersProfile.reviews.length;
+
+        // Update the average rating in the profile
+        buyersProfile.rating = avgRating;
+
+        await buyersProfile.save();
+        return res.status(200).json({ success: true, message: "Review added successfully." });
+      } else {
+        return res.status(404).json({ success: false, message: "Buyer profile not found." });
+      }
+    }
+  } catch (error) {
+    console.error("Error updating rating:", error);
+    return res.status(500).json({ success: false, message: "Error updating rating." });
+  }
+});
 
 
 export default router;

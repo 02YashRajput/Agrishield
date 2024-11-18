@@ -94,7 +94,12 @@ const Home: React.FC = () => {
         <Grid container spacing={3} justifyContent="center" wrap="wrap">
           {Array.isArray(features) && features.map((feature, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
+              <Card  sx={{
+            transition: 'box-shadow 0.3s ease', // Smooth transition for shadow
+            '&:hover': {
+              boxShadow: 3, // Apply shadow on hover
+            },
+          }}>
                 <CardContent>
                   <Stack direction="column" alignItems="center">
                     <Box sx={{ fontSize: 40 }}>{iconComponents[feature.icon]}</Box>

@@ -27,7 +27,6 @@ const fetcher = (url:string) => axios.get(url).then((res) => res.data);
 function App ()  {
 
   const { data: user,isLoading } = useSWR("/api/user", fetcher);
-  console.log(user);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {

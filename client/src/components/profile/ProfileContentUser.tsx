@@ -59,7 +59,6 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
   const {
     control,
     handleSubmit,
-    getValues,
     setValue,
     watch,
     formState: { errors },

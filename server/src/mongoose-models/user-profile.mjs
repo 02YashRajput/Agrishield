@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+const reviewSchema = new mongoose.Schema({
+  rating: { type: Number, required: true },
+  message: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
+
 const farmerProfileSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId, 
@@ -111,10 +118,8 @@ const farmerProfileSchema = new mongoose.Schema({
       default: false,
     }
   },
-  reviews :{
-    type:[String],
-
-  },
+  reviews: { type: [reviewSchema], default: [] },
+  
   rating:{
     type: Number,
     default: 0,
@@ -206,9 +211,7 @@ const buyerProfileSchema = new mongoose.Schema({
     }
   },  
   
-  reviews :{
-    type:[String],
-  },
+  reviews: { type: [reviewSchema], default: [] },
   rating:{
     type: Number,
     default: 0,
