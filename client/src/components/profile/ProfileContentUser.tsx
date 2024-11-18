@@ -96,6 +96,9 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
         // If the profile was updated successfully
         toast.success("Profile updated successfully");
         setIsEditable(false); // Disable the edit mode
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.delete("isEditable");
+        window.history.replaceState({}, "", currentUrl.toString()); 
         
       } else {
         // Handle unexpected response status
