@@ -77,7 +77,7 @@ router.post("/api/auth/google", async (req, res) => {
           return res.status(500).json({success : false, msg: "Error creating user or logging in" });
         }
 
-        return res.status(200).json({success:true, msg: "User created and logged in successfully" });
+        return res.status(200).json({success:true, msg: "User created and logged in successfully",userId: savedUser.userId});
       });
     }
   } catch (error) {
