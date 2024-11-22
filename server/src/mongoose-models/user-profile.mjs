@@ -123,6 +123,11 @@ const farmerProfileSchema = new mongoose.Schema({
   rating:{
     type: Number,
     default: 0,
+  },
+  successfulContracts:{
+    type: Number,
+    required: true,
+    default: 0
   }
 }, { timestamps: true });
 
@@ -215,6 +220,11 @@ const buyerProfileSchema = new mongoose.Schema({
   rating:{
     type: Number,
     default: 0,
+  },
+  successfulContracts:{
+    type: Number,
+    required: true,
+    default: 0
   }
 }, { timestamps: true });
 

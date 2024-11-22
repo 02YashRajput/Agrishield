@@ -137,7 +137,7 @@ const Profile: React.FC = () => {
           className="bg-[#f7f7f7] min-h-screen p-8 "
           sx={{ backgroundColor: "#f7f7f7" }}
         >
-          <Card className="max-w-4xl mx-auto bg-white p-6">
+          <Card sx={{borderRadius:5}} className="max-w-4xl mx-auto bg-white p-6 ">
             <Box
               sx={{
                 display: "flex",
@@ -211,7 +211,7 @@ const Profile: React.FC = () => {
             </CardContent>
           </Card>
 
-          <Card className="max-w-4xl mx-auto bg-white p-6 mt-5">
+          <Card sx={{borderRadius:5}}  className="max-w-4xl mx-auto bg-white p-6 mt-5">
             <CardContent>
               <ReviewsAndRatings
                 profileData={profileData}

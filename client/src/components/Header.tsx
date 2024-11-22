@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({
       menuItems.push({ text: t("Login"), icon: <FaUser />, to: "/login" });
   } else {
     menuItems.push(
-      { text: t("MarketPlace"), icon: <FaStore />, to: "/marketplace" },
+      { text: t("MarketPlace"), icon: <FaStore />, to: "/marketplace?page=1" },
       {
         text: t("MyContracts"),
         icon: <IoDocumentLockSharp />,

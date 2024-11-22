@@ -1,9 +1,146 @@
-import React from 'react'
+import React from "react";
+import { Card, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Stack, Chip, Typography, CardContent, Box, Button } from "@mui/material";
+import { cropsArray, ProductName } from "../../utils/cropsName";
+import ListedContracts from "./ListedContracts";
 
-const FarmerMarketPlace :React.FC= () => {
-  return (
-    <div>FarmerMarketPlace</div>
-  )
+interface FarmerMarketPlaceProps {
+  results: {
+    marketPlaceId: number;
+    buyerName: string;
+    buyerProfileImage: string;
+    buyerProfileLink: string;
+    productName: ProductName;
+    additionalInstructions: string;
+    productQuantity: string;
+    deadline: Date;
+    initialPaymentAmount: string;
+    finalPaymentAmount: string;
+    productImage: string;
+  }[];
+  userType: string;
+  handleNextPage: () => void;
+  handlePrevPage: () => void;
+  page: number;
+  distance: number;
+  setDistance: React.Dispatch<React.SetStateAction<number>>;
+  crop: string;
+  setCrop: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default FarmerMarketPlace
+const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
+  crop,
+  setCrop,
+  distance,
+  setDistance,
+  results,
+  handleNextPage,
+  handlePrevPage,
+  page,
+  userType
+}) => {
+  const handleCropChange = (event: SelectChangeEvent<string>) => {
+    setCrop(event.target.value);
+  };
+
+  const handleDistanceChange = (newDistance: number) => {
+    setDistance(newDistance);
+  };
+
+  return (
+    <div className="space-y-9">
+      <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
+
+        {/* Distance Label */}
+        <Typography variant="h6" color="textSecondary" mb={1}>
+          Select Distance
+        </Typography>
+
+        {/* Chips for Distance */}
+        <Stack direction="row" spacing={2} mb={2}>
+          <Chip
+            label="10"
+            clickable
+            color={distance === 10 ? "primary" : "default"}
+            onClick={() => handleDistanceChange(10)}
+          />
+          <Chip
+            label="50"
+            clickable
+            color={distance === 50 ? "primary" : "default"}
+            onClick={() => handleDistanceChange(50)}
+          />
+          <Chip
+            label="100"
+            clickable
+            color={distance === 100 ? "primary" : "default"}
+            onClick={() => handleDistanceChange(100)}
+          />
+        </Stack>
+
+        <Typography variant="h6" color="textSecondary" mb={1}>
+          Select Crop
+        </Typography>
+
+        <FormControl fullWidth>
+          <InputLabel color="secondary" id="crop-select-label">Select Crop</InputLabel>
+          <Select
+            labelId="crop-select-label"
+            id="crop-select"
+            value={crop}
+            onChange={handleCropChange}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  maxHeight: 300,  // Set max height for the dropdown
+                },
+              },
+            }}
+            color="secondary"
+          >
+            {cropsArray.map((cropName) => (
+              <MenuItem key={cropName} value={cropName}>
+                {cropName.charAt(0).toUpperCase() + cropName.slice(1)}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Card>
+
+      <Card
+        sx={{ borderRadius: 5 }}
+        className="max-w-4xl mx-auto bg-white p-8 "
+      >
+        <Typography variant="h4" sx={{ fontWeight: 600 }}>
+          Listed Contracts
+        </Typography>
+        <CardContent>
+          {
+            results.length > 0 ? 
+            <ListedContracts results={results} userType={userType} /> : (<Typography variant="h5" >No Data Available</Typography>)
+          }
+
+          <Box display="flex" justifyContent="space-between" mt={4}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handlePrevPage}
+              disabled={page === 1}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNextPage}
+              disabled={results.length <= 0}
+            >
+              Next
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default FarmerMarketPlace;

@@ -79,7 +79,6 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
   const handleFormSubmit = async (data : any) => {
     
     setUpdating(true); // Indicate the updating process has started
-    console.log(data);
 
     try {
       // Make the API call to update the profile

@@ -30,7 +30,6 @@ router.get("/api/verify-email", async (req, res) => {
    
     req.login(user, (err) => {
       if (err) {
-        console.log("error during verification",err);
         return res.status(400).json({ success: false, message: 'Error during login' });
       }
      

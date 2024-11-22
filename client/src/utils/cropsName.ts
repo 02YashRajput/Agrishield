@@ -6,3 +6,12 @@ export const cropsArray = [
   'cotton', 'maize', 'ragi', 'sugarcane'
 ]
 export type crops = typeof cropsArray;
+
+const cropArray = [
+  'arhar', 'gram', 'masoor', 'rape', 'sunflower',
+  'bajra', 'groundnut', 'moong', 'safflower', 'urad',
+  'barley', 'jowar', 'niger', 'sesamum', 'wheat',
+  'copra', 'jute', 'paddy', 'soyabean',
+  'cotton', 'maize', 'ragi', 'sugarcane'
+] as const
+export type ProductName = typeof cropArray[number];

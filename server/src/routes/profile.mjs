@@ -253,7 +253,6 @@ router.post("/api/profile/upload-avatar", authMiddleware, upload.single("file"),
 router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidation, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors)
     return res.status(400).json({ errors: errors.array() });
   }
 

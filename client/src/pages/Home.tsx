@@ -123,40 +123,66 @@ const Home: React.FC = () => {
         </Box>
 
         <Box
-          sx={{
-            backgroundColor: (theme) => theme.palette.primary.main,
-            paddingY: { xs: 6, sm: 8, md: 12 }, // Adjusts padding for different screen sizes
-            paddingX: { xs: 4, sm: 6, md: 10 }, 
-          }}
-        >
-          <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: 2 }}>
-            {
-              t('howItWorks.title')
-            }
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ lineHeight: 1.7 }}
-            className="text-slate-500"
-          >
-                       {
-              t('howItWorks.content')
-            }
-          </Typography>
-          <List
+  sx={{
+    backgroundColor: (theme) => theme.palette.primary.main,
+    paddingY: { xs: 6, sm: 8, md: 12 }, // Adjusts padding for different screen sizes
+    paddingX: { xs: 4, sm: 6, md: 10 },
+  }}
+>
+  <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: 2 }}>
+    {t('howItWorks.title')}
+  </Typography>
+  <Typography
+    variant="body1"
+    sx={{ lineHeight: 1.7 }}
+    className="text-slate-500"
+  >
+    {t('howItWorks.content')}
+  </Typography>
+
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: { xs: "column", md: "row" }, // Column for small screens, row for medium and above
+      gap: 4,
+      alignItems: { md: "flex-start" }, // Align items properly on medium screens and above
+    }}
+  >
+    {/* Steps Section */}
+    <Box sx={{ flex: 1 }}>
+      <List
         component="ol"
         sx={{
           paddingLeft: 5,
           listStyleType: "decimal", // Ensures numbering style is shown
         }}
       >
-        {Array.isArray(steps) && steps.map((step, index) => (
-          <ListItem key={index} sx={{ display: "list-item" }}>
-            <ListItemText primary={step} />
-          </ListItem>
-        ))}
+        {Array.isArray(steps) &&
+          steps.map((step, index) => (
+            <ListItem key={index} sx={{ display: "list-item" }}>
+              <ListItemText primary={step} />
+            </ListItem>
+          ))}
       </List>
-        </Box>
+    </Box>
+
+    {/* Video Section */}
+    <Box
+      sx={{
+        flex: 1,
+        width: { xs: "100%", md: "50%" }, // Full width on small screens, 50% on medium and above
+      }}
+    >
+      <video
+        controls
+        style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+      >
+        <source src="https://youtu.be/kpfyeCj1VgA" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </Box>
+  </Box>
+</Box>
         <Box sx={{
             paddingY: 12,
             paddingX: 10,

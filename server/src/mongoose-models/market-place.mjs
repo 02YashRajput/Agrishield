@@ -4,7 +4,7 @@ const marketPlaceSchema = new Schema({
   marketPlaceId:{
     type: Number,
     unique: true,
-    required: true,
+
   },
 
   buyerId:{
@@ -13,6 +13,18 @@ const marketPlaceSchema = new Schema({
     required: true,
   },
   buyerName:{
+    type: String,
+    required: true,
+  },
+  buyerProfileImage:{
+    type: String,
+
+  },
+  buyerProfileLink:{
+    type: String,
+    required: true,
+  },
+  productImage:{
     type: String,
     required: true,
   },
@@ -28,14 +40,13 @@ const marketPlaceSchema = new Schema({
     ]
 ,    
   },
-  additionInstructions:{
+  additionalInstructions:{
     type: String,
-    required: true
   }
 ,
 
   productQuantity:{
-    type: Number,
+    type: String,
     required: true
   },
 
@@ -46,21 +57,28 @@ const marketPlaceSchema = new Schema({
   },
 
   initialPaymentAmount:{
-    type: Number,
+    type: String,
     required: true
   },
   finalPaymentAmount:{
-    type: Number,
+    type: String,
     required: true
-  }
-  ,
-  successfulContracts:{
-    type: Number,
-    required: true,
-    default: 0
-  }
+  },
+
+  location: {
+    latitude: {
+      type: Number,
+      min: -90,
+      max: 90,
+    },
+    longitude: {
+      type: Number,
+      min: -180,
+      max: 180,
+    },
+  },
   
-})
+},{timestamps:true})
 
 marketPlaceSchema.pre("save", async function (next) {
   const marketPlace = this;

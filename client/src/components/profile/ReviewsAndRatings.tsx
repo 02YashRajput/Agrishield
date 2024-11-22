@@ -43,7 +43,6 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
     return null;
   }
 
-  console.log(profileData)
 
   const sortedReviews = profileData.reviews.sort((a, b) => 
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()

@@ -43,6 +43,11 @@ function App ()  {
       }
     }
     }
+    const queryParams = new URLSearchParams(location.search);
+    if ((location.pathname === "/marketplace" || location.pathname === "/marketplace/") && !queryParams.has("page")) {
+        navigate(`/marketplace?page=1`);
+    }
+
   }, [user, location, navigate]);
 
   return (
