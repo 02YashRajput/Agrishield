@@ -20,11 +20,18 @@ import {
   DialogActions,
   CircularProgress,
 } from "@mui/material";
+type Transaction = {
+  transactionId: number;
+  details: string;
+  amount: number;
+  date: Date;
+};
 import { FaRupeeSign } from "react-icons/fa";
 import theme from "../../theme/Theme";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
+import TransactionTable from "./TransactionTable";
 
 interface OngoingDetailaProps {
   data: {
@@ -45,14 +52,17 @@ interface OngoingDetailaProps {
     farmerProfileImage: string;
     farmerProfileLink: string;
     productQuantity: string;
-    transactions: {
+    transactions :{
       transactionId: number;
       details: string;
-      amount: string;
+      amount: number;
       date: Date;
-    }[];
+    }[]
   };
   userType: string | undefined;
+  email: string | undefined;
+  phone: string | undefined;
+  name: string | undefined;
 }
 
 const statusArray = [
@@ -66,101 +76,74 @@ const statusArray = [
   ["Final Payment Paid", "Farmer"],
   ["Final Payment Received", "Default"],
 ];
-const getStatusFromNumber = (activeStep:number) => {
-  let statusField = '';
-  let statusValue = '';
+const getStatusFromNumber = (activeStep: number) => {
+  let statusField = "";
+  let statusValue = "";
 
   switch (activeStep) {
     case 0:
-      statusField = 'initialpaymentStatus';
-      statusValue = 'Pending';
+      statusField = "initialpaymentStatus";
+      statusValue = "Pending";
       break;
     case 1:
-      statusField = 'initialpaymentStatus';
-      statusValue = 'Paid';
+      statusField = "initialpaymentStatus";
+      statusValue = "Paid";
       break;
     case 2:
-      statusField = 'initialpaymentStatus';
-      statusValue = 'Received';
+      statusField = "initialpaymentStatus";
+      statusValue = "Received";
       break;
-    
+
     case 3:
-      statusField = 'deliveryStatus';
-      statusValue = 'Pending';
+      statusField = "deliveryStatus";
+      statusValue = "Pending";
       break;
     case 4:
-      statusField = 'deliveryStatus';
-      statusValue = 'Delivered';
+      statusField = "deliveryStatus";
+      statusValue = "Delivered";
       break;
     case 5:
-      statusField = 'deliveryStatus';
-      statusValue = 'Received';
+      statusField = "deliveryStatus";
+      statusValue = "Received";
       break;
 
     case 6:
-      statusField = 'finalpaymentStatus';
-      statusValue = 'Pending';
+      statusField = "finalpaymentStatus";
+      statusValue = "Pending";
       break;
     case 7:
-      statusField = 'finalpaymentStatus';
-      statusValue = 'Paid';
+      statusField = "finalpaymentStatus";
+      statusValue = "Paid";
       break;
     case 8:
-      statusField = 'finalpaymentStatus';
-      statusValue = 'Received';
+      statusField = "finalpaymentStatus";
+      statusValue = "Received";
       break;
 
     default:
-      return null; 
+      return null;
   }
 
   return [statusField, statusValue];
 };
 
+const OngoingDetails: React.FC<OngoingDetailaProps> = ({
+  data,
+  userType,
+  email,
+  phone,
+  name,
+}) => {
+  const [contractStatus, setContractStatus] = useState(data.contractStatus);
+  const [activeStep, setActiveStep] = useState(0);
 
-const OngoingDetails: React.FC<OngoingDetailaProps> = ({ data, userType }) => {
-  const [contractStatus,setContractStatus] = useState(data.contractStatus);
+  const { Razorpay } = useRazorpay();
   const isVertical = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-  
-
-  const handleStatusUpdate = async () => {
-    setLoading(true);
-    try{
-      const status = getStatusFromNumber(activeStep+1);
-      const response = await axios.post(`/api/contracts/update-status/${data.contractId}`,{status},{withCredentials:true});
-      if(response.data.success){
-        toast.success("Status updated successfully");
-        handleCloseModal();
-        if(activeStep === 1 ||activeStep === 4  ){
-          setActiveStep(activeStep + 2);
-        }else if(activeStep === 7){
-          setActiveStep(activeStep + 1);
-          setContractStatus("Completed")
-        }
-        else{
-          setActiveStep(activeStep + 1);
-          
-        }
-      }
-    }catch(err){
-      toast.error("Error updating")
-    }finally{
-      setLoading(false)
-    }
-  };
-
-  const [activeStep, setActiveStep] = useState(0);
   useEffect(() => {
     const getStatus = () => {
       if (data.finalpaymentStatus === "Received") return 8;
@@ -180,6 +163,100 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({ data, userType }) => {
     };
     setActiveStep(getStatus());
   }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleStatusUpdate = async (transaction?: Transaction) => {
+    setLoading(true);
+    try {
+      const status = getStatusFromNumber(activeStep + 1);
+      const response = await axios.post(
+        `/api/contracts/update-status/${data.contractId}`,
+        { status, transaction },
+        { withCredentials: true }
+      );
+      if (response.data.success) {
+        toast.success("Status updated successfully");
+        handleCloseModal();
+        if (activeStep === 1 || activeStep === 4) {
+          setActiveStep(activeStep + 2);
+        } else if (activeStep === 7) {
+          setActiveStep(activeStep + 1);
+          setContractStatus("Completed");
+        } else {
+          setActiveStep(activeStep + 1);
+        }
+      }
+    } catch (err) {
+      toast.error("Error updating");
+    } finally {
+      setLoading(false);
+      handleCloseModal();
+    }
+  };
+
+  const handlePayNow = async () => {
+    setLoading(true);
+    const amount =
+      activeStep === 0
+        ? parseInt(data.initialPaymentAmount)
+        : parseInt(data.finalPaymentAmount);
+    try {
+      const response = await axios.post(
+        "/api/create-order",
+        { amount },
+        { withCredentials: true }
+      );
+      if (response.data.success) {
+        const options: RazorpayOrderOptions = {
+          order_id: response.data.orderId,
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+          amount: amount,
+          currency: "INR",
+          name: "AgriShield Transaction",
+          description: "This is a  payment",
+          handler: function (response: any) {
+            toast.success(`Payment successful!`);
+            const transaction = {
+              transactionId: response.razorpay_payment_id,
+              details: activeStep === 0 ? "Initial Payment" : "Final Payment",
+              amount: amount,
+              date: new Date(),
+            };
+            handleStatusUpdate(transaction);
+          },
+          prefill: {
+            name: name,
+            email: email,
+            contact: phone,
+          },
+          theme: {
+            color: "#a7f3d0",
+          },
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on("payment.failed", function (response) {
+          toast.error(response.error.code);
+          toast.error(response.error.description);
+          toast.error(response.error.source);
+          toast.error(response.error.step);
+          toast.error(response.error.reason);
+        });
+        rzp.open();
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Error Occured: ");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -286,7 +363,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({ data, userType }) => {
           position: "relative",
           width: "100%",
           marginTop: 4,
-          marginBottom: isVertical ? 4: 14,
+          marginBottom: isVertical ? 4 : 14,
         }}
       >
         {/* Line Connecting Steps */}
@@ -358,49 +435,64 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({ data, userType }) => {
                 >
                   {status}
                 </Typography>
-                
               </Box>
             </Step>
           ))}
         </Stepper>
       </Box>
 
-      {userType === statusArray[activeStep][1] && (
-  activeStep === 0 || activeStep === 3 ? (
-    <Button variant="contained" sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}>
-      Pay Now
-    </Button>
-  ) : (
-    <Button
-        variant="contained"
-        sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
-        onClick={handleOpenModal}
-      >
-        Update Status
-      </Button>
-  )
-)}
+      {userType === statusArray[activeStep][1] &&
+        (activeStep === 0 || activeStep === 3 ? (
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
+            disabled={loading}
+            startIcon={
+              loading && <CircularProgress size={24} color="inherit" />
+            }
+            onClick={handlePayNow}
+          >
+            Pay Now
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
+            onClick={handleOpenModal}
+          >
+            Update Status
+          </Button>
+        ))}
 
-<Dialog open={isModalOpen} onClose={handleCloseModal}>
+        <TransactionTable transactions={data.transactions} />
+
+      <Dialog open={isModalOpen} onClose={handleCloseModal}>
         <DialogTitle>Update Status</DialogTitle>
         <DialogContent>
-    <Typography variant="body1">
-      Are You sure you want to make {activeStep!==8 && statusArray[activeStep+1][0]}
-      </Typography>        
+          <Typography variant="body1">
+            Are You sure you want to make{" "}
+            {activeStep !== 8 && statusArray[activeStep + 1][0]}
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleCloseModal} color="primary">
+          <Button
+            variant="contained"
+            onClick={handleCloseModal}
+            color="primary"
+          >
             Cancel
           </Button>
           <Button
-      variant="contained"
-      onClick={handleStatusUpdate}
-      color="primary"
-      disabled={loading} // Disable button while loading
-      startIcon={loading && <CircularProgress size={24} color="inherit" />} // Show loading spinner
-    >
-      {loading ? 'Updating...' : 'Update'}
-      </Button>
+            variant="contained"
+            onClick={() => handleStatusUpdate()}
+            color="primary"
+            disabled={loading} // Disable button while loading
+            startIcon={
+              loading && <CircularProgress size={24} color="inherit" />
+            }
+          >
+            {loading ? "Updating..." : "Update"}
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

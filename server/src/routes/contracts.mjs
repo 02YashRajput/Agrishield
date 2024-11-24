@@ -4,6 +4,7 @@ import { Contract } from "../mongoose-models/contract.mjs";
 import {User} from "../mongoose-models/user.mjs"
 import { acceptContractRequest, rejectContractRequest } from "../utils/sendEmail.mjs";
 import {check,validationResult} from "express-validator"
+import {MarketPlace} from "../mongoose-models/market-place.mjs"
 import dotenv from "dotenv"
 dotenv.config()
 const router = Router();
@@ -53,6 +54,8 @@ router.get("/api/contracts/:contractId",authMiddleware,async(req,res)=>{
       id: req.user.userId,
       profileImage: req.user.profileImage,
       userType: req.user.userType,
+      email: req.user.email,
+      phone: req.user.phone,
     }})
 
   }catch(err){
@@ -74,7 +77,11 @@ router.post("/api/contracts/accept/:contractId",authMiddleware,async(req,res)=>{
     if(!contract){
       return res.status(404).json({ success: false, message: "Contract not found"});
     }
+    await MarketPlace.findByIdAndDelete(contract.marketPlaceId);
+
     const farmerProfile = await User.findById(contract.farmerId);
+
+
     const url = `${process.env.CLIENT_URL}/contracts/${contract.contractId}`
     acceptContractRequest(farmerProfile.email,url)
 
@@ -118,7 +125,7 @@ router.post(
   "/api/contracts/update-status/:contractId",
   authMiddleware,
   [
-    // Validation for request body to ensure the correct structure
+    
     check('status')
       .isArray({ min: 2, max: 2 })
       .withMessage('Status should be an array of length 2'),
@@ -133,38 +140,43 @@ router.post(
     // Handle validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ success:false, message:"error in format", errors: errors.array() });
+      return res.status(400).json({ success: false, message: "Error in format", errors: errors.array() });
     }
-
-    const { contractId } = req.params; // This is the custom field (not _id)
-    const { status } = req.body; // Expecting status as an array of length 2
-
+  
+    const { contractId } = req.params; // Custom contractId field
+    const { status, transaction } = req.body; // status as an array of length 2, transaction is optional
+  
     try {
-      // Check if the status is finalpaymentStatus and Received
-      let updateData = { [status[0]]: status[1] };
+      // Retrieve the contract using findOne
+      const contract = await Contract.findOne({ contractId });
 
+      if (!contract) {
+        return res.status(404).json({ success: false, message: 'Contract not found' });
+      }
+
+      // Update the status field based on the received status
+      contract[status[0]] = status[1]; // Update the specific status field
+
+      // If the status is 'finalpaymentStatus' and 'Received', set contractStatus to 'Completed'
       if (status[0] === 'finalpaymentStatus' && status[1] === 'Received') {
-        updateData.contractStatus = 'Completed'; // Set contractStatus to 'Completed'
+        contract.contractStatus = 'Completed'; // Set contractStatus to 'Completed'
       }
 
-      // Update the contract using findOneAndUpdate
-      const updatedContract = await Contract.findOneAndUpdate(
-        { contractId }, // Search by the custom contractId field
-        { $set: updateData }, // Set the value of the status field and possibly contractStatus
-        { new: true } // Return the updated document
-      );
-
-      if (!updatedContract) {
-        return res.status(404).json({ success:false, message: 'Contract not found' });
+      // If a transaction is provided, push it to the transactions array
+      if (transaction) {
+        contract.transactions.push(transaction);
       }
 
-      return res.status(200).json({ success:true, message: 'Contract updated successfully' });
-    } catch (error) {
+      // Save the updated contract document
+      await contract.save();
+
+      // Return success response
+      return res.status(200).json({ success: true, message: 'Contract updated successfully' });
+     } catch (error) {
       console.error(error);
-      return res.status(500).json({ success:false, message: 'Server error' });
+      return res.status(500).json({ success: false, message: 'Server error' });
     }
-  }
-);
+})
 
 
 export default router;

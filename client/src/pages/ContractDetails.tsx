@@ -19,6 +19,8 @@ interface Data {
     profileImage: string;
     id: Number;
     userType: string;
+    email: string;
+    phone:string;
   };
   data :{
     contractId:number,
@@ -82,7 +84,7 @@ const ContractDetails :React.FC= () => {
                   }
                  
                   {
-                    (data?.data.contractStatus === "Ongoing" ||data?.data.contractStatus === "Completed")  && <OngoingDetails data={data?.data} userType={data?.user?.userType}/>
+                    (data?.data.contractStatus === "Ongoing" ||data?.data.contractStatus === "Completed")  && <OngoingDetails data={data?.data} userType={data?.user?.userType} email={data?.user?.email} phone={data?.user?.phone} name={data?.user?.name}/>
                   }
                 </CardContent>
               </Card> }

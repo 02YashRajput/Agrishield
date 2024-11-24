@@ -2,15 +2,14 @@ import mongoose, { Schema } from "mongoose";
 import Counter from "./counter.mjs";
 const transactionSchema = new Schema({
   transactionId:{
-    type: Number,
-    unique: true,
+    type: String,
   },
   details:{
     type: String,
     required: true,
   },
-  amout:{
-    type: String,
+  amount:{
+    type: Number,
     required: true,
   },
   date:{
@@ -123,32 +122,6 @@ const contractSchema = new Schema({
 });
 
 
-transactionSchema.pre("save",async function (next) {
-  const transaction = this;
-
-  if (!transaction.isNew || transaction.transactionId) {
-    return next();
-  }
-
-  try {
-    const counter = await Counter.findOneAndUpdate(
-      { id: "transactionId" },
-      { $inc: { seq: 1 } }, 
-      { new: true, upsert: true } 
-    );
-
-    if (counter) {
-      transaction.transactionId = counter.seq; 
-    } else {
-      throw new Error("Counter document not found or created.");
-    }
-
-    next(); 
-  } catch (err) {
-    console.error("Error in pre-save hook:", err);
-    next(err); 
-  }
-})
 
 
 
