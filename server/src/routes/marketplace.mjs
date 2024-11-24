@@ -6,11 +6,15 @@ import {
   FarmerProfile,
   BuyerProfile,
 } from "../mongoose-models/user-profile.mjs";
-import { validationResult } from "express-validator";
+import { validationResult, check, param } from "express-validator";
 import dotenv from "dotenv";
+import { User } from "../mongoose-models/user.mjs";
+import { Contract } from "../mongoose-models/contract.mjs";
+import { sendContractRequest } from "../utils/sendEmail.mjs";
 dotenv.config();
 const router = Router();
 const baseAwsUrl = process.env.AWS_S3_URL;
+const clientUrl = process.env.CLIENT_URL;
 router.get("/api/marketplace", authMiddleware, async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = 20;
@@ -26,19 +30,17 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
         .limit(limit) // Limit the number of documents returned
         .select("-_id -buyerId");
 
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Listed Items Found",
-          results,
-          user: {
-            name: req.user.userName,
-            id: req.user.userId,
-            profileImage: req.user.profileImage,
-            userType: req.user.userType,
-          },
-        });
+      res.status(200).json({
+        success: true,
+        message: "Listed Items Found",
+        results,
+        user: {
+          name: req.user.userName,
+          id: req.user.userId,
+          profileImage: req.user.profileImage,
+          userType: req.user.userType,
+        },
+      });
     } else {
       const profile = await FarmerProfile.findOne({ userId: req.user.id });
       if (!profile || !profile.address || !profile.address.location) {
@@ -47,8 +49,7 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
 
       const userLocation = profile.address.location;
 
-      let marketplaceDocs = await MarketPlace.find();
-
+      let marketplaceDocs = await MarketPlace.find().select("-_id -buyerId");
       const calculateDistance = (loc1, loc2) => {
         const toRadians = (degrees) => (degrees * Math.PI) / 180;
 
@@ -78,19 +79,17 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
 
       const results = marketplaceDocs.slice(skip, skip + limit);
 
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Listed Items Found",
-          results,
-          user: {
-            name: req.user.userName,
-            id: req.user.userId,
-            profileImage: req.user.profileImage,
-            userType: req.user.userType,
-          },
-        });
+      res.status(200).json({
+        success: true,
+        message: "Listed Items Found",
+        results,
+        user: {
+          name: req.user.userName,
+          id: req.user.userId,
+          profileImage: req.user.profileImage,
+          userType: req.user.userType,
+        },
+      });
     }
   } catch (err) {
     console.log(err);
@@ -143,11 +142,151 @@ router.post(
       });
 
       const savedContract = await contract.save();
-      res
-        .status(200)
-        .json({ success: true, message: "Contract Listed Successfully" });
+      const newContract = savedContract.toObject();
+      delete newContract._id;
+      delete newContract.buyerId;
+      res.status(200).json({
+        success: true,
+        message: "Contract Listed Successfully",
+        newContract,
+      });
     } catch (err) {
       console.error("Error creating contract:", err);
+      return res.status(500).json({ success: false, message: "Server Error" });
+    }
+  }
+);
+
+router.put(
+  "/api/marketplace/list-contract",
+  authMiddleware,
+  listContractValidator,
+  async (req, res) => {
+    const errors = validationResult(req); // Import validationResult from 'express-validator'
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+    const {
+      initialPaymentAmount,
+      finalPaymentAmount,
+      deadline,
+      additionalInstructions,
+      productQuantity,
+      marketPlaceId,
+    } = req.body;
+    try {
+      const updatedContract = await MarketPlace.findOneAndUpdate(
+        { marketPlaceId: marketPlaceId },
+        {
+          initialPaymentAmount,
+          finalPaymentAmount,
+          deadline,
+          additionalInstructions,
+          productQuantity,
+        },
+        { new: true }
+      );
+      if (!updatedContract) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Contract not found" });
+      }
+      res
+        .status(200)
+        .json({ success: true, message: "Contract updated successfully" });
+    } catch (err) {
+      console.error("Error creating contract:", err);
+      return res.status(500).json({ success: false, message: "Server Error" });
+    }
+  }
+);
+
+router.delete(
+  "/api/marketplace/list-contract/:marketplaceId",
+  authMiddleware, // Your authentication middleware
+
+  async (req, res) => {
+    let { marketplaceId } = req.params; // Extract marketPlaceId from the request body
+    if (!marketplaceId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Marketplace ID is required" });
+    }
+    marketplaceId = parseInt(marketplaceId, 10);
+    try {
+      const deletedContract = await MarketPlace.findOneAndDelete({
+        marketPlaceId: parseInt(marketplaceId, 10),
+      });
+      if (!deletedContract) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Contract not found" });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Contract deleted successfully",
+      });
+    } catch (err) {
+      console.error("Error deleting contract:", err);
+      return res.status(500).json({ success: false, message: "Server Error" });
+    }
+  }
+);
+
+router.post(
+  "/api/marketplace/request-contract/:marketplaceId",
+  authMiddleware,
+  async (req, res) => {
+    let { marketplaceId } = req.params; // Extract marketPlaceId from the request body
+    if (!marketplaceId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Marketplace ID is required" });
+    }
+    marketplaceId = parseInt(marketplaceId, 10);
+    try {
+      const marketPlaceContract = await MarketPlace.findOne({
+        marketPlaceId: parseInt(marketplaceId, 10),
+      });
+      if (!marketPlaceContract) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Contract not found" });
+      }
+
+      const buyer = await User.findById(marketPlaceContract.buyerId);
+
+      const contract = new Contract({
+        marketPlaceId: marketPlaceContract._id,
+        contractStatus: "Requested",
+        farmerId: req.user._id,
+        farmerName: req.user.userName,
+        farmerProfileImage: req.user.profileImage,
+        farmerProfileLink: `/profile/${req.user.userId}`,
+        productImage: `${baseAwsUrl}/${marketPlaceContract.productName}.jpg`,
+        productName: marketPlaceContract.productName,
+        buyerName: marketPlaceContract.buyerName,
+        buyerId: marketPlaceContract.buyerId,
+        buyerProfileImage: marketPlaceContract.buyerProfileImage,
+        buyerProfileLink: marketPlaceContract.buyerProfileLink,
+        initialpaymentStatus: "Pending",
+        finalpaymentStatus: "Pending",
+        deliveryStatus: "Pending",
+        deadline: new Date(marketPlaceContract.deadline),
+        initialPaymentAmount: marketPlaceContract.initialPaymentAmount,
+        finalPaymentAmount: marketPlaceContract.finalPaymentAmount,
+        productQuantity :marketPlaceContract.productQuantity,
+      });
+      const savedContract = await contract.save();
+      const url = `${clientUrl}/contracts/${savedContract.contractId}`;
+      sendContractRequest(buyer.email, url);
+
+      res
+        .status(200)
+        .json({ success: true, message: `Successfully Requested Contract"` });
+    } catch (err) {
+      console.error("Error requesting contract:", err);
       return res.status(500).json({ success: false, message: "Server Error" });
     }
   }

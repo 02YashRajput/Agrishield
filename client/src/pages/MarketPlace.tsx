@@ -77,6 +77,7 @@ const MarketPlace: React.FC = () => {
       {!isLoading && data && data.user && (
    data.user.userType === "Buyer" ? (
     <BuyerMarketPlace
+    isLoading={isLoading}
       results={data?.results}
       userType={data?.user?.userType}
       handleNextPage={handleNextPage}
@@ -94,6 +95,7 @@ const MarketPlace: React.FC = () => {
       crop={crop}
       setCrop={setCrop}
       page={page}
+      isLoading={isLoading}
      
     />
   )

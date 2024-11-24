@@ -1,14 +1,39 @@
 import mongoose, { Schema } from "mongoose";
 import Counter from "./counter.mjs";
+const transactionSchema = new Schema({
+  transactionId:{
+    type: Number,
+    unique: true,
+  },
+  details:{
+    type: String,
+    required: true,
+  },
+  amout:{
+    type: String,
+    required: true,
+  },
+  date:{
+    type: Date,
+    required: true,
+  }
+})
+
 const contractSchema = new Schema({
   contractId: {
     type: Number,
     unique: true, 
+
+  },
+  marketPlaceId:{
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "MarketPlace",
     required: true,
+    
   },
   contractStatus: {
     type: String,
-    enum: ["Ongoing", "Completed"],
+    enum: ["Requested","Ongoing", "Completed"],
   },
   farmerId: {
     type: Schema.Types.ObjectId,
@@ -48,11 +73,11 @@ const contractSchema = new Schema({
     required: true,
   },
   initialPaymentAmount: {
-    type: Number,
+    type: String,
     required: true,
   },
   finalPaymentAmount:{
-    type:Number,
+    type:String,
     required:true,
   },
 
@@ -67,8 +92,63 @@ const contractSchema = new Schema({
       'cotton', 'maize', 'ragi', 'sugarcane'
     ]
   },
+  buyerProfileImage:{
+    type: String,
+
+  },
+  buyerProfileLink:{
+    type: String,
+    required: true,
+  },
+  productImage:{
+    type: String,
+    required: true,
+  },
+  farmerProfileImage:{
+    type: String,
+  },
+  farmerProfileLink:{
+    type: String,
+    required: true,
+  },
+  productQuantity:{
+    type: String,
+    required: true
+  },
+  transactions: [{
+    type: transactionSchema, 
+    required: false, 
+  }]
+
 });
 
+
+transactionSchema.pre("save",async function (next) {
+  const transaction = this;
+
+  if (!transaction.isNew || transaction.transactionId) {
+    return next();
+  }
+
+  try {
+    const counter = await Counter.findOneAndUpdate(
+      { id: "transactionId" },
+      { $inc: { seq: 1 } }, 
+      { new: true, upsert: true } 
+    );
+
+    if (counter) {
+      transaction.transactionId = counter.seq; 
+    } else {
+      throw new Error("Counter document not found or created.");
+    }
+
+    next(); 
+  } catch (err) {
+    console.error("Error in pre-save hook:", err);
+    next(err); 
+  }
+})
 
 
 

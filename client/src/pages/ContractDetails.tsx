@@ -1,8 +1,94 @@
 import React from 'react'
+import { ProductName } from '../utils/cropsName';
+import axios from 'axios';
+import useSWR from 'swr';
+import ErrorPage from './Error';
+import { useLocation } from 'react-router-dom';
+import Header from '../components/Header';
+import { Card, CardContent, Paper } from '@mui/material';
+import RequestedDetails from '../components/contractDetails/RequestedDetails';
+import CompletedDetails from '../components/contractDetails/CompletedDetails';
+import OngoingDetails from '../components/contractDetails/OngoingDetails';
 
+
+interface Data {
+  success: boolean;
+  message: string;
+  user?: {
+    name: string;
+    profileImage: string;
+    id: Number;
+    userType: string;
+  };
+  data :{
+    contractId:number,
+    contractStatus : "Requested"| "Ongoing"| "Completed"
+    farmerName:string,
+    buyerName:string,
+    initialpaymentStatus: "Pending" | "Paid" | "Received";
+    finalpaymentStatus:"Pending" | "Paid" | "Received";
+    deliveryStatus : "Pending"| "Delivered"| "Received";
+    deadline : Date;
+    initialPaymentAmount :string;
+    finalPaymentAmount :string;
+    productName: ProductName;
+    productImage: string;
+    buyerProfileImage: string;
+    buyerProfileLink: string;
+    farmerProfileImage:string;
+    farmerProfileLink:string;
+    productQuantity:string;
+    transactions:{
+      transactionId:number
+      details:string
+      amount:string;
+      date:Date;
+    }[];
+  }
+}
+const fetcher = (url: string) =>
+  axios
+    .get(url, {
+      withCredentials: true,
+    })
+    .then((res) => res.data);
 const ContractDetails :React.FC= () => {
+  const location = useLocation();
+  
+  const { data, error, isLoading } = useSWR<Data>(
+    `/api${location.pathname}`,
+    fetcher
+  );
+  const isLoggedIn = data?.user ? true : false;
+  if (error) {
+    return <ErrorPage />;
+  }
+  console.log(location.pathname)
   return (
-    <div>Contract</div>
+    <div>
+    <Header
+      name={data?.user?.name}
+      profileImage={data?.user?.profileImage}
+      isLoggedIn={isLoggedIn}
+      id={data?.user?.id}
+    />
+      <Paper  sx={{ backgroundColor: "#f7f7f7" }} className="min-h-screen p-8 ">
+
+       {!isLoading && <Card sx={{ borderRadius: 5 }}
+              className="max-w-4xl mx-auto bg-white p-8 mb-6" >
+                <CardContent>
+                  {
+                    data?.data.contractStatus === "Requested" && <RequestedDetails data = {data?.data}  userType={data?.user?.userType}/>
+                  }
+                 
+                  {
+                    (data?.data.contractStatus === "Ongoing" ||data?.data.contractStatus === "Completed")  && <OngoingDetails data={data?.data} userType={data?.user?.userType}/>
+                  }
+                </CardContent>
+              </Card> }
+
+      </Paper>
+    </div>
   )
 }
 

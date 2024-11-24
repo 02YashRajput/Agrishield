@@ -132,20 +132,21 @@ const Header: React.FC<HeaderProps> = ({
             >
               <List>
                 {menuItems.map((item, index) => (
-                  <>
+                  <div key={index}>
                     <ListItem key={index}>
                       <ListItemButton
                         component={Link}
                         to={item.to}
                         onClick={() => setDrawerOpen(false)}
                         className="flex gap-2"
+                        
                       >
                         {item.icon}
                         <ListItemText primary={item.text} />
                       </ListItemButton>
                     </ListItem>
                     <Divider />
-                  </>
+                  </div>
                 ))}
                 {isLoggedIn && (
                   <ListItem>

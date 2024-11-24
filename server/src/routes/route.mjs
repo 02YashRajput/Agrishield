@@ -11,6 +11,7 @@ import VerificationRoute from "./verification.mjs"
 import GetLanguageRoute from "./get-language.mjs"
 import UserRoute from "./user.mjs"
 import MarketPlaceRoute from "./marketplace.mjs"
+import ContractsRoute from "./contracts.mjs"
 const router = Router();
 
 router.use(SignUpRoute)
@@ -25,4 +26,5 @@ router.use(ProfileRoute)
 router.use(VerificationRoute);
 router.use(GetLanguageRoute);
 router.use(MarketPlaceRoute);
+router.use(ContractsRoute);
 export default router;

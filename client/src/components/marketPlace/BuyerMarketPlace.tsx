@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cropsArray, ProductName } from "../../utils/cropsName";
 import axios from "axios";
 import {
@@ -38,17 +38,19 @@ interface BuyerMarketPlaceProps {
   handleNextPage: () => void;
   handlePrevPage: () => void;
   page: number;
+  isLoading:boolean
 }
 
 const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
   results,
   userType,
+  isLoading,
   handleNextPage,
   handlePrevPage,
   page,
 }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
+  const [contracts,setContracts] = useState<BuyerMarketPlaceProps['results']>([])
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -86,12 +88,21 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       // Handle success response
       if (response.data.success) {
         toast.success("Contract listed successfully!");
-        // Optionally, you can reset the form here
+        setContracts((prev) => [
+          ...prev, 
+          response.data.newContract 
+        ]);
       }
     } catch (error) {
       toast.error("Failed to list contract. Please try again.");
     }
   };
+
+useEffect(()=>{
+  if(!isLoading){
+    setContracts(results);
+  }
+},[isLoading])
 
   return (
     <div className="space-y-9">
@@ -307,7 +318,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
         <CardContent>
           {
             results.length > 0 ? 
-            <ListedContracts results={results} userType={userType} /> : (<Typography variant="h5" >No Data Available</Typography>)
+            <ListedContracts setContracts={setContracts} contracts={contracts} userType={userType} /> : (<Typography variant="h5" >No Data Available</Typography>)
           }
 
           <Box display="flex" justifyContent="space-between" mt={4}>

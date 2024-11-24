@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Stack, Chip, Typography, CardContent, Box, Button } from "@mui/material";
 import { cropsArray, ProductName } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
@@ -25,6 +25,7 @@ interface FarmerMarketPlaceProps {
   setDistance: React.Dispatch<React.SetStateAction<number>>;
   crop: string;
   setCrop: React.Dispatch<React.SetStateAction<string>>;
+  isLoading: boolean
 }
 
 const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
@@ -36,8 +37,10 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   handleNextPage,
   handlePrevPage,
   page,
-  userType
+  userType,
+isLoading
 }) => {
+  const [contracts,setContracts] = useState<FarmerMarketPlaceProps['results']>([])
   const handleCropChange = (event: SelectChangeEvent<string>) => {
     setCrop(event.target.value);
   };
@@ -45,7 +48,11 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   const handleDistanceChange = (newDistance: number) => {
     setDistance(newDistance);
   };
-
+  useEffect(()=>{
+    if(!isLoading){
+      setContracts(results);
+    }
+  },[isLoading])
   return (
     <div className="space-y-9">
       <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
@@ -116,7 +123,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
         <CardContent>
           {
             results.length > 0 ? 
-            <ListedContracts results={results} userType={userType} /> : (<Typography variant="h5" >No Data Available</Typography>)
+            <ListedContracts contracts={contracts} userType={userType} setContracts={setContracts} /> : (<Typography variant="h5" >No Data Available</Typography>)
           }
 
           <Box display="flex" justifyContent="space-between" mt={4}>

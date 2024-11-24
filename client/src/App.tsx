@@ -61,7 +61,7 @@ function App ()  {
       <Route element={<PrivateRoute userId={user?.userId || 0} isLoading={isLoading}/>}>
         <Route path="/marketplace" element={<MarketPlace />} />
         <Route path="/contracts" element={<ContractList />} />
-        <Route path="/contact/:id" element={<ContractDetails />} />
+        <Route path="/contracts/:id" element={<ContractDetails />} />
         <Route path="/negotiations" element={<NegotiationList />} />
       </Route>
 
