@@ -40,12 +40,12 @@ interface Data {
     farmerProfileImage:string;
     farmerProfileLink:string;
     productQuantity:string;
-    transactions:{
-      transactionId:number
-      details:string
-      amount:string;
-      date:Date;
-    }[];
+    transactions :{
+      transactionId: number;
+      details: string;
+      amount: number;
+      date: Date;
+    }[]
   }
 }
 const fetcher = (url: string) =>
