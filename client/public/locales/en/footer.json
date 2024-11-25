@@ -1,3 +1,15 @@
 {
-  "select":"Select Language"
+  "logo_alt": "AgriShield Logo",
+  "platform_description": "A platform connecting farmers with guaranteed buyers through secure contracts, ensuring stable market access and reliable income.",
+  "navigation_title": "Navigation",
+  "home": "Home",
+  "about_us": "About Us",
+  "contact": "Contact",
+  "marketplace": "Market Place",
+  "address_title": "Address",
+  "address_line1": "Greater Noida, Uttar Pradesh, India",
+  "select_language": "Select Language",
+  "follow_us": "Follow Us",
+  "language_update_success": "Language updated successfully",
+  "login_first": "Please Login First"
 }
