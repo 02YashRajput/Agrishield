@@ -68,7 +68,7 @@ isLoading
             label="All"
             clickable
             color={distance === 0 ? "primary" : "default"}
-            onClick={() => handleDistanceChange(100)}
+            onClick={() => handleDistanceChange(0)}
           />
           <Chip
             label="<10"
