@@ -18,15 +18,16 @@ import Header from "../components/Header";
 import toast from "react-hot-toast";
 import { sendContactUsEmail } from "../utils/sendEmail.ts";
 import Footer from "../components/Footer.tsx";
+import { useTranslation } from "react-i18next";
 
 const contactSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  name: z.string().min(1, { message: "requiredname" }),
+  email: z.string().email({ message: "invalidemail" }),
   phone: z
     .string()
-    .min(10, "Phone number should be 10 digits")
-    .max(10, "Phone number should be 10 digits"),
-  message: z.string().min(10, "Message should be at least 10 characters"),
+    .min(10, { message: "phonelength" })
+    .max(10, { message: "phonelength" }),
+  message: z.string().min(10, { message: "messagelength" }),
 });
 type formInputSchema = z.infer<typeof contactSchema>;
 
@@ -50,15 +51,12 @@ const fetcher = (url: string) =>
 const ContactUsForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { data, error } = useSWR<Data>(`/api/`, fetcher);
+  const { t } = useTranslation("contactus");
 
-  // Fallback to 'Guest' if user name is not available or in case of error
+  const isLoggedIn = data?.user ? true : false;
 
-
-  const isLoggedIn = data?.user  ? true : false;
-  // Handle error state
-  // Handle error state
   if (error) {
-    return <ErrorPage />; // Show error page if there's an error
+    return <ErrorPage />;
   }
 
   const form = useForm<formInputSchema>({
@@ -71,7 +69,6 @@ const ContactUsForm: React.FC = () => {
     },
   });
 
-  // Handle form submission
   const onSubmit = async (data: formInputSchema) => {
     setLoading(true);
     const emailData = {
@@ -83,23 +80,25 @@ const ContactUsForm: React.FC = () => {
     };
     try {
       await sendContactUsEmail(emailData);
-    
-      toast.success("Form submitted successfully");
+
+      toast.success(t("formsubmittedsuccessfully"));
       setLoading(false);
       form.reset();
     } catch (error) {
       console.error(error);
-      // Show error message to user
-      toast.error(
-        "An error occurred while submitting the form. Please try again later."
-      );
+      toast.error(t("formsubmiterror"));
       setLoading(false);
     }
   };
 
   return (
     <div>
-      <Header name={data?.user?.name} profileImage={data?.user?.profileImage} isLoggedIn = {isLoggedIn} id = {data?.user?.id} />
+      <Header
+        name={data?.user?.name}
+        profileImage={data?.user?.profileImage}
+        isLoggedIn={isLoggedIn}
+        id={data?.user?.id}
+      />
 
       <Paper
         sx={{
@@ -114,7 +113,7 @@ const ContactUsForm: React.FC = () => {
         className="w-full md:w-[70%] lg:w-[50%] "
       >
         <Typography variant="h4" className="text-center">
-          GET IN TOUCH
+          {t("getintouch")}
         </Typography>
         <Divider
           sx={{
@@ -130,46 +129,46 @@ const ContactUsForm: React.FC = () => {
         >
           <TextField
             className="w-[80%]"
-            label="Name"
+            label={t("name")}
             type="text"
             {...form.register("name")}
             error={!!form.formState.errors.name}
-            helperText={form.formState.errors.name?.message}
+            helperText={form.formState.errors.name && t(form.formState.errors.name.message!)}
             color="secondary"
           />
           <TextField
             className="w-[80%]"
-            label="Email"
+            label={t("email")}
             type="text"
             {...form.register("email")}
             error={!!form.formState.errors.email}
-            helperText={form.formState.errors.email?.message}
+            helperText={form.formState.errors.email && t(form.formState.errors.email.message!)}
             color="secondary"
           />
           <TextField
             className="w-[80%]"
-            label="Phone Number"
+            label={t("phone")}
             type="text"
             {...form.register("phone")}
             error={!!form.formState.errors.phone}
-            helperText={form.formState.errors.phone?.message}
+            helperText={form.formState.errors.phone && t(form.formState.errors.phone.message!)}
             color="secondary"
           />
           <TextField
             className="w-[80%]"
-            label="Message"
+            label={t("message")}
             type="text"
             {...form.register("message")}
             error={!!form.formState.errors.message}
-            helperText={form.formState.errors.message?.message}
+            helperText={form.formState.errors.message && t(form.formState.errors.message.message!)}
             color="secondary"
           />
           <Button variant="contained" type="submit" disabled={loading}>
-            {loading ? <CircularProgress /> : "Submit"}
+            {loading ? <CircularProgress /> : t("submit")}
           </Button>
         </form>
       </Paper>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

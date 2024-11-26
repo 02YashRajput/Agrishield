@@ -1,0 +1,15 @@
+{
+    "getintouch": "हमरा सँ सम्पर्क करू",
+    "name": "नाम",
+    "email": "ईमेल",
+    "phone": "फोन नंबर",
+    "message": "संदेश",
+    "submit": "जमा करू",
+    "formsubmittedsuccessfully": "फॉर्म सफलतापूर्वक जमा भेल अछि",
+    "formsubmiterror": "फॉर्म जमा करैत समय त्रुटि भेल। कृपया बाद मे फेर प्रयास करू।",
+    "requiredname": "नाम आवश्यक अछि",
+    "invalidemail": "अवैध ईमेल पता",
+    "phonelength": "फोन नंबर 10 अंकक होबाक चाही",
+    "messagelength": "संदेश कम सँ कम 10 अक्षरक होबाक चाही"
+  }
+  
