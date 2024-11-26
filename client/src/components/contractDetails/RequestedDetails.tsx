@@ -67,7 +67,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                 <Link
                   href={data.farmerProfileLink}
                   color="secondary"
-                  target="_blank"
+                 
                   rel="noopener"
                 >
                   View Profile
@@ -95,7 +95,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                 <Link
                   href={data.buyerProfileLink}
                   color="secondary"
-                  target="_blank"
+                 
                   rel="noopener"
                 >
                   View Profile

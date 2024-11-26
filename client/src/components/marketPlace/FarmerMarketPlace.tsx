@@ -99,7 +99,7 @@ isLoading
   id="crop-autocomplete"
   value={crop}
   onChange={(event, newValue) => {
-    handleCropChange(newValue ?? ""); // Provide a fallback for `null`
+    handleCropChange(newValue ?? ""); 
   }}
   options={cropsArray.map((cropName) =>
     cropName.charAt(0).toUpperCase() + cropName.slice(1)

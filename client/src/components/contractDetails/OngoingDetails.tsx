@@ -286,7 +286,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                 <Link
                   href={data.farmerProfileLink}
                   color="secondary"
-                  target="_blank"
+                  
                   rel="noopener"
                 >
                   View Profile
@@ -314,7 +314,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                 <Link
                   href={data.buyerProfileLink}
                   color="secondary"
-                  target="_blank"
+                  
                   rel="noopener"
                 >
                   View Profile
