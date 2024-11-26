@@ -14,6 +14,7 @@ import MarketPlaceRoute from "./marketplace.mjs"
 import ContractsRoute from "./contracts.mjs"
 import RazorpayRoute from "./razorpay.mjs"
 import NegotiationsRoute from "./negotiations.mjs"
+import TransalationRoute from "./transaction.mjs"
 const router = Router();
 
 router.use(SignUpRoute)
@@ -31,4 +32,5 @@ router.use(MarketPlaceRoute);
 router.use(ContractsRoute);
 router.use(RazorpayRoute);
 router.use(NegotiationsRoute);
+router.use(TransalationRoute);
 export default router;

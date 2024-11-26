@@ -91,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({
         menuItems.push({
           text: t("MyTransactions"),
           icon: <FaFileInvoiceDollar />,
-          to: "/my-transactions",
+          to: "/transactions",
         });
     }
   }
@@ -210,7 +210,7 @@ const Header: React.FC<HeaderProps> = ({
                         onClick={() => setAvatarOpen(false)}
                         className="flex gap-2 "
                         component={Link}
-                        to="/my-transactions"
+                        to="/transactions"
                       >
                         <FaFileInvoiceDollar />
                         <ListItemText primary={t("MyTransactions")} />

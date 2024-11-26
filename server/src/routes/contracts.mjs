@@ -171,11 +171,11 @@ router.post(
 
 
       if(req.user.userType === "Farmer"){
-        const user = User.findById(contract.buyerId)
+        const user =await User.findById(contract.buyerId)
         updateEmail(user.email)
       }
       else{
-        const user = User.findById(contract.farmerId)
+        const user =await User.findById(contract.farmerId)
         updateEmail(user.email)
       }
 

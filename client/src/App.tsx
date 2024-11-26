@@ -18,6 +18,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import Verification from './pages/Verification';
 import { useEffect } from 'react';
 import PrivateRoute from './components/PrivateRoute';
+import TransactionList from './pages/TransactionList';
 
 
 const fetcher = (url:string) => axios.get(url).then((res) => res.data);
@@ -63,6 +64,7 @@ function App ()  {
         <Route path="/contracts" element={<ContractList />} />
         <Route path="/contracts/:id" element={<ContractDetails />} />
         <Route path="/negotiations" element={<NegotiationList />} />
+        <Route path="/transactions" element={<TransactionList />} />
       </Route>
 
   
