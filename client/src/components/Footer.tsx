@@ -16,10 +16,9 @@ import { useLanguage } from "../context/LanguageContext";
 import { Language } from "../context/LanguageContext";
 import toast from "react-hot-toast";
 
-
 const Footer: React.FC = () => {
   const { t, i18n } = useTranslation("footer");
-  const {setLanguage } = useLanguage();
+  const { setLanguage } = useLanguage();
   const languages = [
     { code: "en", name: "English" },
     { code: "hi", name: "हिंदी" },
@@ -36,40 +35,35 @@ const Footer: React.FC = () => {
     { code: "te", name: "తెలుగు" },
     { code: "ur", name: "اردو" },
   ];
-  
-  const handleLanguageChange = async (newLanguage :Language) => {
 
+  const handleLanguageChange = async (newLanguage: Language) => {
     try {
       const response = await axios.post(
-        '/api/get-language',
+        "/api/get-language",
         { language: newLanguage },
         {
           withCredentials: true,
         }
       );
       if (response.data.success) {
-        toast.success('Language updated successfully');
+        toast.success(t("language_update_success"));
         i18n.changeLanguage(newLanguage);
         setLanguage(newLanguage);
-    
       }
     } catch (err) {
-      toast.error('Please Login First');
+      toast.error(t("login_first"));
     }
   };
 
-
   return (
-    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5",marginTop:5 }}>
+    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5", marginTop: 5 }}>
       <Grid container spacing={4} justifyContent="space-between">
         {/* Logo and Info Section */}
         <Grid item xs={12} sm={6} md={4}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <img src={logo} alt="AgriShield Logo" className="w-40" />
+            <img src={logo} alt={t("logo_alt")} className="w-40" />
             <Typography variant="body2" sx={{ ml: 2 }}>
-              A platform connecting farmers with guaranteed buyers through
-              secure contracts, ensuring stable market access and reliable
-              income.
+              {t("platform_description")}
             </Typography>
           </Box>
         </Grid>
@@ -77,27 +71,27 @@ const Footer: React.FC = () => {
         {/* Navigation Section */}
         <Grid item xs={12} sm={6} md={2}>
           <Typography variant="h6" sx={{ marginBottom: 2 }}>
-           
+            {t("navigation_title")}
           </Typography>
           <Grid container direction="column" spacing={1}>
             <Grid item>
               <Link href="/" color="inherit" variant="body2">
-                Home
+                {t("home")}
               </Link>
             </Grid>
             <Grid item>
               <Link href="/about" color="inherit" variant="body2">
-                About Us
+                {t("about_us")}
               </Link>
             </Grid>
             <Grid item>
               <Link href="/contact-us" color="inherit" variant="body2">
-                Contact
+                {t("contact")}
               </Link>
             </Grid>
             <Grid item>
               <Link href="/marketplace" color="inherit" variant="body2">
-                Market Place
+                {t("marketplace")}
               </Link>
             </Grid>
           </Grid>
@@ -105,13 +99,9 @@ const Footer: React.FC = () => {
 
         {/* Address Section */}
         <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="h6">Address</Typography>
+          <Typography variant="h6">{t("address_title")}</Typography>
           <Typography variant="body2" sx={{ marginTop: 2 }}>
-            Noida Intitute of Engineering & Technology,
-            <br />
-            Greater Noida, Gautam Buddha Nagar,
-            <br />
-            Uttar Pradesh, 201301, India
+            {t("address_line1")}
           </Typography>
         </Grid>
 
@@ -119,7 +109,7 @@ const Footer: React.FC = () => {
         <Grid item xs={12} sm={6} md={2}>
           <Box>
             <Typography variant="h6" sx={{ marginBottom: 1 }}>
-              {t("select")}
+              {t("select_language")}
             </Typography>
             <Select
               value={i18n.language}
@@ -147,7 +137,7 @@ const Footer: React.FC = () => {
           </Box>
 
           <Box>
-            <Typography variant="h6">Follow Us</Typography>
+            <Typography variant="h6">{t("follow_us")}</Typography>
             <Box sx={{ display: "flex", justifyContent: "start" }}>
               <IconButton
                 onClick={() => {
@@ -170,10 +160,7 @@ const Footer: React.FC = () => {
               </IconButton>
               <IconButton
                 onClick={() => {
-                  window.open(
-                    "https://www.instagram.com/agri_shield",
-                    "_blank"
-                  );
+                  window.open("https://www.instagram.com/agri_shield", "_blank");
                 }}
                 color="inherit"
               >

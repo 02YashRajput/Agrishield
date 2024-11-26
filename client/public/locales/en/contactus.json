@@ -1,0 +1,15 @@
+{
+    "getintouch": "Get in Touch",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "message": "Message",
+    "submit": "Submit",
+    "formsubmittedsuccessfully": "Form submitted successfully",
+    "formsubmiterror": "An error occurred while submitting the form. Please try again later.",
+    "requiredname": "Name is required",
+    "invalidemail": "Invalid email address",
+    "phonelength": "Phone number should be 10 digits",
+    "messagelength": "Message should be at least 10 characters"
+  }
+  
