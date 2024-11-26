@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import ErrorPage from './Error';
 import Header from '../components/Header';
 import { Card, CardContent, Paper, Typography } from '@mui/material';
-import TableComponent from '../components/TableComponent';
+import TableComponent from '../components/ContractList/TableComponent';
 import { Link } from 'react-router-dom';
 interface Data {
   success: boolean;

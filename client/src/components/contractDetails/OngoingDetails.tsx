@@ -10,7 +10,6 @@ import {
   CardContent,
   Stepper,
   Step,
-  StepLabel,
   Box,
   useMediaQuery,
   Theme,
@@ -148,9 +147,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
     const getStatus = () => {
       if (data.finalpaymentStatus === "Received") return 8;
       if (data.finalpaymentStatus === "Paid") return 7;
-      if (data.deliveryStatus === "Received") return 5;
       if (data.deliveryStatus === "Delivered") return 4;
-      if (data.initialpaymentStatus === "Received") return 2;
       if (data.initialpaymentStatus === "Paid") return 1;
 
       if (data.initialpaymentStatus === "Pending") return 0;
@@ -158,6 +155,10 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       if (data.deliveryStatus === "Pending") return 3;
 
       if (data.finalpaymentStatus === "Pending") return 6;
+      if (data.deliveryStatus === "Received") return 5;
+      if (data.initialpaymentStatus === "Received") return 2;
+
+
 
       return 0;
     };
@@ -442,7 +443,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       </Box>
 
       {userType === statusArray[activeStep][1] &&
-        (activeStep === 0 || activeStep === 3 ? (
+        (activeStep === 0 || activeStep === 6 ? (
           <Button
             variant="contained"
             sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
@@ -464,7 +465,10 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           </Button>
         ))}
 
+          <div className="mt-4">
+
         <TransactionTable transactions={data.transactions} />
+          </div>
 
       <Dialog open={isModalOpen} onClose={handleCloseModal}>
         <DialogTitle>Update Status</DialogTitle>

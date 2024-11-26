@@ -4,13 +4,13 @@ import Counter from "./counter.mjs";
 const negotiationsSchema = new Schema({
   negotiationsId:{
     type: Number,
-    required: true,
     unique: true,
   },
   marketPlaceId:{
     type: Schema.Types.ObjectId,
     ref: "MarketPlace",
     required: true,
+    unique:true,
   },
   buyerId:{
     type: Schema.Types.ObjectId,
@@ -43,32 +43,32 @@ const negotiationsSchema = new Schema({
   },
  
   productQuantityBuyer:{
-    type: Number,
+    type: String,
     required: true
   },
   deadlineBuyer:{
-    type: Number,
+    type: Date,
     required: true
   },
 
   initialPaymentAmountBuyer:{
-    type: Number,
+    type: String,
     required: true
   },
   finalPaymentAmountBuyer:{
-    type: Number,
+    type: String,
     required: true
   },
   initialPaymentAmountFarmer:{
-    type: Number,
+    type: String,
     required: true
   },
   finalPaymentAmountFarmer:{
-    type: Number,
+    type: String,
     required: true
   },
   productQuantityFarmer:{
-    type: Number,
+    type: String,
     required: true
   },
   lastUpdated:{
@@ -77,13 +77,31 @@ const negotiationsSchema = new Schema({
     required: true,
   },
   deadlineFarmer:{
-    type: Number,
+    type: Date,
     required: true
   },
+  buyerProfileImage:{
+    type: String,
 
+  },
+  buyerProfileLink:{
+    type: String,
+    required: true,
+  },
+  productImage:{
+    type: String,
+    required: true,
+  },
+  farmerProfileImage:{
+    type: String,
+  },
+  farmerProfileLink:{
+    type: String,
+    required: true,
+  },
 
   
-})
+},{timestamps:true})
 
 
 

@@ -6,11 +6,13 @@ import {
   FarmerProfile,
   BuyerProfile,
 } from "../mongoose-models/user-profile.mjs";
-import { validationResult, check, param } from "express-validator";
+import { validationResult} from "express-validator";
 import dotenv from "dotenv";
 import { User } from "../mongoose-models/user.mjs";
 import { Contract } from "../mongoose-models/contract.mjs";
 import { sendContractRequest } from "../utils/sendEmail.mjs";
+import { Negotiations } from "../mongoose-models/negotiations.mjs";
+import { validateNegotiationDetails } from "../middleware/validation-models/start-negotiations.mjs";
 dotenv.config();
 const router = Router();
 const baseAwsUrl = process.env.AWS_S3_URL;
@@ -125,7 +127,6 @@ router.post(
       } else {
         userProfile = await BuyerProfile.findOne({ userId: user._id });
       }
-      console.log(userProfile);
       const contract = new MarketPlace({
         buyerId: user._id,
         productName,
@@ -276,7 +277,7 @@ router.post(
         deadline: new Date(marketPlaceContract.deadline),
         initialPaymentAmount: marketPlaceContract.initialPaymentAmount,
         finalPaymentAmount: marketPlaceContract.finalPaymentAmount,
-        productQuantity :marketPlaceContract.productQuantity,
+        productQuantity: marketPlaceContract.productQuantity,
       });
       const savedContract = await contract.save();
       const url = `${clientUrl}/contracts/${savedContract.contractId}`;
@@ -292,4 +293,72 @@ router.post(
   }
 );
 
+router.post(
+  "/api/marketplace/start-negotiations/:marketplaceId",
+  authMiddleware,
+  validateNegotiationDetails,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Validation Error', errors: errors.array() });
+    }
+
+    let { marketplaceId } = req.params; 
+    if (!marketplaceId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Marketplace ID is required" });
+    }
+    marketplaceId = parseInt(marketplaceId, 10);
+    try {
+      const marketPlaceContract = await MarketPlace.findOne({
+        marketPlaceId: parseInt(marketplaceId, 10),
+      });
+      if (!marketPlaceContract) {
+        return res
+          .status(404)
+          .json({ success: false, message: "Contract not found" });
+      }
+      const {
+        initialPaymentAmount,
+        finalPaymentAmount,
+        productQuantity,
+        deadline,
+      } = req.body;
+      const buyer = await User.findById(marketPlaceContract.buyerId);
+      const negotiations = new Negotiations({
+        marketPlaceId: marketPlaceContract._id,
+        farmerId: req.user._id,
+        farmerName: req.user.userName,
+        farmerProfileImage: req.user.profileImage,
+        farmerProfileLink: `/profile/${req.user.userId}`,
+        productImage: `${baseAwsUrl}/${marketPlaceContract.productName}.jpg`,
+        productName: marketPlaceContract.productName,
+        buyerName: marketPlaceContract.buyerName,
+        buyerId: marketPlaceContract.buyerId,
+        buyerProfileImage: marketPlaceContract.buyerProfileImage,
+        buyerProfileLink: marketPlaceContract.buyerProfileLink,
+        deadlineBuyer: new Date(marketPlaceContract.deadline),
+        initialPaymentAmountBuyer: marketPlaceContract.initialPaymentAmount,
+        finalPaymentAmountBuyer: marketPlaceContract.finalPaymentAmount,
+        productQuantityBuyer: marketPlaceContract.productQuantity,
+        initialPaymentAmountFarmer:initialPaymentAmount,
+        finalPaymentAmountFarmer:finalPaymentAmount,
+        productQuantityFarmer:productQuantity,
+        deadlineFarmer:deadline,
+        lastUpdated: "Farmer",
+      });
+
+      const savedNegotiations = await negotiations.save();
+      res
+        .status(200)
+        .json({ success: true, message: `Successfully Started Negotiation` });
+    } catch (err) {
+      console.error("Error requesting contract:", err);
+      return res.status(500).json({ success: false, message: "Server Error" });
+    }
+  }
+);
 export default router;

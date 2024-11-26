@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductName } from "../utils/cropsName";
+import { ProductName } from "../../utils/cropsName";
 import {
   Table,
   TableBody,
@@ -50,25 +50,25 @@ const TableComponent: React.FC<TableComponentProps> = ({ contracts }) => {
         <TableHead>
           <TableRow>
             <TableCell>
-              <Typography variant="h6">Farmer</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Farmer</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Buyer</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Buyer</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Initial Payment</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Initial Payment</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Final Payment</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Final Payment</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Delivery Status</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Delivery Status</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Deadline</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Deadline</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6">Product</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Product</Typography>
             </TableCell>
           </TableRow>
         </TableHead>

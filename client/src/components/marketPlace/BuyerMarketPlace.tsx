@@ -96,6 +96,9 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
     } catch (error) {
       toast.error("Failed to list contract. Please try again.");
     }
+    finally{
+      window.location.reload();
+    }
   };
 
 useEffect(()=>{

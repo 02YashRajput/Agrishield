@@ -114,13 +114,21 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
   const handleFormSubmit = async(data:any) => {
     try{
       data.marketPlaceId = selectedContract?.marketPlaceId
-      console.log(data)
+      if(userType === "Farmer"){
+        const response = await axios.post(`/api/marketplace/start-negotiations/${selectedContract?.marketPlaceId}`,data,{withCredentials:true});
+        if (response.status === 200) {
+          toast.success("Negotiation started successfully!");
+          navigate("/negotiations");
+        }
+
+      }else{
+
       const response = await axios.put( "/api/marketplace/list-contract",data,{withCredentials:true})
       if (response.data.success) {
         toast.success("Contract listed successfully!");
         setContracts((prev) => {
           const updatedContractIndex = prev.findIndex(contract => contract.marketPlaceId === selectedContract?.marketPlaceId);
-          console.log(updatedContractIndex)
+       
         if   (updatedContractIndex !== -1) {
             
             const updatedContracts = [...prev];
@@ -141,7 +149,8 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
           return prev;
         });
       }
-    handleCloseModal()
+    }
+
     }
     catch(error){
 
@@ -149,6 +158,8 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       toast.error("Error updating contract")
     }finally{
       setIsEditable(false)
+    handleCloseModal()
+
   }
 
   }
@@ -520,7 +531,14 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       justifyContent: "space-between",
                     }}
                   >
-                    <Button
+                    {
+                      isEditable ? <Button  variant="contained"
+                      color="primary"
+                      fullWidth
+                      type="submit"
+                      endIcon={<SaveIcon className="text-white" />}>
+                        Send
+                      </Button>:<><Button
                       variant="contained"
                       color="primary"
                       fullWidth
@@ -544,10 +562,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       variant="contained"
                       color="secondary"
                       fullWidth
-                      onClick={() => {}}
+                      onClick={() => {setIsEditable(true)}}
                     >
                       Negotiate
-                    </Button>
+                    </Button></>
+                    }
+                    
                   </Box>
                 ) : (
                   <Box
@@ -600,8 +620,6 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       fullWidth
                       onClick={async() => {
                         try{
-                          console.log(selectedContract?.marketPlaceId)
-                          console.log(`/api/marketplace/list-contract/${selectedContract?.marketPlaceId}`)
                           const response = await axios.delete(`/api/marketplace/list-contract/${selectedContract?.marketPlaceId}`,{withCredentials:true})
                           if(response.data.success) {
                             setContracts(prevContracts => 

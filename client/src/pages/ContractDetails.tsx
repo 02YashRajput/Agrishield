@@ -7,7 +7,6 @@ import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import { Card, CardContent, Paper } from '@mui/material';
 import RequestedDetails from '../components/contractDetails/RequestedDetails';
-import CompletedDetails from '../components/contractDetails/CompletedDetails';
 import OngoingDetails from '../components/contractDetails/OngoingDetails';
 
 
@@ -65,7 +64,6 @@ const ContractDetails :React.FC= () => {
   if (error) {
     return <ErrorPage />;
   }
-  console.log(location.pathname)
   return (
     <div>
     <Header

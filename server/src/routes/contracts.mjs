@@ -2,10 +2,11 @@ import { Router } from "express";
 import { authMiddleware } from "../middleware/auth_middleware.mjs";
 import { Contract } from "../mongoose-models/contract.mjs";
 import {User} from "../mongoose-models/user.mjs"
-import { acceptContractRequest, rejectContractRequest } from "../utils/sendEmail.mjs";
+import { acceptContractRequest, rejectContractRequest, updateEmail } from "../utils/sendEmail.mjs";
 import {check,validationResult} from "express-validator"
 import {MarketPlace} from "../mongoose-models/market-place.mjs"
 import dotenv from "dotenv"
+import { Negotiations } from "../mongoose-models/negotiations.mjs";
 dotenv.config()
 const router = Router();
 
@@ -78,7 +79,11 @@ router.post("/api/contracts/accept/:contractId",authMiddleware,async(req,res)=>{
       return res.status(404).json({ success: false, message: "Contract not found"});
     }
     await MarketPlace.findByIdAndDelete(contract.marketPlaceId);
-
+    await Contract.deleteMany({
+      marketPlaceId: contract.marketPlaceId,
+      contractId: { $ne: contractId },
+    });
+    await Negotiations.deleteMany({marketPlaceId: contract.marketPlaceId})
     const farmerProfile = await User.findById(contract.farmerId);
 
 
@@ -137,40 +142,43 @@ router.post(
       .withMessage('Invalid status value for the second index')
   ],
   async (req, res) => {
-    // Handle validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ success: false, message: "Error in format", errors: errors.array() });
     }
   
-    const { contractId } = req.params; // Custom contractId field
-    const { status, transaction } = req.body; // status as an array of length 2, transaction is optional
+    const { contractId } = req.params;
+    const { status, transaction } = req.body; 
   
     try {
-      // Retrieve the contract using findOne
       const contract = await Contract.findOne({ contractId });
 
       if (!contract) {
         return res.status(404).json({ success: false, message: 'Contract not found' });
       }
 
-      // Update the status field based on the received status
-      contract[status[0]] = status[1]; // Update the specific status field
+      contract[status[0]] = status[1];
 
-      // If the status is 'finalpaymentStatus' and 'Received', set contractStatus to 'Completed'
       if (status[0] === 'finalpaymentStatus' && status[1] === 'Received') {
-        contract.contractStatus = 'Completed'; // Set contractStatus to 'Completed'
+        contract.contractStatus = 'Completed'; 
       }
 
-      // If a transaction is provided, push it to the transactions array
       if (transaction) {
         contract.transactions.push(transaction);
       }
 
-      // Save the updated contract document
       await contract.save();
 
-      // Return success response
+
+      if(req.user.userType === "Farmer"){
+        const user = User.findById(contract.buyerId)
+        updateEmail(user.email)
+      }
+      else{
+        const user = User.findById(contract.farmerId)
+        updateEmail(user.email)
+      }
+
       return res.status(200).json({ success: true, message: 'Contract updated successfully' });
      } catch (error) {
       console.error(error);

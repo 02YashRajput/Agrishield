@@ -36,3 +36,11 @@ export const rejectContractRequest = (email)=>{
     html: `Your contract request has been rejected`
   })
 }
+
+export const updateEmail = (email)=>{
+  transport.sendMail({
+    to : email,
+    subject : "Email Updated",
+    html: `You contract status has been updated`
+  })
+}
