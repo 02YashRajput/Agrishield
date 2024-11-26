@@ -21,7 +21,7 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = 20;
   const skip = (page - 1) * limit;
-  const distance = parseInt(req.query.distance) || 10;
+  const distance = parseInt(req.query.distance);
   const crop = req.query.crop || "";
 
   try {
@@ -52,33 +52,38 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
       const userLocation = profile.address.location;
 
       let marketplaceDocs = await MarketPlace.find().select("-_id -buyerId");
-      const calculateDistance = (loc1, loc2) => {
-        const toRadians = (degrees) => (degrees * Math.PI) / 180;
-
-        const R = 6371;
-        const dLat = toRadians(loc2.latitude - loc1.latitude);
-        const dLon = toRadians(loc2.longitude - loc1.longitude);
-        const lat1 = toRadians(loc1.latitude);
-        const lat2 = toRadians(loc2.latitude);
-
-        const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(lat1) *
-            Math.cos(lat2) *
-            Math.sin(dLon / 2) *
-            Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return R * c;
-      };
-      marketplaceDocs = marketplaceDocs.filter((doc) => {
-        const docDistance = calculateDistance(userLocation, doc.location);
-
-        const matchesCrop = crop ? doc.productName === crop : true;
-
-        return docDistance <= distance && matchesCrop;
-      });
-
+      if (distance !== 0) {
+        const calculateDistance = (loc1, loc2) => {
+          const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  
+          const R = 6371;
+          const dLat = toRadians(loc2.latitude - loc1.latitude);
+          const dLon = toRadians(loc2.longitude - loc1.longitude);
+          const lat1 = toRadians(loc1.latitude);
+          const lat2 = toRadians(loc2.latitude);
+  
+          const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1) *
+              Math.cos(lat2) *
+              Math.sin(dLon / 2) *
+              Math.sin(dLon / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  
+          return R * c;
+        };
+  
+        marketplaceDocs = marketplaceDocs.filter((doc) => {
+          const docDistance = calculateDistance(userLocation, doc.location);
+          const matchesCrop = crop ? doc.productName === crop : true;
+          return docDistance <= distance && matchesCrop;
+        });
+      } else if (crop) {
+        marketplaceDocs = marketplaceDocs.filter(
+          (doc) => doc.productName === crop
+        );
+      }
+      
       const results = marketplaceDocs.slice(skip, skip + limit);
 
       res.status(200).json({

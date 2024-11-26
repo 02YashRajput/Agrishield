@@ -43,7 +43,7 @@ const fetcher = (url: string) =>
 const MarketPlace: React.FC = () => {
   const [page, setPage] = useState(1);
 
-  const [distance,setDistance] = useState<number>(10);
+  const [distance,setDistance] = useState<number>(0);
   const [crop,setCrop] = useState<string>("");
   const { data, error, isLoading } = useSWR<Data>(
     `/api/marketplace?page=${page}&distance=${distance}&crop=${crop}`,

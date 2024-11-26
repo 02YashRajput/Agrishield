@@ -64,24 +64,31 @@ isLoading
 
         {/* Chips for Distance */}
         <Stack direction="row" spacing={2} mb={2}>
+        <Chip
+            label="All"
+            clickable
+            color={distance === 0 ? "primary" : "default"}
+            onClick={() => handleDistanceChange(100)}
+          />
           <Chip
-            label="10"
+            label="<10"
             clickable
             color={distance === 10 ? "primary" : "default"}
             onClick={() => handleDistanceChange(10)}
           />
           <Chip
-            label="50"
+            label="<50"
             clickable
             color={distance === 50 ? "primary" : "default"}
             onClick={() => handleDistanceChange(50)}
           />
           <Chip
-            label="100"
+            label="<100"
             clickable
             color={distance === 100 ? "primary" : "default"}
             onClick={() => handleDistanceChange(100)}
           />
+
         </Stack>
 
         <Typography variant="h6" color="textSecondary" mb={1}>
