@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Stack, Chip, Typography, CardContent, Box, Button } from "@mui/material";
+import { Card, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Stack, Chip, Typography, CardContent, Box, Button, Autocomplete, TextField } from "@mui/material";
 import { cropsArray, ProductName } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
 
@@ -41,8 +41,8 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
 isLoading
 }) => {
   const [contracts,setContracts] = useState<FarmerMarketPlaceProps['results']>([])
-  const handleCropChange = (event: SelectChangeEvent<string>) => {
-    setCrop(event.target.value);
+  const handleCropChange = (value : string) => {
+    setCrop(value);
   };
 
   const handleDistanceChange = (newDistance: number) => {
@@ -95,29 +95,30 @@ isLoading
           Select Crop
         </Typography>
 
-        <FormControl fullWidth>
-          <InputLabel color="secondary" id="crop-select-label">Select Crop</InputLabel>
-          <Select
-            labelId="crop-select-label"
-            id="crop-select"
-            value={crop}
-            onChange={handleCropChange}
-            MenuProps={{
-              PaperProps: {
-                sx: {
-                  maxHeight: 300,  // Set max height for the dropdown
-                },
-              },
-            }}
-            color="secondary"
-          >
-            {cropsArray.map((cropName) => (
-              <MenuItem key={cropName} value={cropName}>
-                {cropName.charAt(0).toUpperCase() + cropName.slice(1)}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Autocomplete
+  id="crop-autocomplete"
+  value={crop}
+  onChange={(event, newValue) => {
+    handleCropChange(newValue ?? ""); // Provide a fallback for `null`
+  }}
+  options={cropsArray.map((cropName) =>
+    cropName.charAt(0).toUpperCase() + cropName.slice(1)
+  )}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label="Select Crop"
+      color="secondary"
+      fullWidth
+    />
+  )}
+  ListboxProps={{
+    style: {
+      maxHeight: 300, // Limit the dropdown height
+    },
+  }}
+  isOptionEqualToValue={(option, value) => option === value}
+/>
       </Card>
 
       <Card
