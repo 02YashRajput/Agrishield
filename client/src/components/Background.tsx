@@ -1,5 +1,5 @@
 
-import DashboardVideo from  "../assets/Dashboard_bg.mp4"
+
 const Background = () => {
 
 
