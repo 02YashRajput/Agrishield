@@ -14,7 +14,7 @@ import {
   ListItem,
   ListItemText, // Import Grid from MUI
 } from "@mui/material";
-import DashboardVideo from "../assets/Dashboard_bg.mp4";
+
 import { MdEditDocument } from "react-icons/md";
 import { FaHandshake } from "react-icons/fa6";
 import { GrSecure } from "react-icons/gr";
@@ -76,7 +76,7 @@ const Home: React.FC = () => {
       <Paper>
         <Box>
           <video className="w-full object-cover" autoPlay loop muted>
-            <source src={DashboardVideo} type="video/mp4" />
+            <source src="assets/video/Dashboard_bg.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </Box>
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
         controls
         style={{ width: "100%", height: "auto", borderRadius: "8px" }}
       >
-        <source src="https://youtu.be/kpfyeCj1VgA" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/5994360/5994360-hd_1550_1080_30fps.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </Box>

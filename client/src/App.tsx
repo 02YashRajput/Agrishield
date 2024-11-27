@@ -19,6 +19,7 @@ import Verification from './pages/Verification';
 import { useEffect } from 'react';
 import PrivateRoute from './components/PrivateRoute';
 import TransactionList from './pages/TransactionList';
+import Chat from './components/chat/Chat';
 
 
 const fetcher = (url:string) => axios.get(url).then((res) => res.data);
@@ -50,9 +51,12 @@ function App ()  {
     }
 
   }, [user, location, navigate]);
-
+  const excludeChatRoutes = ["/login", "/sign-up"];
+  const showChatWidget = user?.userId && !excludeChatRoutes.includes(location.pathname);
   return (
     <>
+    {showChatWidget  &&  <Chat /> }
+    
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/sign-up" element={<SignUp />} />

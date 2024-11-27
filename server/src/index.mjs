@@ -8,14 +8,18 @@ import dotenv from 'dotenv';
 import passport from 'passport';
 import AllRoutes from './routes/route.mjs'; 
 import { connectDb } from './config/connect-db.mjs';
+import {configureChatSockets} from "./config/socket.mjs"
+import http from 'http'; 
+
 const cookie_secret = process.env.COOKIE_SECRET ;
 const session_secret = process.env.SESSION_SECRET;
 dotenv.config();
 
 const app = express();
+const httpServer = http.createServer(app); 
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: process.env.CLIENT_URL,
   credentials: true, 
 };
 
@@ -46,6 +50,10 @@ app.use(passport.session());
 
 app.use(AllRoutes);
 
-app.listen(process.env.PORT, () => {
+
+
+
+configureChatSockets(httpServer);
+httpServer.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
 });

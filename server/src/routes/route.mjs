@@ -15,6 +15,7 @@ import ContractsRoute from "./contracts.mjs"
 import RazorpayRoute from "./razorpay.mjs"
 import NegotiationsRoute from "./negotiations.mjs"
 import TransalationRoute from "./transaction.mjs"
+import ChatRoute from "./chat.mjs"
 const router = Router();
 
 router.use(SignUpRoute)
@@ -33,4 +34,5 @@ router.use(ContractsRoute);
 router.use(RazorpayRoute);
 router.use(NegotiationsRoute);
 router.use(TransalationRoute);
+router.use(ChatRoute);
 export default router;
