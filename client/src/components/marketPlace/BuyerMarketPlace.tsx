@@ -104,8 +104,9 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
 useEffect(()=>{
   if(!isLoading){
     setContracts(results);
+    console.log("loading")
   }
-},[isLoading])
+},[isLoading , page])
 
   return (
     <div className="space-y-9">
@@ -333,11 +334,12 @@ useEffect(()=>{
             >
               Previous
             </Button>
+            
             <Button
               variant="contained"
               color="primary"
               onClick={handleNextPage}
-              disabled={results.length <= 0}
+              disabled={results.length < 20}
             >
               Next
             </Button>

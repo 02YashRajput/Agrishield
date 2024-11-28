@@ -19,10 +19,10 @@ const ProfileAvatar :React.FC<ProfileAvatarProps>= ({src,isEditable}) => {
         setAvatarSrc(reader.result as string);
 
         try {
-          // Send the file to the backend for Cloudinary upload
+          
           const formData = new FormData();
           formData.append("file", file);
-          formData.append("upload_preset", "your_upload_preset"); // Cloudinary upload preset
+          formData.append("upload_preset", "your_upload_preset"); 
 
           const response = await axios.post('/api/profile/upload-avatar', formData, {
             headers: {

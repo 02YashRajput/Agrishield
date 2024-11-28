@@ -5,6 +5,7 @@ import logo from "../assets/AgriShieldTransparent.png";
 import Background from "../components/Background";
 import Button from "@mui/material/Button";
 import { IoIosArrowBack } from "react-icons/io";
+import { useMediaQuery } from '@mui/material';
 import axios from "axios";
 import {
   Card,
@@ -26,6 +27,7 @@ import { useTranslation } from "react-i18next";
 type UserType = "Farmer" | "Buyer" | "";
 
 const SignUp: React.FC = () => {
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const [userType, setUserType] = useState<UserType>("");
   const [showUserTypeInput, setShowUserTypeInput] = useState(true);
@@ -103,12 +105,13 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="relative flex justify-center items-center overflow-hidden min-h-screen min-w-screen">
+    <div className="relative bg:[#bbf7d0] flex justify-center items-center min-h-screen min-w-screen">
       <Background />
       <Paper
         sx={{ backgroundColor: "rgba(255,255,255,0.5)" }}
         className="z-50 flex flex-col md:flex-row"
       >
+         {isSmallScreen && showUserTypeInput && (
         <Card
           sx={{ backgroundColor: "transparent" }}
           className="flex flex-col items-center justify-center"
@@ -120,13 +123,14 @@ const SignUp: React.FC = () => {
             sx={{ height: "18rem" }}
           />
           <CardContent className="flex items-center justify-center">
-            <Typography variant="h5" className="text-black  text-center">
-             {t('slogan.0')}
-             <br/>
-             {t('slogan.1')}
+            <Typography variant="h5" className="text-black text-center">
+              {t('slogan.0')}
+              <br />
+              {t('slogan.1')}
             </Typography>
           </CardContent>
         </Card>
+      )}
         <Divider />
         <Card
           sx={{ backgroundColor: "transparent" }}

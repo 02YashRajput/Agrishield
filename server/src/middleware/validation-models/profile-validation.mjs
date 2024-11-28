@@ -125,4 +125,25 @@ export const profileUpdateValidation = checkSchema({
     isMobilePhone: { options: 'en-IN' },
     errorMessage: 'Phone number must be a valid Indian mobile number.',
   },
+  email:{
+    in: ['body'],
+    notEmpty: {
+      errorMessage: "Email cannot be empty",
+    },
+    isString: {
+      errorMessage: "Email must be a string!",
+    },
+    isEmail: {
+      errorMessage: "Please enter a valid email address",
+    },
+  },
+  adhaar:{
+    in: ['body'],
+    isString: {
+      errorMessage: "Email must be a string!",
+    },
+    notEmpty: {
+      errorMessage: "Email cannot be empty",
+    },
+  }
 });

@@ -128,7 +128,13 @@ const farmerProfileSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  adhaar:{
+    type: String,
+    required: true,
+    match: /^[0-9]{12}$/, 
   }
+
 }, { timestamps: true });
 
 
@@ -225,6 +231,11 @@ const buyerProfileSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  adhaar:{
+    type: String,
+    required: true,
+    match: /^[0-9]{12}$/, 
   }
 }, { timestamps: true });
 

@@ -52,7 +52,7 @@ isLoading
     if(!isLoading){
       setContracts(results);
     }
-  },[isLoading])
+  },[isLoading,page])
   return (
     <div className="space-y-9">
       <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">

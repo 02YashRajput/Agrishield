@@ -11,6 +11,10 @@ export type Language = typeof supportedLanguages[number];
 interface LanguageContextProps {
   language: Language | '';
   setLanguage: (language: Language) => void;
+  isChatOpen: boolean;
+  setIsChatOpen: React.Dispatch<React.SetStateAction<boolean>>
+  currentChatId: string | null
+  setCurrentChatId: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 // Create context with a default value
@@ -28,7 +32,8 @@ const fetcher = (url: string) => axios.get(url,{
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<Language | ''>('');
   const { data: backendLanguage } = useSWR('/api/get-language', fetcher);
-
+  const [isChatOpen,setIsChatOpen] = useState<boolean>(false);
+  const [currentChatId, setCurrentChatId] = useState<string | null>(null);
   useEffect(() => {
     const initializeLanguage = () => {
       let selectedLanguage: Language;
@@ -53,7 +58,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, [backendLanguage]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage,isChatOpen,setIsChatOpen,currentChatId,setCurrentChatId }}>
       {children}
     </LanguageContext.Provider>
   );

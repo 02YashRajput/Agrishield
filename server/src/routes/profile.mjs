@@ -8,6 +8,7 @@ import { profileUpdateValidation } from "../middleware/validation-models/profile
 import {check,validationResult, matchedData } from "express-validator";
 import mongoose from "mongoose";
 import { getLocationCoordinates } from "../utils/get-location.mjs";
+import { createChat } from "../utils/start-chat.mjs";
 
 const router = Router();
 
@@ -38,7 +39,8 @@ router.get('/api/profile/:id',authMiddleware,async (req, res) => {
           farmDetails : profile.farmDetails,
           notificationPreferences:profile.notificationPreferences,
           reviews:profile.reviews,
-          rating:profile.rating
+          rating:profile.rating,
+          adhaar:profile.adhaar
         }
         return res.status(200).json({ success: true, message:"User Profile" , user:{name:req.user.userName,profileImage:req.user.profileImage,id:req.user.userId},profileData });
       }
@@ -81,7 +83,8 @@ router.get('/api/profile/:id',authMiddleware,async (req, res) => {
             email:true
           },
           reviews:[],
-          rating:0
+          rating:0,
+          adhaar:""
         }
         return res.status(200).json({ success: true, message: "Profile Yet to Edit", user:{name:req.user.userName,profileImage:req.user.profileImage,id:req.user.userId},profileData})
       }
@@ -101,7 +104,8 @@ router.get('/api/profile/:id',authMiddleware,async (req, res) => {
           paymentInformation:profile.paymentInformation,
           notificationPreferences:profile.notificationPreferences,
           reviews:profile.reviews,
-          rating:profile.rating
+          rating:profile.rating,
+          adhaar:profile.adhaar
         }
         return res.status(200).json({ success: true, message:"User Profile" , user:{name:req.user.userName,profileImage:req.user.profileImage,id:req.user.userId},profileData });
       }
@@ -137,7 +141,8 @@ router.get('/api/profile/:id',authMiddleware,async (req, res) => {
             email:true
           },
           reviews:[],
-          rating:0
+          rating:0,
+          adhaar:""
         }
         return res.status(200).json({ success: true, message: "Profile Yet to Edit", user:{name:req.user.userName,profileImage:req.user.profileImage,id:req.user.userId},profileData})
       }
@@ -159,7 +164,8 @@ router.get('/api/profile/:id',authMiddleware,async (req, res) => {
           farmDetails : profile.farmDetails,
           notificationPreferences:profile,
           reviews:profile.reviews,
-          rating:profile.rating
+          rating:profile.rating,
+          adhaar:profile.adhaar
         }
         
         return res.status(200).json({ success: true, message:"User Profile" , user:{name:req.user.userName,profileImage:req.user.profileImage,id:req.user.userId},profileData });
@@ -183,7 +189,8 @@ router.get('/api/profile/:id',authMiddleware,async (req, res) => {
          
           notificationPreferences:profile,
           reviews:profile.reviews,
-          rating:profile.rating
+          rating:profile.rating,
+          adhaar:profile.adhaar
         }
        
         return res.status(200).json({ success: true, message:"User Profile" , user:{name:req.user.userName,profileImage:req.user.profileImage,id:req.user.userId},profileData });
@@ -258,6 +265,7 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
 
   const data = matchedData(req);
   const userId = req.user.id;
+
   try {
     const {lat,lng} =await getLocationCoordinates(`${data.address.name}, ${data.address.district}, ${data.address.state}, ${data.address.pincode}, India`)
     if (!data.address.location) {
@@ -286,7 +294,7 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
           address :  data.address,
           notificationPreferences : data.notificationPreferences,
           paymentInformation : data.paymentInformation,
-
+          adhaar: data.adhaar
         });
       } else {
         // Create a new FarmerProfile
@@ -296,7 +304,8 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
           farmDetails : data.farmDetails,
           address :  data.address,
           notificationPreferences : data.notificationPreferences,
-          paymentInformation : data.paymentInformation
+          paymentInformation : data.paymentInformation,
+          adhaar: data.adhaar
         });
       }
     }
@@ -313,6 +322,7 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
             address: data.address,
             notificationPreferences: data.notificationPreferences,
             paymentInformation: data.paymentInformation,
+            adhaar:data.adhaar
           },
           { new: true } // Ensures the updated document is returned
         );
@@ -325,7 +335,8 @@ router.post("/api/profile/upload-profile", authMiddleware, profileUpdateValidati
           userId: userId,
           address :  data.address,
           notificationPreferences : data.notificationPreferences,
-          paymentInformation : data.paymentInformation// assuming buyerDetails is part of the incoming data
+          paymentInformation : data.paymentInformation,// assuming buyerDetails is part of the incoming data
+          adhaar:data.adhaar
         });
       }
     }
@@ -402,5 +413,29 @@ router.post('/api/profile/add-review/:id', authMiddleware, [
   }
 });
 
+
+router.post("/api/profile/start-chat/:id",authMiddleware,async(req,res)=>{
+  try{
+
+    const { id } = req.params;
+    
+    const user = await User.findOne({userId:parseInt(id,10)});
+    if(!user){
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    const participants = [{userId : req.user.id, name : req.user.userName,profileLink : `/profile/${req.user.userId}`}, {userId : user.id, name : user.userName, profileLink :`/profile/${user.userId}`}]
+    const result = await createChat(participants);
+
+
+    if(!result){
+      return res.status(500).json({ success: false, message:'Chat already exists' });
+    }
+    res.status(200).json({ success: true, message:"Chat created successfully",chatId:result});
+    
+  }catch(err){
+    console.error(err);
+    return res.status(500).json({ success: false, message: 'Server Error' });
+  }
+})
 
 export default router;

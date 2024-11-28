@@ -13,7 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Data } from "../../pages/Profile";
 import { IoPersonOutline } from "react-icons/io5";
 
@@ -73,9 +73,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
       ...(profileData.userType === "Farmer" && {
         farmDetails: profileData.farmDetails,
       }),
+      adhaar: profileData.adhaar
     },
   });
 
+  useEffect(()=>{
+    console.log(profileData)
+  })
   const handleFormSubmit = async (data : any) => {
     
     setUpdating(true); // Indicate the updating process has started
@@ -208,6 +212,39 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 />
               ) : (
                 <Typography variant="body1">{profileData?.phone}</Typography>
+              )}
+            </Box>
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: "600" }}>
+                Aadhaar
+                {isEditable && (
+                  <sup>
+                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                  </sup>
+                )}
+                :
+              </Typography>
+              {isEditable ? (
+                <Controller
+                  name="adhaar"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                      type="text"
+                      error={!!errors.adhaar}
+                      helperText={errors.adhaar?.message}
+                      color="secondary"
+                    />
+                  )}
+                />
+              ) : (
+                <Typography variant="body1">
+                {profileData?.adhaar === ""
+                  ? "Not Provided"
+                  : profileData?.adhaar} 
+              </Typography>
               )}
             </Box>
           </Box>
@@ -654,6 +691,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
         </Box>
       )}
+      
 
       {profileData.userType === "Farmer" && (
         <Box
@@ -711,6 +749,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 </Typography>
               )}
             </Box>
+
 
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>

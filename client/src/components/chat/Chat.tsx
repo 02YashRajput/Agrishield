@@ -14,6 +14,7 @@ import { io, Socket } from "socket.io-client";
 import axios from "axios";
 import { FaChevronLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 interface Message {
   _id: string;
@@ -31,10 +32,11 @@ interface Chat {
 }
 
 const ChatComponent :React.FC= () => {
+  const {isChatOpen,setIsChatOpen,currentChatId,setCurrentChatId} = useLanguage();
   const [user, setUser] = useState("");
-  const [isChatOpen, setIsChatOpen] = useState(false);
+ 
   const [chats, setChats] = useState<Chat[]>([]);
-  const [currentChatId, setCurrentChatId] = useState<string | null>(null);
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageContent, setMessageContent] = useState("");
   const [socket, setSocket] = useState<Socket | null>(null);

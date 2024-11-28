@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import BuyerMarketPlace from "../components/marketPlace/BuyerMarketPlace";
 import { Paper } from "@mui/material";
 import FarmerMarketPlace from "../components/marketPlace/FarmerMarketPlace";
+import { useLocation } from "react-router-dom";
 
 interface Data {
   success: boolean;
@@ -41,7 +42,11 @@ const fetcher = (url: string) =>
     .then((res) => res.data);
 
 const MarketPlace: React.FC = () => {
-  const [page, setPage] = useState(1);
+  const location = useLocation()
+
+  const params = new URLSearchParams(location.search);
+  const Page = params.get("page") || null;
+  const [page, setPage] = useState<number>(Page ? parseInt(Page,10) : 1);
 
   const [distance,setDistance] = useState<number>(0);
   const [crop,setCrop] = useState<string>("");
@@ -55,7 +60,10 @@ const MarketPlace: React.FC = () => {
   const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
 
 
- 
+  // useEffect(()=>{
+  //   console.log(isLoading);
+  //   console.log(data);
+  // })
 
   useEffect(() => { 
     const newUrl = `/marketplace?page=${page}`;

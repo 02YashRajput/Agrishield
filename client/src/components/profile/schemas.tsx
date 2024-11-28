@@ -47,6 +47,7 @@ export const baseProfileDataSchema = z.object({
     upiDetails: upiDetailsSchema,
   }),
   notificationPreferences: notificationPreferencesSchema,
+  adhaar:z.string().min(12,{ message: "adhaar mst be 12 integers" }).max(12, { message: "adhaar must be 12 integers" }),
 });
 
 export const farmerProfileDataSchema = baseProfileDataSchema.extend({

@@ -14,6 +14,8 @@ import { sendContractRequest } from "../utils/sendEmail.mjs";
 import { Negotiations } from "../mongoose-models/negotiations.mjs";
 import { validateNegotiationDetails } from "../middleware/validation-models/start-negotiations.mjs";
 import { createChat } from "../utils/start-chat.mjs";
+import { Chat } from "../mongoose-models/chat.mjs";
+
 dotenv.config();
 const router = Router();
 const baseAwsUrl = process.env.AWS_S3_URL;
@@ -289,10 +291,23 @@ router.post(
       const savedContract = await contract.save();
 
       const participants = [{userId: savedContract.farmerId,name: savedContract.farmerName,profileLink : savedContract.farmerProfileLink }, { userId : savedContract.buyerId, name: savedContract.buyerName, profileLink : savedContract.buyerProfileLink }];
+      const participantIds = participants.map(participant => participant.userId.toString());
+
+   
+    const existingChat = await Chat.findOne({
+        $and: [
+            { 'participants.userId': { $all: participantIds } }, // Both user IDs must be present
+           
+        ],
+    });
+    if (!existingChat) {
+        
       const response = await createChat(participants);
       if(!response){
         return res.status(500).json({ success: false, message: "Failed to create chat" });
       }
+    }
+
       const url = `${clientUrl}/contracts/${savedContract.contractId}`;
       sendContractRequest(buyer.email, url);
 

@@ -19,6 +19,30 @@ const chatSchema = new mongoose.Schema({
     lastUpdated: { type: Date, default: Date.now },
 });
 
+chatSchema.pre('save', async function (next) {
+    if (this.participants.length !== 2) {
+        return next(new Error('A chat must have exactly two participants.'));
+    }
+
+    const Chat = mongoose.model('Chat');
+    const participantIds = this.participants.map(participant => participant.userId.toString());
+
+    // Check for an existing chat with exactly these two participants
+    const existingChat = await Chat.findOne({
+        $and: [
+            { 'participants.userId': { $all: participantIds } }, // Both userIds are present
+           
+        ],
+    });
+
+    if (existingChat) {
+        return next(new Error('A chat between these participants already exists.'));
+    }
+
+    next();
+});
+
+
 const Message = mongoose.model('Message', messageSchema);
 const Chat = mongoose.model('Chat', chatSchema);
 

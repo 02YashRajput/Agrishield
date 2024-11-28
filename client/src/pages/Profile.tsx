@@ -10,6 +10,7 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
+import { MdVerifiedUser } from "react-icons/md";
 import { crops } from "../utils/cropsName";
 import useSWR from "swr";
 import axios from "axios";
@@ -22,6 +23,7 @@ import ProfileAvatar from "../components/profile/ProfileAvatar";
 import NotFound from "./NotFound";
 import ProfileContentUser from "../components/profile/ProfileContentUser";
 import ReviewsAndRatings from "../components/profile/ReviewsAndRatings";
+import { useLanguage } from "../context/LanguageContext";
 
 export interface Data {
   success: boolean;
@@ -73,7 +75,7 @@ export interface Data {
       }[]
   ;
     rating: number;
-
+      adhaar:string;
   };
 }
 
@@ -85,6 +87,8 @@ const fetcher = (url: string) =>
     .then((res) => res.data);
 
 const Profile: React.FC = () => {
+  const {setIsChatOpen} = useLanguage();
+  
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, error, isLoading } = useSWR<Data>(
@@ -159,13 +163,13 @@ const Profile: React.FC = () => {
                   isEditable={isEditable}
                 />
                 <Box>
-                  <Typography
-                    variant="body1"
-                    align="left"
-                    sx={{ color: "gray" }}
-                  >
-                    Name: {profileData?.userName}
-                  </Typography>
+                <Typography
+  variant="body1"
+  align="left"
+  sx={{ color: "gray", display: "flex", alignItems: "center" }}
+>
+  Name: {profileData?.userName} <MdVerifiedUser />
+</Typography>
                   <Box
                     sx={{
                       display: "flex",
@@ -183,6 +187,25 @@ const Profile: React.FC = () => {
                 </Box>
               </Box>
               <Box>
+                {
+                  !profileData?.email && <Button variant="contained" onClick={async()=>{
+try{
+  const response = await axios.post(`/api/profile/start-chat/${id}`, {
+    withCredentials: true, 
+  });
+  if(response.data.success) {
+    toast.success("Chat started successfully");
+    setIsChatOpen(true);
+  }
+}catch (err:any) {
+  if (err.response?.data?.message === 'Chat already exists') {
+    toast.error("Chat already exists");
+  } else {
+    toast.error("Failed to initiate chat");
+  }
+}
+                  }}>Chat with {profileData?.userName}</Button>
+                }
                 {profileData?.email && !isEditable && (
                   <Button
                     sx={{
