@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -18,12 +19,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import theme from "../theme/Theme";
 
 
 
 
 
 const Login:React.FC = () => {
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const {t} = useTranslation('login');
   
@@ -70,6 +73,8 @@ const Login:React.FC = () => {
         sx={{ backgroundColor: "rgba(255,255,255,0.5)" }}
         className="z-50 flex flex-col md:flex-row"
       >
+        {
+!isSmallScreen &&
         <Card
           sx={{ backgroundColor: "transparent" }}
           className="flex flex-col items-center justify-center "
@@ -87,6 +92,8 @@ const Login:React.FC = () => {
             </Typography>
           </CardContent>
         </Card>
+        }
+
         <Divider />
         <Card
           sx={{ backgroundColor: "transparent" }}

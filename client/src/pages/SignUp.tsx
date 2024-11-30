@@ -27,7 +27,8 @@ import { useTranslation } from "react-i18next";
 type UserType = "Farmer" | "Buyer" | "";
 
 const SignUp: React.FC = () => {
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  
   const navigate = useNavigate();
   const [userType, setUserType] = useState<UserType>("");
   const [showUserTypeInput, setShowUserTypeInput] = useState(true);
@@ -111,7 +112,7 @@ const SignUp: React.FC = () => {
         sx={{ backgroundColor: "rgba(255,255,255,0.5)" }}
         className="z-50 flex flex-col md:flex-row"
       >
-         {isSmallScreen && showUserTypeInput && (
+         {!isSmallScreen && showUserTypeInput && (
         <Card
           sx={{ backgroundColor: "transparent" }}
           className="flex flex-col items-center justify-center"

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ProductName } from "../../utils/cropsName";
 import {
   Card,
   Grid,
@@ -44,7 +43,7 @@ interface OngoingDetailaProps {
     deadline: Date;
     initialPaymentAmount: string;
     finalPaymentAmount: string;
-    productName: ProductName;
+    productName: string;
     productImage: string;
     buyerProfileImage: string;
     buyerProfileLink: string;

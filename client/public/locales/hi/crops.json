@@ -1,0 +1,27 @@
+{
+  "cropsObject": {
+    "arhar": "अरहर",
+    "gram": "चना",
+    "masoor": "मसूर",
+    "rape": "सरसों",
+    "sunflower": "सूरजमुखी",
+    "bajra": "बाजरा",
+    "groundnut": "मूंगफली",
+    "moong": "मूंग",
+    "safflower": "कुसुम",
+    "urad": "उड़द",
+    "barley": "जौ",
+    "jowar": "ज्वार",
+    "niger": "रामतिल",
+    "sesamum": "तिल",
+    "wheat": "गेहूं",
+    "copra": "नारियल",
+    "jute": "जूट",
+    "paddy": "धान",
+    "soyabean": "सोयाबीन",
+    "cotton": "कपास",
+    "maize": "मक्का",
+    "ragi": "रागी",
+    "sugarcane": "गन्ना"
+  }
+}

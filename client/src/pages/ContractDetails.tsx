@@ -32,7 +32,7 @@ interface Data {
     deadline : Date;
     initialPaymentAmount :string;
     finalPaymentAmount :string;
-    productName: ProductName;
+    productName: string;
     productImage: string;
     buyerProfileImage: string;
     buyerProfileLink: string;

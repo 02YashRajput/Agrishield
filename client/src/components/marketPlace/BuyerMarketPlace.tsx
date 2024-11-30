@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { cropsArray, ProductName } from "../../utils/cropsName";
+import { cropsArray } from "../../utils/cropsName";
 import axios from "axios";
 import {
   Autocomplete,
@@ -20,13 +20,15 @@ import Calendar from "react-calendar"; // React Calendar library
 import "react-calendar/dist/Calendar.css";
 import ListedContracts from "./ListedContracts";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+
 interface BuyerMarketPlaceProps {
   results: {
     marketPlaceId: number;
     buyerName: string;
     buyerProfileImage: string;
     buyerProfileLink: string;
-    productName: ProductName;
+    productName: string;
     additionalInstructions: string;
     productQuantity: string;
     deadline: Date;
@@ -49,6 +51,9 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
   handlePrevPage,
   page,
 }) => {
+
+  const {t} = useTranslation(["marketplace", "crops"]);
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [contracts,setContracts] = useState<BuyerMarketPlaceProps['results']>([])
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
@@ -58,6 +63,14 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
   const handleClosePopover = () => {
     setAnchorEl(null);
   };
+
+  const cropsObject = t("crops:cropsObject", { returnObjects: true });
+
+ console.log(cropsObject);
+ const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
+  key,
+  value,
+}));
 
   const isPopoverOpen = Boolean(anchorEl);
   const {
@@ -101,6 +114,8 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
     }
   };
 
+
+
 useEffect(()=>{
   if(!isLoading){
     setContracts(results);
@@ -121,28 +136,30 @@ useEffect(()=>{
           <form onSubmit={handleSubmit(handleFormSubmit)} className="mt-8">
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
-                <Controller
-                  name="productName"
-                  control={control}
-                  render={({ field }) => (
-                    <Autocomplete
-                      {...field}
-                      options={cropsArray}
-                      color="secondary"
-                      renderInput={(params) => (
-                        <TextField
-                          required
-                          color="secondary"
-                          {...params}
-                          label="Product Name"
-                          error={!!errors.productName}
-                          helperText={errors.productName?.message}
-                        />
-                      )}
-                      onChange={(_, data) => field.onChange(data)}
-                    />
-                  )}
-                />
+              <Controller
+      name="productName"
+      control={control}
+      render={({ field }) => (
+        <Autocomplete
+        {...field}
+        options={cropsArray}
+        getOptionLabel={(option) => option.value} // Show the crop name
+        isOptionEqualToValue={(option, value) => option.key === value?.key} // Match by key
+        value={cropsArray.find((crop) => crop.key === field.value) || null} // Convert `field.value` to an object
+        onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            required
+            color="secondary"
+            label="Product Name"
+            error={!!errors.productName}
+            helperText={errors.productName?.message}
+          />
+        )}
+      />
+      )}
+    />
               </Grid>
 
               <Grid item xs={12} sm={6}>

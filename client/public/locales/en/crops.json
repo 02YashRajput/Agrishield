@@ -1,0 +1,27 @@
+{
+  "cropsObject": {
+    "arhar": "Arhar",
+    "gram": "Gram",
+    "masoor": "Masoor",
+    "rape": "Rape",
+    "sunflower": "Sunflower",
+    "bajra": "Bajra",
+    "groundnut": "Groundnut",
+    "moong": "Moong",
+    "safflower": "Safflower",
+    "urad": "Urad",
+    "barley": "Barley",
+    "jowar": "Jowar",
+    "niger": "Niger",
+    "sesamum": "Sesamum",
+    "wheat": "Wheat",
+    "copra": "Copra",
+    "jute": "Jute",
+    "paddy": "Paddy",
+    "soyabean": "Soyabean",
+    "cotton": "Cotton",
+    "maize": "Maize",
+    "ragi": "Ragi",
+    "sugarcane": "Sugarcane"
+  }
+}

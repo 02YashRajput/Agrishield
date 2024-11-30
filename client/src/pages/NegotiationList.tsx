@@ -31,7 +31,7 @@ export interface Negotiation {
     finalPaymentAmountFarmer: string;
     productQuantityFarmer: string;
     lastUpdated: "Farmer" | "Buyer";
-    productName: ProductName;
+    productName: string;
     productImage: string;
     buyerProfileImage: string;
     buyerProfileLink: string;

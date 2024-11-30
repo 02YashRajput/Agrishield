@@ -9,7 +9,7 @@ interface FarmerMarketPlaceProps {
     buyerName: string;
     buyerProfileImage: string;
     buyerProfileLink: string;
-    productName: ProductName;
+    productName: string;
     additionalInstructions: string;
     productQuantity: string;
     deadline: Date;

@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Grid, Typography, Avatar, Link, Button, CardContent } from "@mui/material";
 
-import { ProductName } from "../../utils/cropsName";
 import { FaCheck, FaRupeeSign, FaTimes, FaTrash } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -19,7 +18,7 @@ interface RequestedDetailsProps {
     deadline : Date;
     initialPaymentAmount :string;
     finalPaymentAmount :string;
-    productName: ProductName;
+    productName: string;
     productImage: string;
     buyerProfileImage: string;
     buyerProfileLink: string;
