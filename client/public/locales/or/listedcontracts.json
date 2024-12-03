@@ -1,0 +1,19 @@
+{
+    "buyer_name": "କ୍ରେତାର ନାମ:",
+    "product_name": "ଉତ୍ପାଦର ନାମ:",
+    "quantity": "ପରିମାଣ:",
+    "total_amount": "ମୋଟ ରାଶି:",
+    "deadline": "ଶେଷ ତାରିଖ:",
+    "initial_payment_amount": "ଆରମ୍ଭିକ ପେମେଣ୍ଟ ରାଶି:",
+    "final_payment_amount": "ଚୁଡାନ୍ତ ପେମେଣ୍ଟ ରାଶି:",
+    "total_payment_amount": "ମୋଟ ପେମେଣ୍ଟ ରାଶି:",
+    "instructions": "ଦିଶା-ନିର୍ଦେଶ:",
+    "view_buyer_profile": "କ୍ରେତାର ପ୍ରୋଫାଇଲ ଦେଖନ୍ତୁ",
+    "send": "ପଠାନ୍ତୁ",
+    "request": "ସକ୍ରିୟ କରିବା ପାଇଁ ଅନୁରୋଧ କରନ୍ତୁ",
+    "negotiate": "ବାତଚିତ୍ତ କରନ୍ତୁ",
+    "edit": "ସମ୍ପାଦନା କରନ୍ତୁ",
+    "delete": "ମିଟାନ୍ତୁ",
+    "save": "ସେଭ୍ କରନ୍ତୁ",
+    "rate": "ମୂଲ୍ୟାଙ୍କନ କରନ୍ତୁ"
+}

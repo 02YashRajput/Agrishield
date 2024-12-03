@@ -1,0 +1,19 @@
+{
+    "buyer_name": "خریدار کا نام:",
+    "product_name": "پروڈکٹ کا نام:",
+    "quantity": "مقدار:",
+    "total_amount": "مجموعی رقم:",
+    "deadline": "آخری تاریخ:",
+    "initial_payment_amount": "ابتدائی ادائیگی کی رقم:",
+    "final_payment_amount": "حتمی ادائیگی کی رقم:",
+    "total_payment_amount": "مجموعی ادائیگی کی رقم:",
+    "instructions": "ہدایات:",
+    "view_buyer_profile": "خریدار کا پروفائل دیکھیں",
+    "send": "بھیجیں",
+    "request": "فعال کرنے کی درخواست کریں",
+    "negotiate": "مذاکرات کریں",
+    "edit": "ترمیم کریں",
+    "delete": "حذف کریں",
+    "save": "محفوظ کریں",
+    "rate": "درجہ بندی کریں"
+}

@@ -1,0 +1,19 @@
+{
+    "buyer_name": "ক্রেতার নাম:",
+    "product_name": "পণ্যের নাম:",
+    "quantity": "পরিমাণ:",
+    "total_amount": "মোট অর্থ:",
+    "deadline": "শেষ তারিখ:",
+    "initial_payment_amount": "প্রাথমিক অর্থের পরিমাণ:",
+    "final_payment_amount": "চূড়ান্ত অর্থের পরিমাণ:",
+    "total_payment_amount": "মোট অর্থের পরিমাণ:",
+    "instructions": "নির্দেশাবলী:",
+    "view_buyer_profile": "ক্রেতার প্রোফাইল দেখুন",
+    "send": "পাঠান",
+    "request": "সক্রিয় করার জন্য অনুরোধ করুন",
+    "negotiate": "আলোচনা করুন",
+    "edit": "সম্পাদনা করুন",
+    "delete": "মুছে ফেলুন",
+    "save": "সংরক্ষণ করুন",
+    "rate": "মূল্যায়ন করুন"
+}

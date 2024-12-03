@@ -1,0 +1,19 @@
+{
+    "buyer_name": "വാങ്ങുന്നവന്റെ പേര്:",
+    "product_name": "ഉൽപ്പന്നത്തിന്റെ പേര്:",
+    "quantity": "അളവ്:",
+    "total_amount": "മൊത്തം തുക:",
+    "deadline": "അവസാന തീയതി:",
+    "initial_payment_amount": "ആദി പണമിടപാട് തുക:",
+    "final_payment_amount": "അന്തിമ പണമിടപാട് തുക:",
+    "total_payment_amount": "മൊത്തം പണമിടപാട് തുക:",
+    "instructions": "നിർദ്ദേശങ്ങൾ:",
+    "view_buyer_profile": "വാങ്ങുന്നവന്റെ പ്രൊഫൈൽ കാണുക",
+    "send": "പതുക്കുക",
+    "request": "സജീവമാക്കാൻ അഭ്യർഥിക്കൂ",
+    "negotiate": "സംവദിക്കുക",
+    "edit": "സമ്പാദിക്കുക",
+    "delete": "അഴിപ്പിക്കുക",
+    "save": "സംരക്ഷിക്കുക",
+    "rate": "വിലയിരുത്തുക"
+}

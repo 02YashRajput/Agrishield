@@ -1,0 +1,19 @@
+{
+    "buyer_name": "ಖರೀದಿದಾರರ ಹೆಸರು:",
+    "product_name": "ಉತ್ಪನ್ನದ ಹೆಸರು:",
+    "quantity": "ಮাত্ৰೆ:",
+    "total_amount": "ಒಟ್ಟು ಮೊತ್ತ:",
+    "deadline": "ಅಂತಿಮ ದಿನಾಂಕ:",
+    "initial_payment_amount": "ಆರಂಭಿಕ ಪಾವತಿ ಮೊತ್ತ:",
+    "final_payment_amount": "ಅಂತಿಮ ಪಾವತಿ ಮೊತ್ತ:",
+    "total_payment_amount": "ಒಟ್ಟು ಪಾವತಿ ಮೊತ್ತ:",
+    "instructions": "ಆಜ್ಞೆಗಳು:",
+    "view_buyer_profile": "ಖರೀದಿದಾರರ ಪ್ರೊಫೈಲ್ ನೋಡಿ",
+    "send": "ಕಳುಹಿಸಿ",
+    "request": "ಸಕ್ರಿಯಗೊಳಿಸಲು ವಿನಂತಿ ಮಾಡಿ",
+    "negotiate": "ಸಂವಹನ ಮಾಡಿ",
+    "edit": "ಸಂಪಾದಿಸಿ",
+    "delete": "ಅಳಿಸಿ",
+    "save": "ಉಳಿಸಿ",
+    "rate": "ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ"
+}

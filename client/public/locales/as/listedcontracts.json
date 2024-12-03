@@ -1,0 +1,19 @@
+{
+    "buyer_name": "ক্ৰেতাৰ নাম:",
+    "product_name": "সামগ্ৰীৰ নাম:",
+    "quantity": "পৰিমাণ:",
+    "total_amount": "মুঠ পৰিমাণ:",
+    "deadline": "শেষ তাৰিখ:",
+    "initial_payment_amount": "প্ৰাৰম্ভিক পেমেণ্ট পৰিমাণ:",
+    "final_payment_amount": "চূড়ান্ত পেমেণ্ট পৰিমাণ:",
+    "total_payment_amount": "মুঠ পেমেণ্ট পৰিমাণ:",
+    "instructions": " নিৰ্দেশনা:",
+    "view_buyer_profile": "ক্ৰেতাৰ প্ৰফাইল চাওক",
+    "send": "পঠিওৱা",
+    "request": "সক্ৰিয় কৰিবলৈ অনুৰোধ কৰক",
+    "negotiate": "পৰামৰ্শ কৰক",
+    "edit": "সম্পাদনা কৰক",
+    "delete": "বিলোপ কৰক",
+    "save": "সংৰক্ষণ কৰক",
+    "rate": "মূল্যাংকন কৰক"
+}

@@ -125,7 +125,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
         className="max-w-4xl mx-auto bg-white p-8 "
       >
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-          {t("buyermarketplace:listYourContract")}
+          {t("listYourContract")}
         </Typography>
         <CardContent>
           <form onSubmit={handleSubmit(handleFormSubmit)} className="mt-8">
@@ -152,7 +152,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                           {...params}
                           required
                           color="secondary"
-                          label={t("buyermarketplace:productName")}
+                          label={t("productName")}
                           error={!!errors.productName}
                           helperText={errors.productName?.message}
                         />
@@ -174,7 +174,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       {...field}
                       error={!!errors.productQuantity}
                       helperText={errors.productQuantity?.message}
-                      label={t("buyermarketplace:productQuantity")}
+                      label={t("productQuantity")}
                       fullWidth
                     />
                   )}
@@ -192,7 +192,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       {...field}
                       error={!!errors.initialPaymentAmount}
                       helperText={errors.initialPaymentAmount?.message}
-                      label={t("buyermarketplace:initialPaymentAmount")}
+                      label={t("initialPaymentAmount")}
                       fullWidth
                     />
                   )}
@@ -210,7 +210,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       {...field}
                       error={!!errors.finalPaymentAmount}
                       helperText={errors.finalPaymentAmount?.message}
-                      label={t("buyermarketplace:finalPaymentAmount")}
+                      label={t("finalPaymentAmount")}
                       fullWidth
                     />
                   )}
@@ -224,7 +224,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                     Number(watch("initialPaymentAmount") || 0) +
                     Number(watch("finalPaymentAmount") || 0)
                   }
-                  label={t("buyermarketplace:totalAmount")}
+                  label={t("totalAmount")}
                   fullWidth
                   disabled
                 />
@@ -239,7 +239,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       Number(watch("finalPaymentAmount") || 0)) /
                     Number(watch("productQuantity") || 1)
                   }
-                  label={t("buyermarketplace:ratePerQuintal")}
+                  label={t("ratePerQuintal")}
                   fullWidth
                   disabled
                 />
@@ -259,7 +259,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       >
                         {field.value
                           ? new Date(field.value).toLocaleDateString()
-                          : t("buyermarketplace:selectDeadline")}
+                          : t("selectDeadline")}
                       </Button>
                       <Popover
                         open={isPopoverOpen}
@@ -299,7 +299,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       {...field}
                       error={!!errors.additionalInstructions}
                       helperText={errors.additionalInstructions?.message}
-                      label={t("buyermarketplace:additionalInstructions")}
+                      label={t("additionalInstructions")}
                       fullWidth
                     />
                   )}
@@ -321,7 +321,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                   }}
                   startIcon={<MdPlaylistAdd />}
                 >
-                  {t("buyermarketplace:listContract")}
+                  {t("listContract")}
                 </Button>
               </Grid>
             </Grid>
@@ -334,7 +334,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
         className="max-w-4xl mx-auto bg-white p-8 "
       >
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-          {t("buyermarketplace:listedContracts")}
+          {t("listedContracts")}
         </Typography>
         <CardContent>
           {results.length > 0 ? (
@@ -345,7 +345,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
             />
           ) : (
             <Typography variant="h5">
-              {t("buyermarketplace:noDataAvailable")}
+              {t("noDataAvailable")}
             </Typography>
           )}
 
@@ -356,7 +356,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
               onClick={handlePrevPage}
               disabled={page === 1}
             >
-              {t("buyermarketplace:previous")}
+              {t("previous")}
             </Button>
 
             <Button
@@ -365,7 +365,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
               onClick={handleNextPage}
               disabled={results.length < 20}
             >
-              {t("buyermarketplace:next")}
+              {t("next")}
             </Button>
           </Box>
         </CardContent>

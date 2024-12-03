@@ -1,0 +1,19 @@
+{
+    "buyer_name": "ખરીદદારનું નામ:",
+    "product_name": "ઉત્પાદનનું નામ:",
+    "quantity": "જથ્થો:",
+    "total_amount": "કુલ રકમ:",
+    "deadline": "અંતિમ તારીખ:",
+    "initial_payment_amount": "પ્રારંભિક ચુકવણી રકમ:",
+    "final_payment_amount": "છૂટક ચુકવણી રકમ:",
+    "total_payment_amount": "કુલ ચુકવણી રકમ:",
+    "instructions": "હિદ્દયાઓ:",
+    "view_buyer_profile": "ખરીદદારની પ્રોફાઈલ જુઓ",
+    "send": "હોય",
+    "request": "પ્રારંભ કરવા માટે વિનંતી કરો",
+    "negotiate": "વાટાઘાટ કરો",
+    "edit": "સંપાદિત કરો",
+    "delete": "માટે કાઢો",
+    "save": "સાચવો",
+    "rate": "મુલ્યાંકન કરો"
+}

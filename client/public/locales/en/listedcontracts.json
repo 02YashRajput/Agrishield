@@ -1,0 +1,19 @@
+{
+    "buyer_name": "Buyer Name:",
+    "product_name": "Product Name:",
+    "quantity": "Quantity:",
+    "total_amount": "Total Amount:",
+    "deadline": "Deadline:",
+    "initial_payment_amount": "Initial Payment Amount:",
+    "final_payment_amount": "Final Payment Amount:",
+    "total_payment_amount": "Total Payment Amount:",
+    "instructions": "Instructions:",
+    "view_buyer_profile": "View Buyer Profile",
+    "send":"Send",
+    "request":"Request to Activate",
+    "negotiate": "Negotiate",
+    "edit":"Edit",
+    "delete":"Delete",
+    "save":"Save",
+    "rate":"Rate"
+}

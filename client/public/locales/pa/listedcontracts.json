@@ -1,0 +1,19 @@
+{
+    "buyer_name": "ਖਰੀਦਦਾਰ ਦਾ ਨਾਮ:",
+    "product_name": "ਉਤਪਾਦ ਦਾ ਨਾਮ:",
+    "quantity": "ਮਾਤਰਾ:",
+    "total_amount": "ਕੁੱਲ ਰਕਮ:",
+    "deadline": "ਆਖਰੀ ਤਾਰੀਖ:",
+    "initial_payment_amount": "ਪਹਿਲੀ ਪੇਮੈਂਟ ਰਕਮ:",
+    "final_payment_amount": "ਆਖਰੀ ਪੇਮੈਂਟ ਰਕਮ:",
+    "total_payment_amount": "ਕੁੱਲ ਪੇਮੈਂਟ ਰਕਮ:",
+    "instructions": "ਹਦਾਇਤਾਂ:",
+    "view_buyer_profile": "ਖਰੀਦਦਾਰ ਦਾ ਪ੍ਰੋਫਾਈਲ ਵੇਖੋ",
+    "send": "ਭੇਜੋ",
+    "request": "ਸਰਗਰਮ ਕਰਨ ਦੀ ਬੇਨਤੀ ਕਰੋ",
+    "negotiate": "ਮੋਲ ਭਾਅ ਕਰੋ",
+    "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+    "delete": "ਹਟਾਓ",
+    "save": "ਸੰਭਾਲੋ",
+    "rate": "ਮੁੱਲਿਆੰਕਨ ਕਰੋ"
+}

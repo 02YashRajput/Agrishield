@@ -24,7 +24,7 @@ import Calendar from "react-calendar";
 import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { useTranslation } from "react-i18next";
 
 interface ListedContractsProps {
   contracts: {
@@ -62,6 +62,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
   userType,
   setContracts
 }) => {
+  const { t } = useTranslation(["listedcontracts", "crops"]);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
@@ -245,22 +246,22 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     </Link>
                     <Box>
                       <Typography variant="body1">
-                        <strong>Buyer Name:</strong> {contract.buyerName}
+                        <strong>{t("buyer_name")}</strong> {contract.buyerName}
                       </Typography>
                       <Typography variant="body1">
-                        <strong>Product Name:</strong> {contract.productName}
+                        <strong>{t("product_name")}</strong> {contract.productName}
                       </Typography>
                       <Typography variant="body1">
-                        <strong>Quantity:</strong> {contract.productQuantity}
+                        <strong>{t("quantity")}</strong> {contract.productQuantity}
                       </Typography>
                       <Typography variant="body1" className="flex items-center">
-                        <strong>Total Amount:</strong>
+                        <strong>{t("total_amount")}</strong>
                         <FaRupeeSign />{" "}
                         {parseInt(contract.initialPaymentAmount) +
                           parseInt(contract.finalPaymentAmount)}
                       </Typography>
                       <Typography variant="body1">
-                        <strong>Deadline:</strong>{" "}
+                        <strong>{t("deadline")}</strong>{" "}
                         {new Date(contract.deadline).toLocaleDateString()}
                       </Typography>
                     </Box>
@@ -322,7 +323,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   {selectedContract.productName}
                 </Typography>
                 <Typography id="modal-description" variant="body1">
-                  <strong>Buyer Name:</strong> {selectedContract.buyerName}
+                  <strong>{t("buyer_name")}</strong> {selectedContract.buyerName}
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -343,7 +344,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1">
-                    <strong>Quantity:</strong>{" "}
+                    <strong>{t("quantity")}</strong>{" "}
                     {selectedContract.productQuantity}
                   </Typography>
                 )}
@@ -366,7 +367,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Initial Payment Amount:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("initial_payment_amount")}</strong> <FaRupeeSign />{" "}
                     {selectedContract.initialPaymentAmount}
                   </Typography>
                 )}
@@ -389,7 +390,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Final Payment Amount:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("final_payment_amount")}</strong> <FaRupeeSign />{" "}
                     {selectedContract.finalPaymentAmount}
                   </Typography>
                 )}
@@ -407,7 +408,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Total Payment Amount:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("total_payment_amount")}</strong> <FaRupeeSign />{" "}
                     {parseInt(selectedContract.initialPaymentAmount) +
                       parseInt(selectedContract.finalPaymentAmount)}
                   </Typography>
@@ -427,7 +428,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Rate:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("rate")}</strong> <FaRupeeSign />{" "}
                     {(parseInt(selectedContract.initialPaymentAmount) +
                       parseInt(selectedContract.finalPaymentAmount)) /
                       parseInt(selectedContract.productQuantity)}
@@ -476,7 +477,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     </>
                   )}
                 />:<Typography variant="body1">
-                <strong>Deadline:</strong>{" "}
+                <strong>{t("deadline")}</strong>{" "}
                 {new Date(selectedContract.deadline).toLocaleDateString()}
               </Typography>
                 }
@@ -496,7 +497,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     />
                   )}
                 />:<Typography variant="body1">
-                <strong>Instructions:</strong>{" "}
+                <strong>{t("instructions")}</strong>{" "}
                 {selectedContract.additionalInstructions}
               </Typography>
 
@@ -518,7 +519,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     style={{ textDecoration: "none" }}
                   >
                     <Typography variant="body1" color="secondary">
-                      View Buyer Profile
+                    {t("view_buyer_profile")}
                     </Typography>
                   </Link>
                 </Box>
@@ -537,7 +538,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       fullWidth
                       type="submit"
                       endIcon={<SaveIcon className="text-white" />}>
-                        Send
+                        {t("send")}
                       </Button>:<><Button
                       variant="contained"
                       color="primary"
@@ -556,7 +557,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                         }
                       }}
                     >
-                      Request to Activate
+                      {t("request")}
                     </Button>
                     <Button
                       variant="contained"
@@ -564,7 +565,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       fullWidth
                       onClick={() => {setIsEditable(true)}}
                     >
-                      Negotiate
+                      {t("negotiate")}
                     </Button></>
                     }
                     
@@ -591,7 +592,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       
 
                     >
-                      Save
+                      {t("save")}
                     </Button> :<Button
                     type="button"
                       endIcon={<FaPen className="text-white" />}
@@ -608,7 +609,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       }}
 
                     >
-                      Edit
+                      {t("edit")}
                     </Button>
                     }
                     {!isEditable &&<Button
@@ -634,7 +635,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                         }
                       }}
                     >
-                      Delete
+                      {t("delete")}
                     </Button>}
                     
                   </Box>

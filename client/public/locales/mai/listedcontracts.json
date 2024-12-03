@@ -1,0 +1,19 @@
+{
+    "buyer_name": "खरीदारक नाम:",
+    "product_name": "उत्पादक नाम:",
+    "quantity": "मात्रा:",
+    "total_amount": "कुल राशि:",
+    "deadline": "अंतिम तिथि:",
+    "initial_payment_amount": "प्रारंभिक भुगतान राशि:",
+    "final_payment_amount": "अंतिम भुगतान राशि:",
+    "total_payment_amount": "कुल भुगतान राशि:",
+    "instructions": "निर्देश:",
+    "view_buyer_profile": "खरीदारक प्रोफ़ाइल देखू",
+    "send": "भेजू",
+    "request": "सक्रिय करबाक लेल अनुरोध करू",
+    "negotiate": "मोल-भाव करू",
+    "edit": "संपादित करू",
+    "delete": "हटाऊ",
+    "save": "सहेजू",
+    "rate": "मूल्यांकन करू"
+}
