@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import { Card, CardContent, Paper, Typography } from "@mui/material";
 import NegoTable from "../components/Negotiations/NegoTable";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export interface NegoData {
   success: boolean;
@@ -47,6 +48,7 @@ const fetcher = (url: string) =>
     })
     .then((res) => res.data);
 const NegotiationList: React.FC = () => {
+  const { t } = useTranslation(["negotiationlist", "crops"]);
   const { data, error, isLoading } = useSWR<NegoData>(`/api/negotiations`, fetcher);
   const isLoggedIn = data?.user ? true : false;
   const [tableData,setTableDate] = useState<Negotiation[]>([]);
@@ -72,10 +74,10 @@ const NegotiationList: React.FC = () => {
     <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8 mb-6" key={status}>
       <CardContent>
         <Typography variant="h4" sx={{ fontWeight: 800 }}>
-          Ongoing Negotiations
+          {t('Ongoing Negotiations')}
         </Typography>
         <Typography variant="body1">
-          View the status of your active negotiations.
+          {t('View the status of your active negotiations.')}
         </Typography>
         <NegoTable data={tableData} setData = {setTableDate} userType={data?.user?.userType} />
       </CardContent>
@@ -84,13 +86,13 @@ const NegotiationList: React.FC = () => {
     <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8 mb-6">
       <CardContent>
         <Typography variant="h4" sx={{ fontWeight: 800 }}>
-          No Negotiations Available
+          {t('nonego')}
         </Typography>
         <Typography variant="body1">
-          There are no negotiations under the selected statuses.
+          {t('There are no negotiations under the selected statuses.')}
         </Typography>
         <Link to="/marketplace?page=1" className="text-blue-500 underline">
-          Go To Market Place
+          {t('Go To Market Place')}
         </Link>
       </CardContent>
     </Card>
