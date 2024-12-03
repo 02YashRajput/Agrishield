@@ -28,6 +28,8 @@ import Calendar from "react-calendar";
 import toast from "react-hot-toast";
 import { NegoData,Negotiation } from "../../pages/NegotiationList";
 import axios from "axios"
+import { useTranslation } from "react-i18next";
+
 interface NegoTableProps {
   data:Negotiation[]
   setData :React.Dispatch<React.SetStateAction<Negotiation[]>>
@@ -35,11 +37,11 @@ interface NegoTableProps {
 }
 const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
   const isFarmer = userType === "Farmer";
-
+  
   if(!data){
     return null;
   }
-
+  const { t } = useTranslation(["negoTable", "crops"]);
   const [selectedRow, setSelectedRow] = useState< Negotiation | null>(null);
   const [isEditable, setIsEditable] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -157,33 +159,33 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
             <TableRow>
               <TableCell>
                 <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
-                  Buyer Name
+                {t('buyername')}
                 </Typography>
               </TableCell>
               <TableCell>
                 {" "}
                 <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
-                  Farmer Name
+                {t('farmername')}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
-                  Product Name
+                {t('productname')}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
-                  Initial Payment Amount
+                {t('initialpaymentamount')}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
-                  Final Payment Amount
+                {t('finalpaymentamount')}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 600 }}>
-                  Product Quantity (q)
+                {t('productquantity(q)')}
                 </Typography>
               </TableCell>
             </TableRow>
@@ -339,10 +341,10 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                 <Card>
                   <CardContent>
                     <Typography variant="h6">
-                      Farmer: {selectedRow?.farmerName}
+                    {t('farmer')}: {selectedRow?.farmerName}
                     </Typography>
                     <Typography>
-                      Deadline:{" "}
+                    {t('deadline')}:{" "}
                       {selectedRow?.deadlineFarmer
                         ? new Date(
                             selectedRow.deadlineFarmer
@@ -350,13 +352,13 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         : "N/A"}
                     </Typography>
                     <Typography>
-                      Initial Payment: {selectedRow?.initialPaymentAmountFarmer}
+                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountFarmer}
                     </Typography>
                     <Typography>
-                      Final Payment: {selectedRow?.finalPaymentAmountFarmer}
+                    {t('finalpayment')}: {selectedRow?.finalPaymentAmountFarmer}
                     </Typography>
                     <Typography>
-                      Product Quantity: {selectedRow?.productQuantityFarmer}
+                    {t('productquantity')}: {selectedRow?.productQuantityFarmer}
                     </Typography>
                     <Typography>
                       <a
@@ -364,7 +366,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        View Profile
+                        {t('viewprofile')}
                       </a>
                     </Typography>
                   </CardContent>
@@ -376,10 +378,10 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                 <Card>
                   <CardContent>
                     <Typography variant="h6">
-                      Buyer: {selectedRow?.buyerName}
+                    {t('buyer')}: {selectedRow?.buyerName}
                     </Typography>
                     <Typography>
-                      Deadline:{" "}
+                    {t('deadline')}:{" "}
                       {selectedRow?.deadlineBuyer
                         ? new Date(
                             selectedRow.deadlineBuyer
@@ -387,13 +389,13 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         : "N/A"}
                     </Typography>
                     <Typography>
-                      Initial Payment: {selectedRow?.initialPaymentAmountBuyer}
+                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountBuyer}
                     </Typography>
                     <Typography>
-                      Final Payment: {selectedRow?.finalPaymentAmountBuyer}
+                    {t('finalpayment')}: {selectedRow?.finalPaymentAmountBuyer}
                     </Typography>
                     <Typography>
-                      Product Quantity: {selectedRow?.productQuantityBuyer}
+                    {t('productquantity')}: {selectedRow?.productQuantityBuyer}
                     </Typography>
                     <Typography>
                       <a
@@ -401,7 +403,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        View Profile
+                        {t('viewprofile')}
                       </a>
                     </Typography>
                   </CardContent>
@@ -416,7 +418,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                 sx={{ mr: 2 }}
                 onClick={() => setIsEditable(true)}
               >
-                Edit
+                {t('edit')}
               </Button>
 
               {/* Accept Button (only shown if lastUpdated !== userType) */}
@@ -435,7 +437,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                     }
                   }}
                 >
-                  Accept
+                   {t('accept')}
                 </Button>
               )}
             </Box>
@@ -587,7 +589,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                   )}
                 />
                 <Button type="submit" variant="contained" color="primary">
-                  Submit
+                  {t('submit')}
                 </Button>
           </form>
           </Box>
