@@ -1,0 +1,19 @@
+{
+    "listYourContract": "તમારો કરાર યાદીબદ્ધ કરો",
+    "productName": "ઉત્પાદનનું નામ",
+    "productQuantity": "ઉત્પાદનની માત્રા (ક્વિન્ટલમાં)",
+    "initialPaymentAmount": "પ્રારંભિક ચુકવણી રકમ",
+    "finalPaymentAmount": "છૂટક ચુકવણી રકમ",
+    "totalAmount": "કુલ રકમ",
+    "ratePerQuintal": "પ્રતિ ક્વિન્ટલ દર",
+    "selectDeadline": "સમયમર્યાદા પસંદ કરો *",
+    "additionalInstructions": "વધુ સૂચનાઓ",
+    "listContract": "કરાર યાદીબદ્ધ કરો",
+    "listedContracts": "યાદીબદ્ધ કરાર",
+    "noDataAvailable": "કોઈ ડેટા ઉપલબ્ધ નથી",
+    "previous": "પુર્વવર્તી",
+    "next": "આગળ",
+    "contractListedSuccess": "કરાર સફળતાપૂર્વક યાદીબદ્ધ કરવામાં આવ્યો!",
+    "contractListedFailure": "કરાર યાદીબદ્ધ કરવામાં નિષ્ફળ. કૃપા કરીને ફરી પ્રયાસ કરો."
+  }
+  

@@ -1,0 +1,18 @@
+{
+    "listYourContract": "നിങ്ങളുടെ കരാർ ലിസ്റ്റ് ചെയ്യുക",
+    "productName": "ഉൽപ്പന്നത്തിന്റെ പേര്",
+    "productQuantity": "ഉൽപ്പന്നത്തിന്റെ അളവ് (ക്വിന്റലിൽ)",
+    "initialPaymentAmount": "ആദ്യ പേമന്റ് തുക",
+    "finalPaymentAmount": "അന്തിമ പേമന്റ് തുക",
+    "totalAmount": "മൊത്ത തുക",
+    "ratePerQuintal": "പ്രതി ക്വിന്റൽ നിരക്ക്",
+    "selectDeadline": "ടൈംലൈൻ തിരഞ്ഞെടുക്കുക *",
+    "additionalInstructions": "അധിക നിർദ്ദേശങ്ങൾ",
+    "listContract": "കരാർ ലിസ്റ്റ് ചെയ്യുക",
+    "listedContracts": "ലിസ്റ്റ് ചെയ്ത കരാറുകൾ",
+    "noDataAvailable": "ഡാറ്റ ലഭ്യമല്ല",
+    "previous": "മുമ്പത്തെ",
+    "next": "അടുത്തത്",
+    "contractListedSuccess": "കരാർ വിജയകരമായി ലിസ്റ്റ് ചെയ്തിരിക്കുന്നു!",
+    "contractListedFailure": "കരാർ ലിസ്റ്റ് ചെയ്യുന്നതിൽ പരാജയം. ദയവായി വീണ്ടും ശ്രമിക്കുക."
+  }

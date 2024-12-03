@@ -1,0 +1,19 @@
+{
+    "listYourContract": "अपन समझौता सूचीबद्ध करू",
+    "productName": "उत्पाद के नाम",
+    "productQuantity": "उत्पाद के मात्रा (क्विंटल में)",
+    "initialPaymentAmount": "प्रारंभिक भुगतान राशि",
+    "finalPaymentAmount": "अंतिम भुगतान राशि",
+    "totalAmount": "कुल राशि",
+    "ratePerQuintal": "प्रति क्विंटल दर",
+    "selectDeadline": "समय सीमा चयन करू *",
+    "additionalInstructions": "अतिरिक्त निर्देश",
+    "listContract": "समझौता सूचीबद्ध करू",
+    "listedContracts": "सूचीबद्ध समझौता",
+    "noDataAvailable": "कोई डेटा उपलब्ध नहीं है",
+    "previous": "पिछला",
+    "next": "अगला",
+    "contractListedSuccess": "समझौता सफलतापूर्वक सूचीबद्ध किया गया!",
+    "contractListedFailure": "समझौता सूचीबद्ध करने में विफल। कृपया फिर से प्रयास करें।"
+  }
+  

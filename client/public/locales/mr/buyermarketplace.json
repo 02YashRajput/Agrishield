@@ -1,0 +1,19 @@
+{
+    "listYourContract": "तुमचा करार सूचीबद्ध करा",
+    "productName": "उत्पादनाचे नाव",
+    "productQuantity": "उत्पादनाची मात्रा (क्विंटलमध्ये)",
+    "initialPaymentAmount": "प्रारंभिक पेमेंट रक्कम",
+    "finalPaymentAmount": "अंतिम पेमेंट रक्कम",
+    "totalAmount": "एकूण रक्कम",
+    "ratePerQuintal": "प्रति क्विंटल दर",
+    "selectDeadline": "समयसीमा निवडा *",
+    "additionalInstructions": "अतिरिक्त सूचना",
+    "listContract": "करार सूचीबद्ध करा",
+    "listedContracts": "सूचीबद्ध केलेले करार",
+    "noDataAvailable": "कुठलीही माहिती उपलब्ध नाही",
+    "previous": "पूर्वीचा",
+    "next": "पुढचा",
+    "contractListedSuccess": "करार यशस्वीरित्या सूचीबद्ध केला गेला!",
+    "contractListedFailure": "करार सूचीबद्ध करण्यात अयशस्वी. कृपया पुन्हा प्रयत्न करा."
+  }
+  

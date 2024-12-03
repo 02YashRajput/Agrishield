@@ -1,0 +1,19 @@
+{
+    "listYourContract": "List Your Contract",
+    "productName": "Product Name",
+    "productQuantity": "Product Quantity in Quintal (q)",
+    "initialPaymentAmount": "Initial Payment Amount",
+    "finalPaymentAmount": "Final Payment Amount",
+    "totalAmount": "Total Amount",
+    "ratePerQuintal": "Rate per q",
+    "selectDeadline": "Select Deadline *",
+    "additionalInstructions": "Additional Instructions",
+    "listContract": "List Contract",
+    "listedContracts": "Listed Contracts",
+    "noDataAvailable": "No Data Available",
+    "previous": "Previous",
+    "next": "Next",
+    "contractListedSuccess": "Contract listed successfully!",
+    "contractListedFailure": "Failed to list contract. Please try again."
+  }
+  
