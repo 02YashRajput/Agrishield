@@ -1,0 +1,19 @@
+{
+    "listYourContract": "ଆପଣଙ୍କର ଚୁକ୍ତି ତାଲିକାବଦ୍ଧ କରନ୍ତୁ",
+    "productName": "ଉତ୍ପାଦନର ନାମ",
+    "productQuantity": "ଉତ୍ପାଦନର ପରିମାଣ (କ୍ୱିଣ୍ଟାଲରେ)",
+    "initialPaymentAmount": "ଆରମ୍ଭିକ ଭୁଗତାନ ରାଶି",
+    "finalPaymentAmount": "ଚୁଡ଼ାଣ୍ତ ଭୁଗତାନ ରାଶି",
+    "totalAmount": "ମୋଟ ରାଶି",
+    "ratePerQuintal": "ପ୍ରତି କ୍ୱିଣ୍ଟାଲ ଦର",
+    "selectDeadline": "ସମୟ ସୀମା ଚୟନ କରନ୍ତୁ *",
+    "additionalInstructions": "ଅତିରିକ୍ତ ନିର୍ଦ୍ଦେଶ",
+    "listContract": "ଚୁକ୍ତି ତାଲିକାବଦ୍ଧ କରନ୍ତୁ",
+    "listedContracts": "ତାଲିକାବଦ୍ଧ ଚୁକ୍ତିଗୁଡିକ",
+    "noDataAvailable": "କୌଣସି ତଥ୍ୟ ଉପଲବ୍ଧ ନାହିଁ",
+    "previous": "ପୂର୍ବତନ",
+    "next": "ପରବର୍ତ୍ତୀ",
+    "contractListedSuccess": "ଚୁକ୍ତି ସଫଳତାର ସହିତ ତାଲିକାବଦ୍ଧ ହୋଇଛି!",
+    "contractListedFailure": "ଚୁକ୍ତି ତାଲିକାବଦ୍ଧ କରିବାରେ ବିଫଳ। ଦୟାକରି ପୁନଃ ଚେଷ୍ଟା କରନ୍ତୁ।"
+  }
+  

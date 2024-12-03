@@ -1,0 +1,19 @@
+{
+    "listYourContract": "ਆਪਣਾ ਸਮਝੌਤਾ ਲਿਸਟ ਕਰੋ",
+    "productName": "ਉਤਪਾਦ ਦਾ ਨਾਮ",
+    "productQuantity": "ਉਤਪਾਦ ਦੀ ਮਾਤਰਾ (ਕੁਇੰਟਲ ਵਿੱਚ)",
+    "initialPaymentAmount": "ਪਹਿਲੀ ਭੁਗਤਾਨ ਰਾਸ਼ੀ",
+    "finalPaymentAmount": "ਆਖਰੀ ਭੁਗਤਾਨ ਰਾਸ਼ੀ",
+    "totalAmount": "ਕੁੱਲ ਰਾਸ਼ੀ",
+    "ratePerQuintal": "ਪ੍ਰਤੀ ਕੁਇੰਟਲ ਦਰ",
+    "selectDeadline": "ਅੰਤਿਮ ਤਾਰੀਖ ਚੁਣੋ *",
+    "additionalInstructions": "ਅਤਿਰਿਕਤ ਹੁਕਮ",
+    "listContract": "ਸਮਝੌਤਾ ਲਿਸਟ ਕਰੋ",
+    "listedContracts": "ਲਿਸਟ ਕੀਤੇ ਗਏ ਸਮਝੌਤੇ",
+    "noDataAvailable": "ਕੋਈ ਡਾਟਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
+    "previous": "ਪਿਛਲਾ",
+    "next": "ਅਗਲਾ",
+    "contractListedSuccess": "ਸਮਝੌਤਾ ਸਫਲਤਾਪੂਰਵਕ ਲਿਸਟ ਹੋ ਗਿਆ ਹੈ!",
+    "contractListedFailure": "ਸਮਝੌਤਾ ਲਿਸਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+  }
+  
