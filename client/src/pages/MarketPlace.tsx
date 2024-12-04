@@ -8,6 +8,7 @@ import BuyerMarketPlace from "../components/marketPlace/BuyerMarketPlace";
 import { Paper } from "@mui/material";
 import FarmerMarketPlace from "../components/marketPlace/FarmerMarketPlace";
 import { useLocation } from "react-router-dom";
+import Footer from "../components/Footer";
 
 interface Data {
   success: boolean;
@@ -110,6 +111,7 @@ const MarketPlace: React.FC = () => {
 )}
 
       </Paper>
+      <Footer/>
     </div>
   );
 };

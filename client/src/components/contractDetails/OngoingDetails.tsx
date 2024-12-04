@@ -262,7 +262,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
   return (
     <div>
       <Typography variant="h4" sx={{ mb: 4 }}>
-        {contractStatus} {t('Contract Details')}
+        {t(contractStatus)} {t('Contract Details')}
       </Typography>
       <Typography variant="h5" sx={{ mb: 4 }}>
         {data.productName.toUpperCase()}

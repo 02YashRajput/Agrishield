@@ -18,5 +18,8 @@
     "Error updating": "నవీకరించే సమయంలో లోపం",
     "Payment successful!": "చెల్లింపు విజయవంతం!",
     "Error Occured: ": "లోపం సంభవించింది:",
-    "Update": "నవీకరించండి"
+    "Update": "నవీకరించండి",
+    "Ongoing": "చలికొంటున్నది",
+  "Requested": "గుర్తించబడినవి",
+  "Completed": "పూర్తయింది"
 }

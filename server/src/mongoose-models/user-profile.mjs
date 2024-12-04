@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import {cropsArray} from "../utils/crops.mjs"
 const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   message: { type: String, required: true },
@@ -96,13 +96,7 @@ const farmerProfileSchema = new mongoose.Schema({
       {
         type: String,
         required:true,
-        enum:[
-          'arhar', 'gram', 'masoor', 'rape', 'sunflower',
-          'bajra', 'groundnut', 'moong', 'safflower', 'urad',
-          'barley', 'jowar', 'niger', 'sesamum', 'wheat',
-          'copra', 'jute', 'paddy', 'soyabean',
-          'cotton', 'maize', 'ragi', 'sugarcane'
-        ],
+        enum:cropsArray,
         
       },
     ],

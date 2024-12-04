@@ -1,0 +1,13 @@
+{
+    "Farmer": "କୃଷକ",
+    "Buyer": "କ୍ରୟକର୍ତ୍ତା",
+    "Initial Payment": "ପ୍ରାରମ୍ଭିକ ଅଦାୟଗୀ",
+    "Final Payment": "ଅନ୍ତିମ ଅଦାୟଗୀ",
+    "Delivery Status": "ଡିଲିଭରୀ ଅବସ୍ଥା",
+    "Deadline": "ସମୟ ସୀମା",
+    "Product": "ସାମଗ୍ରୀ",
+    "Pending": "ପେଣ୍ଡିଂ",
+    "Paid": "ଅଦାୟିତ",
+    "Received": "ଗ୍ରହଣ କରାଗଲା",
+    "Delivered": "ଡିଲିଭର୍ କରାଗଲା"
+}

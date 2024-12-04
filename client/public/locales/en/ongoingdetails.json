@@ -18,5 +18,8 @@
     "Error updating":"Error updating",
     "Payment successful!":"Payment successful!",
     "Error Occured: ":"Error Occured: ",
-    "Update":"Update"
+    "Update":"Update",
+    "Ongoing": "Ongoing",
+    "Requested": "Requested",
+    "Completed": "Completed"
 }

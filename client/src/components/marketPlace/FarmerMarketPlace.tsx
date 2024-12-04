@@ -149,7 +149,7 @@ isLoading
               variant="contained"
               color="primary"
               onClick={handleNextPage}
-              disabled={results.length <= 0}
+              disabled={results.length < 20}
             >
               {t('next')}
             </Button>

@@ -18,5 +18,8 @@
     "Error updating": "ನವೀಕರಣದ ದೋಷ",
     "Payment successful!": "ಪಾವತಿ ಯಶಸ್ವಿಯಾಗಿದೆ!",
     "Error Occured: ": "ದೋಷ ಸಂಭವಿಸಿದೆ:",
-    "Update": "ನವೀಕರಿಸಿ"
+    "Update": "ನವೀಕರಿಸಿ",
+    "Ongoing": "ಚಾಲು",
+  "Requested": "ವಿನಂತಿ ಮಾಡಲಾಗಿದೆ",
+  "Completed": "ಪೂರೈಸಲಾಗಿದೆ"
 }

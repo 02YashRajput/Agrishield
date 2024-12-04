@@ -5,5 +5,9 @@
     "Final Payment":"Final Payment",
     "Delivery Status":"Delivery Status",
     "Deadline":"Deadline",
-    "Product":"Product"
+    "Product":"Product",
+    "Pending":"Pending",
+    "Paid":"Paid",
+    "Received":"Received",
+    "Delivered":"Delivered"
 }

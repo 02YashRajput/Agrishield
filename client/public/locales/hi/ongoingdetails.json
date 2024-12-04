@@ -18,5 +18,8 @@
     "Error updating": "अपडेट करने में त्रुटि",
     "Payment successful!": "भुगतान सफल!",
     "Error Occured: ": "त्रुटि हुई: ",
-    "Update": "अपडेट करें"
+    "Update": "अपडेट करें",
+    "Ongoing": "चालू",
+    "Requested": "अनुरोधित",
+    "Completed": "समाप्त"
 }

@@ -85,9 +85,9 @@ const TableComponent: React.FC<TableComponentProps> = ({ contracts }) => {
             >
               <TableCell>{contract.farmerName}</TableCell>
               <TableCell>{contract.buyerName}</TableCell>
-              <TableCell>{contract.initialpaymentStatus}</TableCell>
-              <TableCell>{contract.finalpaymentStatus}</TableCell>
-              <TableCell>{contract.deliveryStatus}</TableCell>
+              <TableCell>{t(contract.initialpaymentStatus)}</TableCell>
+              <TableCell>{t(contract.finalpaymentStatus)}</TableCell>
+              <TableCell>{t(contract.deliveryStatus)}</TableCell>
               <TableCell>
                 {new Date(contract.deadline).toLocaleDateString()}
               </TableCell>

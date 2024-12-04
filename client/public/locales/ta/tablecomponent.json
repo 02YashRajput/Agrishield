@@ -1,0 +1,13 @@
+{
+    "Farmer": "விவசாயி",
+    "Buyer": "வாங்குபவர்",
+    "Initial Payment": "தொடக்க கட்டணம்",
+    "Final Payment": "கடைசிக் கட்டணம்",
+    "Delivery Status": "அனுப்பல் நிலை",
+    "Deadline": "கடைசி நாள்",
+    "Product": "பொருள்",
+    "Pending": "நிலுவையில்",
+    "Paid": "செலுத்தப்பட்டது",
+    "Received": "பெறப்பட்டது",
+    "Delivered": "அனுப்பப்பட்டது"
+}
