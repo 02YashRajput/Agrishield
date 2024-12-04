@@ -5,7 +5,7 @@ import ErrorPage from './Error';
 import { Card, CardContent, CircularProgress, Paper } from '@mui/material';
 import Header from '../components/Header';
 import TransactionsTable from '../components/TransactionsTable';
-
+import Footer from "../components/Footer";
 interface User {
   name: string;
   id: number;
@@ -76,6 +76,7 @@ const TransactionList :React.FC= () => {
                 </Card>
       }
 </Paper>
+<Footer/>
     </div>
   )
 }

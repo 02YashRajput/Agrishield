@@ -8,7 +8,7 @@ import { Card, CardContent, Paper, Typography } from "@mui/material";
 import NegoTable from "../components/Negotiations/NegoTable";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import Footer from "../components/Footer";
 export interface NegoData {
   success: boolean;
   message: string;
@@ -99,6 +99,7 @@ const NegotiationList: React.FC = () => {
   )
 )}
       </Paper>
+      <Footer/>
     </div>
   );
 };

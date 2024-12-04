@@ -24,6 +24,7 @@ import NotFound from "./NotFound";
 import ProfileContentUser from "../components/profile/ProfileContentUser";
 import ReviewsAndRatings from "../components/profile/ReviewsAndRatings";
 import { useLanguage } from "../context/LanguageContext";
+import Footer from "../components/Footer";
 
 export interface Data {
   success: boolean;
@@ -246,6 +247,7 @@ try{
       ) : (
         <CircularProgress />
       )}
+      <Footer />
     </div>
   );
 };
