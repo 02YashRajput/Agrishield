@@ -18,6 +18,7 @@ import { IoMdClose } from "react-icons/io";
 import toast from "react-hot-toast";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 
 
 interface ReviewsAndRatingsProps {
@@ -43,7 +44,7 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
     return null;
   }
 
-
+  const { t } = useTranslation(["reviewsAndRating", "crops"]);
   const sortedReviews = profileData.reviews.sort((a, b) => 
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
@@ -113,7 +114,7 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
         }}
       >
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          Reviews and Ratings
+        {t("riviewandrating")}
         </Typography>
         {!profileData.email && (
           <Button
@@ -121,7 +122,7 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
             startIcon={<TiPlus />}
             onClick={handleDialogOpen}
           >
-            Add Review
+             {t("addreview")}
           </Button>
         )}
       </Box>
@@ -166,7 +167,7 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography variant="h6">Add a Review</Typography>
             <Typography variant="body1">
-              Share your experience with this {profileData?.userType}
+            {t("share your experience")} {profileData?.userType}
             </Typography>
           </Box>
           <Button
@@ -211,7 +212,7 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleReviewSubmit} color="primary" variant="contained">
-            Submit
+          {t("submit")}
           </Button>
         </DialogActions>
       </Dialog>

@@ -15,6 +15,7 @@ import axios from "axios";
 import { FaChevronLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   _id: string;
@@ -32,6 +33,7 @@ interface Chat {
 }
 
 const ChatComponent :React.FC= () => {
+  const {t} = useTranslation("chat");
   const {isChatOpen,setIsChatOpen,currentChatId,setCurrentChatId} = useLanguage();
   const [user, setUser] = useState("");
  
@@ -209,7 +211,7 @@ const ChatComponent :React.FC= () => {
                       )
                     ))
                     
-                : "Chats"}
+                : t("Chats")}
             </Typography>
           </Box>
 
@@ -249,7 +251,7 @@ const ChatComponent :React.FC= () => {
                   ))
                 ) : (
                   <Typography variant="body2" color="textSecondary">
-                    No messages yet
+                    {t("No messages yet")}
                   </Typography>
                 )}
                 
@@ -291,7 +293,7 @@ const ChatComponent :React.FC= () => {
               ))
             ) : (
               <Typography variant="body2" color="textSecondary">
-                No chats available
+                {t("No chats available")}
               </Typography>
             )}
           </Box>
@@ -312,7 +314,7 @@ const ChatComponent :React.FC= () => {
                 sx={{ mr: 1 }}
               />
               <Button type="submit" variant="contained" >
-                Send
+              {t("send")}
               </Button>
             </form>
           )}
