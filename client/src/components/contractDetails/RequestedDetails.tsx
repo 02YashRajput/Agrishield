@@ -153,12 +153,12 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               try{
                 const response = await axios.post(`/api/contracts/accept/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
-                  toast.success("Contract accepted successfully");
+                  toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
                 console.log(err);
-                toast.error("An error occurred while accepting contract");
+                toast.error(t("An error occurred while accepting contract"));
               }
             }}
           >
@@ -173,12 +173,12 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               try{
                 const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
-                  toast.success("Contract accepted successfully");
+                  toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
                 console.log(err);
-                toast.error("An error occurred while accepting contract");
+                toast.error(t("An error occurred while accepting contract"));
               }
             }}
           >
@@ -196,12 +196,12 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               try{
                 const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
-                  toast.success("Contract accepted successfully");
+                  toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
                 console.log(err);
-                toast.error("An error occurred while accepting contract");
+                toast.error(t("An error occurred while accepting contract"));
               }
             }}
           >

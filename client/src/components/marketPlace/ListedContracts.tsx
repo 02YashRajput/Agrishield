@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ProductName } from "../../utils/cropsName";
 import {
   Avatar,
   Box,
@@ -118,7 +117,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       if(userType === "Farmer"){
         const response = await axios.post(`/api/marketplace/start-negotiations/${selectedContract?.marketPlaceId}`,data,{withCredentials:true});
         if (response.status === 200) {
-          toast.success("Negotiation started successfully!");
+          toast.success(t("Negotiation started successfully!"));
           navigate("/negotiations");
         }
 
@@ -126,7 +125,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
 
       const response = await axios.put( "/api/marketplace/list-contract",data,{withCredentials:true})
       if (response.data.success) {
-        toast.success("Contract listed successfully!");
+        toast.success(t("Contract listed successfully!"));
         setContracts((prev) => {
           const updatedContractIndex = prev.findIndex(contract => contract.marketPlaceId === selectedContract?.marketPlaceId);
        
@@ -156,7 +155,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
     catch(error){
 
       console.log(error)
-      toast.error("Error updating contract")
+      toast.error(t("Error updating contract"))
     }finally{
       setIsEditable(false)
     handleCloseModal()
@@ -548,11 +547,11 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                         try{
                           const response =await axios.post(`/api/marketplace/request-contract/${selectedContract?.marketPlaceId}`,{withCredentials: true});
                           if(response.data.success){
-                            toast.success("Request sent successfully");
+                            toast.success(t("Request sent successfully"));
                             navigate("/contracts")
                           }
                         }catch(e) {
-                          toast.error("An error occurred while requesting the contract");
+                          toast.error(t("An error occurred while requesting the contract"));
                          
                         }
                       }}
@@ -626,12 +625,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                             setContracts(prevContracts => 
                               prevContracts.filter(contract => contract.marketPlaceId !== selectedContract?.marketPlaceId)
                             );
-                            toast.success("Contract deleted successfully!");
+                            toast.success(t("Contract deleted successfully!"));
                             handleCloseModal();
                           }
                         }catch(err){
                           console.error(err)
-                          toast.error("failed to delete contract")
+                          toast.error(t("Failed to delete contract"))
                         }
                       }}
                     >

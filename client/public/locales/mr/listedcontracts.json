@@ -15,5 +15,12 @@
     "edit": "संपादित करा",
     "delete": "काढा",
     "save": "जतन करा",
-    "rate": "मूल्यमापन करा"
+    "rate": "मूल्यमापन करा",
+    "Negotiation started successfully!": "चर्चा यशस्वीपणे सुरू झाली!",
+    "Contract listed successfully!": "करार यशस्वीपणे सूचीबद्ध झाला!",
+    "Error updating contract": "करार अद्यतनित करताना त्रुटी आली",
+    "Request sent successfully": "विनंती यशस्वीपणे पाठवली गेली!",
+    "An error occurred while requesting the contract": "कराराची विनंती करताना त्रुटी आली",
+    "Contract deleted successfully!": "करार यशस्वीपणे हटवला गेला!",
+    "Failed to delete contract": "करार हटवण्यात अयशस्वी!"
 }

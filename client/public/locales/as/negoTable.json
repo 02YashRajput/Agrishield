@@ -14,5 +14,8 @@
     "viewprofile": "প্ৰোফাইল চাওক",
     "buyer": "ক্ৰেতা",
     "edit": "সম্পাদনা কৰক",
-    "accept": "গ্ৰহণ কৰক"
+    "accept": "গ্ৰহণ কৰক",
+    "Successfully updated": "সফলভাৱে আপডেট কৰা হৈছে",
+  "Error Updating": "আপডেট কৰাত ত্ৰুটি",
+  "Error activating Contract": "চুক্তি সক্ৰিয় কৰাত ত্ৰুটি"
 }

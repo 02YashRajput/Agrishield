@@ -14,5 +14,8 @@
     "viewprofile": "சுயவிவரம் காண்க",
     "buyer": "வாங்குபவர்",
     "edit": "திருத்து",
-    "accept": "ஏற்க்கவும்"
+    "accept": "ஏற்க்கவும்",
+    "Successfully updated": "வெற்றிகரமாக புதுப்பிக்கப்பட்டது",
+    "Error Updating": "புதுப்பிப்பதில் பிழை",
+    "Error activating Contract": "ஒப்பந்தத்தை செயல்படுத்துவதில் பிழை"
 }

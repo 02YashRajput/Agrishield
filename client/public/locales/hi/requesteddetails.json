@@ -12,5 +12,7 @@
     "Product Details": "उत्पाद विवरण",
     "View Profile": "प्रोफ़ाइल देखें",
     "Buyer": "खरीदार",
-    "Farmer": "किसान"
+    "Farmer": "किसान",
+    "Contract accepted successfully": "अनुबंध सफलतापूर्वक स्वीकार किया गया",
+    "An error occurred while accepting contract": "अनुबंध स्वीकार करते समय त्रुटि हुई"
 }

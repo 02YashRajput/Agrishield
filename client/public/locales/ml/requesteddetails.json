@@ -12,5 +12,7 @@
     "Product Details": "ഉത്പന്ന വിശദാംശങ്ങൾ",
     "View Profile": "പ്രൊഫൈൽ കാണുക",
     "Buyer": "വാങ്ങുന്നവൻ",
-    "Farmer": "കൃഷി ചെയ്യുന്നവൻ"
+    "Farmer": "കൃഷി ചെയ്യുന്നവൻ",
+    "Contract accepted successfully": "ഒപ്പന്തം വിജയകരമായി അംഗീകരിച്ചു",
+    "An error occurred while accepting contract": "ഒപ്പന്തം അംഗീകരിക്കുന്നതിനിടെ പിശക് സംഭവിച്ചു"
 }

@@ -14,5 +14,9 @@
     "viewprofile": "ಪ್ರೊಫೈಲ್ ನೋಡಿ",
     "buyer": "ಖರೀದಿದಾರ",
     "edit": "ಸಂಪಾದಿಸಿ",
-    "accept": "ಸ್ವೀಕರಿಸಿ"
+    "accept": "ಸ್ವೀಕರಿಸಿ",
+        "Successfully updated": "ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
+        "Error Updating": "ನವೀಕರಣದಲ್ಲಿ ದೋಷ",
+        "Error activating Contract": "ಒಪ್ಪಂದವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವಲ್ಲಿ ದೋಷ"
+      
 }

@@ -14,5 +14,9 @@
     "viewprofile": "ప్రొఫైల్ చూడండి",
     "buyer": "కొనుగోలుదారు",
     "edit": "సవరించు",
-    "accept": "అంగీకరించు"
+    "accept": "అంగీకరించు",
+    "Successfully updated": "విజయవంతంగా అప్డేట్ చేయబడింది",
+    "Error Updating": "అప్డేట్ చేస్తూ లోపం",
+    "Error activating Contract": "కాంట్రాక్ట్ ను సక్రియం చేయడంలో లోపం"
+  
 }

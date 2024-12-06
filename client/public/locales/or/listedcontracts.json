@@ -15,5 +15,12 @@
     "edit": "ସମ୍ପାଦନା କରନ୍ତୁ",
     "delete": "ମିଟାନ୍ତୁ",
     "save": "ସେଭ୍ କରନ୍ତୁ",
-    "rate": "ମୂଲ୍ୟାଙ୍କନ କରନ୍ତୁ"
+    "rate": "ମୂଲ୍ୟାଙ୍କନ କରନ୍ତୁ",
+    "Negotiation started successfully!": "ଚର୍ଚ୍ଚା ସଫଳତାରେ ଆରମ୍ଭ ହେଲା!",
+    "Contract listed successfully!": "ଚୁକ୍ତି ସଫଳତାରେ ତାଲିକାଭୁକ୍ତ ହେଲା!",
+    "Error updating contract": "ଚୁକ୍ତି ଅପଡେଟ୍ କରିବାରେ ତ୍ରୁଟି ଘଟିଲା",
+    "Request sent successfully": "ଅନୁରୋଧ ସଫଳତାରେ ପଠାଯାଇଛି",
+    "An error occurred while requesting the contract": "ଚୁକ୍ତି ଅନୁରୋଧ କରିବା ସମୟରେ ତ୍ରୁଟି ଘଟିଲା",
+    "Contract deleted successfully!": "ଚୁକ୍ତି ସଫଳତାରେ ମଚାଯାଇଛି!",
+    "Failed to delete contract": "ଚୁକ୍ତି ମଚାଇବାରେ ବିଫଳ ହେଲା"
 }

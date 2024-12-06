@@ -15,5 +15,12 @@
     "edit": "संपादित करें",
     "delete": "हटाएं",
     "save": "सहेजें",
-    "rate": "मूल्यांकन करें"
+    "rate": "मूल्यांकन करें",
+    "Negotiation started successfully!": "मोलभाव सफलतापूर्वक शुरू हो गया!",
+    "Contract listed successfully!": "अनुबंध सफलतापूर्वक सूचीबद्ध हो गया!",
+    "Error updating contract": "अनुबंध अपडेट करने में त्रुटि",
+    "Request sent successfully": "अनुरोध सफलतापूर्वक भेजा गया",
+    "An error occurred while requesting the contract": "अनुबंध का अनुरोध करते समय एक त्रुटि हुई",
+    "Contract deleted successfully!": "अनुबंध सफलतापूर्वक हटाया गया!",
+    "Failed to delete contract": "अनुबंध हटाने में विफल"
 }

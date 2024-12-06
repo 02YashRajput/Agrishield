@@ -12,5 +12,7 @@
     "Product Details":"Product Details",
     "View Profile":"View Profile",
     "Buyer":"Buyer",
-    "Farmer":"Farmer"
+    "Farmer":"Farmer",
+    "Contract accepted successfully":"Contract accepted successfully",
+    "An error occurred while accepting contract":"An error occurred while accepting contract"
 }

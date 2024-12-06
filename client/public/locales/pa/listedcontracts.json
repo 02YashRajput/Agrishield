@@ -15,5 +15,12 @@
     "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
     "delete": "ਹਟਾਓ",
     "save": "ਸੰਭਾਲੋ",
-    "rate": "ਮੁੱਲਿਆੰਕਨ ਕਰੋ"
+    "rate": "ਮੁੱਲਿਆੰਕਨ ਕਰੋ",
+    "Negotiation started successfully!": "ਗੱਲਬਾਤ ਸਫਲਤਾਪੂਰਕ ਸ਼ੁਰੂ ਹੋ ਗਈ!",
+    "Contract listed successfully!": "ਕਾਂਟ੍ਰੈਕਟ ਸਫਲਤਾਪੂਰਕ ਸੂਚੀਬੱਧ ਹੋ ਗਿਆ!",
+    "Error updating contract": "ਕਾਂਟ੍ਰੈਕਟ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਗਲਤੀ ਆਈ",
+    "Request sent successfully": "ਬਿਨੈ ਸਫਲਤਾਪੂਰਕ ਭੇਜੀ ਗਈ",
+    "An error occurred while requesting the contract": "ਕਾਂਟ੍ਰੈਕਟ ਦੀ ਬਿਨੈ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ",
+    "Contract deleted successfully!": "ਕਾਂਟ੍ਰੈਕਟ ਸਫਲਤਾਪੂਰਕ ਮਿਟਾਇਆ ਗਿਆ!",
+    "Failed to delete contract": "ਕਾਂਟ੍ਰੈਕਟ ਮਿਟਾਉਣ ਵਿੱਚ ਅਸਫਲ"
 }

@@ -15,5 +15,12 @@
     "edit":"Edit",
     "delete":"Delete",
     "save":"Save",
-    "rate":"Rate"
+    "rate":"Rate",
+    "Negotiation started successfully!":"Negotiation started successfully!",
+    "Contract listed successfully!":"Contract listed successfully!",
+    "Error updating contract":"Error updating contract",
+    "Request sent successfully":"Request sent successfully",
+    "An error occurred while requesting the contract":"An error occurred while requesting the contract",
+    "Contract deleted successfully!":"Contract deleted successfully!",
+    "Failed to delete contract":"Failed to delete contract"
 }

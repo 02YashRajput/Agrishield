@@ -14,5 +14,8 @@
     "viewprofile": "پروفائل دیکھیں",
     "buyer": "خریدار",
     "edit": "ترمیم کریں",
-    "accept": "قبول کریں"
+    "accept": "قبول کریں",
+    "Successfully updated": "کامیابی کے ساتھ اپ ڈیٹ کیا گیا",
+    "Error Updating": "اپ ڈیٹ کرتے وقت خرابی",
+    "Error activating Contract": "کنٹریکٹ کو فعال کرنے میں خرابی"
 }

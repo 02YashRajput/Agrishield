@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { cropsArray } from "../../utils/cropsName";
 import axios from "axios";
 import {
   Autocomplete,
@@ -101,11 +100,11 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       );
       // Handle success response
       if (response.data.success) {
-        toast.success("Contract listed successfully!");
+        toast.success(t("contractListedSuccess"));
         setContracts((prev) => [...prev, response.data.newContract]);
       }
     } catch (error) {
-      toast.error("Failed to list contract. Please try again.");
+      toast.error(t("contractListedFailure"));
     } finally {
       window.location.reload();
     }

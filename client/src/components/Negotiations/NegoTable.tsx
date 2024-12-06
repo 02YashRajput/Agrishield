@@ -133,11 +133,11 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
         }
         return prev;
       });
-      toast.success("Successfully updated")
+      toast.success(t("Successfully updated"))
     }
     reset();
   }catch(e){
-    toast.error("Error Updating");
+    toast.error(t("Error Updating"));
 
   }
   finally{
@@ -433,7 +433,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         handleCloseModal();
                       }
                     }catch(e){
-                      toast.error("Error activating Contract")
+                      toast.error(t("Error activating Contract"))
                     }
                   }}
                 >

@@ -15,5 +15,12 @@
     "edit": "ಸಂಪಾದಿಸಿ",
     "delete": "ಅಳಿಸಿ",
     "save": "ಉಳಿಸಿ",
-    "rate": "ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ"
+    "rate": "ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ",
+    "Negotiation started successfully!": "ಚರ್ಚೆ ಯಶಸ್ವಿಯಾಗಿ ಪ್ರಾರಂಭವಾಗಿದೆ!",
+    "Contract listed successfully!": "ಒಪ್ಪಂದವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪಟ್ಟಿ ಮಾಡಲಾಗಿದೆ!",
+    "Error updating contract": "ಒಪ್ಪಂದವನ್ನು ನವೀಕರಿಸುವಲ್ಲಿ ದೋಷವಾಯಿತು",
+    "Request sent successfully": "ವಿನಂತಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ",
+    "An error occurred while requesting the contract": "ಒಪ್ಪಂದವನ್ನು ವಿನಂತಿಸುವ ವೇಳೆ ದೋಷ ಉಂಟಾಯಿತು",
+    "Contract deleted successfully!": "ಒಪ್ಪಂದವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ!",
+    "Failed to delete contract": "ಒಪ್ಪಂದವನ್ನು ಅಳಿಸಲು ವಿಫಲವಾಗಿದೆ"
 }

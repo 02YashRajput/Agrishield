@@ -14,5 +14,9 @@
     "viewprofile": "প্রোফাইল দেখুন",
     "buyer": "ক্রেতা",
     "edit": "সম্পাদনা করুন",
-    "accept": "গৃহীত"
+    "accept": "গৃহীত",
+        "Successfully updated": "সফলভাবে আপডেট করা হয়েছে",
+        "Error Updating": "আপডেট করতে ত্রুটি",
+        "Error activating Contract": "চুক্তি সক্রিয় করতে ত্রুটি"
+      
 }

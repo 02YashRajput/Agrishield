@@ -15,5 +15,12 @@
     "edit": "સંપાદિત કરો",
     "delete": "માટે કાઢો",
     "save": "સાચવો",
-    "rate": "મુલ્યાંકન કરો"
+    "rate": "મુલ્યાંકન કરો",
+    "Negotiation started successfully!": "વાટાઘાટ સફળતાપૂર્વક શરૂ થઈ!",
+    "Contract listed successfully!": "કરાર સફળતાપૂર્વક યાદીમાં સામેલ કરાયો!",
+    "Error updating contract": "કરાર અપડેટ કરવામાં ભૂલ થઈ",
+    "Request sent successfully": "વિનંતી સફળતાપૂર્વક મોકલવામાં આવી",
+    "An error occurred while requesting the contract": "કરારની વિનંતી કરતી વખતે ભૂલ થઈ",
+    "Contract deleted successfully!": "કરાર સફળતાપૂર્વક કાઢી નાખવામાં આવ્યો!",
+    "Failed to delete contract": "કરાર કાઢી નાખવામાં નિષ્ફળ રહ્યું"
 }

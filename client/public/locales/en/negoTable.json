@@ -14,5 +14,8 @@
     "viewprofile":"View Profile",
     "buyer":"Buyer",
     "edit":"Edit",
-    "accept":"Accept"
+    "accept":"Accept",
+    "Successfully updated":"Successfully updated",
+    "Error Updating":"Error Updating",
+    "Error activating Contract":"Error activating Contract"
 }

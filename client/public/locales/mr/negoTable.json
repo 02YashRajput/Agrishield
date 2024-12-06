@@ -14,5 +14,8 @@
     "viewprofile": "प्रोफाइल पहा",
     "buyer": "खरेदीदार",
     "edit": "संपादित करा",
-    "accept": "स्वीकारा"
+    "accept": "स्वीकारा",
+    "Successfully updated": "यशस्वीरित्या अपडेट केले",
+    "Error Updating": "अपडेट करताना त्रुटी",
+    "Error activating Contract": "करार सक्रिय करताना त्रुटी"
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Stack, Chip, Typography, CardContent, Box, Button, Autocomplete, TextField } from "@mui/material";
-import { cropsArray, ProductName } from "../../utils/cropsName";
+import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
 import { useTranslation } from "react-i18next";
 

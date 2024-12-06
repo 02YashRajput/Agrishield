@@ -12,5 +12,7 @@
     "Product Details": "পণ্য বিস্তারিত",
     "View Profile": "প্রোফাইল দেখুন",
     "Buyer": "ক্রেতা",
-    "Farmer": "কৃষক"
+    "Farmer": "কৃষক",
+    "Contract accepted successfully": "চুক্তি সফলভাবে গৃহীত হয়েছে",
+    "An error occurred while accepting contract": "চুক্তি গ্রহণ করার সময় একটি ত্রুটি ঘটেছে"
 }
