@@ -33,9 +33,9 @@ const Login:React.FC = () => {
   const loginSchema = z.object({
     identifier: z
       .string()
-      .min(1, { message: "Email or Phone no is required" }),
+      .min(1, { message: t("Email or Phone no is required" )}),
       
-    password: z.string().min(1, { message: "Password is required" }),
+    password: z.string().min(1, { message: t("Password is required" )}),
   });
   
   
@@ -48,10 +48,10 @@ const Login:React.FC = () => {
       withCredentials: true, 
     })
       
-      toast.success("Login successful");
+      toast.success(t("Login successful"));
       navigate("/");
     }catch(error:any){
-      toast.error(error.response.data.message || "An error occurred");
+      toast.error(error.response.data.message || t("An error occurred"));
       console.error(error);
     }
 
@@ -87,8 +87,8 @@ const Login:React.FC = () => {
           />
           <CardContent className="flex items-center justify-center">
             <Typography variant="h5" className="text-black  text-center">
-              Farm with Confidence
-              <br /> Market with Ease.
+              {t("Farm with Confidence")}
+              <br /> {t("Market with Ease.")}
             </Typography>
           </CardContent>
         </Card>
@@ -105,7 +105,7 @@ const Login:React.FC = () => {
               className="w-80 flex flex-col gap-5 mt-5"
             >
               <TextField
-                label="Email or Phone Number"
+                label={t("Email or Phone Number")}
                 fullWidth
                 type="text"
                 {...form.register("identifier")}
@@ -114,7 +114,7 @@ const Login:React.FC = () => {
                 color="secondary"
               />
               <TextField
-                label="Password"
+                label={t("Password")}
                 fullWidth
                 type="password"
                 {...form.register("password")}
@@ -129,7 +129,7 @@ const Login:React.FC = () => {
                   backgroundColor: (theme) => theme.palette.yellow?.main,
                 }}
               >
-                Submit
+                {t("Submit")}
               </Button>
             </form>
             <Typography
@@ -137,14 +137,14 @@ const Login:React.FC = () => {
               sx={{ marginTop: "1rem", marginBottom: "1rem" }}
               className="text-black text-center"
             >
-              Or
+              {t("Or")}
             </Typography>
             <GoogleLoginButton userType={null} />
           </Card>
           <Typography variant="body1" className="text-black">
-            New User?{" "}
+            {t("New User")}?{" "}
             <Link to="/sign-up" className="text-red-600">
-              SignUp
+              {t("SignUp")}
             </Link>
           </Typography>
         </Card>
