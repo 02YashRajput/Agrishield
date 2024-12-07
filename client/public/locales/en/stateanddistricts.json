@@ -1,14 +1,815 @@
 {
-  "States":{
-    "Uttar Pradesh":{
-      "name":"Uttar Pradesh",
+  "States": {
+    "Andaman and Nicobar": {
+      "name": "Andaman and Nicobar",
       "districts": {
-        "Agra": "Agra",
-        "Lucknow": "Lucknow",
-        "Varanasi": "Varanasi",
-        "Kanpur": "Kanpur"
+        "Nicobar": "Nicobar",
+        "North and Middle Andaman": "North and Middle Andaman",
+        "South Andaman": "South Andaman"
       }
-    
+    },
+
+
+  
+    "Andhra Pradesh": {
+      "name": "Andhra Pradesh",
+      "districts": {
+        "Anantapur": "Anantapur",
+        "Chittor": "Chittor",
+        "Cuddapah": "Cuddapah",
+        "East Godavari": "East Godavari",
+        "Guntur": "Guntur",
+        "Krishna": "Krishna",
+        "Kurnool": "Kurnool",
+        "Nellore": "Nellore",
+        "Prakasam": "Prakasam",
+        "Srikakulam": "Srikakulam",
+        "Visakhapatnam": "Visakhapatnam",
+        "West Godavari": "West Godavari"
+      }
+    },
+
+
+
+  
+    "Arunachal Pradesh": {
+      "name": "Arunachal Pradesh",
+      "districts": {
+        "Changlang": "Changlang",
+        "East Siang": "East Siang",
+        "Lohit": "Lohit",
+        "Lower Dibang Valley": "Lower Dibang Valley",
+        "Lower Subansiri": "Lower Subansiri",
+        "Papum Pore": "Papum Pore",
+        "Tirap": "Tirap",
+        "Upper Subansiri": "Upper Subansiri",
+        "West Siang": "West Siang"
+      }
+    },
+
+
+
+  
+    "Assam": {
+      "name": "Assam",
+      "districts": {
+        "Barpeta": "Barpeta",
+        "Bongaigaon": "Bongaigaon",
+        "Cachar": "Cachar",
+        "Darrang": "Darrang",
+        "Dhemaji": "Dhemaji",
+        "Dhubri": "Dhubri",
+        "Dibrugarh": "Dibrugarh",
+        "Goalpara": "Goalpara",
+        "Golaghat": "Golaghat",
+        "Hailakandi": "Hailakandi",
+        "Jorhat": "Jorhat",
+        "Kamrup": "Kamrup",
+        "Karbi Anglong": "Karbi Anglong",
+        "Karimganj": "Karimganj",
+        "Kokrajhar": "Kokrajhar",
+        "Lakhimpur": "Lakhimpur",
+        "Morigaon": "Morigaon",
+        "Nagaon": "Nagaon",
+        "Nalbari": "Nalbari",
+        "Sibsagar": "Sibsagar",
+        "Sonitpur": "Sonitpur"
+      }
+    },
+
+
+
+  
+    "Bihar": {
+      "name": "Bihar",
+      "districts": {
+        "Araria": "Araria",
+        "Arwal": "Arwal",
+        "Aurangabad": "Aurangabad",
+        "Banka": "Banka",
+        "Begusarai": "Begusarai",
+        "Bhagalpur": "Bhagalpur",
+        "Bhojpur": "Bhojpur",
+        "Buxar": "Buxar",
+        "Chhapra": "Chhapra",
+        "Darbhanga": "Darbhanga",
+        "East Champaran/ Motihari": "East Champaran/ Motihari",
+        "Gaya": "Gaya",
+        "Gopalgang": "Gopalgang",
+        "Jamui": "Jamui",
+        "Jehanabad": "Jehanabad",
+        "Kaimur/Bhabhua": "Kaimur/Bhabhua",
+        "Kaithar": "Kaithar",
+        "Khagaria": "Khagaria",
+        "Kishanganj": "Kishanganj",
+        "Luckeesarai": "Luckeesarai",
+        "Madhepura": "Madhepura",
+        "Madhubani": "Madhubani",
+        "Munghair": "Munghair",
+        "Muzaffarpur": "Muzaffarpur",
+        "Nalanda": "Nalanda",
+        "Nawada": "Nawada",
+        "Patna": "Patna",
+        "Purnea": "Purnea",
+        "Rohtas": "Rohtas",
+        "Saharsa": "Saharsa",
+        "Samastipur": "Samastipur",
+        "Saran": "Saran",
+        "Sheikhpura": "Sheikhpura",
+        "Sheohar": "Sheohar",
+        "Sitamarhi": "Sitamarhi",
+        "Siwan": "Siwan",
+        "Supaul": "Supaul",
+        "Tinsukia": "Tinsukia",
+        "Vaishali": "Vaishali",
+        "West Chambaran": "West Chambaran"
+      }
+    },
+
+
+
+  
+    "Chandigarh": {
+      "name": "Chandigarh",
+      "districts": {
+        "Chandigarh": "Chandigarh"
+      }
+    },
+
+
+
+  
+    "Chhattisgarh": {
+      "name": "Chhattisgarh",
+      "districts": {
+        "Balod": "Balod",
+        "Balodabazar": "Balodabazar",
+        "Balrampur": "Balrampur",
+        "Bastar": "Bastar",
+        "Bemetara": "Bemetara",
+        "Bijapur": "Bijapur",
+        "Bilaspur": "Bilaspur",
+        "Dantewada": "Dantewada",
+        "Dhamtari": "Dhamtari",
+        "Durg": "Durg",
+        "Gariyaband": "Gariyaband",
+        "Janjgir": "Janjgir",
+        "Jashpur": "Jashpur",
+        "Kabirdham": "Kabirdham",
+        "Kanker": "Kanker",
+        "Kondagaon": "Kondagaon",
+        "Korba": "Korba",
+        "Koria": "Koria",
+        "Mahasamund": "Mahasamund",
+        "Mungeli": "Mungeli",
+        "Narayanpur": "Narayanpur",
+        "Raigarh": "Raigarh",
+        "Rajnandgaon": "Rajnandgaon",
+        "Sukma": "Sukma",
+        "Surajpur": "Surajpur",
+        "Surguja": "Surguja"
+      }
+    },
+
+
+
+  
+    "Goa": {
+      "name": "Goa",
+      "districts": {
+        "North Goa": "North Goa",
+        "South Goa": "South Goa"
+      }
+    },
+
+
+
+  
+    "Gujarat": {
+      "name": "Gujarat",
+      "districts": {
+        "Ahmedabad": "Ahmedabad",
+        "Amreli": "Amreli",
+        "Anand": "Anand",
+        "Banaskantha": "Banaskantha",
+        "Bharuch": "Bharuch",
+        "Bhavnagar": "Bhavnagar",
+        "Botad": "Botad",
+        "Chhota Udaipur": "Chhota Udaipur",
+        "Dahod": "Dahod",
+        "Dang": "Dang",
+        "Devbhumi Dwarka": "Devbhumi Dwarka",
+        "Gandhinagar": "Gandhinagar",
+        "Gir Somnath": "Gir Somnath",
+        "Jamnagar": "Jamnagar",
+        "Junagarh": "Junagarh",
+        "Kachchh": "Kachchh",
+        "Kheda": "Kheda",
+        "Mehsana": "Mehsana",
+        "Morbi": "Morbi",
+        "Narmada": "Narmada",
+        "Navsari": "Navsari",
+        "Panchmahals": "Panchmahals",
+        "Patan": "Patan",
+        "Porbandar": "Porbandar",
+        "Rajkot": "Rajkot",
+        "Sabarkantha": "Sabarkantha",
+        "Surat": "Surat",
+        "Surendranagar": "Surendranagar",
+        "The Dangs": "The Dangs",
+        "Vadodara(Baroda)": "Vadodara(Baroda)",
+        "Valsad": "Valsad"
+      }
+    },
+
+
+
+  
+    "Haryana": {
+      "name": "Haryana",
+      "districts": {
+        "Ambala": "Ambala",
+        "Bhiwani": "Bhiwani",
+        "Faridabad": "Faridabad",
+        "Fatehabad": "Fatehabad",
+        "Gurgaon": "Gurgaon",
+        "Hissar": "Hissar",
+        "Jhajar": "Jhajar",
+        "Jind": "Jind",
+        "Kaithal": "Kaithal",
+        "Karnal": "Karnal",
+        "Kurukshetra": "Kurukshetra",
+        "Mahendragarh-Narnaul": "Mahendragarh-Narnaul",
+        "Mewat": "Mewat",
+        "Palwal": "Palwal",
+        "Panchkula": "Panchkula",
+        "Panipat": "Panipat",
+        "Rewari": "Rewari",
+        "Rohtak": "Rohtak",
+        "Sirsa": "Sirsa",
+        "Sonipat": "Sonipat",
+        "Yamuna Nagar": "Yamuna Nagar"
+      }
+    },
+
+
+
+  
+    "Himachal Pradesh": {
+      "name": "Himachal Pradesh",
+      "districts": {
+        "Bilaspur": "Bilaspur",
+        "Chamba": "Chamba",
+        "Hamirpur": "Hamirpur",
+        "Kangra": "Kangra",
+        "Kullu": "Kullu",
+        "Mandi": "Mandi",
+        "Shimla": "Shimla",
+        "Sirmore": "Sirmore",
+        "Solan": "Solan",
+        "Una": "Una"
+      }
+    },
+
+
+
+  
+    "Jammu and Kashmir": {
+      "name": "Jammu and Kashmir",
+      "districts": {
+        "Anantnag": "Anantnag",
+        "Badgam": "Badgam",
+        "Baramulla": "Baramulla",
+        "Jammu": "Jammu",
+        "Kathua": "Kathua",
+        "Kupwara": "Kupwara",
+        "Pulwama": "Pulwama",
+        "Rajouri": "Rajouri",
+        "Srinagar": "Srinagar",
+        "Udhampur": "Udhampur"
+      }
+    },
+
+
+
+  
+    "Jharkhand": {
+      "name": "Jharkhand",
+      "districts": {
+        "Bokaro": "Bokaro",
+        "Deogarh": "Deogarh",
+        "Dhanbad": "Dhanbad",
+        "Dumka": "Dumka",
+        "East Singhbhum": "East Singhbhum",
+        "Garhwa": "Garhwa",
+        "Giridih": "Giridih",
+        "Godda": "Godda",
+        "Gumla": "Gumla",
+        "Hazaribagh": "Hazaribagh",
+        "Jamtara": "Jamtara",
+        "Koderma": "Koderma",
+        "Latehar": "Latehar",
+        "Lohardaga": "Lohardaga",
+        "Pakur": "Pakur",
+        "Palamu": "Palamu",
+        "Ranchi": "Ranchi",
+        "Sahebgang": "Sahebgang",
+        "Saraikela(Kharsanwa)": "Saraikela(Kharsanwa)",
+        "Simdega": "Simdega",
+        "West Singbhum": "West Singbhum"
+      }
+    },
+
+
+
+  
+    "Karnataka": {
+      "name": "Karnataka",
+      "districts": {
+        "Bagalkot": "Bagalkot",
+        "Bangalore": "Bangalore",
+        "Belgaum": "Belgaum",
+        "Bellary": "Bellary",
+        "Bidar": "Bidar",
+        "Bijapur": "Bijapur",
+        "Chamrajnagar": "Chamrajnagar",
+        "Chikmagalur": "Chikmagalur",
+        "Chitradurga": "Chitradurga",
+        "Davangere": "Davangere",
+        "Dharwad": "Dharwad",
+        "Gadag": "Gadag",
+        "Hassan": "Hassan",
+        "Haveri": "Haveri",
+        "Kalburgi": "Kalburgi",
+        "Karwar(Uttar Kannad)": "Karwar(Uttar Kannad)",
+        "Kolar": "Kolar",
+        "Koppal": "Koppal",
+        "Madikeri(Kodagu)": "Madikeri(Kodagu)",
+        "Mandya": "Mandya",
+        "Mangalore(Dakshin Kannad)": "Mangalore(Dakshin Kannad)",
+        "Mysore": "Mysore",
+        "Raichur": "Raichur",
+        "Shimoga": "Shimoga",
+        "Tumkur": "Tumkur",
+        "Udupi": "Udupi",
+        "Yadgiri": "Yadgiri"
+      }
+    },
+
+
+
+  
+    "Kerala": {
+      "name": "Kerala",
+      "districts": {
+        "Alappuzha": "Alappuzha",
+        "Alleppey": "Alleppey",
+        "Ernakulam": "Ernakulam",
+        "Idukki": "Idukki",
+        "Kannur": "Kannur",
+        "Kasargod": "Kasargod",
+        "Kollam": "Kollam",
+        "Kottayam": "Kottayam",
+        "Kozhikode(Calicut)": "Kozhikode(Calicut)",
+        "Malappuram": "Malappuram",
+        "Palakad": "Palakad",
+        "Pathanamthitta": "Pathanamthitta",
+        "Thirssur": "Thirssur",
+        "Thiruvananthapuram": "Thiruvananthapuram",
+        "Wayanad": "Wayanad"
+      }
+    },
+
+
+
+  
+    "Madhya Pradesh": {
+      "name": "Madhya Pradesh",
+      "districts": {
+        "Alirajpur": "Alirajpur",
+        "Anupur": "Anupur",
+        "Ashoknagar": "Ashoknagar",
+        "Badwani": "Badwani",
+        "Balaghat": "Balaghat",
+        "Betul": "Betul",
+        "Bhind": "Bhind",
+        "Bhopal": "Bhopal",
+        "Burhanpur": "Burhanpur",
+        "Chhatarpur": "Chhatarpur",
+        "Chhindwara": "Chhindwara",
+        "Damoh": "Damoh",
+        "Datia": "Datia",
+        "Dewas": "Dewas",
+        "Dhar": "Dhar",
+        "Dindori": "Dindori",
+        "Guna": "Guna",
+        "Gwalior": "Gwalior",
+        "Harda": "Harda",
+        "Hoshangabad": "Hoshangabad",
+        "Indore": "Indore",
+        "Jabalpur": "Jabalpur",
+        "Jhabua": "Jhabua",
+        "Katni": "Katni",
+        "Khandwa": "Khandwa",
+        "Khargone": "Khargone",
+        "Agar Malwa": "Agar Malwa",
+        "Mandla": "Mandla",
+        "Mandsaur": "Mandsaur",
+        "Morena": "Morena",
+        "Narsinghpur": "Narsinghpur",
+        "Neemuch": "Neemuch",
+        "Panna": "Panna",
+        "Raisen": "Raisen",
+        "Rajgarh": "Rajgarh",
+        "Ratlam": "Ratlam",
+        "Rewa": "Rewa",
+        "Sagar": "Sagar",
+        "Satna": "Satna",
+        "Sehore": "Sehore",
+        "Seoni": "Seoni",
+        "Shajapur": "Shajapur",
+        "Shehdol": "Shehdol",
+        "Sheopur": "Sheopur",
+        "Shivpuri": "Shivpuri",
+        "Sidhi": "Sidhi",
+        "Singroli": "Singroli",
+        "Tikamgarh": "Tikamgarh",
+        "Ujjain": "Ujjain",
+        "Umariya": "Umariya",
+        "Vidisha": "Vidisha"
+      }
+    },
+
+
+
+  
+    "Maharashtra": {
+      "name": "Maharashtra",
+      "districts": {
+        "Beed": "Beed",
+        "Buldhana": "Buldhana",
+        "Ahmednagar": "Ahmednagar",
+        "Akola": "Akola",
+        "Bhandara": "Bhandara",
+        "Chattrapati Sambhajinagar": "Chattrapati Sambhajinagar",
+        "Dharashiv(Usmanabad)": "Dharashiv(Usmanabad)",
+        "Dhule": "Dhule",
+        "Gadchiroli": "Gadchiroli",
+        "Gondiya": "Gondiya",
+        "Hingoli": "Hingoli",
+        "Jalana": "Jalana",
+        "Jalgaon": "Jalgaon",
+        "Kolhapur": "Kolhapur",
+        "Latur": "Latur",
+        "Mumbai": "Mumbai",
+        "Murum": "Murum",
+        "Nagpur": "Nagpur",
+        "Nanded": "Nanded",
+        "Nandurbar": "Nandurbar",
+        "Nashik": "Nashik",
+        "Raigad": "Raigad",
+        "Ratnagiri": "Ratnagiri",
+        "Sangli": "Sangli",
+        "Satara": "Satara",
+        "Thane": "Thane",
+        "Vashim": "Vashim",
+        "Wardha": "Wardha",
+        "Yavatmal": "Yavatmal",
+        "Amarawati": "Amarawati",
+        "Chandrapur": "Chandrapur",
+        "Parbhani": "Parbhani",
+        "Pune": "Pune",
+        "Sholapur": "Sholapur"
+      }
+    },
+
+
+
+  
+    "Manipur": {
+      "name": "Manipur",
+      "districts": {
+        "Bishnupur": "Bishnupur",
+        "Imphal East": "Imphal East",
+        "Imphal West": "Imphal West",
+        "Kakching": "Kakching",
+        "Thoubal": "Thoubal"
+      }
+    },
+
+
+
+  
+    "Meghalaya": {
+      "name": "Meghalaya",
+      "districts": {
+        "East Garo Hills": "East Garo Hills",
+        "East Jaintia Hills": "East Jaintia Hills",
+        "East Khasi Hills": "East Khasi Hills",
+        "West Garo Hills": "West Garo Hills",
+        "West Jaintia Hills": "West Jaintia Hills",
+        "West Khasi Hills": "West Khasi Hills",
+        "Nongpoh (R-Bhoi)": "Nongpoh (R-Bhoi)",
+        "South West Garo Hills": "South West Garo Hills",
+        "South West Khasi Hills": "South West Khasi Hills"
+      }
+    },
+
+
+
+  
+    "Nagaland": {
+      "name": "Nagaland",
+      "districts": {
+        "Dimapur": "Dimapur",
+        "Kiphire": "Kiphire",
+        "Kohima": "Kohima",
+        "Longleng": "Longleng",
+        "Mokokchung": "Mokokchung",
+        "Mon": "Mon",
+        "Peren": "Peren",
+        "Phek": "Phek",
+        "Tsemenyu": "Tsemenyu",
+        "Tuensang": "Tuensang",
+        "Wokha": "Wokha",
+        "Zunheboto": "Zunheboto"
+      }
+    },
+
+
+  
+    "NCT of Delhi": {
+      "name": "NCT of Delhi",
+      "districts": {
+        "Delhi": "Delhi"
+      }
+    },
+
+
+
+  
+    "Odisha": {
+      "name": "Odisha",
+      "districts": {
+        "Angul": "Angul",
+        "Balasore": "Balasore",
+        "Bargarh": "Bargarh",
+        "Bhadrak": "Bhadrak",
+        "Bolangir": "Bolangir",
+        "Boudh": "Boudh",
+        "Cuttack": "Cuttack",
+        "Deogarh": "Deogarh",
+        "Dhenkanal": "Dhenkanal",
+        "Gajapati": "Gajapati",
+        "Ganjam": "Ganjam",
+        "Jagatsinghpur": "Jagatsinghpur",
+        "Jharsuguda": "Jharsuguda",
+        "Kalahandi": "Kalahandi",
+        "Kandhamal": "Kandhamal",
+        "Kendrapara": "Kendrapara",
+        "Keonjhar": "Keonjhar",
+        "Khurda": "Khurda",
+        "Koraput": "Koraput",
+        "Malkangiri": "Malkangiri",
+        "Mayurbhanja": "Mayurbhanja",
+        "Nayagarh": "Nayagarh",
+        "Nowarangpur": "Nowarangpur",
+        "Nuapada": "Nuapada",
+        "Puri": "Puri",
+        "Rayagada": "Rayagada",
+        "Sambalpur": "Sambalpur",
+        "Sonepur": "Sonepur",
+        "Sundergarh": "Sundergarh",
+        "Jajpur": "Jajpur"
+      }
+    },
+
+
+  
+    "Puducherry": {
+      "name": "Puducherry",
+      "districts": {
+        "Karaikal": "Karaikal",
+        "Pondicherry": "Pondicherry"
+      }
+    },
+
+
+
+  
+    "Punjab": {
+      "name": "Punjab",
+      "districts": {
+        "Amritsar": "Amritsar",
+        "Barnala": "Barnala",
+        "Bhatinda": "Bhatinda",
+        "Faridkot": "Faridkot",
+        "Fatehgarh": "Fatehgarh",
+        "Fazilka": "Fazilka",
+        "Ferozpur": "Ferozpur",
+        "Gurdaspur": "Gurdaspur",
+        "Hoshiarpur": "Hoshiarpur",
+        "Kapurthala": "Kapurthala",
+        "Ludhiana": "Ludhiana",
+        "Mansa": "Mansa",
+        "Moga": "Moga",
+        "Mohali": "Mohali",
+        "Muktsar": "Muktsar",
+        "Nawanshahr": "Nawanshahr",
+        "Pathankot": "Pathankot",
+        "Patiala": "Patiala",
+        "Sangrur": "Sangrur",
+        "Tarntaran": "Tarntaran",
+        "Ropar (Rupnagar)": "Ropar (Rupnagar)"
+      }
+    },
+
+
+
+  
+    "Rajasthan": {
+      "name": "Rajasthan",
+      "districts": {
+        "Udaipur": "Udaipur",
+        "Ajmer": "Ajmer",
+        "Alwar": "Alwar",
+        "Anupgarh": "Anupgarh",
+        "Balotra": "Balotra",
+        "Banswara": "Banswara",
+        "Baran": "Baran",
+        "Barmer": "Barmer",
+        "Beawar": "Beawar",
+        "Bharatpur": "Bharatpur",
+        "Bhilwara": "Bhilwara",
+        "Bikaner": "Bikaner",
+        "Bundi": "Bundi",
+        "Chittorgarh": "Chittorgarh",
+        "Churu": "Churu",
+        "Deedwana Kuchaman": "Deedwana Kuchaman",
+        "Deeg": "Deeg",
+        "Dholpur": "Dholpur",
+        "Dudu": "Dudu",
+        "Dungarpur": "Dungarpur",
+        "Ganganagar": "Ganganagar",
+        "Gangapur City": "Gangapur City",
+        "Hanumangarh": "Hanumangarh",
+        "Jaipur": "Jaipur",
+        "Jaipur Rural": "Jaipur Rural",
+        "Jaisalmer": "Jaisalmer",
+        "Jhalawar": "Jhalawar",
+        "Jhunjhunu": "Jhunjhunu",
+        "Jodhpur": "Jodhpur",
+        "Jodhpur Rural": "Jodhpur Rural",
+        "Karauli": "Karauli",
+        "Kekri": "Kekri",
+        "Khairthal Tijara": "Khairthal Tijara",
+        "Kota": "Kota",
+        "Kotputli- Behror": "Kotputli- Behror",
+        "Neem Ka Thana": "Neem Ka Thana",
+        "Pali": "Pali",
+        "Phalodi": "Phalodi",
+        "Pratapgarh": "Pratapgarh",
+        "Sanchore": "Sanchore",
+        "Sikar": "Sikar",
+        "Sirohi": "Sirohi",
+        "Swai Madhopur": "Swai Madhopur",
+        "Tonk": "Tonk",
+        "Dausa": "Dausa",
+        "Nagaur": "Nagaur",
+        "Rajasamand": "Rajasamand",
+        "Rajsamand": "Rajsamand"
+      }
+    },
+
+
+
+  
+    "Tamil Nadu": {
+      "name": "Tamil Nadu",
+      "districts": {
+        "Ariyalur": "Ariyalur",
+        "Chengalpattu": "Chengalpattu",
+        "Chennai": "Chennai",
+        "Coimbatore": "Coimbatore",
+        "Cuddalore": "Cuddalore",
+        "Dharmapuri": "Dharmapuri",
+        "Dindigul": "Dindigul",
+        "Erode": "Erode",
+        "Kallakuruchi": "Kallakuruchi",
+        "Kancheepuram": "Kancheepuram",
+        "Nagercoil (Kannyiakumari)": "Nagercoil (Kannyiakumari)",
+        "Karur": "Karur",
+        "Krishnagiri": "Krishnagiri",
+        "Madurai": "Madurai",
+        "Nagapattinam": "Nagapattinam",
+        "Namakkal": "Namakkal",
+        "The Nilgiris": "The Nilgiris",
+        "Perambalur": "Perambalur",
+        "Pudukkottai": "Pudukkottai",
+        "Ramanathapuram": "Ramanathapuram",
+        "Ranipet": "Ranipet",
+        "Salem": "Salem",
+        "Sivaganga": "Sivaganga",
+        "Tenkasi": "Tenkasi",
+        "Thanjavur": "Thanjavur",
+        "Theni": "Theni",
+        "Thiruchirappalli": "Thiruchirappalli",
+        "Thirunelveli": "Thirunelveli",
+        "Thirupathur": "Thirupathur",
+        "Thirupur": "Thirupur",
+        "Thiruvannamalai": "Thiruvannamalai",
+        "Thiruvarur": "Thiruvarur",
+        "Thiruvellore": "Thiruvellore",
+        "Tuticorin": "Tuticorin",
+        "Vellore": "Vellore",
+        "Villupuram": "Villupuram",
+        "Virudhunagar": "Virudhunagar"
+      }
+    },
+
+
+  
+    "Telangana": {
+      "name": "Telangana",
+      "districts": {
+        "Adilabad": "Adilabad",
+        "Hyderabad": "Hyderabad",
+        "Jagityal": "Jagityal",
+        "Karimnagar": "Karimnagar",
+        "Khammam": "Khammam",
+        "Mahbubnagar": "Mahbubnagar",
+        "Medak": "Medak",
+        "Nalgonda": "Nalgonda",
+        "Nizamabad": "Nizamabad",
+        "Ranga Reddy": "Ranga Reddy",
+        "Warangal": "Warangal"
+      }
+    },
+
+
+
+  
+    "Tripura": {
+      "name": "Tripura",
+      "districts": {
+        "Dhalai": "Dhalai",
+        "Gomati": "Gomati",
+        "Khowai": "Khowai",
+        "North Tripura": "North Tripura",
+        "Sepahijala": "Sepahijala",
+        "South District": "South District",
+        "Unokoti": "Unokoti",
+        "West District": "West District"
+      }
+    },
+
+
+
+  
+    "Uttarakhand": {
+      "name": "Uttarakhand",
+      "districts": {
+        "Champawat": "Champawat",
+        "Dehradoon": "Dehradoon",
+        "Garhwal (Pauri)": "Garhwal (Pauri)",
+        "Haridwar": "Haridwar",
+        "Nanital": "Nanital",
+        "UdhamSinghNagar": "UdhamSinghNagar"
+      }
+    },
+
+
+  
+    "West Bengal": {
+      "name": "West Bengal",
+      "districts": {
+        "Dakshin Dinajpur": "Dakshin Dinajpur",
+        "Alipurduar": "Alipurduar",
+        "Bankura": "Bankura",
+        "Birbhum": "Birbhum",
+        "Burdwan": "Burdwan",
+        "Coochbehar": "Coochbehar",
+        "Darjeeling": "Darjeeling",
+        "Hooghly": "Hooghly",
+        "Howrah": "Howrah",
+        "Jalpaiguri": "Jalpaiguri",
+        "Jhargram": "Jhargram",
+        "Kalimpong": "Kalimpong",
+        "Kolkata": "Kolkata",
+        "Malda": "Malda",
+        "Medinipur(E)": "Medinipur(E)",
+        "Medinipur(W)": "Medinipur(W)",
+        "Murshidabad": "Murshidabad",
+        "Nadia": "Nadia",
+        "North 24 Parganas": "North 24 Parganas",
+        "Paschim Bardhaman": "Paschim Bardhaman",
+        "Purba Bardhaman": "Purba Bardhaman",
+        "Puruliya": "Puruliya",
+        "Sounth 24 Parganas": "Sounth 24 Parganas",
+        "Uttar Dinajpur": "Uttar Dinajpur"
+      }
     }
   }
 }
+
+
