@@ -1,0 +1,14 @@
+{
+  "States":{
+    "Uttar Pradesh":{
+      "name":"Uttar Pradesh",
+      "districts": {
+        "Agra": "Agra",
+        "Lucknow": "Lucknow",
+        "Varanasi": "Varanasi",
+        "Kanpur": "Kanpur"
+      }
+    
+    }
+  }
+}
