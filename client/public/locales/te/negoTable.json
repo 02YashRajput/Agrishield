@@ -1,0 +1,22 @@
+{
+    "submit": "సమర్పించు",
+    "buyername": "కొనుగోలుదారుడి పేరు",
+    "farmername": "వ్యవసాయికుడి పేరు",
+    "productname": "ఉత్పత్తి పేరు",
+    "initialpaymentamount": "ప్రారంభ చెల్లింపుపై మొత్తము",
+    "finalpaymentamount": "చివరి చెల్లింపుపై మొత్తం",
+    "productquantity(q)": "ఉత్పత్తి పరిమాణం (q)",
+    "farmer": "వ్యవసాయికుడు",
+    "deadline": "గడువు",
+    "initialpayment": "ప్రారంభ చెల్లింపు",
+    "finalpayment": "చివరి చెల్లింపు",
+    "productquantity": "ఉత్పత్తి పరిమాణం",
+    "viewprofile": "ప్రొఫైల్ చూడండి",
+    "buyer": "కొనుగోలుదారు",
+    "edit": "సవరించు",
+    "accept": "అంగీకరించు",
+    "Successfully updated": "విజయవంతంగా అప్డేట్ చేయబడింది",
+    "Error Updating": "అప్డేట్ చేస్తూ లోపం",
+    "Error activating Contract": "కాంట్రాక్ట్ ను సక్రియం చేయడంలో లోపం"
+  
+}

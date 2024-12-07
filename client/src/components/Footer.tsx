@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <Box sx={{ padding: 4, backgroundColor: "#f5f5f5", marginTop: 5 }}>
+    <Box sx={{ padding: 4,paddingBottom:0, backgroundColor: "#E2E8F0" }}>
       <Grid container spacing={4} justifyContent="space-between">
         {/* Logo and Info Section */}
         <Grid item xs={12} sm={6} md={4}>

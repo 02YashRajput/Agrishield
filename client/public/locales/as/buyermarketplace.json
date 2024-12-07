@@ -1,0 +1,19 @@
+{
+    "listYourContract": "আপোনাৰ চুক্তি তালিকাভুক্ত কৰক",
+    "productName": "সামগ্ৰীৰ নাম",
+    "productQuantity": "সামগ্ৰীৰ পৰিমাণ (কুইন্টেলত)",
+    "initialPaymentAmount": "প্ৰাথমিক পৰিশোধৰ পৰিমাণ",
+    "finalPaymentAmount": "চূড়ান্ত পৰিশোধৰ পৰিমাণ",
+    "totalAmount": "মুঠ পৰিমাণ",
+    "ratePerQuintal": "প্ৰতি কুইন্টেলৰ হাৰ",
+    "selectDeadline": "সময় সীমা নিৰ্বাচন কৰক *",
+    "additionalInstructions": "অতিৰিক্ত নিৰ্দেশনা",
+    "listContract": "চুক্তি তালিকাভুক্ত কৰক",
+    "listedContracts": "তালিকাভুক্ত চুক্তিসমূহ",
+    "noDataAvailable": "কোনো তথ্য উপলব্ধ নাই",
+    "previous": "পূৰ্ববৰ্তী",
+    "next": "পৰৱৰ্তী",
+    "contractListedSuccess": "চুক্তি সফলতাৰে তালিকাভুক্ত কৰা হৈছে!",
+    "contractListedFailure": "চুক্তি তালিকাভুক্ত কৰিবলৈ ব্যৰ্থ। অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক।"
+  }
+  

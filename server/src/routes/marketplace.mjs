@@ -141,7 +141,7 @@ router.post(
         buyerName: user.userName,
         buyerProfileImage: user.profileImage,
         buyerProfileLink: `/profile/${user.userId}`,
-        productImage: `${baseAwsUrl}/${productName}.jpg`,
+        productImage: `${baseAwsUrl}/${productName.split("/").join(" ")}.jpg`,
         initialPaymentAmount,
         finalPaymentAmount,
         deadline,

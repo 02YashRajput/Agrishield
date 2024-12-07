@@ -1,0 +1,19 @@
+{
+    "listYourContract": "اپنا معاہدہ لسٹ کریں",
+    "productName": "پروڈکٹ کا نام",
+    "productQuantity": "پروڈکٹ کی مقدار (کوینتل میں)",
+    "initialPaymentAmount": "ابتدائی ادائیگی کی رقم",
+    "finalPaymentAmount": "آخری ادائیگی کی رقم",
+    "totalAmount": "کل رقم",
+    "ratePerQuintal": "فی کویِنتل قیمت",
+    "selectDeadline": "ڈیڈ لائن منتخب کریں *",
+    "additionalInstructions": "اضافی ہدایات",
+    "listContract": "معاہدہ لسٹ کریں",
+    "listedContracts": "لسٹ شدہ معاہدے",
+    "noDataAvailable": "کوئی ڈیٹا دستیاب نہیں ہے",
+    "previous": "پچھلا",
+    "next": "اگلا",
+    "contractListedSuccess": "معاہدہ کامیابی سے لسٹ کر دیا گیا ہے!",
+    "contractListedFailure": "معاہدہ لسٹ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔"
+  }
+  

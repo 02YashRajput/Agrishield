@@ -24,6 +24,8 @@ import NotFound from "./NotFound";
 import ProfileContentUser from "../components/profile/ProfileContentUser";
 import ReviewsAndRatings from "../components/profile/ReviewsAndRatings";
 import { useLanguage } from "../context/LanguageContext";
+import Footer from "../components/Footer";
+import { useTranslation } from "react-i18next";
 
 export interface Data {
   success: boolean;
@@ -88,6 +90,7 @@ const fetcher = (url: string) =>
 
 const Profile: React.FC = () => {
   const {setIsChatOpen} = useLanguage();
+  const {t} = useTranslation('profilee');
   
   const { id } = useParams();
   const navigate = useNavigate();
@@ -118,7 +121,7 @@ const Profile: React.FC = () => {
   }, [isLoading]);
 
   if (error?.response?.status === 401) {
-    toast.error("please login first");
+    toast.error(t("please login first"));
     navigate("/login");
   }
   if (error?.response?.status === 500) {
@@ -194,14 +197,14 @@ try{
     withCredentials: true, 
   });
   if(response.data.success) {
-    toast.success("Chat started successfully");
+    toast.success(t("Chat started successfully"));
     setIsChatOpen(true);
   }
 }catch (err:any) {
   if (err.response?.data?.message === 'Chat already exists') {
-    toast.error("Chat already exists");
+    toast.error(t("Chat already exists"));
   } else {
-    toast.error("Failed to initiate chat");
+    toast.error(t("Failed to initiate chat"));
   }
 }
                   }}>Chat with {profileData?.userName}</Button>
@@ -218,7 +221,7 @@ try{
                     startIcon={<FaEdit />}
                     onClick={() => setIsEditable(!isEditable)}
                   >
-                    Edit
+                    {t("Edit")}
                   </Button>
                 )}
               </Box>
@@ -246,6 +249,7 @@ try{
       ) : (
         <CircularProgress />
       )}
+      <Footer />
     </div>
   );
 };

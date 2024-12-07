@@ -1,0 +1,19 @@
+{
+    "listYourContract": "ನಿಮ್ಮ ಒಪ್ಪಂದವನ್ನು ಪಟ್ಟಿ ಮಾಡಿ",
+    "productName": "ಉತ್ಪನ್ನದ ಹೆಸರು",
+    "productQuantity": "ಉತ್ಪನ್ನದ ಪ್ರಮಾಣ (ಕ್ವಿಂಟಲ್‌ನಲ್ಲಿ)",
+    "initialPaymentAmount": "ಆರಂಭಿಕ ಪಾವತಿ ಮೊತ್ತ",
+    "finalPaymentAmount": "ಕೊನೆಯ ಪಾವತಿ ಮೊತ್ತ",
+    "totalAmount": "ಒಟ್ಟು ಮೊತ್ತ",
+    "ratePerQuintal": "ಪ್ರತಿ ಕ್ವಿಂಟಲ್ ದರ",
+    "selectDeadline": "ಅಂತಿಮ ದಿನಾಂಕ ಆಯ್ಕೆ ಮಾಡಿ *",
+    "additionalInstructions": "ಹೆಚ್ಚು ಸೂಚನೆಗಳು",
+    "listContract": "ಒಪ್ಪಂದ ಪಟ್ಟಿ ಮಾಡಿ",
+    "listedContracts": "ಪಟ್ಟಿ ಮಾಡಿದ ಒಪ್ಪಂದಗಳು",
+    "noDataAvailable": "ಯಾವುದೇ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ",
+    "previous": "ಹಿಂದಿನದು",
+    "next": "ಮುಂದೆ",
+    "contractListedSuccess": "ಒಪ್ಪಂದ ಯಶಸ್ವಿಯಾಗಿ ಪಟ್ಟಿ ಮಾಡಲಾಗಿದೆ!",
+    "contractListedFailure": "ಒಪ್ಪಂದವನ್ನು ಪಟ್ಟಿ ಮಾಡಲು ವಿಫಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+  }
+  

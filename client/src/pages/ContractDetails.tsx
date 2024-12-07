@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import { Card, CardContent, Paper } from '@mui/material';
 import RequestedDetails from '../components/contractDetails/RequestedDetails';
 import OngoingDetails from '../components/contractDetails/OngoingDetails';
-
+import Footer from "../components/Footer";
 
 interface Data {
   success: boolean;
@@ -88,6 +88,7 @@ const ContractDetails :React.FC= () => {
               </Card> }
 
       </Paper>
+      <Footer />
     </div>
   )
 }

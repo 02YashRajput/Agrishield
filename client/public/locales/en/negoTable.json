@@ -1,0 +1,21 @@
+{
+    "submit":"Submit",
+    "buyername":"Buyer Name",
+    "farmername":"Farmer Name",
+    "productname":"Product Name",
+    "initialpaymentamount":"Initial Payment Amount",
+    "finalpaymentamount":"Final Payment Amount",
+    "productquantity(q)":"Product Quantity (q)",
+    "farmer":"Farmer",
+    "deadline":"Deadline",
+    "initialpayment":"Initial Payment",
+    "finalpayment":"Final Payment",
+    "productquantity":"Product Quantity",
+    "viewprofile":"View Profile",
+    "buyer":"Buyer",
+    "edit":"Edit",
+    "accept":"Accept",
+    "Successfully updated":"Successfully updated",
+    "Error Updating":"Error Updating",
+    "Error activating Contract":"Error activating Contract"
+}

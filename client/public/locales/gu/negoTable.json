@@ -1,0 +1,21 @@
+{
+    "submit": "જમા કરો",
+    "buyername": "ખરીદદારનું નામ",
+    "farmername": "કિસાનનું નામ",
+    "productname": "ઉત્પાદનનું નામ",
+    "initialpaymentamount": "પ્રારંભિક ચુકવણી રકમ",
+    "finalpaymentamount": "અંતિમ ચુકવણી રકમ",
+    "productquantity(q)": "ઉત્પાદન માત્રા (q)",
+    "farmer": "કિસાન",
+    "deadline": "સમયસીમા",
+    "initialpayment": "પ્રારંભિક ચુકવણી",
+    "finalpayment": "અંતિમ ચુકવણી",
+    "productquantity": "ઉત્પાદન માત્રા",
+    "viewprofile": "પ્રોફાઈલ જુઓ",
+    "buyer": "ખરીદદાર",
+    "edit": "સંપાદિત કરો",
+    "accept": "સ્વીકારો",
+    "Successfully updated": "સફળતાપૂર્વક અપડેટ કર્યું",
+    "Error Updating": "અપડેટ કરતી વખતે ભૂલ",
+    "Error activating Contract": "કોન્ટ્રાક્ટ સક્રિય કરતી વખતે ભૂલ"
+}

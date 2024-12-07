@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { cropsArray } from "../../utils/cropsName";
 import axios from "axios";
 import {
   Autocomplete,
@@ -40,7 +39,7 @@ interface BuyerMarketPlaceProps {
   handleNextPage: () => void;
   handlePrevPage: () => void;
   page: number;
-  isLoading:boolean
+  isLoading: boolean;
 }
 
 const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
@@ -51,11 +50,12 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
   handlePrevPage,
   page,
 }) => {
-
-  const {t} = useTranslation(["marketplace", "crops"]);
+  const { t } = useTranslation(["buyermarketplace", "crops"]);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [contracts,setContracts] = useState<BuyerMarketPlaceProps['results']>([])
+  const [contracts, setContracts] = useState<BuyerMarketPlaceProps["results"]>(
+    []
+  );
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -66,11 +66,11 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
 
   const cropsObject = t("crops:cropsObject", { returnObjects: true });
 
- console.log(cropsObject);
- const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
-  key,
-  value,
-}));
+  console.log(cropsObject);
+  const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
+    key,
+    value,
+  }));
 
   const isPopoverOpen = Boolean(anchorEl);
   const {
@@ -100,28 +100,22 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       );
       // Handle success response
       if (response.data.success) {
-        toast.success("Contract listed successfully!");
-        setContracts((prev) => [
-          ...prev, 
-          response.data.newContract 
-        ]);
+        toast.success(t("contractListedSuccess"));
+        setContracts((prev) => [...prev, response.data.newContract]);
       }
     } catch (error) {
-      toast.error("Failed to list contract. Please try again.");
-    }
-    finally{
+      toast.error(t("contractListedFailure"));
+    } finally {
       window.location.reload();
     }
   };
 
-
-
-useEffect(()=>{
-  if(!isLoading){
-    setContracts(results);
-    console.log("loading")
-  }
-},[isLoading , page])
+  useEffect(() => {
+    if (!isLoading) {
+      setContracts(results);
+      console.log("loading");
+    }
+  }, [isLoading, page]);
 
   return (
     <div className="space-y-9">
@@ -130,36 +124,41 @@ useEffect(()=>{
         className="max-w-4xl mx-auto bg-white p-8 "
       >
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-          List Your Contract
+          {t("listYourContract")}
         </Typography>
         <CardContent>
           <form onSubmit={handleSubmit(handleFormSubmit)} className="mt-8">
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
-              <Controller
-      name="productName"
-      control={control}
-      render={({ field }) => (
-        <Autocomplete
-        {...field}
-        options={cropsArray}
-        getOptionLabel={(option) => option.value} // Show the crop name
-        isOptionEqualToValue={(option, value) => option.key === value?.key} // Match by key
-        value={cropsArray.find((crop) => crop.key === field.value) || null} // Convert `field.value` to an object
-        onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            required
-            color="secondary"
-            label="Product Name"
-            error={!!errors.productName}
-            helperText={errors.productName?.message}
-          />
-        )}
-      />
-      )}
-    />
+                <Controller
+                  name="productName"
+                  control={control}
+                  render={({ field }) => (
+                    <Autocomplete
+                      {...field}
+                      options={cropsArray}
+                      getOptionLabel={(option) => option.value} // Show the crop name
+                      isOptionEqualToValue={(option, value) =>
+                        option.key === value?.key
+                      } // Match by key
+                      value={
+                        cropsArray.find((crop) => crop.key === field.value) ||
+                        null
+                      } // Convert `field.value` to an object
+                      onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          required
+                          color="secondary"
+                          label={t("productName")}
+                          error={!!errors.productName}
+                          helperText={errors.productName?.message}
+                        />
+                      )}
+                    />
+                  )}
+                />
               </Grid>
 
               <Grid item xs={12} sm={6}>
@@ -174,7 +173,7 @@ useEffect(()=>{
                       {...field}
                       error={!!errors.productQuantity}
                       helperText={errors.productQuantity?.message}
-                      label="Product Quantity in Quintal (q)"
+                      label={t("productQuantity")}
                       fullWidth
                     />
                   )}
@@ -192,7 +191,7 @@ useEffect(()=>{
                       {...field}
                       error={!!errors.initialPaymentAmount}
                       helperText={errors.initialPaymentAmount?.message}
-                      label="Initial Payment Amount"
+                      label={t("initialPaymentAmount")}
                       fullWidth
                     />
                   )}
@@ -210,7 +209,7 @@ useEffect(()=>{
                       {...field}
                       error={!!errors.finalPaymentAmount}
                       helperText={errors.finalPaymentAmount?.message}
-                      label="Final Payment Amount"
+                      label={t("finalPaymentAmount")}
                       fullWidth
                     />
                   )}
@@ -224,7 +223,7 @@ useEffect(()=>{
                     Number(watch("initialPaymentAmount") || 0) +
                     Number(watch("finalPaymentAmount") || 0)
                   }
-                  label="Total Amount"
+                  label={t("totalAmount")}
                   fullWidth
                   disabled
                 />
@@ -239,7 +238,7 @@ useEffect(()=>{
                       Number(watch("finalPaymentAmount") || 0)) /
                     Number(watch("productQuantity") || 1)
                   }
-                  label="Rate per q"
+                  label={t("ratePerQuintal")}
                   fullWidth
                   disabled
                 />
@@ -259,7 +258,7 @@ useEffect(()=>{
                       >
                         {field.value
                           ? new Date(field.value).toLocaleDateString()
-                          : "Select Deadline *"}
+                          : t("selectDeadline")}
                       </Button>
                       <Popover
                         open={isPopoverOpen}
@@ -299,7 +298,7 @@ useEffect(()=>{
                       {...field}
                       error={!!errors.additionalInstructions}
                       helperText={errors.additionalInstructions?.message}
-                      label="Additional Instructions"
+                      label={t("additionalInstructions")}
                       fullWidth
                     />
                   )}
@@ -321,7 +320,7 @@ useEffect(()=>{
                   }}
                   startIcon={<MdPlaylistAdd />}
                 >
-                  List Contract
+                  {t("listContract")}
                 </Button>
               </Grid>
             </Grid>
@@ -334,13 +333,20 @@ useEffect(()=>{
         className="max-w-4xl mx-auto bg-white p-8 "
       >
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-          Listed Contracts
+          {t("listedContracts")}
         </Typography>
         <CardContent>
-          {
-            results.length > 0 ? 
-            <ListedContracts setContracts={setContracts} contracts={contracts} userType={userType} /> : (<Typography variant="h5" >No Data Available</Typography>)
-          }
+          {results.length > 0 ? (
+            <ListedContracts
+              setContracts={setContracts}
+              contracts={contracts}
+              userType={userType}
+            />
+          ) : (
+            <Typography variant="h5">
+              {t("noDataAvailable")}
+            </Typography>
+          )}
 
           <Box display="flex" justifyContent="space-between" mt={4}>
             <Button
@@ -349,16 +355,16 @@ useEffect(()=>{
               onClick={handlePrevPage}
               disabled={page === 1}
             >
-              Previous
+              {t("previous")}
             </Button>
-            
+
             <Button
               variant="contained"
               color="primary"
               onClick={handleNextPage}
               disabled={results.length < 20}
             >
-              Next
+              {t("next")}
             </Button>
           </Box>
         </CardContent>

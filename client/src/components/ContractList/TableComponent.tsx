@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next"; 
 
 interface TableComponentProps {
   contracts: {
@@ -41,6 +42,7 @@ interface TableComponentProps {
 }
 
 const TableComponent: React.FC<TableComponentProps> = ({ contracts }) => {
+  const { t } = useTranslation(["tablecomponent", "crops"]);
   return (
     <TableContainer
       component={Paper}
@@ -50,25 +52,25 @@ const TableComponent: React.FC<TableComponentProps> = ({ contracts }) => {
         <TableHead>
           <TableRow>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Farmer</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Farmer")}</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Buyer</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Buyer")}</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Initial Payment</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Initial Payment")}</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Final Payment</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Final Payment")}</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Delivery Status</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Delivery Status")}</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Deadline</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Deadline")}</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>Product</Typography>
+              <Typography variant="h6" sx={{fontSize:15 , fontWeight:600}}>{t("Product")}</Typography>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -83,9 +85,9 @@ const TableComponent: React.FC<TableComponentProps> = ({ contracts }) => {
             >
               <TableCell>{contract.farmerName}</TableCell>
               <TableCell>{contract.buyerName}</TableCell>
-              <TableCell>{contract.initialpaymentStatus}</TableCell>
-              <TableCell>{contract.finalpaymentStatus}</TableCell>
-              <TableCell>{contract.deliveryStatus}</TableCell>
+              <TableCell>{t(contract.initialpaymentStatus)}</TableCell>
+              <TableCell>{t(contract.finalpaymentStatus)}</TableCell>
+              <TableCell>{t(contract.deliveryStatus)}</TableCell>
               <TableCell>
                 {new Date(contract.deadline).toLocaleDateString()}
               </TableCell>

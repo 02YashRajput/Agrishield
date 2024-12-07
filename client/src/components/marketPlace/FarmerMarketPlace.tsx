@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, Stack, Chip, Typography, CardContent, Box, Button, Autocomplete, TextField } from "@mui/material";
-import { cropsArray, ProductName } from "../../utils/cropsName";
+import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
+import { useTranslation } from "react-i18next";
 
 interface FarmerMarketPlaceProps {
   results: {
@@ -40,6 +41,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   userType,
 isLoading
 }) => {
+  const {t} = useTranslation(["farmermarketplace", "crops"]);
   const [contracts,setContracts] = useState<FarmerMarketPlaceProps['results']>([])
   const handleCropChange = (value : string) => {
     setCrop(value);
@@ -59,13 +61,13 @@ isLoading
 
         {/* Distance Label */}
         <Typography variant="h6" color="textSecondary" mb={1}>
-          Select Distance
+        {t('selectdistance')}
         </Typography>
 
         {/* Chips for Distance */}
         <Stack direction="row" spacing={2} mb={2}>
         <Chip
-            label="All"
+            label={t('all')}
             clickable
             color={distance === 0 ? "primary" : "default"}
             onClick={() => handleDistanceChange(0)}
@@ -92,7 +94,7 @@ isLoading
         </Stack>
 
         <Typography variant="h6" color="textSecondary" mb={1}>
-          Select Crop
+        {t('selectcrop')}
         </Typography>
 
         <Autocomplete
@@ -107,7 +109,7 @@ isLoading
   renderInput={(params) => (
     <TextField
       {...params}
-      label="Select Crop"
+      label={t('selectcrop')}
       color="secondary"
       fullWidth
     />
@@ -126,12 +128,12 @@ isLoading
         className="max-w-4xl mx-auto bg-white p-8 "
       >
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-          Listed Contracts
+        {t('listedcontract')}
         </Typography>
         <CardContent>
           {
             results.length > 0 ? 
-            <ListedContracts contracts={contracts} userType={userType} setContracts={setContracts} /> : (<Typography variant="h5" >No Data Available</Typography>)
+            <ListedContracts contracts={contracts} userType={userType} setContracts={setContracts} /> : (<Typography variant="h5" >{t('nodata')}</Typography>)
           }
 
           <Box display="flex" justifyContent="space-between" mt={4}>
@@ -141,15 +143,15 @@ isLoading
               onClick={handlePrevPage}
               disabled={page === 1}
             >
-              Previous
+             {t('previous')}
             </Button>
             <Button
               variant="contained"
               color="primary"
               onClick={handleNextPage}
-              disabled={results.length <= 0}
+              disabled={results.length < 20}
             >
-              Next
+              {t('next')}
             </Button>
           </Box>
         </CardContent>

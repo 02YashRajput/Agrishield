@@ -1,0 +1,21 @@
+{
+    "submit": "സമർപ്പിക്കുക",
+    "buyername": "വാങ്ങുന്നവന്റെ പേര്",
+    "farmername": "കർഷകന്റെ പേര്",
+    "productname": "ഉത്പന്നത്തിന്റെ പേര്",
+    "initialpaymentamount": "ആദി പണമടയ്‌ക്കുന്ന തുക",
+    "finalpaymentamount": "അവസാന പണമടയ്‌ക്കുന്ന തുക",
+    "productquantity(q)": "ഉത്പന്നത്തിന്റെ അളവ് (q)",
+    "farmer": "കർഷകന്",
+    "deadline": "കാലാവധി",
+    "initialpayment": "ആദി പണമടക്കം",
+    "finalpayment": "അവസാന പണമടക്കം",
+    "productquantity": "ഉത്പന്നത്തിന്റെ അളവ്",
+    "viewprofile": "പ്രൊഫൈൽ കാണുക",
+    "buyer": "വാങ്ങുന്നവൻ",
+    "edit": "തിരുത്തുക",
+    "accept": "സമ്മതിക്കുക",
+    "Successfully updated": "സഫലമായി അപ്‌ഡേറ്റ് ചെയ്യപ്പെട്ടു",
+    "Error Updating": "അപ്‌ഡേറ്റ് ചെയ്യുന്നതിൽ പിശക്",
+    "Error activating Contract": "കരാർ സജീവമാക്കുന്നതിൽ പിശക്"
+}

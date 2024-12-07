@@ -1,6 +1,6 @@
 import mongoose,{Schema} from "mongoose";
 import Counter from "./counter.mjs";
-
+import {cropsArray} from "../utils/crops.mjs"
 const negotiationsSchema = new Schema({
   negotiationsId:{
     type: Number,
@@ -33,13 +33,7 @@ const negotiationsSchema = new Schema({
   productName:{
     type: String,
     r2equired: true,
-    enum:[
-      'arhar', 'gram', 'masoor', 'rape', 'sunflower',
-      'bajra', 'groundnut', 'moong', 'safflower', 'urad',
-      'barley', 'jowar', 'niger', 'sesamum', 'wheat',
-      'copra', 'jute', 'paddy', 'soyabean',
-      'cotton', 'maize', 'ragi', 'sugarcane'
-    ],
+    enum:cropsArray,
   },
  
   productQuantityBuyer:{

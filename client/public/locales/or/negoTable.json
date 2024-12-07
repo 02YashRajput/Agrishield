@@ -1,0 +1,21 @@
+{
+    "submit": "ସବମିଟ୍ କରନ୍ତୁ",
+    "buyername": "କ୍ରୟକର୍ତ୍ତାର ନାମ",
+    "farmername": "କୃଷକର ନାମ",
+    "productname": "ପ୍ରୋଡକ୍ଟର ନାମ",
+    "initialpaymentamount": "ପ୍ରାରମ୍ଭିକ ପେମେଣ୍ଟ ରାଶି",
+    "finalpaymentamount": "ଅନ୍ତିମ ପେମେଣ୍ଟ ରାଶି",
+    "productquantity(q)": "ପ୍ରୋଡକ୍ଟ ପରିମାଣ (q)",
+    "farmer": "କୃଷକ",
+    "deadline": "ସମୟ ସୀମା",
+    "initialpayment": "ପ୍ରାରମ୍ଭିକ ପେମେଣ୍ଟ",
+    "finalpayment": "ଅନ୍ତିମ ପେମେଣ୍ଟ",
+    "productquantity": "ପ୍ରୋଡକ୍ଟ ପରିମାଣ",
+    "viewprofile": "ପ୍ରୋଫାଇଲ୍ ଦେଖନ୍ତୁ",
+    "buyer": "କ୍ରୟକର୍ତ୍ତା",
+    "edit": "ସମ୍ପାଦନା କରନ୍ତୁ",
+    "accept": "ସ୍ୱୀକାର କରନ୍ତୁ",
+    "Successfully updated": "ସଫଳତାପୂର୍ବକ ଅପଡେଟ୍ କରାଯାଇଛି",
+    "Error Updating": "ଅପଡେଟ୍ କରିବାରେ ତ୍ରୁଟି",
+    "Error activating Contract": "ଚୁକ୍ତି ସକ୍ରିୟ କରିବାରେ ତ୍ରୁଟି"
+}

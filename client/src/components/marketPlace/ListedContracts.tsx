@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ProductName } from "../../utils/cropsName";
 import {
   Avatar,
   Box,
@@ -24,7 +23,7 @@ import Calendar from "react-calendar";
 import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { useTranslation } from "react-i18next";
 
 interface ListedContractsProps {
   contracts: {
@@ -62,6 +61,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
   userType,
   setContracts
 }) => {
+  const { t } = useTranslation(["listedcontracts", "crops"]);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
@@ -117,7 +117,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       if(userType === "Farmer"){
         const response = await axios.post(`/api/marketplace/start-negotiations/${selectedContract?.marketPlaceId}`,data,{withCredentials:true});
         if (response.status === 200) {
-          toast.success("Negotiation started successfully!");
+          toast.success(t("Negotiation started successfully!"));
           navigate("/negotiations");
         }
 
@@ -125,7 +125,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
 
       const response = await axios.put( "/api/marketplace/list-contract",data,{withCredentials:true})
       if (response.data.success) {
-        toast.success("Contract listed successfully!");
+        toast.success(t("Contract listed successfully!"));
         setContracts((prev) => {
           const updatedContractIndex = prev.findIndex(contract => contract.marketPlaceId === selectedContract?.marketPlaceId);
        
@@ -155,7 +155,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
     catch(error){
 
       console.log(error)
-      toast.error("Error updating contract")
+      toast.error(t("Error updating contract"))
     }finally{
       setIsEditable(false)
     handleCloseModal()
@@ -245,22 +245,22 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     </Link>
                     <Box>
                       <Typography variant="body1">
-                        <strong>Buyer Name:</strong> {contract.buyerName}
+                        <strong>{t("buyer_name")}</strong> {contract.buyerName}
                       </Typography>
                       <Typography variant="body1">
-                        <strong>Product Name:</strong> {contract.productName}
+                        <strong>{t("product_name")}</strong> {contract.productName}
                       </Typography>
                       <Typography variant="body1">
-                        <strong>Quantity:</strong> {contract.productQuantity}
+                        <strong>{t("quantity")}</strong> {contract.productQuantity}
                       </Typography>
                       <Typography variant="body1" className="flex items-center">
-                        <strong>Total Amount:</strong>
+                        <strong>{t("total_amount")}</strong>
                         <FaRupeeSign />{" "}
                         {parseInt(contract.initialPaymentAmount) +
                           parseInt(contract.finalPaymentAmount)}
                       </Typography>
                       <Typography variant="body1">
-                        <strong>Deadline:</strong>{" "}
+                        <strong>{t("deadline")}</strong>{" "}
                         {new Date(contract.deadline).toLocaleDateString()}
                       </Typography>
                     </Box>
@@ -322,7 +322,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   {selectedContract.productName}
                 </Typography>
                 <Typography id="modal-description" variant="body1">
-                  <strong>Buyer Name:</strong> {selectedContract.buyerName}
+                  <strong>{t("buyer_name")}</strong> {selectedContract.buyerName}
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -343,7 +343,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1">
-                    <strong>Quantity:</strong>{" "}
+                    <strong>{t("quantity")}</strong>{" "}
                     {selectedContract.productQuantity}
                   </Typography>
                 )}
@@ -366,7 +366,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Initial Payment Amount:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("initial_payment_amount")}</strong> <FaRupeeSign />{" "}
                     {selectedContract.initialPaymentAmount}
                   </Typography>
                 )}
@@ -389,7 +389,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Final Payment Amount:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("final_payment_amount")}</strong> <FaRupeeSign />{" "}
                     {selectedContract.finalPaymentAmount}
                   </Typography>
                 )}
@@ -407,7 +407,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Total Payment Amount:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("total_payment_amount")}</strong> <FaRupeeSign />{" "}
                     {parseInt(selectedContract.initialPaymentAmount) +
                       parseInt(selectedContract.finalPaymentAmount)}
                   </Typography>
@@ -427,7 +427,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   />
                 ) : (
                   <Typography variant="body1" className="flex items-center">
-                    <strong>Rate:</strong> <FaRupeeSign />{" "}
+                    <strong>{t("rate")}</strong> <FaRupeeSign />{" "}
                     {(parseInt(selectedContract.initialPaymentAmount) +
                       parseInt(selectedContract.finalPaymentAmount)) /
                       parseInt(selectedContract.productQuantity)}
@@ -476,7 +476,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     </>
                   )}
                 />:<Typography variant="body1">
-                <strong>Deadline:</strong>{" "}
+                <strong>{t("deadline")}</strong>{" "}
                 {new Date(selectedContract.deadline).toLocaleDateString()}
               </Typography>
                 }
@@ -496,7 +496,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     />
                   )}
                 />:<Typography variant="body1">
-                <strong>Instructions:</strong>{" "}
+                <strong>{t("instructions")}</strong>{" "}
                 {selectedContract.additionalInstructions}
               </Typography>
 
@@ -518,7 +518,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     style={{ textDecoration: "none" }}
                   >
                     <Typography variant="body1" color="secondary">
-                      View Buyer Profile
+                    {t("view_buyer_profile")}
                     </Typography>
                   </Link>
                 </Box>
@@ -537,7 +537,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       fullWidth
                       type="submit"
                       endIcon={<SaveIcon className="text-white" />}>
-                        Send
+                        {t("send")}
                       </Button>:<><Button
                       variant="contained"
                       color="primary"
@@ -547,16 +547,16 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                         try{
                           const response =await axios.post(`/api/marketplace/request-contract/${selectedContract?.marketPlaceId}`,{withCredentials: true});
                           if(response.data.success){
-                            toast.success("Request sent successfully");
+                            toast.success(t("Request sent successfully"));
                             navigate("/contracts")
                           }
                         }catch(e) {
-                          toast.error("An error occurred while requesting the contract");
+                          toast.error(t("An error occurred while requesting the contract"));
                          
                         }
                       }}
                     >
-                      Request to Activate
+                      {t("request")}
                     </Button>
                     <Button
                       variant="contained"
@@ -564,7 +564,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       fullWidth
                       onClick={() => {setIsEditable(true)}}
                     >
-                      Negotiate
+                      {t("negotiate")}
                     </Button></>
                     }
                     
@@ -591,7 +591,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       
 
                     >
-                      Save
+                      {t("save")}
                     </Button> :<Button
                     type="button"
                       endIcon={<FaPen className="text-white" />}
@@ -608,7 +608,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       }}
 
                     >
-                      Edit
+                      {t("edit")}
                     </Button>
                     }
                     {!isEditable &&<Button
@@ -625,16 +625,16 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                             setContracts(prevContracts => 
                               prevContracts.filter(contract => contract.marketPlaceId !== selectedContract?.marketPlaceId)
                             );
-                            toast.success("Contract deleted successfully!");
+                            toast.success(t("Contract deleted successfully!"));
                             handleCloseModal();
                           }
                         }catch(err){
                           console.error(err)
-                          toast.error("failed to delete contract")
+                          toast.error(t("Failed to delete contract"))
                         }
                       }}
                     >
-                      Delete
+                      {t("delete")}
                     </Button>}
                     
                   </Box>

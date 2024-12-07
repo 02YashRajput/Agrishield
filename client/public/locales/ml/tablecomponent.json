@@ -1,0 +1,13 @@
+{
+    "Farmer": "കർഷകൻ",
+    "Buyer": "വാങ്ങലാളി",
+    "Initial Payment": "ആദ്യ പണമടവ്",
+    "Final Payment": "അവസാന പണമടവ്",
+    "Delivery Status": "ഡെലിവറി നില",
+    "Deadline": "അവസാന തീയതി",
+    "Product": "ഉൽപ്പന്നം",
+    "Pending": "വെയ്റ്റിങ്ങിൽ",
+    "Paid": "പണമടച്ചത്",
+    "Received": "സ്വീകൃതം",
+    "Delivered": "ഡെലിവർ ചെയ്തത്"
+}

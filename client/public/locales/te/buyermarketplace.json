@@ -1,0 +1,19 @@
+{
+    "listYourContract": "మీ ఒప్పందాన్ని జాబితా చేయండి",
+    "productName": "ఉత్పత్తి పేరు",
+    "productQuantity": "ఉత్పత్తి పరిమాణం (క్వింటల్లో)",
+    "initialPaymentAmount": "ప్రారంభ చెల్లింపు మొత్తం",
+    "finalPaymentAmount": "చివరి చెల్లింపు మొత్తం",
+    "totalAmount": "మొత్తం మొత్తం",
+    "ratePerQuintal": "ప్రతి క్వింటల్ ధర",
+    "selectDeadline": "గడువు ఎంచుకోండి *",
+    "additionalInstructions": "అదనపు సూచనలు",
+    "listContract": "ఒప్పందం జాబితా చేయండి",
+    "listedContracts": "జాబితా చేసిన ఒప్పందాలు",
+    "noDataAvailable": "ఏమైనా డేటా అందుబాటులో లేదు",
+    "previous": "మునుపటి",
+    "next": "తరువాత",
+    "contractListedSuccess": "ఒప్పందం విజయవంతంగా జాబితా చేయబడింది!",
+    "contractListedFailure": "ఒప్పందం జాబితా చేయడంలో విఫలమైంది. దయచేసి మళ్ళీ ప్రయత్నించండి."
+  }
+  

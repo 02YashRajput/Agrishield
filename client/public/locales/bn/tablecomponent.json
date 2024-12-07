@@ -1,0 +1,13 @@
+{
+    "Farmer": "কৃষক",
+    "Buyer": "ক্রেতা",
+    "Initial Payment": "প্রাথমিক পেমেন্ট",
+    "Final Payment": "চূড়ান্ত পেমেন্ট",
+    "Delivery Status": "ডেলিভারি স্ট্যাটাস",
+    "Deadline": "ডেডলাইন",
+    "Product": "পণ্য",
+    "Pending": "বকেয়া",
+    "Paid": "পেমেন্ট করা হয়েছে",
+    "Received": "গ্রহণ করা হয়েছে",
+    "Delivered": "ডেলিভার করা হয়েছে"
+}

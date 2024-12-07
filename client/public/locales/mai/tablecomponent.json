@@ -1,0 +1,13 @@
+{
+    "Farmer": "किसान",
+    "Buyer": "खरीदार",
+    "Initial Payment": "प्रारंभिक भुगतान",
+    "Final Payment": "अंतिम भुगतान",
+    "Delivery Status": "वितरण स्थिति",
+    "Deadline": "अंतिम तिथि",
+    "Product": "उत्पाद",
+    "Pending": "लंबित",
+    "Paid": "भुगतान कएल गेल",
+    "Received": "प्राप्त कएल गेल",
+    "Delivered": "वितरित कएल गेल"
+}

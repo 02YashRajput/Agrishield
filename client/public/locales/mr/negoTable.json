@@ -1,0 +1,21 @@
+{
+    "submit": "सादर करा",
+    "buyername": "खरेदीदाराचे नाव",
+    "farmername": "किसानाचे नाव",
+    "productname": "उत्पादनाचे नाव",
+    "initialpaymentamount": "प्रारंभिक पेमेंट रक्कम",
+    "finalpaymentamount": "अंतिम पेमेंट रक्कम",
+    "productquantity(q)": "उत्पादनाची मात्रा (q)",
+    "farmer": "किसान",
+    "deadline": "अखेरची तारीख",
+    "initialpayment": "प्रारंभिक पेमेंट",
+    "finalpayment": "अंतिम पेमेंट",
+    "productquantity": "उत्पादनाची मात्रा",
+    "viewprofile": "प्रोफाइल पहा",
+    "buyer": "खरेदीदार",
+    "edit": "संपादित करा",
+    "accept": "स्वीकारा",
+    "Successfully updated": "यशस्वीरित्या अपडेट केले",
+    "Error Updating": "अपडेट करताना त्रुटी",
+    "Error activating Contract": "करार सक्रिय करताना त्रुटी"
+}

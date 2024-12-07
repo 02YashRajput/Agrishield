@@ -1,0 +1,19 @@
+{
+    "listYourContract": "உங்கள் ஒப்பந்தத்தை பட்டியலிடுக",
+    "productName": "பொருளின் பெயர்",
+    "productQuantity": "பொருளின் அளவு (க்வின்டலில்)",
+    "initialPaymentAmount": "ஆரம்ப பணம் தொகை",
+    "finalPaymentAmount": "இறுதிப் பணம் தொகை",
+    "totalAmount": "மொத்த தொகை",
+    "ratePerQuintal": "ஒரு க்வின்டலுக்கு விகிதம்",
+    "selectDeadline": "காலக்கெடு தேர்ந்தெடுக்கவும் *",
+    "additionalInstructions": "மேலும் வழிமுறைகள்",
+    "listContract": "ஒப்பந்தத்தை பட்டியலிடுக",
+    "listedContracts": "பட்டியலிடப்பட்ட ஒப்பந்தங்கள்",
+    "noDataAvailable": "எந்தத் தகவலும் கிடைக்கவில்லை",
+    "previous": "முந்தையது",
+    "next": "அடுத்தது",
+    "contractListedSuccess": "ஒப்பந்தம் வெற்றிகரமாக பட்டியலிடப்பட்டுள்ளது!",
+    "contractListedFailure": "ஒப்பந்தத்தை பட்டியலிட தோல்வி. தயவுசெய்து மீண்டும் முயற்சி செய்க."
+  }
+  

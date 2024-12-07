@@ -1,0 +1,13 @@
+{
+    "Farmer": "ਕਿਸਾਨ",
+    "Buyer": "ਖਰੀਦਦਾਰ",
+    "Initial Payment": "ਸ਼ੁਰੂਆਤੀ ਭੁਗਤਾਨ",
+    "Final Payment": "ਆਖ਼ਰੀ ਭੁਗਤਾਨ",
+    "Delivery Status": "ਡਿਲੀਵਰੀ ਸਥਿਤੀ",
+    "Deadline": "ਅਖ਼ੀਰੀ ਤਾਰੀਖ",
+    "Product": "ਉਤਪਾਦ",
+    "Pending": "ਲਟਕਿਆ ਹੋਇਆ",
+    "Paid": "ਭੁਗਤਾਨ ਕੀਤਾ ਗਿਆ",
+    "Received": "ਪ੍ਰਾਪਤ ਕੀਤਾ",
+    "Delivered": "ਡਿਲੀਵਰ ਕੀਤਾ"
+}

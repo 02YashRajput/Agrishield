@@ -1,0 +1,13 @@
+{
+    "Farmer": "शेतकरी",
+    "Buyer": "खरेदीदार",
+    "Initial Payment": "प्रारंभिक भरणा",
+    "Final Payment": "अखेरचा भरणा",
+    "Delivery Status": "वितरण स्थिती",
+    "Deadline": "अखेरची तारीख",
+    "Product": "उत्पादन",
+    "Pending": "लंबित",
+    "Paid": "भरणा केलेला",
+    "Received": "प्राप्त केले",
+    "Delivered": "वितरित केले"
+}

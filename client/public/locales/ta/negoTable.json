@@ -1,0 +1,21 @@
+{
+    "submit": "சமர்ப்பி",
+    "buyername": "வாங்குபவரின் பெயர்",
+    "farmername": " விவசாயியின் பெயர்",
+    "productname": "பொருளின் பெயர்",
+    "initialpaymentamount": "ஆரம்ப பணம் தொகை",
+    "finalpaymentamount": "கடைசி பணம் தொகை",
+    "productquantity(q)": "பொருள் அளவு (q)",
+    "farmer": "விவசாயி",
+    "deadline": "காலக்கெடு",
+    "initialpayment": "ஆரம்ப பணம்",
+    "finalpayment": "கடைசி பணம்",
+    "productquantity": "பொருள் அளவு",
+    "viewprofile": "சுயவிவரம் காண்க",
+    "buyer": "வாங்குபவர்",
+    "edit": "திருத்து",
+    "accept": "ஏற்க்கவும்",
+    "Successfully updated": "வெற்றிகரமாக புதுப்பிக்கப்பட்டது",
+    "Error Updating": "புதுப்பிப்பதில் பிழை",
+    "Error activating Contract": "ஒப்பந்தத்தை செயல்படுத்துவதில் பிழை"
+}

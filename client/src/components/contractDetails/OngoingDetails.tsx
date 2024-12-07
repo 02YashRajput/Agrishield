@@ -30,7 +30,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import TransactionTable from "./TransactionTable";
-
+import { useTranslation } from "react-i18next";
 interface OngoingDetailaProps {
   data: {
     contractId: number;
@@ -132,6 +132,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
   phone,
   name,
 }) => {
+  const { t } = useTranslation(["ongoingdetails", "crops"]);
   const [contractStatus, setContractStatus] = useState(data.contractStatus);
   const [activeStep, setActiveStep] = useState(0);
 
@@ -181,7 +182,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         { withCredentials: true }
       );
       if (response.data.success) {
-        toast.success("Status updated successfully");
+        toast.success(t('Status updated successfully'));
         handleCloseModal();
         if (activeStep === 1 || activeStep === 4) {
           setActiveStep(activeStep + 2);
@@ -193,7 +194,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         }
       }
     } catch (err) {
-      toast.error("Error updating");
+      toast.error(t("Error updating"));
     } finally {
       setLoading(false);
       handleCloseModal();
@@ -221,7 +222,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           name: "AgriShield Transaction",
           description: "This is a  payment",
           handler: function (response: any) {
-            toast.success(`Payment successful!`);
+            toast.success(t(`Payment successful!`));
             const transaction = {
               transactionId: response.razorpay_payment_id,
               details: activeStep === 0 ? "Initial Payment" : "Final Payment",
@@ -252,7 +253,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       }
     } catch (err) {
       console.log(err);
-      toast.error("Error Occured: ");
+      toast.error(t("Error Occured: "));
     } finally {
       setLoading(false);
     }
@@ -261,7 +262,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
   return (
     <div>
       <Typography variant="h4" sx={{ mb: 4 }}>
-        {contractStatus} Contract Details
+        {t(contractStatus)} {t('Contract Details')}
       </Typography>
       <Typography variant="h5" sx={{ mb: 4 }}>
         {data.productName.toUpperCase()}
@@ -270,7 +271,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         {/* Farmer Profile */}
         <Grid item xs={12} sm={6}>
           <Card sx={{ padding: 2, boxShadow: "none" }}>
-            <Typography variant="h6">Farmer</Typography>
+            <Typography variant="h6">{t('Farmer')}</Typography>
             <Grid container alignItems="center">
               <Grid item>
                 <Avatar
@@ -288,7 +289,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                   
                   rel="noopener"
                 >
-                  View Profile
+                  {t('View Profile')}
                 </Link>
               </Grid>
             </Grid>
@@ -298,7 +299,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         {/* Buyer Profile */}
         <Grid item xs={12} sm={6}>
           <Card sx={{ padding: 2, boxShadow: "none" }}>
-            <Typography variant="h6">Buyer</Typography>
+            <Typography variant="h6">{t('Buyer')}</Typography>
             <Grid container alignItems="center">
               <Grid item>
                 <Avatar
@@ -316,7 +317,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                   
                   rel="noopener"
                 >
-                  View Profile
+                  {t('View Profile')}
                 </Link>
               </Grid>
             </Grid>
@@ -324,16 +325,16 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         </Grid>
         <Grid item xs={12} sm={12}>
           <Card sx={{ padding: 2, boxShadow: "none" }}>
-            <Typography variant="h6">Product Details</Typography>
+            <Typography variant="h6">{t('Product Details')}</Typography>
             <CardContent>
               <Typography variant="body1">
-                <strong>Initial Payment:</strong> {data.initialPaymentAmount}
+                <strong>{t('Initial Payment:')}</strong> {data.initialPaymentAmount}
               </Typography>
               <Typography variant="body1">
-                <strong>Final Payment:</strong> {data.finalPaymentAmount}
+                <strong>{t('Final Payment:')}</strong> {data.finalPaymentAmount}
               </Typography>
               <Typography variant="body1">
-                <strong>Total Amount:</strong>{" "}
+                <strong>{t('Total Amount:')}</strong>{" "}
                 {parseInt(data.initialPaymentAmount) +
                   parseInt(data.finalPaymentAmount)}
               </Typography>
@@ -341,16 +342,16 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                 variant="body1"
                 sx={{ display: "flex", alignItems: "center" }}
               >
-                <strong>Rate:</strong>{" "}
+                <strong>{t('Rate:')}</strong>{" "}
                 {(
                   (parseInt(data.initialPaymentAmount) +
                     parseInt(data.finalPaymentAmount)) /
                   parseInt(data.productQuantity)
                 ).toFixed(2)}
-                <FaRupeeSign className="text-sm ml-2" /> / quintal
+                <FaRupeeSign className="text-sm ml-2" /> / {t('quintal')}
               </Typography>
               <Typography variant="body1">
-                <strong>Deadline:</strong>{" "}
+                <strong>{t('Deadline:')}</strong>{" "}
                 {new Date(data.deadline).toLocaleDateString()}
               </Typography>
             </CardContent>
@@ -452,7 +453,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
             }
             onClick={handlePayNow}
           >
-            Pay Now
+            {t('Pay Now')}
           </Button>
         ) : (
           <Button
@@ -460,7 +461,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
             sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
             onClick={handleOpenModal}
           >
-            Update Status
+            {t('Update Status')}
           </Button>
         ))}
 
@@ -470,10 +471,10 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           </div>
 
       <Dialog open={isModalOpen} onClose={handleCloseModal}>
-        <DialogTitle>Update Status</DialogTitle>
+        <DialogTitle>{t('Update Status')}</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Are You sure you want to make{" "}
+          {t('Are You sure you want to make')}{" "}
             {activeStep !== 8 && statusArray[activeStep + 1][0]}
           </Typography>
         </DialogContent>
@@ -483,7 +484,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
             onClick={handleCloseModal}
             color="primary"
           >
-            Cancel
+            {t('Cancel')}
           </Button>
           <Button
             variant="contained"

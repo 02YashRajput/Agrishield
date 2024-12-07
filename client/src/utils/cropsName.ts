@@ -1,17 +1,29 @@
 export const cropsArray = [
-  'arhar', 'gram', 'masoor', 'rape', 'sunflower',
-  'bajra', 'groundnut', 'moong', 'safflower', 'urad',
-  'barley', 'jowar', 'niger', 'sesamum', 'wheat',
-  'copra', 'jute', 'paddy', 'soyabean',
-  'cotton', 'maize', 'ragi', 'sugarcane'
+  'Banana', 'Maize', 'Apple', 'Wheat', 'Black Gram (Urd Beans)(Whole)',
+  'Bengal Gram(Gram)(Whole)', 'Paddy(Dhan)(Common)', 'Ginger(Green)',
+  'Green Chilli', 'Pomegranate', 'Tomato', 'Onion', 'Potato',
+  'Mustard', 'Masur Dal', 'Garlic', 'Rice', 'Arhar (Tur/Red Gram)(Whole)',
+  'Lentil (Masur)(Whole)', 'Groundnut', 'Capsicum', 'Spinach', 'Papaya',
+  'Water Melon', 'Carrot', 'Cauliflower', 'Orange', 'Peas Wet', 
+  'Pineapple', 'Green Peas', 'Amla(Nelli Kai)', 'Chikoos(Sapota)', 
+  'Bajra(Pearl Millet/Cumbu)', 'Jowar(Sorghum)', 'Turmeric', 
+  'Soyabean', 'Cotton', 'Moath Dal', 'Peach', 'Turnip', 
+  'Cummin Seed(Jeera)', 'Mint(Pudina)', 'Guar Seed(Cluster Beans Seed)', 
+  'Kodo Millet(Varagu)'
 ]
 export type crops = typeof cropsArray;
 
 const cropArray = [
-  'arhar', 'gram', 'masoor', 'rape', 'sunflower',
-  'bajra', 'groundnut', 'moong', 'safflower', 'urad',
-  'barley', 'jowar', 'niger', 'sesamum', 'wheat',
-  'copra', 'jute', 'paddy', 'soyabean',
-  'cotton', 'maize', 'ragi', 'sugarcane'
+  'Banana', 'Maize', 'Apple', 'Wheat', 'Black Gram (Urd Beans)(Whole)',
+  'Bengal Gram(Gram)(Whole)', 'Paddy(Dhan)(Common)', 'Ginger(Green)',
+  'Green Chilli', 'Pomegranate', 'Tomato', 'Onion', 'Potato',
+  'Mustard', 'Masur Dal', 'Garlic', 'Rice', 'Arhar (Tur/Red Gram)(Whole)',
+  'Lentil (Masur)(Whole)', 'Groundnut', 'Capsicum', 'Spinach', 'Papaya',
+  'Water Melon', 'Carrot', 'Cauliflower', 'Orange', 'Peas Wet', 
+  'Pineapple', 'Green Peas', 'Amla(Nelli Kai)', 'Chikoos(Sapota)', 
+  'Bajra(Pearl Millet/Cumbu)', 'Jowar(Sorghum)', 'Turmeric', 
+  'Soyabean', 'Cotton', 'Moath Dal', 'Peach', 'Turnip', 
+  'Cummin Seed(Jeera)', 'Mint(Pudina)', 'Guar Seed(Cluster Beans Seed)', 
+  'Kodo Millet(Varagu)'
 ] as const
 export type ProductName = typeof cropArray[number];

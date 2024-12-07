@@ -5,6 +5,7 @@ import { FaCheck, FaRupeeSign, FaTimes, FaTrash } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface RequestedDetailsProps {
   data: {
@@ -36,11 +37,12 @@ interface RequestedDetailsProps {
 }
 
 const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) => {
+  const { t } = useTranslation(["requesteddetails", "crops"]);
   const navigate = useNavigate()
   return (
     <div>
       <Typography variant="h4" sx={{ mb: 4 }}>
-        Requested Contract Details
+        {t('Requested Contract Details')}
       </Typography>
 
       <Typography variant="h5" sx={{ mb: 4 }}>
@@ -51,7 +53,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
         {/* Farmer Profile */}
         <Grid item xs={12} sm={6}>
           <Card sx={{ padding: 2, boxShadow: "none" }}>
-            <Typography variant="h6">Farmer</Typography>
+            <Typography variant="h6">{t('Farmer')}</Typography>
             <Grid container alignItems="center">
               <Grid item>
                 <Avatar
@@ -69,7 +71,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                  
                   rel="noopener"
                 >
-                  View Profile
+                  {t('View Profile')}
                 </Link>
               </Grid>
             </Grid>
@@ -79,7 +81,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
         {/* Buyer Profile */}
         <Grid item xs={12} sm={6}>
           <Card sx={{ padding: 2, boxShadow: "none" }}>
-            <Typography variant="h6">Buyer</Typography>
+            <Typography variant="h6">{t('Buyer')}</Typography>
             <Grid container alignItems="center">
               <Grid item>
                 <Avatar
@@ -97,7 +99,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                  
                   rel="noopener"
                 >
-                  View Profile
+                  {t('View Profile')}
                 </Link>
               </Grid>
             </Grid>
@@ -105,17 +107,17 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Card sx={{ padding: 2, boxShadow: "none" }}>
-            <Typography variant="h6">Product Details</Typography>
+            <Typography variant="h6">{t('Product Details')}</Typography>
             <CardContent >
 
             <Typography variant="body1">
-              <strong>Initial Payment:</strong> {data.initialPaymentAmount}
+              <strong>{t('Initial Payment:')}</strong> {data.initialPaymentAmount}
             </Typography>
             <Typography variant="body1">
-              <strong>Final Payment:</strong> {data.finalPaymentAmount}
+              <strong>{t('Final Payment:')}</strong> {data.finalPaymentAmount}
             </Typography>
             <Typography variant="body1">
-              <strong>Total Amount:</strong>{" "}
+              <strong>{t('Total Amount:')}</strong>{" "}
               {parseInt(data.initialPaymentAmount) +
                 parseInt(data.finalPaymentAmount)}
             </Typography>
@@ -123,16 +125,16 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               variant="body1"
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <strong>Rate:</strong>{" "}
+              <strong>{t('Rate:')}</strong>{" "}
               {(
                 (parseInt(data.initialPaymentAmount) +
                   parseInt(data.finalPaymentAmount)) /
                 parseInt(data.productQuantity)
               ).toFixed(2)}
-              <FaRupeeSign className="text-sm ml-2" /> / quintal
+              <FaRupeeSign className="text-sm ml-2" /> / {t('quintal')}
             </Typography>
             <Typography variant="body1">
-              <strong>Deadline:</strong>{" "}
+              <strong>{t('Deadline:')}</strong>{" "}
               {new Date(data.deadline).toLocaleDateString()}
             </Typography>
             </CardContent>
@@ -151,16 +153,16 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               try{
                 const response = await axios.post(`/api/contracts/accept/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
-                  toast.success("Contract accepted successfully");
+                  toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
                 console.log(err);
-                toast.error("An error occurred while accepting contract");
+                toast.error(t("An error occurred while accepting contract"));
               }
             }}
           >
-            Accept
+            {t('Accept')}
           </Button>
           <Button
             variant="outlined"
@@ -171,16 +173,16 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               try{
                 const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
-                  toast.success("Contract accepted successfully");
+                  toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
                 console.log(err);
-                toast.error("An error occurred while accepting contract");
+                toast.error(t("An error occurred while accepting contract"));
               }
             }}
           >
-            Reject
+            {t('Reject')}
           </Button>
         </div>
       ) : (
@@ -194,16 +196,16 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               try{
                 const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
-                  toast.success("Contract accepted successfully");
+                  toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
                 console.log(err);
-                toast.error("An error occurred while accepting contract");
+                toast.error(t("An error occurred while accepting contract"));
               }
             }}
           >
-            Delete
+            {t('Delete')}
           </Button>
         </>
       )}

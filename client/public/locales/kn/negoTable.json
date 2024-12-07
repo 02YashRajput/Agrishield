@@ -1,0 +1,22 @@
+{
+    "submit": "ಸಲ್ಲಿಸಿ",
+    "buyername": "ಖರೀದಿದಾರರ ಹೆಸರು",
+    "farmername": "ಕೃಷಿಕರ ಹೆಸರು",
+    "productname": "ಉತ್ಪನ್ನದ ಹೆಸರು",
+    "initialpaymentamount": "ಆರಂಭಿಕ ಪಾವತಿ ಮೊತ್ತ",
+    "finalpaymentamount": "ಕೊನೆಯ ಪಾವತಿ ಮೊತ್ತ",
+    "productquantity(q)": "ಉತ್ಪನ್ನದ ಪ್ರಮಾಣ (q)",
+    "farmer": "ಕೃಷಿಕ",
+    "deadline": "ಕಡಿವೇಲಿ",
+    "initialpayment": "ಆರಂಭಿಕ ಪಾವತಿ",
+    "finalpayment": "ಕೊನೆಯ ಪಾವತಿ",
+    "productquantity": "ಉತ್ಪನ್ನದ ಪ್ರಮಾಣ",
+    "viewprofile": "ಪ್ರೊಫೈಲ್ ನೋಡಿ",
+    "buyer": "ಖರೀದಿದಾರ",
+    "edit": "ಸಂಪಾದಿಸಿ",
+    "accept": "ಸ್ವೀಕರಿಸಿ",
+        "Successfully updated": "ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ",
+        "Error Updating": "ನವೀಕರಣದಲ್ಲಿ ದೋಷ",
+        "Error activating Contract": "ಒಪ್ಪಂದವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುವಲ್ಲಿ ದೋಷ"
+      
+}

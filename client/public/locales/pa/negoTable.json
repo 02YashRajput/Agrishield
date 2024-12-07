@@ -1,0 +1,21 @@
+{
+    "submit": "ਜਮਾਂ ਕਰੋ",
+    "buyername": "ਖਰੀਦਦਾਰ ਦਾ ਨਾਮ",
+    "farmername": "ਕਿਸਾਨ ਦਾ ਨਾਮ",
+    "productname": "ਉਤਪਾਦ ਦਾ ਨਾਮ",
+    "initialpaymentamount": "ਸ਼ੁਰੂਆਤੀ ਭੁਗਤਾਨ ਰਕਮ",
+    "finalpaymentamount": "ਆਖਰੀ ਭੁਗਤਾਨ ਰਕਮ",
+    "productquantity(q)": "ਉਤਪਾਦ ਦੀ ਮਾਤਰਾ (q)",
+    "farmer": "ਕਿਸਾਨ",
+    "deadline": "ਅਖੀਰੀ ਤਾਰੀਖ",
+    "initialpayment": "ਸ਼ੁਰੂਆਤੀ ਭੁਗਤਾਨ",
+    "finalpayment": "ਆਖਰੀ ਭੁਗਤਾਨ",
+    "productquantity": "ਉਤਪਾਦ ਦੀ ਮਾਤਰਾ",
+    "viewprofile": "ਪ੍ਰੋਫਾਈਲ ਦੇਖੋ",
+    "buyer": "ਖਰੀਦਦਾਰ",
+    "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+    "accept": "ਸਵੀਕਾਰ ਕਰੋ",
+    "Successfully updated": "ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ",
+    "Error Updating": "ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਗਲਤੀ",
+    "Error activating Contract": "ਕਾਂਟ੍ਰੈਕਟ ਸක්ਰੀਯ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
+}

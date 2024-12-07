@@ -1,0 +1,21 @@
+{
+    "submit": "सबमिट",
+    "buyername": "खरीदार का नाम",
+    "farmername": "किसान का नाम",
+    "productname": "उत्पाद का नाम",
+    "initialpaymentamount": "प्रारंभिक भुगतान राशि",
+    "finalpaymentamount": "अंतिम भुगतान राशि",
+    "productquantity(q)": "उत्पाद की मात्रा (q)",
+    "farmer": "किसान",
+    "deadline": "समय सीमा",
+    "initialpayment": "प्रारंभिक भुगतान",
+    "finalpayment": "अंतिम भुगतान",
+    "productquantity": "उत्पाद की मात्रा",
+    "viewprofile": "प्रोफाइल देखें",
+    "buyer": "खरीदार",
+    "edit": "संपादित करें",
+    "accept": "स्वीकार करें",
+    "Successfully updated": "सफलतापूर्वक अपडेट किया गया",
+    "Error Updating": "अपडेट करते समय त्रुटि",
+    "Error activating Contract": "संविदा सक्रिय करते समय त्रुटि"
+}

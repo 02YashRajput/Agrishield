@@ -32,6 +32,7 @@ import { baseProfileDataSchema, farmerProfileDataSchema } from "./schemas";
 import StarIcon from "@mui/icons-material/Star";
 
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 interface ProfileContentUserProps {
   profileData: Data["profileData"];
@@ -46,6 +47,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
   setIsEditable,
   setProfileData 
 }) => {
+  const { t } = useTranslation(["profile", "crops"]);
   if (!profileData) {
     return null;
   }
@@ -97,7 +99,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
         }));
         
         // If the profile was updated successfully
-        toast.success("Profile updated successfully");
+        toast.success(t("Profile updated successfully"));
         setIsEditable(false); // Disable the edit mode
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.delete("isEditable");
@@ -105,12 +107,12 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
         
       } else {
         // Handle unexpected response status
-        toast.error("Unexpected response from the server.");
+        toast.error(t("Unexpected response from the server."));
       }
     } catch (err) {
       // Handle errors during the API call
       console.error("Error updating profile:", err); // Log the error for debugging
-      toast.error("Error updating profile");
+      toast.error(t("Error updating profile"));
     } finally {
       // Ensure `setUpdating` is reset regardless of success or error
       setUpdating(false);
@@ -149,7 +151,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             sx={{ fontWeight: "bold" }}
           >
             <IoPersonOutline />
-            Basic Information
+            {t("basicinformation")}
           </Typography>
           <Box
             sx={{
@@ -160,7 +162,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           >
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Email
+              {t("email")}
                 {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
@@ -189,7 +191,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Phone{isEditable && (
+              {t("phone")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -216,7 +218,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Aadhaar
+              {t("aadhaar")}
                 {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
@@ -266,7 +268,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           sx={{ fontWeight: "bold" }}
         >
           <CiLocationOn />
-          Address
+          {t("address")}
         </Typography>
         <Box
           sx={{
@@ -277,7 +279,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
         >
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Name of City/Village{isEditable && (
+            {t("Name of City/Village")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -308,7 +310,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Name of District{isEditable && (
+            {t("Name of District")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -339,7 +341,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Name of State{isEditable && (
+            {t("Name of State")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -370,7 +372,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              Pincode{isEditable && (
+            {t("pincode")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -418,7 +420,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             sx={{ fontWeight: "bold" }}
           >
             <MdOutlinePayment />
-            Payment Information
+            {t("Payment Information")}
           </Typography>
           <Box
             className="pl-5"
@@ -434,7 +436,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               sx={{ fontWeight: "400" }}
             >
               <CiBank />
-              Bank Details
+              {t("bankdetails")}
             </Typography>
 
             <Box
@@ -446,7 +448,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             >
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Account Number{isEditable && (
+                {t("accnumber")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -486,7 +488,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Account Holder Name{isEditable && (
+                {t("Account Holder Name")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -525,7 +527,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Bank Name{isEditable && (
+                {t("bankname")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -562,7 +564,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  IFSC Code{isEditable && (
+                {t("ifsc code")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -618,7 +620,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 width={30}
                 height={30}
               />
-              Upi Details
+              {t("upi details")}
             </Typography>
 
             <Box
@@ -630,7 +632,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             >
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Upi Id:
+                {t("upi id")}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -659,7 +661,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                  Upi Holder Name:
+                {t("upi holder name")}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -709,7 +711,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             sx={{ fontWeight: "bold" }}
           >
             <FaTractor />
-            Farm Details
+            {t("farm details")}
           </Typography>
           <Box
             sx={{
@@ -720,7 +722,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           >
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Farm Address{isEditable && (
+              {t("farm address")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -753,7 +755,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Farm Size{isEditable && (
+              {t("farm size")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -781,17 +783,17 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                     sx={{ minWidth: 120, marginLeft: 1 }}
                     error={!!errors.farmDetails?.sizeUnit}
                   >
-                    <InputLabel color="secondary">Unit</InputLabel>
+                    <InputLabel color="secondary">{t("unit")}</InputLabel>
                     <Controller
                       name="farmDetails.sizeUnit"
                       control={control}
                       defaultValue="Acres"
                       render={({ field }) => (
                         <Select {...field} label="Unit" color="secondary">
-                          <MenuItem value="Bigha">Bigha</MenuItem>
-                          <MenuItem value="Acres">Acres</MenuItem>
-                          <MenuItem value="Hectares">Hectares</MenuItem>
-                          <MenuItem value="Gunta">Gunta</MenuItem>
+                          <MenuItem value="Bigha">{t("bigha")}</MenuItem>
+                          <MenuItem value="Acres">{t("acres")}</MenuItem>
+                          <MenuItem value="Hectares">{t("hectares")}</MenuItem>
+                          <MenuItem value="Gunta">{t("gunta")}</MenuItem>
                         </Select>
                       )}
                     />
@@ -812,7 +814,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                Crops Grown{isEditable && (
+              {t("Cropsgrown")}{isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
@@ -875,7 +877,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           sx={{ fontWeight: "bold" }}
         >
           <FaRegBell />
-          Notification Preferences
+          {t("Notification Preferences")}
         </Typography>
 
         <Box sx={{ display: "inline-block" }}>
@@ -901,7 +903,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                     }}
                   />
                 }
-                label="Message Notifications"
+                label={t("messagenotification")}
                 labelPlacement="start"
               />
             )}
@@ -930,7 +932,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                     }}
                   />
                 }
-                label="Email Notifications"
+                label={t("emailnotification")}
                 labelPlacement="start"
               />
             )}
@@ -949,7 +951,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           }}
           startIcon={updating ? <CircularProgress /> : <SaveIcon />}
         >
-          Save
+            {t("save")}
         </Button>
       )}
     </form>

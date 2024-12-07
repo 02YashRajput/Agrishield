@@ -7,6 +7,8 @@ import Header from '../components/Header';
 import { Card, CardContent, Paper, Typography } from '@mui/material';
 import TableComponent from '../components/ContractList/TableComponent';
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
+import Footer from '../components/Footer';
 interface Data {
   success: boolean;
   message: string;
@@ -50,6 +52,7 @@ const fetcher = (url: string) =>
     .then((res) => res.data);
     
 const ContractList :React.FC = () => {
+  const { t } = useTranslation("contractlist");
   const { data, error, isLoading } = useSWR<Data>(
     `/api/contracts`,
     fetcher
@@ -80,14 +83,14 @@ const ContractList :React.FC = () => {
         id={data?.user?.id}
       />
 
-      <Paper  sx={{ backgroundColor: "#f7f7f7" }} className="min-h-screen p-8 ">
+      <Paper  sx={{ backgroundColor: "#f7f7f7"}} className="min-h-screen p-8 ">
       { !isLoading &&  groupedContracts && (
           <>
             {!isLoading && sortedStatuses.map((status) => (
               <Card sx={{ borderRadius: 5 }}
               className="max-w-4xl mx-auto bg-white p-8 mb-6" key={status}>
                 <CardContent>
-                <Typography variant='h4' sx={{fontWeight:800}}>{status} Contracts</Typography>
+                <Typography variant='h4' sx={{fontWeight:800}}>{t(status)} {t('Contracts')}</Typography>
                 <TableComponent contracts={groupedContracts[status]} />
                 </CardContent>
               </Card>
@@ -95,16 +98,16 @@ const ContractList :React.FC = () => {
 {!isLoading && sortedStatuses.length === 0 && (
         <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8 mb-6">
           <CardContent>
-            <Typography variant='h4' sx={{ fontWeight: 800 }}>No Contracts Available</Typography>
-            <Typography variant='body1'>There are no contracts under the selected statuses.</Typography>
-            <Link to="/marketplace?page=1" className='text-blue-500 underline'> Go To Market Place</Link>
+            <Typography variant='h4' sx={{ fontWeight: 800 }}>{t('No Contracts Available')}</Typography>
+            <Typography variant='body1'>{t('There are no contracts under the selected statuses.')}</Typography>
+            <Link to="/marketplace?page=1" className='text-blue-500 underline'>{t('Go To Market Place')}</Link>
           </CardContent>
         </Card>
       )}
           </>
         )}
-
       </Paper>
+          <Footer/>
     </div>
   )
 }

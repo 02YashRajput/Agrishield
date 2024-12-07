@@ -1,0 +1,22 @@
+{
+    "submit": "জমা দিন",
+    "buyername": "ক্রেতার নাম",
+    "farmername": "কৃষকের নাম",
+    "productname": "পণ্যের নাম",
+    "initialpaymentamount": "প্রারম্ভিক পেমেন্ট পরিমাণ",
+    "finalpaymentamount": "চূড়ান্ত পেমেন্ট পরিমাণ",
+    "productquantity(q)": "পণ্যের পরিমাণ (q)",
+    "farmer": "কৃষক",
+    "deadline": "সময়সীমা",
+    "initialpayment": "প্রারম্ভিক পেমেন্ট",
+    "finalpayment": "চূড়ান্ত পেমেন্ট",
+    "productquantity": "পণ্যের পরিমাণ",
+    "viewprofile": "প্রোফাইল দেখুন",
+    "buyer": "ক্রেতা",
+    "edit": "সম্পাদনা করুন",
+    "accept": "গৃহীত",
+        "Successfully updated": "সফলভাবে আপডেট করা হয়েছে",
+        "Error Updating": "আপডেট করতে ত্রুটি",
+        "Error activating Contract": "চুক্তি সক্রিয় করতে ত্রুটি"
+      
+}
