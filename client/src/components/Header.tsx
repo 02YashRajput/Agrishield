@@ -74,13 +74,13 @@ const Header: React.FC<HeaderProps> = ({
         to: "/contracts",
       },
       { text: t("MyNegotiations"), icon: <FaHandshake />, to: "/negotiations" },
-      { text: t("PricePredictor"), icon: <FaChartLine />, to: "#" }
+      { text: t("PricePredictor"), icon: <FaChartLine />, to: "/price-predictor" }
     );
     if (isSmallScreen) {
       menuItems.push({
         text: t("PricePredictor"),
         icon: <FaChartLine />,
-        to: "#",
+        to: "/price-predictor",
       });
 
       menuItems.push({
