@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Box,
   Button,
   Chip,
@@ -33,21 +34,27 @@ import StarIcon from "@mui/icons-material/Star";
 
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+interface StateData {
+  name: string;
+  districts: Record<string, string>; 
+}
 
 interface ProfileContentUserProps {
   profileData: Data["profileData"];
   isEditable: boolean;
   setIsEditable: React.Dispatch<React.SetStateAction<boolean>>;
-  setProfileData :  React.Dispatch<React.SetStateAction<Data["profileData"] | null>>
+  setProfileData: React.Dispatch<
+    React.SetStateAction<Data["profileData"] | null>
+  >;
 }
 
 const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
   profileData,
   isEditable,
   setIsEditable,
-  setProfileData 
+  setProfileData,
 }) => {
-  const { t } = useTranslation(["profile", "crops"]);
+  const { t } = useTranslation(["profile", "crops", "stateanddistricts"]);
   if (!profileData) {
     return null;
   }
@@ -75,15 +82,16 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
       ...(profileData.userType === "Farmer" && {
         farmDetails: profileData.farmDetails,
       }),
-      adhaar: profileData.adhaar
+      adhaar: profileData.adhaar,
     },
   });
 
-  useEffect(()=>{
-    console.log(profileData)
-  })
-  const handleFormSubmit = async (data : any) => {
-    
+  
+
+  useEffect(() => {
+    console.log(profileData);
+  });
+  const handleFormSubmit = async (data: any) => {
     setUpdating(true); // Indicate the updating process has started
 
     try {
@@ -97,14 +105,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           ...prev,
           ...data, // Merge the new data into the previous profileData
         }));
-        
+
         // If the profile was updated successfully
         toast.success(t("Profile updated successfully"));
         setIsEditable(false); // Disable the edit mode
         const currentUrl = new URL(window.location.href);
         currentUrl.searchParams.delete("isEditable");
-        window.history.replaceState({}, "", currentUrl.toString()); 
-        
+        window.history.replaceState({}, "", currentUrl.toString());
       } else {
         // Handle unexpected response status
         toast.error(t("Unexpected response from the server."));
@@ -120,6 +127,8 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
   };
 
   const cropsGrown = watch("farmDetails.cropsGrown");
+  
+
 
   const handleCropsSelection = (crop: string) => {
     const currentCrops = cropsGrown;
@@ -132,6 +141,21 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
       setValue("farmDetails.cropsGrown", [...currentCrops, crop]);
     }
   };
+
+  const statesObject = t("stateanddistricts:States", { returnObjects: true }) as Record<string, StateData>;
+
+  const stateOptions = Object.entries(statesObject).map(([key, value]) => ({
+    key,
+    value: value.name,
+  }));
+
+  const selectedState = watch("address.state");
+  const districtsOptions = selectedState ? Object.entries(statesObject[selectedState]?.districts || {}).map(
+    ([key, value]) => ({ key, value })
+      )
+    : [];
+
+  
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="flex  flex-col">
@@ -162,7 +186,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           >
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              {t("email")}
+                {t("email")}
                 {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
@@ -191,11 +215,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              {t("phone")}{isEditable && (
+                {t("phone")}
+                {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
-                )}:
+                )}
+                :
               </Typography>
               {isEditable ? (
                 <Controller
@@ -218,7 +244,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              {t("aadhaar")}
+                {t("aadhaar")}
                 {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
@@ -243,10 +269,10 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 />
               ) : (
                 <Typography variant="body1">
-                {profileData?.adhaar === ""
-                  ? "Not Provided"
-                  : profileData?.adhaar} 
-              </Typography>
+                  {profileData?.adhaar === ""
+                    ? "Not Provided"
+                    : profileData?.adhaar}
+                </Typography>
               )}
             </Box>
           </Box>
@@ -279,11 +305,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
         >
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-            {t("Name of City/Village")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+              {t("Name of City/Village")}
+              {isEditable && (
+                <sup>
+                  <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                </sup>
+              )}
+              :
             </Typography>
             {isEditable ? (
               <Controller
@@ -310,55 +338,41 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-            {t("Name of District")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
-            </Typography>
-            {isEditable ? (
-              <Controller
-                name="address.district"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    type="text"
-                    error={!!errors.address?.district}
-                    helperText={errors.address?.district?.message}
-                    color="secondary"
-                  />
-                )}
-              />
-            ) : (
-              <Typography variant="body1">
-                {profileData?.address.district === ""
-                  ? "Not Provided"
-                  : profileData?.address.district}
-              </Typography>
-            )}
-          </Box>
-          <Box>
-            <Typography variant="body1" sx={{ fontWeight: "600" }}>
-            {t("Name of State")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+              {t("Name of State")}
+              {isEditable && (
+                <sup>
+                  <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                </sup>
+              )}
+              :
             </Typography>
             {isEditable ? (
               <Controller
                 name="address.state"
                 control={control}
                 render={({ field }) => (
-                  <TextField
+                  <Autocomplete
                     {...field}
-                    fullWidth
-                    type="text"
-                    error={!!errors.address?.state}
-                    helperText={errors.address?.state?.message}
-                    color="secondary"
+                    options={stateOptions}
+                    getOptionLabel={(option) => option.value} // Show the crop name
+                    isOptionEqualToValue={(option, value) =>
+                      option.key === value?.key
+                    }
+                    value={
+                      stateOptions.find((state) => state.key === field.value) ||
+                      null
+                    } 
+                    onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        
+                        color="secondary"
+                        label={t("State")}
+                        error={!!errors.address?.state}
+                        helperText={errors.address?.state?.message}
+                      />
+                    )}
                   />
                 )}
               />
@@ -372,11 +386,63 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
           <Box>
             <Typography variant="body1" sx={{ fontWeight: "600" }}>
-            {t("pincode")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+              {t("Name of District")}
+              {isEditable && (
+                <sup>
+                  <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                </sup>
+              )}
+              :
+            </Typography>
+            {isEditable ? (
+              <Controller
+                name="address.district"
+                control={control}
+                render={({ field }) => (
+                  <Autocomplete
+                  {...field}
+                  disabled = {!selectedState}
+                  options={districtsOptions}
+                  getOptionLabel={(option) => option.value} // Show the crop name
+                  isOptionEqualToValue={(option, value) =>
+                    option.key === value?.key
+                  }
+                  value={
+                    districtsOptions.find((district) => district.key === field.value) ||
+                    null
+                  } 
+                  onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      
+                      color="secondary"
+                      label={t("State")}
+                      error={!!errors.address?.state}
+                      helperText={errors.address?.state?.message}
+                    />
+                  )}
+                />
+                )}
+              />
+            ) : (
+              <Typography variant="body1">
+                {profileData?.address.district === ""
+                  ? "Not Provided"
+                  : profileData?.address.district}
+              </Typography>
+            )}
+          </Box>
+
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: "600" }}>
+              {t("pincode")}
+              {isEditable && (
+                <sup>
+                  <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                </sup>
+              )}
+              :
             </Typography>
             {isEditable ? (
               <Controller
@@ -448,11 +514,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             >
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                {t("accnumber")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+                  {t("accnumber")}
+                  {isEditable && (
+                    <sup>
+                      <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                    </sup>
+                  )}
+                  :
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -488,11 +556,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                {t("Account Holder Name")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+                  {t("Account Holder Name")}
+                  {isEditable && (
+                    <sup>
+                      <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                    </sup>
+                  )}
+                  :
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -527,11 +597,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                {t("bankname")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+                  {t("bankname")}
+                  {isEditable && (
+                    <sup>
+                      <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                    </sup>
+                  )}
+                  :
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -564,11 +636,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                {t("ifsc code")}{isEditable && (
-                  <sup>
-                    <StarIcon sx={{ color: "red", fontSize: 8 }} />
-                  </sup>
-                )}:
+                  {t("ifsc code")}
+                  {isEditable && (
+                    <sup>
+                      <StarIcon sx={{ color: "red", fontSize: 8 }} />
+                    </sup>
+                  )}
+                  :
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -632,7 +706,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             >
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                {t("upi id")}:
+                  {t("upi id")}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -661,7 +735,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               </Box>
               <Box>
                 <Typography variant="body1" sx={{ fontWeight: "600" }}>
-                {t("upi holder name")}:
+                  {t("upi holder name")}:
                 </Typography>
                 {isEditable ? (
                   <Controller
@@ -693,7 +767,6 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
         </Box>
       )}
-      
 
       {profileData.userType === "Farmer" && (
         <Box
@@ -722,11 +795,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           >
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              {t("farm address")}{isEditable && (
+                {t("farm address")}
+                {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
-                )}:
+                )}
+                :
               </Typography>
               {isEditable ? (
                 <Controller
@@ -752,14 +827,15 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               )}
             </Box>
 
-
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              {t("farm size")}{isEditable && (
+                {t("farm size")}
+                {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
-                )}:
+                )}
+                :
               </Typography>
               {isEditable ? (
                 <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -814,11 +890,13 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             </Box>
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "600" }}>
-              {t("Cropsgrown")}{isEditable && (
+                {t("Cropsgrown")}
+                {isEditable && (
                   <sup>
                     <StarIcon sx={{ color: "red", fontSize: 8 }} />
                   </sup>
-                )}:
+                )}
+                :
               </Typography>
 
               {/* Show chips */}
@@ -860,86 +938,84 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           </Box>
         </Box>
       )}
-{
-  profileData.email && 
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          paddingTop: 2,
-        }}
-      >
-        <Typography
-          variant="h6"
-          className="flex items-center gap-2"
-          sx={{ fontWeight: "bold" }}
+      {profileData.email && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            paddingTop: 2,
+          }}
         >
-          <FaRegBell />
-          {t("Notification Preferences")}
-        </Typography>
+          <Typography
+            variant="h6"
+            className="flex items-center gap-2"
+            sx={{ fontWeight: "bold" }}
+          >
+            <FaRegBell />
+            {t("Notification Preferences")}
+          </Typography>
 
-        <Box sx={{ display: "inline-block" }}>
-          <Controller
-            name="notificationPreferences.message"
-            control={control}
-            defaultValue={false} // default value
-            render={({ field }) => (
-              <FormControlLabel
-                control={
-                  <Switch
-                    {...field}
-                    checked={field.value}
-                    disabled={!isEditable}
-                    sx={{
-                      "& .MuiSwitch-switchBase.Mui-checked": {
-                        color: "blue.main", // Change checked color to blue.main
-                      },
-                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
-                        {
-                          backgroundColor: "blue.main", // Change the track color
+          <Box sx={{ display: "inline-block" }}>
+            <Controller
+              name="notificationPreferences.message"
+              control={control}
+              defaultValue={false} // default value
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      {...field}
+                      checked={field.value}
+                      disabled={!isEditable}
+                      sx={{
+                        "& .MuiSwitch-switchBase.Mui-checked": {
+                          color: "blue.main", // Change checked color to blue.main
                         },
-                    }}
-                  />
-                }
-                label={t("messagenotification")}
-                labelPlacement="start"
-              />
-            )}
-          />
-          <br />
-          {/* Email Notification Preference */}
-          <Controller
-            name="notificationPreferences.email"
-            control={control}
-            defaultValue={false} // default value
-            render={({ field }) => (
-              <FormControlLabel
-                control={
-                  <Switch
-                    {...field}
-                    disabled={!isEditable}
-                    checked={field.value}
-                    sx={{
-                      "& .MuiSwitch-switchBase.Mui-checked": {
-                        color: "blue.main", // Change checked color to blue.main
-                      },
-                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
-                        {
-                          backgroundColor: "blue.main", // Change the track color
+                        "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                          {
+                            backgroundColor: "blue.main", // Change the track color
+                          },
+                      }}
+                    />
+                  }
+                  label={t("messagenotification")}
+                  labelPlacement="start"
+                />
+              )}
+            />
+            <br />
+            {/* Email Notification Preference */}
+            <Controller
+              name="notificationPreferences.email"
+              control={control}
+              defaultValue={false} // default value
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Switch
+                      {...field}
+                      disabled={!isEditable}
+                      checked={field.value}
+                      sx={{
+                        "& .MuiSwitch-switchBase.Mui-checked": {
+                          color: "blue.main", // Change checked color to blue.main
                         },
-                    }}
-                  />
-                }
-                label={t("emailnotification")}
-                labelPlacement="start"
-              />
-            )}
-          />
+                        "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                          {
+                            backgroundColor: "blue.main", // Change the track color
+                          },
+                      }}
+                    />
+                  }
+                  label={t("emailnotification")}
+                  labelPlacement="start"
+                />
+              )}
+            />
+          </Box>
         </Box>
-      </Box>
-}
+      )}
       {isEditable && (
         <Button
           type="submit"
@@ -951,7 +1027,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
           }}
           startIcon={updating ? <CircularProgress /> : <SaveIcon />}
         >
-            {t("save")}
+          {t("save")}
         </Button>
       )}
     </form>

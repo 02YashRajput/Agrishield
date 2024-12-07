@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import PrivateRoute from './components/PrivateRoute';
 import TransactionList from './pages/TransactionList';
 import Chat from './components/chat/Chat';
+import PricePredictor from './pages/PricePredictor';
 
 
 const fetcher = (url:string) => axios.get(url).then((res) => res.data);
@@ -69,6 +70,7 @@ function App ()  {
         <Route path="/contracts/:id" element={<ContractDetails />} />
         <Route path="/negotiations" element={<NegotiationList />} />
         <Route path="/transactions" element={<TransactionList />} />
+        <Route path='/price-predictor' element={<PricePredictor />} />
       </Route>
 
   
