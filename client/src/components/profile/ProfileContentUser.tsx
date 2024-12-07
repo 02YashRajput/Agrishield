@@ -417,9 +417,9 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                       {...params}
                       
                       color="secondary"
-                      label={t("State")}
-                      error={!!errors.address?.state}
-                      helperText={errors.address?.state?.message}
+                      label={t("district")}
+                      error={!!errors.address?.district}
+                      helperText={errors.address?.district?.message}
                     />
                   )}
                 />

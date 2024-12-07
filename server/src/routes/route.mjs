@@ -16,6 +16,7 @@ import RazorpayRoute from "./razorpay.mjs"
 import NegotiationsRoute from "./negotiations.mjs"
 import TransalationRoute from "./transaction.mjs"
 import ChatRoute from "./chat.mjs"
+import PricePredictor from "./price-prediction.mjs"
 const router = Router();
 
 router.use(SignUpRoute)
@@ -35,4 +36,5 @@ router.use(RazorpayRoute);
 router.use(NegotiationsRoute);
 router.use(TransalationRoute);
 router.use(ChatRoute);
+router.use(PricePredictor);
 export default router;
