@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename);
 const parentDir = path.resolve(__dirname, '../');
 
 router.get("/api/price-predictor", async (req, res) => {
-  const state = "Uttar Pradesh";
+  const state = "UttarPradesh";
   const district = 'Lucknow';
   const commodity = "Wheat";
   const date = formatDate(new Date());
@@ -57,6 +57,7 @@ python.on('close', (code) => {
           res.status(500).json({ error: 'Failed to parse Python script output.' });
       }
   } else {
+    console.log(result);
       res.status(500).json({ error: 'Python script exited with an error.' });
   }
 });

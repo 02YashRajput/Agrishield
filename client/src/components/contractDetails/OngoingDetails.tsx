@@ -18,6 +18,7 @@ import {
   DialogActions,
   CircularProgress,
 } from "@mui/material";
+import { pdf } from "@react-pdf/renderer";
 type Transaction = {
   transactionId: number;
   details: string;
@@ -31,6 +32,7 @@ import axios from "axios";
 import { useRazorpay, RazorpayOrderOptions } from "react-razorpay";
 import TransactionTable from "./TransactionTable";
 import { useTranslation } from "react-i18next";
+import ContractPdf from "./ContractPdf";
 interface OngoingDetailaProps {
   data: {
     contractId: number;
@@ -135,7 +137,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
   const { t } = useTranslation(["ongoingdetails", "crops"]);
   const [contractStatus, setContractStatus] = useState(data.contractStatus);
   const [activeStep, setActiveStep] = useState(0);
-
+  const [pdfLoading, setPDFLoading] = useState(false);
   const { Razorpay } = useRazorpay();
   const isVertical = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
@@ -258,15 +260,36 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       setLoading(false);
     }
   };
+  const handleReport = async()=>{
+    try{
+      setPDFLoading(true);
+      const pdfBlob =await  pdf(<ContractPdf data={data}/>).toBlob();
+      const blobURL = URL.createObjectURL(pdfBlob);
+      window.open(blobURL, "_blank");
+
+    }catch (err) {
+      toast.error("Error Occured while opening pdf");
+    }
+    finally{
+      setPDFLoading(false);
+    }
+  }
 
   return (
     <div>
       <Typography variant="h4" sx={{ mb: 4 }}>
         {t(contractStatus)} {t('Contract Details')}
       </Typography>
-      <Typography variant="h5" sx={{ mb: 4 }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, alignItems: 'center',mb:4,justifyContent:'space-between' }}>
+
+      
+      <Typography variant="h5" >
         {data.productName.toUpperCase()}
       </Typography>
+      <Button variant="contained" sx={{backgroundColor : theme.palette.blue?.main, color:"white"}} onClick={handleReport} disabled={pdfLoading} startIcon = {pdfLoading && <CircularProgress size={24} color="inherit"/>}>
+        Download Report
+      </Button>
+      </Box>
       <Grid container spacing={4}>
         {/* Farmer Profile */}
         <Grid item xs={12} sm={6}>
