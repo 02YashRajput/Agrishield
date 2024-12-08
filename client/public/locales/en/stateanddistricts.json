@@ -9,8 +9,6 @@
       }
     },
 
-
-  
     "Andhra Pradesh": {
       "name": "Andhra Pradesh",
       "districts": {
@@ -29,9 +27,6 @@
       }
     },
 
-
-
-  
     "Arunachal Pradesh": {
       "name": "Arunachal Pradesh",
       "districts": {
@@ -47,9 +42,6 @@
       }
     },
 
-
-
-  
     "Assam": {
       "name": "Assam",
       "districts": {
@@ -77,9 +69,6 @@
       }
     },
 
-
-
-  
     "Bihar": {
       "name": "Bihar",
       "districts": {
@@ -126,9 +115,6 @@
       }
     },
 
-
-
-  
     "Chandigarh": {
       "name": "Chandigarh",
       "districts": {
@@ -136,9 +122,6 @@
       }
     },
 
-
-
-  
     "Chhattisgarh": {
       "name": "Chhattisgarh",
       "districts": {
@@ -171,9 +154,6 @@
       }
     },
 
-
-
-  
     "Goa": {
       "name": "Goa",
       "districts": {
@@ -182,9 +162,6 @@
       }
     },
 
-
-
-  
     "Gujarat": {
       "name": "Gujarat",
       "districts": {
@@ -222,9 +199,6 @@
       }
     },
 
-
-
-  
     "Haryana": {
       "name": "Haryana",
       "districts": {
@@ -252,9 +226,6 @@
       }
     },
 
-
-
-  
     "Himachal Pradesh": {
       "name": "Himachal Pradesh",
       "districts": {
@@ -271,9 +242,6 @@
       }
     },
 
-
-
-  
     "Jammu and Kashmir": {
       "name": "Jammu and Kashmir",
       "districts": {
@@ -290,9 +258,6 @@
       }
     },
 
-
-
-  
     "Jharkhand": {
       "name": "Jharkhand",
       "districts": {
@@ -320,9 +285,6 @@
       }
     },
 
-
-
-  
     "Karnataka": {
       "name": "Karnataka",
       "districts": {
@@ -356,9 +318,6 @@
       }
     },
 
-
-
-  
     "Kerala": {
       "name": "Kerala",
       "districts": {
@@ -380,9 +339,6 @@
       }
     },
 
-
-
-  
     "Madhya Pradesh": {
       "name": "Madhya Pradesh",
       "districts": {
@@ -440,9 +396,6 @@
       }
     },
 
-
-
-  
     "Maharashtra": {
       "name": "Maharashtra",
       "districts": {
@@ -483,9 +436,6 @@
       }
     },
 
-
-
-  
     "Manipur": {
       "name": "Manipur",
       "districts": {
@@ -497,9 +447,6 @@
       }
     },
 
-
-
-  
     "Meghalaya": {
       "name": "Meghalaya",
       "districts": {
@@ -515,9 +462,6 @@
       }
     },
 
-
-
-  
     "Nagaland": {
       "name": "Nagaland",
       "districts": {
@@ -536,8 +480,6 @@
       }
     },
 
-
-  
     "NCT of Delhi": {
       "name": "NCT of Delhi",
       "districts": {
@@ -545,9 +487,6 @@
       }
     },
 
-
-
-  
     "Odisha": {
       "name": "Odisha",
       "districts": {
@@ -584,8 +523,6 @@
       }
     },
 
-
-  
     "Puducherry": {
       "name": "Puducherry",
       "districts": {
@@ -594,9 +531,6 @@
       }
     },
 
-
-
-  
     "Punjab": {
       "name": "Punjab",
       "districts": {
@@ -624,9 +558,6 @@
       }
     },
 
-
-
-  
     "Rajasthan": {
       "name": "Rajasthan",
       "districts": {
@@ -681,9 +612,6 @@
       }
     },
 
-
-
-  
     "Tamil Nadu": {
       "name": "Tamil Nadu",
       "districts": {
@@ -727,8 +655,6 @@
       }
     },
 
-
-  
     "Telangana": {
       "name": "Telangana",
       "districts": {
@@ -746,9 +672,6 @@
       }
     },
 
-
-
-  
     "Tripura": {
       "name": "Tripura",
       "districts": {
@@ -763,9 +686,85 @@
       }
     },
 
+    "Uttar Pradesh": {
+      "name": "Uttar Pradesh",
+      "districts": {
+        "Agra": "Agra",
+        "Aligarh": "Aligarh",
+        "Ambedkarnagar": "Ambedkarnagar",
+        "Amethi": "Amethi",
+        "Amroha": "Amroha",
+        "Auraiya": "Auraiya",
+        "Ayodhya": "Ayodhya",
+        "Azamgarh": "Azamgarh",
+        "Badaun": "Badaun",
+        "Baghpat": "Baghpat",
+        "Bahraich": "Bahraich",
+        "Ballia": "Ballia",
+        "Balrampur": "Balrampur",
+        "Banda": "Banda",
+        "Barabanki": "Barabanki",
+        "Bareilly": "Bareilly",
+        "Basti": "Basti",
+        "Bhadohi(Sant Ravi Nagar)": "Bhadohi(Sant Ravi Nagar)",
+        "Bijnor": "Bijnor",
+        "Bulandshahar": "Bulandshahar",
+        "Chandauli": "Chandauli",
+        "Chitrakut": "Chitrakut",
+        "Deoria": "Deoria",
+        "Etah": "Etah",
+        "Etawah": "Etawah",
+        "Farukhabad": "Farukhabad",
+        "Fatehpur": "Fatehpur",
+        "Firozabad": "Firozabad",
+        "Gautam Budh Nagar": "Gautam Budh Nagar",
+        "Ghaziabad": "Ghaziabad",
+        "Ghazipur": "Ghazipur",
+        "Gonda": "Gonda",
+        "Gorakhpur": "Gorakhpur",
+        "Hamirpur": "Hamirpur",
+        "Hapur": "Hapur",
+        "Hardoi": "Hardoi",
+        "Hathras": "Hathras",
+        "Jalaun (Orai)": "Jalaun (Orai)",
+        "Jaunpur": "Jaunpur",
+        "Jhansi": "Jhansi",
+        "Kannuj": "Kannuj",
+        "Kanpur": "Kanpur",
+        "Kasganj": "Kasganj",
+        "Kaushambi": "Kaushambi",
+        "Khiri (Lakhimpur)": "Khiri (Lakhimpur)",
+        "Kushinagar": "Kushinagar",
+        "Lakhimpur": "Lakhimpur",
+        "Lalitpur": "Lalitpur",
+        "Lucknow": "Lucknow",
+        "Mahoba": "Mahoba",
+        "Maharajganj": "Maharajganj",
+        "Mainpuri": "Mainpuri",
+        "Mathura": "Mathura",
+        "Mau(Maunathbhanjan)": "Mau(Maunathbhanjan)",
+        "Meerut": "Meerut",
+        "Mirzapur": "Mirzapur",
+        "Muzaffarnagar": "Muzaffarnagar",
+        "Pillibhit": "Pillibhit",
+        "Pratapgarh": "Pratapgarh",
+        "Prayagraj": "Prayagraj",
+        "Raebarelli": "Raebarelli",
+        "Rampur": "Rampur",
+        "Saharanpur": "Saharanpur",
+        "Sambhal": "Sambhal",
+        "Sant Kabir Nagar": "Sant Kabir Nagar",
+        "Shahjahanpur": "Shahjahanpur",
+        "Shamli": "Shamli",
+        "Shravasti": "Shravasti",
+        "Siddharth Nagar": "Siddharth Nagar",
+        "Sitapur": "Sitapur",
+        "Sonbhadra": "Sonbhadra",
+        "Unnao": "Unnao",
+        "Varanasi": "Varanasi"
+      }
+    },
 
-
-  
     "Uttarakhand": {
       "name": "Uttarakhand",
       "districts": {
@@ -778,8 +777,6 @@
       }
     },
 
-
-  
     "West Bengal": {
       "name": "West Bengal",
       "districts": {
@@ -809,7 +806,191 @@
         "Uttar Dinajpur": "Uttar Dinajpur"
       }
     }
-  }
-}
-
-
+  },
+    "Tamil Nadu": {
+      "name": "तमिलनाडु",
+      "districts": {
+        "Ariyalur": "अरियालुर",
+        "Chengalpattu": "चेंगलपट्टू",
+        "Chennai": "चेन्नई",
+        "Coimbatore": "कोयंबटूर",
+        "Cuddalore": "कुड्डालोर",
+        "Dharmapuri": "धर्मपुरी",
+        "Dindigul": "दिन्दिगुल",
+        "Erode": "एरोडे",
+        "Kallakuruchi": "कल्लाकुरुचि",
+        "Kancheepuram": "कांचीपुरम",
+        "Nagercoil (Kannyiakumari)": "नागरकोइल (कन्याकुमारी)",
+        "Karur": "करूर",
+        "Krishnagiri": "कृष्णगिरी",
+        "Madurai": "मदुरै",
+        "Nagapattinam": "नागापट्टिनम",
+        "Namakkal": "नमक्कल",
+        "The Nilgiris": "नीलगिरि",
+        "Perambalur": "पेरम्बलुर",
+        "Pudukkottai": "पुडुकोट्टाई",
+        "Ramanathapuram": "रामनाथपुरम",
+        "Ranipet": "रानीपेट",
+        "Salem": "सलेम",
+        "Sivaganga": "सिवगंगा",
+        "Tenkasi": "तेन्कासी",
+        "Thanjavur": "तंजावुर",
+        "Theni": "थेनी",
+        "Thiruchirappalli": "तिरुचिरापल्ली",
+        "Thirunelveli": "तिरुनलवेली",
+        "Thirupathur": "तिरुपथुर",
+        "Thirupur": "तिरुपुर",
+        "Thiruvannamalai": "तिरुवन्नामलाई",
+        "Thiruvarur": "तिरुवरुर",
+        "Thiruvellore": "तिरुवेल्लोर",
+        "Tuticorin": "तुतिकोरिन",
+        "Vellore": "वेल्लोर",
+        "Villupuram": "विल्लुपुरम",
+        "Virudhunagar": "विरुधुनगर"
+      }
+    },
+    "Telangana": {
+      "name": "तेलंगाना",
+      "districts": {
+        "Adilabad": "आदिलाबाद",
+        "Hyderabad": "हैदराबाद",
+        "Jagityal": "जगित्याल",
+        "Karimnagar": "करिमनगर",
+        "Khammam": "खम्मम",
+        "Mahbubnagar": "महबूबनगर",
+        "Medak": "मेड़क",
+        "Nalgonda": "नलगोंडा",
+        "Nizamabad": "निजामाबाद",
+        "Ranga Reddy": "रंगा रेड्डी",
+        "Warangal": "वारंगल"
+      }
+    },
+    "Tripura": {
+      "name": "त्रिपुरा",
+      "districts": {
+        "Dhalai": "धलाई",
+        "Gomati": "गोमती",
+        "Khowai": "खोवाई",
+        "North Tripura": "उत्तर त्रिपुरा",
+        "Sepahijala": "सेफाजीला",
+        "South District": "दक्षिण जिला",
+        "Unokoti": "उनोकोटी",
+        "West District": "पश्चिम जिला"
+      }
+    },
+    "Uttar Pradesh": {
+      "name": "उत्तर प्रदेश",
+      "districts": {
+        "Agra": "आगरा",
+        "Aligarh": "अलीगढ़",
+        "Ambedkarnagar": "अम्बेडकर्नगर",
+        "Amethi": "अमेठी",
+        "Amroha": "अमरोहा",
+        "Auraiya": "औरैया",
+        "Ayodhya": "अयोध्या",
+        "Azamgarh": "आजमगढ़",
+        "Badaun": "बदायूं",
+        "Baghpat": "बागपत",
+        "Bahraich": "बहराइच",
+        "Ballia": "बलिया",
+        "Balrampur": "बलरामपुर",
+        "Banda": "बांदा",
+        "Barabanki": "बाराबंकी",
+        "Bareilly": "बरेली",
+        "Basti": "बस्ती",
+        "Bhadohi(Sant Ravi Nagar)": "भदोही(संत रवि नगर)",
+        "Bijnor": "बिजनौर",
+        "Bulandshahar": "बुलंदशहर",
+        "Chandauli": "चंदौली",
+        "Chitrakut": "चित्रकूट",
+        "Deoria": "देवरिया",
+        "Etah": "एटाह",
+        "Etawah": "एताह",
+        "Farukhabad": "फरुखाबाद",
+        "Fatehpur": "फतेहपुर",
+        "Firozabad": "फिरोजाबाद",
+        "Gautam Budh Nagar": "गौतम बुद्ध नगर",
+        "Ghaziabad": "गाज़ियाबाद",
+        "Ghazipur": "गाजीपुर",
+        "Gonda": "गोंडा",
+        "Gorakhpur": "गोरखपुर",
+        "Hamirpur": "हमीरपुर",
+        "Hapur": "हापुड़",
+        "Hardoi": "हरदोई",
+        "Hathras": "हाथरस",
+        "Jalaun (Orai)": "जालौन (ओरई)",
+        "Jaunpur": "जौनपुर",
+        "Jhansi": "झाँसी",
+        "Kannuj": "कन्नोज",
+        "Kanpur": "कानपुर",
+        "Kasganj": "कासगंज",
+        "Kaushambi": "कौशांबी",
+        "Khiri (Lakhimpur)": "खीरी (लखीमपुर)",
+        "Kushinagar": "कुशीनगर",
+        "Lakhimpur": "लखीमपुर",
+        "Lalitpur": "ललितपुर",
+        "Lucknow": "लखनऊ",
+        "Mahoba": "महोबा",
+        "Maharajganj": "महराजगंज",
+        "Mainpuri": "मैनपुरी",
+        "Mathura": "मथुरा",
+        "Mau(Maunathbhanjan)": "मऊ(मौनाथभंजन)",
+        "Meerut": "मेरठ",
+        "Mirzapur": "मीरजापुर",
+        "Muzaffarnagar": "मुज़फ्फरनगर",
+        "Pillibhit": "पीलीभीत",
+        "Pratapgarh": "प्रतापगढ़",
+        "Prayagraj": "प्रयागराज",
+        "Raebarelli": "रायबरेली",
+        "Rampur": "रामपुर",
+        "Saharanpur": "सहारनपुर",
+        "Sambhal": "संभल",
+        "Sant Kabir Nagar": "संत कबीर नगर",
+        "Shahjahanpur": "शाहजहांपुर",
+        "Shamli": "शामली",
+        "Shravasti": "श्रावस्ती",
+        "Siddharth Nagar": "सिद्धार्थ नगर",
+        "Sitapur": "सीतापुर",
+        "Sonbhadra": "सोनभद्र",
+        "Unnao": "उन्नाव",
+        "Varanasi": "वाराणसी"
+      }
+    },
+    "Uttarakhand": {
+      "name": "उत्तराखंड",
+      "districts": {
+        "Champawat": "चम्पावत",
+        "Dehradoon": "देहरादून",
+        "Garhwal (Pauri)": "गढ़वाल (पौड़ी)",
+        "Haridwar": "हरिद्वार",
+        "Nanital": "नैनीताल",
+        "UdhamSinghNagar": "उधमसिंह नगर"
+      }
+    },
+    "West Bengal": {
+      "name": "पश्चिम बंगाल",
+      "districts": {
+        "Dakshin Dinajpur": "दक्षिण दिनाजपुर",
+        "Alipurduar": "आलीपुरदुआर",
+        "Bankura": "बांकुरा",
+        "Birbhum": "बीरभूम",
+        "Burdwan": "बर्धवान",
+        "Coochbehar": "कूचबिहार",
+        "Darjeeling": "दार्जिलिंग",
+        "Hooghly": "हुगली",
+        "Howrah": "हावड़ा",
+        "Jalpaiguri": "जलपाईगुड़ी",
+        "Jhargram": "झारग्राम",
+        "Kalimpong": "कालिमपोंग",
+        "Kolkata": "कोलकाता",
+        "Malda": "मालदा",
+        "Medinipur(E)": "मेदिनीपुर(पूर्व)",
+        "Medinipur(W)": "मेदिनीपुर(पश्चिम)",
+        "Murshidabad": "मुर्शिदाबाद",
+        "Nadia": "नदिया",
+        "North 24 Parganas": "उत्तर 24 परगना",
+        "South 24 Parganas": "दक्षिण 24 परगना",
+        "Purulia": "पुरुलिया"
+      }
+    }
+  }  
