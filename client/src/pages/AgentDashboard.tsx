@@ -14,7 +14,7 @@ interface Data{
 }
 const AgentDashboard:React.FC = () => {
 
-  const { data, error } = useSWR<Data>(`/api/agent`, fetcher);
+  const { error } = useSWR<Data>(`/api/agent`, fetcher);
 
   if(error){
     console.log(error.message);
