@@ -1,0 +1,30 @@
+import axios from 'axios';
+import React from 'react'
+import useSWR from 'swr';
+import NotFound from './NotFound';
+import { Paper } from '@mui/material';
+import UserForm from '../components/agent/UserForm';
+
+const fetcher = (url: string) =>
+  axios.get(url, { withCredentials: true }).then((res) => res.data);
+
+interface Data{
+  success: boolean;
+  message:string
+}
+const AgentDashboard:React.FC = () => {
+
+  const { data, error } = useSWR<Data>(`/api/agent`, fetcher);
+
+  if(error){
+    console.log(error.message);
+    return <NotFound/>
+  }
+  return (
+      <Paper  className="min-h-screen">
+        <UserForm/>
+      </Paper>
+  )
+}
+
+export default AgentDashboard

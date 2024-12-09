@@ -44,12 +44,27 @@ const Login:React.FC = () => {
   const handleFormSubmit = async(values: LoginFormSchema) => {
 
     try{
-     await axios.post(`/api/local/login`, values,{
+     const response = await axios.post(`/api/local/login`, values,{
       withCredentials: true, 
     })
       
+    
+    const user = response.data.userType
+    console.log(user)
+    console.log(user=== "Agent")
       toast.success(t("Login successful"));
+      if(response.data.userType === "Admin"){
+        navigate("/admin/dashboard")
+      }
+      
+      else if(response.data.userType === "Agent"){
+        navigate("/agent/dashboard")
+      }
+      else{
+
+      
       navigate("/");
+      }
     }catch(error:any){
       toast.error(error.response.data.message || t("An error occurred"));
       console.error(error);

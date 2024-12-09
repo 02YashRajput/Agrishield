@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import NotFound from './NotFound';
 import toast from 'react-hot-toast';
 
-// Fetcher function to handle API requests
 const fetcher = (url: string) =>
   axios.get(url, { withCredentials: true }).then((res) => res.data);
 
@@ -85,7 +84,7 @@ const AdminDashboard: React.FC = () => {
   };
   const deleteUser = async (userId: number) => {
     try {
-      const response = await axios.delete(`/api/admin/dashboard/user/${userId}`, {
+       await axios.delete(`/api/admin/dashboard/user/${userId}`, {
         withCredentials: true,
       });
 
@@ -97,7 +96,7 @@ const AdminDashboard: React.FC = () => {
   };
   const deleteContract = async (contractId: number) => {
     try {
-      const response = await axios.delete(`/api/admin/dashboard/${contractId}`, {
+      await axios.delete(`/api/admin/dashboard/${contractId}`, {
         withCredentials: true,
       });
      toast.success('contract deleted successfullt')

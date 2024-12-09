@@ -36,10 +36,9 @@ router.post(
           .status(500)
           .send({success:false, message: "Error logging in" });
       }
-
       return res
         .status(200)
-        .json({ message: "User logged in successfully",success:true });
+        .json({ message: "User logged in successfully",success:true , userType :req.user.userType});
     });
 
   }

@@ -34,6 +34,19 @@ interface Data {
     finalPaymentAmount: string;
     productImage: string;
   }[];
+  suggestedCrops: {
+    marketPlaceId: number;
+    buyerName: string;
+    buyerProfileImage: string;
+    buyerProfileLink: string;
+    productName: string;
+    additionalInstructions: string;
+    productQuantity: string;
+    deadline: Date;
+    initialPaymentAmount: string;
+    finalPaymentAmount: string;
+    productImage: string;
+  }[];
 }
 const fetcher = (url: string) =>
   axios
@@ -61,10 +74,7 @@ const MarketPlace: React.FC = () => {
   const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
 
 
-  // useEffect(()=>{
-  //   console.log(isLoading);
-  //   console.log(data);
-  // })
+
 
   useEffect(() => { 
     const newUrl = `/marketplace?page=${page}`;
@@ -101,6 +111,7 @@ const MarketPlace: React.FC = () => {
       handlePrevPage={handlePrevPage}
       distance={distance}
       setDistance={setDistance}
+      suggestedCrops={data?.suggestedCrops}
       crop={crop}
       setCrop={setCrop}
       page={page}

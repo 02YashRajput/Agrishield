@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ProductName } from "../utils/cropsName";
+
 import axios from "axios";
 import useSWR from "swr";
 import ErrorPage from "./Error";

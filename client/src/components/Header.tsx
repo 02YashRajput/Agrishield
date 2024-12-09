@@ -77,11 +77,7 @@ const Header: React.FC<HeaderProps> = ({
       { text: t("PricePredictor"), icon: <FaChartLine />, to: "/price-predictor" }
     );
     if (isSmallScreen) {
-      menuItems.push({
-        text: t("PricePredictor"),
-        icon: <FaChartLine />,
-        to: "/price-predictor",
-      });
+     
 
       menuItems.push({
         text: t("Profile"),

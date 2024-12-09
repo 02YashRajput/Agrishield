@@ -17,6 +17,7 @@ import NegotiationsRoute from "./negotiations.mjs"
 import TransalationRoute from "./transaction.mjs"
 import ChatRoute from "./chat.mjs"
 import PricePredictor from "./price-prediction.mjs"
+import AgentRoute from "./agent-dashboard.mjs"
 const router = Router();
 
 router.use(SignUpRoute)
@@ -37,4 +38,5 @@ router.use(NegotiationsRoute);
 router.use(TransalationRoute);
 router.use(ChatRoute);
 router.use(PricePredictor);
+router.use(AgentRoute)
 export default router;

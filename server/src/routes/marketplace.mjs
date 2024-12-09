@@ -51,10 +51,17 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
       if (!profile || !profile.address || !profile.address.location) {
         return res.status(400).json({ message: "User location not found" });
       }
-
+      
       const userLocation = profile.address.location;
 
       let marketplaceDocs = await MarketPlace.find().select("-_id -buyerId");
+
+      const { cropsGrown } = profile.farmDetails;
+
+      const suggestedCrops = marketplaceDocs
+  .filter(doc => cropsGrown.includes(doc.productName)) 
+  .slice(0, 10)
+
       if (distance !== 0) {
         const calculateDistance = (loc1, loc2) => {
           const toRadians = (degrees) => (degrees * Math.PI) / 180;
@@ -93,6 +100,7 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
         success: true,
         message: "Listed Items Found",
         results,
+        suggestedCrops,
         user: {
           name: req.user.userName,
           id: req.user.userId,

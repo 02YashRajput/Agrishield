@@ -39,7 +39,7 @@ const userSchema = new Schema({
   userType:{
     type: String,
     required: true,
-    enum: ['Farmer', 'Buyer','Admin'],
+    enum: ['Farmer', 'Buyer','Admin','Agent'],
   },
   provider: {
     type: String,

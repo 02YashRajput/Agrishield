@@ -88,9 +88,6 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
   
 
-  useEffect(() => {
-    console.log(profileData);
-  });
   const handleFormSubmit = async (data: any) => {
     setUpdating(true); // Indicate the updating process has started
 

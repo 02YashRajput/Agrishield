@@ -17,6 +17,8 @@ import {
   DialogContent,
   DialogActions,
   CircularProgress,
+  MenuItem,
+  Menu,
 } from "@mui/material";
 import { pdf } from "@react-pdf/renderer";
 type Transaction = {
@@ -139,6 +141,20 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
   const [activeStep, setActiveStep] = useState(0);
   const [pdfLoading, setPDFLoading] = useState(false);
   const { Razorpay } = useRazorpay();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // For the dropdown
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget); // Open the menu when the button is clicked
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null); // Close the menu when an option is selected or clicked outside
+  };
+
+  const handleSelect = (url: string) => {
+    window.open(url, "_blank"); // Open the selected link in a new tab
+    handleClose(); // Close the dropdown after selection
+  };
   const isVertical = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
@@ -464,6 +480,8 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           ))}
         </Stepper>
       </Box>
+      
+         
 
       {userType === statusArray[activeStep][1] &&
         (activeStep === 0 || activeStep === 6 ? (
@@ -487,6 +505,37 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
             {t('Update Status')}
           </Button>
         ))}
+         {
+            userType === statusArray[activeStep][1] && activeStep === 3
+            && <Button sx= {{color:theme.palette.blue?.main}} onClick={handleClick}>
+              Need Help with Delivery?
+            </Button>
+
+            
+
+           }
+                 <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "delivery-help-button",
+        }}
+      >
+        <MenuItem onClick={() => handleSelect("https://www.delhivery.com/")}>
+          Delhivery
+        </MenuItem>
+        <MenuItem onClick={() => handleSelect("https://www.bluedart.com/")}>
+          Blue Dart
+        </MenuItem>
+        <MenuItem onClick={() => handleSelect("http://www.ekartlogistics.com/")}>
+          Ekart Logistics
+        </MenuItem>
+        <MenuItem onClick={() => handleSelect("https://www.ecomexpress.in")}>
+          Ecom Express
+        </MenuItem>
+      </Menu>
+
 
           <div className="mt-4">
 

@@ -3,9 +3,23 @@ import { Card, Stack, Chip, Typography, CardContent, Box, Button, Autocomplete, 
 import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
 import { useTranslation } from "react-i18next";
-
+import Slider from "react-slick";
+import SuggestedCropsCarousel from "./SuggestedCarousel";
 interface FarmerMarketPlaceProps {
   results: {
+    marketPlaceId: number;
+    buyerName: string;
+    buyerProfileImage: string;
+    buyerProfileLink: string;
+    productName: string;
+    additionalInstructions: string;
+    productQuantity: string;
+    deadline: Date;
+    initialPaymentAmount: string;
+    finalPaymentAmount: string;
+    productImage: string;
+  }[];
+  suggestedCrops: {
     marketPlaceId: number;
     buyerName: string;
     buyerProfileImage: string;
@@ -39,7 +53,8 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   handlePrevPage,
   page,
   userType,
-isLoading
+isLoading,
+suggestedCrops
 }) => {
   const {t} = useTranslation(["farmermarketplace", "crops"]);
   const [contracts,setContracts] = useState<FarmerMarketPlaceProps['results']>([])
@@ -57,6 +72,7 @@ isLoading
   },[isLoading,page])
   return (
     <div className="space-y-9">
+     <SuggestedCropsCarousel suggestedCrops={suggestedCrops}/>
       <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
 
         {/* Distance Label */}

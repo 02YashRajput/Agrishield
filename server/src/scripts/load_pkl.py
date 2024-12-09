@@ -1,43 +1,57 @@
 import sys
-import pickle
 import pandas as pd
-import json
+import joblib 
+from datetime import datetime, timedelta
 
 def main():
-    
-    if len(sys.argv) != 6:
-        print("Usage: process_data.py <pickle_path> <state> <district> <commodity> <date>")
-        sys.exit(1)
-
-    pickle_path = sys.argv[1]
-    state = sys.argv[2]
-    district = sys.argv[3]
-    commodity = sys.argv[4]
-    date = sys.argv[5]
-    
-    print("Raw input: ", state, district, commodity, date)
-
-
     try:
-        with open(pickle_path, 'rb') as f:
-            model = pickle.load(f)
+         
+        
+        if len(sys.argv) != 4:
+            print("Usage: process_data.py <pickle_path>  <district> <commodity> ")
+            sys.exit(1)
+
+        pickle_path = sys.argv[1]
+    
+        district = sys.argv[2]
+        commodity = sys.argv[3]
+        start_date = datetime.today().date()
+        
+    
+     
+        model = joblib.load(pickle_path)
+        
+        
+        columns = ['District', 'Commodity', 'Year', 'Month', 'Day']
+        
+       
+        
+        
+     
+        predictions = []
+        
+        for i in range(12):
+            
+            next_month_date = start_date + timedelta(days=i * 30)  
+            
+           
+            single_instance = pd.DataFrame([[ district, commodity, next_month_date.year, next_month_date.month, next_month_date.day]], columns=columns)
+            
+            
+            single_instance_prediction = model.predict(single_instance)
+            
+           
+            predictions.append(round(single_instance_prediction[0], 2))
+            
+       
+        print(predictions)
             
     except Exception as e:
-        print(f"Error loading pickle file: {e}")
-        sys.exit(1)
-
-    feature_names = ["State", "District", "Commodity", "Arrival_Date"]
-    input_data = [[state, district, commodity, date]]  
-    input_df = pd.DataFrame(input_data, columns=feature_names)
-
-    try:
-        predictions = model.predict(input_df)
-        predictions_list = predictions.tolist()
-        print(json.dumps(predictions_list))
-    except Exception as e:
-        print(f"Error during prediction: {e}")
+        print(f"Error loading model: {e}")
         sys.exit(1)
 
 
+    
+   
 if __name__ == "__main__":
     main()

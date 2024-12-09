@@ -21,6 +21,7 @@ import PrivateRoute from './components/PrivateRoute';
 import TransactionList from './pages/TransactionList';
 import Chat from './components/chat/Chat';
 import PricePredictor from './pages/PricePredictor';
+import AgentDashboard from './pages/AgentDashboard';
 
 
 const fetcher = (url:string) => axios.get(url).then((res) => res.data);
@@ -78,6 +79,7 @@ function App ()  {
       <Route path="/contact-us" element={<ContactUs />} />
       <Route path="/about" element={<About />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      <Route path="/agent/dashboard" element={<AgentDashboard />} />
       <Route path="/verify-email" element={<Verification />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
