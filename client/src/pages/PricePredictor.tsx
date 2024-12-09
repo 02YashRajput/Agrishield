@@ -258,6 +258,7 @@ const PricePredictor: React.FC = () => {
                     height="140"
                     image={crop.imgLink}
                     alt={crop.name}
+                    loading="lazy"
                   />
                   <CardContent>
                     <Typography variant="h6" component="div">
