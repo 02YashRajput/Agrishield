@@ -5,7 +5,6 @@ import { z } from "zod";
 import { TextField, MenuItem, Button, Typography, Grid } from "@mui/material";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Email } from "@mui/icons-material";
 
 // Define the schema using Zod
 const userSchema = z.object({
@@ -32,7 +31,7 @@ const UserForm :React.FC= () => {
   const {
     control,
     handleSubmit,
-    watch,
+    
     reset,
     formState: { errors },
   } = useForm<UserFormValues>({

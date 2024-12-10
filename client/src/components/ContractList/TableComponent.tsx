@@ -1,5 +1,4 @@
 import React from "react";
-import { ProductName } from "../../utils/cropsName";
 import {
   Table,
   TableBody,

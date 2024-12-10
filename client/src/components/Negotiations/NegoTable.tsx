@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -26,7 +26,7 @@ import { listContractSchema } from "../marketPlace/listContractSchema";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Calendar from "react-calendar";
 import toast from "react-hot-toast";
-import { NegoData,Negotiation } from "../../pages/NegotiationList";
+import { Negotiation } from "../../pages/NegotiationList";
 import axios from "axios"
 import { useTranslation } from "react-i18next";
 

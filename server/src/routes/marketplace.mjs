@@ -49,7 +49,7 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
     } else {
       const profile = await FarmerProfile.findOne({ userId: req.user.id });
       if (!profile || !profile.address || !profile.address.location) {
-        return res.status(400).json({ message: "User location not found" });
+        return res.status(401).json({ message: "User Profile not found" });
       }
       
       const userLocation = profile.address.location;

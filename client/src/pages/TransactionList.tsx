@@ -46,11 +46,7 @@ const TransactionList :React.FC= () => {
   if (error) {
     return <ErrorPage />;
   }
-  useEffect(()=>{
-    if(!isLoading){
-      console.log(data)
-    }
-  },[isLoading]);
+
   return (
     <div>
  <Header

@@ -66,7 +66,6 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
 
   const cropsObject = t("crops:cropsObject", { returnObjects: true });
 
-  console.log(cropsObject);
   const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
     key,
     value,
@@ -113,7 +112,6 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
   useEffect(() => {
     if (!isLoading) {
       setContracts(results);
-      console.log("loading");
     }
   }, [isLoading, page]);
 

@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import { ProductName } from "../utils/cropsName";
 import ErrorPage from "./Error";
 import Header from "../components/Header";
 import BuyerMarketPlace from "../components/marketPlace/BuyerMarketPlace";
 import { Paper } from "@mui/material";
 import FarmerMarketPlace from "../components/marketPlace/FarmerMarketPlace";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import toast from "react-hot-toast";
 
 interface Data {
   success: boolean;
@@ -57,7 +57,7 @@ const fetcher = (url: string) =>
 
 const MarketPlace: React.FC = () => {
   const location = useLocation()
-
+  const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
   const Page = params.get("page") || null;
   const [page, setPage] = useState<number>(Page ? parseInt(Page,10) : 1);
@@ -81,6 +81,12 @@ const MarketPlace: React.FC = () => {
     window.history.pushState({}, "", newUrl);
   }, [page]);
   if (error) {
+    if (error.status === 401) {
+        navigate("/profile");
+        toast.error("Please complete you profile first");
+    } else {
+      return <ErrorPage />;
+    }
     return <ErrorPage />;
   }
 

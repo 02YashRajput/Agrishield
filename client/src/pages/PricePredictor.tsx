@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import ErrorPage from "./Error";
 import Header from "../components/Header";
@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 interface StateData {
   name: string;
   districts: Record<string, string>;
@@ -53,7 +54,7 @@ const PricePredictor: React.FC = () => {
     districtSelect: z.string().min(1, { message: "District is required." }),
     stateSelect: z.string().min(1, { message: "State is required." }),
   });
-
+  const navigate = useNavigate();
   const { t } = useTranslation(["crops", "stateanddistricts"]);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -126,6 +127,10 @@ const PricePredictor: React.FC = () => {
   };
   
   if (error) {
+    if(error.status === 401){
+      navigate('/profile');
+      toast.error("Please complete your profile first");
+    }
     return <ErrorPage />;
   }
 

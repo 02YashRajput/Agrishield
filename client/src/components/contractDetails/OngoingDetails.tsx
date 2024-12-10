@@ -270,7 +270,6 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         rzp.open();
       }
     } catch (err) {
-      console.log(err);
       toast.error(t("Error Occured: "));
     } finally {
       setLoading(false);

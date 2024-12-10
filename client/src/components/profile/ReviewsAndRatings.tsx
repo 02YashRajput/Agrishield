@@ -192,7 +192,7 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Rating
               value={newReview.rating}
-              onChange={(event, newValue) =>
+              onChange={(_, newValue) =>
                 setNewReview((prev) => ({ ...prev, rating: newValue || 0 }))
               }
               precision={0.5}

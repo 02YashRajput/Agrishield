@@ -171,7 +171,7 @@ const Profile: React.FC = () => {
   align="left"
   sx={{ color: "gray", display: "flex", alignItems: "center" }}
 >
-  Name: {profileData?.userName} <MdVerifiedUser />
+  Name: {profileData?.userName} { profileData?.adhaar && <MdVerifiedUser />}
 </Typography>
                   <Box
                     sx={{

@@ -154,7 +154,6 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
     }
     catch(error){
 
-      console.log(error)
       toast.error(t("Error updating contract"))
     }finally{
       setIsEditable(false)

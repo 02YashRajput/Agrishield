@@ -37,11 +37,10 @@ router.get("/api/price-predictor", authMiddleware, async (req, res) => {
         profile = await BuyerProfile.findOne({ userId: req.user.id });
       }
 
-      if (!profile) {
-        res
-          .status(404)
-          .json({ success: false, message: "Please complete your profile." });
+      if (!profile || !profile.address ) {
+        return res.status(401).json({ message: "User Profile not found" });
       }
+
       state = profile.address.state;
       district = profile.address.district;
 
@@ -137,10 +136,9 @@ router.get(
   "/api/price-predictor/:commodity",
   authMiddleware,
   async (req, res) => {
-   
     try {
       const commodity = decodeURIComponent(req.params.commodity);
-      
+
       let state = req.query.state || "";
       let district = req.query.district || "";
 

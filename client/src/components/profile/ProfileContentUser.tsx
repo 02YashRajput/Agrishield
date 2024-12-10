@@ -14,7 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Data } from "../../pages/Profile";
 import { IoPersonOutline } from "react-icons/io5";
 

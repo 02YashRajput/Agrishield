@@ -17,7 +17,6 @@ const AgentDashboard:React.FC = () => {
   const { error } = useSWR<Data>(`/api/agent`, fetcher);
 
   if(error){
-    console.log(error.message);
     return <NotFound/>
   }
   return (

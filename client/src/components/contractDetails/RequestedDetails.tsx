@@ -157,7 +157,6 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                   navigate("/contracts")
                 }
               }catch(err){
-                console.log(err);
                 toast.error(t("An error occurred while accepting contract"));
               }
             }}
@@ -177,7 +176,6 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                   navigate("/contracts")
                 }
               }catch(err){
-                console.log(err);
                 toast.error(t("An error occurred while accepting contract"));
               }
             }}
@@ -200,7 +198,6 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
                   navigate("/contracts")
                 }
               }catch(err){
-                console.log(err);
                 toast.error(t("An error occurred while accepting contract"));
               }
             }}

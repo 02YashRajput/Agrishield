@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Card, Stack, Chip, Typography, CardContent, Box, Button, Autocomplete, TextField } from "@mui/material";
+import {
+  Card,
+  Stack,
+  Chip,
+  Typography,
+  CardContent,
+  Box,
+  Button,
+  Autocomplete,
+  TextField,
+} from "@mui/material";
 import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
 import { useTranslation } from "react-i18next";
-import Slider from "react-slick";
 import SuggestedCropsCarousel from "./SuggestedCarousel";
 interface FarmerMarketPlaceProps {
   results: {
@@ -40,7 +49,7 @@ interface FarmerMarketPlaceProps {
   setDistance: React.Dispatch<React.SetStateAction<number>>;
   crop: string;
   setCrop: React.Dispatch<React.SetStateAction<string>>;
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
@@ -53,37 +62,41 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   handlePrevPage,
   page,
   userType,
-isLoading,
-suggestedCrops
+  isLoading,
+  suggestedCrops,
 }) => {
-  const {t} = useTranslation(["farmermarketplace", "crops"]);
-  const [contracts,setContracts] = useState<FarmerMarketPlaceProps['results']>([])
-  const handleCropChange = (value : string) => {
+  const { t } = useTranslation(["farmermarketplace", "crops"]);
+  const [contracts, setContracts] = useState<FarmerMarketPlaceProps["results"]>(
+    []
+  );
+  const handleCropChange = (value: string) => {
     setCrop(value);
   };
 
   const handleDistanceChange = (newDistance: number) => {
     setDistance(newDistance);
   };
-  useEffect(()=>{
-    if(!isLoading){
+  useEffect(() => {
+    if (!isLoading) {
       setContracts(results);
     }
-  },[isLoading,page])
+  }, [isLoading, page]);
   return (
-    <div className="space-y-9">
-     <SuggestedCropsCarousel suggestedCrops={suggestedCrops}/>
-      <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
+    <div className="space-y-9">{
+      suggestedCrops.length>0 &&
+      <SuggestedCropsCarousel suggestedCrops={suggestedCrops} />
 
+    }
+      <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
         {/* Distance Label */}
         <Typography variant="h6" color="textSecondary" mb={1}>
-        {t('selectdistance')}
+          {t("selectdistance")}
         </Typography>
 
         {/* Chips for Distance */}
         <Stack direction="row" spacing={2} mb={2}>
-        <Chip
-            label={t('all')}
+          <Chip
+            label={t("all")}
             clickable
             color={distance === 0 ? "primary" : "default"}
             onClick={() => handleDistanceChange(0)}
@@ -106,37 +119,36 @@ suggestedCrops
             color={distance === 100 ? "primary" : "default"}
             onClick={() => handleDistanceChange(100)}
           />
-
         </Stack>
 
         <Typography variant="h6" color="textSecondary" mb={1}>
-        {t('selectcrop')}
+          {t("selectcrop")}
         </Typography>
 
         <Autocomplete
-  id="crop-autocomplete"
-  value={crop}
-  onChange={(event, newValue) => {
-    handleCropChange(newValue ?? ""); 
-  }}
-  options={cropsArray.map((cropName) =>
-    cropName.charAt(0).toUpperCase() + cropName.slice(1)
-  )}
-  renderInput={(params) => (
-    <TextField
-      {...params}
-      label={t('selectcrop')}
-      color="secondary"
-      fullWidth
-    />
-  )}
-  ListboxProps={{
-    style: {
-      maxHeight: 300, // Limit the dropdown height
-    },
-  }}
-  isOptionEqualToValue={(option, value) => option === value}
-/>
+          id="crop-autocomplete"
+          value={crop}
+          onChange={(_, newValue) => {
+            handleCropChange(newValue ?? "");
+          }}
+          options={cropsArray.map(
+            (cropName) => cropName.charAt(0).toUpperCase() + cropName.slice(1)
+          )}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={t("selectcrop")}
+              color="secondary"
+              fullWidth
+            />
+          )}
+          ListboxProps={{
+            style: {
+              maxHeight: 300, // Limit the dropdown height
+            },
+          }}
+          isOptionEqualToValue={(option, value) => option === value}
+        />
       </Card>
 
       <Card
@@ -144,13 +156,18 @@ suggestedCrops
         className="max-w-4xl mx-auto bg-white p-8 "
       >
         <Typography variant="h4" sx={{ fontWeight: 600 }}>
-        {t('listedcontract')}
+          {t("listedcontract")}
         </Typography>
         <CardContent>
-          {
-            results.length > 0 ? 
-            <ListedContracts contracts={contracts} userType={userType} setContracts={setContracts} /> : (<Typography variant="h5" >{t('nodata')}</Typography>)
-          }
+          {results.length > 0 ? (
+            <ListedContracts
+              contracts={contracts}
+              userType={userType}
+              setContracts={setContracts}
+            />
+          ) : (
+            <Typography variant="h5">{t("nodata")}</Typography>
+          )}
 
           <Box display="flex" justifyContent="space-between" mt={4}>
             <Button
@@ -159,7 +176,7 @@ suggestedCrops
               onClick={handlePrevPage}
               disabled={page === 1}
             >
-             {t('previous')}
+              {t("previous")}
             </Button>
             <Button
               variant="contained"
@@ -167,7 +184,7 @@ suggestedCrops
               onClick={handleNextPage}
               disabled={results.length < 20}
             >
-              {t('next')}
+              {t("next")}
             </Button>
           </Box>
         </CardContent>
