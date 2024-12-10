@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
   const handleLanguageChange = async (newLanguage: Language) => {
     try {
       const response = await axios.post(
-        "/api/get-language",
+        `${import.meta.env.VITE_SERVER_URL}/api/get-language`,
         { language: newLanguage },
         {
           withCredentials: true,

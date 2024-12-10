@@ -22,7 +22,7 @@ const Verification: React.FC = () => {
     return <ErrorPage />;
   }
 
-  const { data, error } = useSWR(`/api/verify-email?token=${token}`, fetcher);
+  const { data, error } = useSWR(`${import.meta.env.VITE_SERVER_URL}/api/verify-email?token=${token}`, fetcher);
 
   if (error) {
     return <ErrorPage />;

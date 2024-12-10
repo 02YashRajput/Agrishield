@@ -57,7 +57,7 @@ const ContractDetails :React.FC= () => {
   const location = useLocation();
   
   const { data, error, isLoading } = useSWR<Data>(
-    `/api${location.pathname}`,
+    `${import.meta.env.VITE_SERVER_URL}/api${location.pathname}`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

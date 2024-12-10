@@ -44,7 +44,7 @@ const Login:React.FC = () => {
   const handleFormSubmit = async(values: LoginFormSchema) => {
 
     try{
-     const response = await axios.post(`/api/local/login`, values,{
+     const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/local/login`, values,{
       withCredentials: true, 
     })
       

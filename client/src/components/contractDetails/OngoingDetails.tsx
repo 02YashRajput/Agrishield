@@ -195,7 +195,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
     try {
       const status = getStatusFromNumber(activeStep + 1);
       const response = await axios.post(
-        `/api/contracts/update-status/${data.contractId}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/contracts/update-status/${data.contractId}`,
         { status, transaction },
         { withCredentials: true }
       );
@@ -227,7 +227,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         : parseInt(data.finalPaymentAmount);
     try {
       const response = await axios.post(
-        "/api/create-order",
+        `${import.meta.env.VITE_SERVER_URL}/api/create-order`,
         { amount },
         { withCredentials: true }
       );

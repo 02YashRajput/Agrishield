@@ -115,7 +115,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
     try{
       data.marketPlaceId = selectedContract?.marketPlaceId
       if(userType === "Farmer"){
-        const response = await axios.post(`/api/marketplace/start-negotiations/${selectedContract?.marketPlaceId}`,data,{withCredentials:true});
+        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/marketplace/start-negotiations/${selectedContract?.marketPlaceId}`,data,{withCredentials:true});
         if (response.status === 200) {
           toast.success(t("Negotiation started successfully!"));
           navigate("/negotiations");
@@ -123,7 +123,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
 
       }else{
 
-      const response = await axios.put( "/api/marketplace/list-contract",data,{withCredentials:true})
+      const response = await axios.put( `${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract`,data,{withCredentials:true})
       if (response.data.success) {
         toast.success(t("Contract listed successfully!"));
         setContracts((prev) => {
@@ -544,7 +544,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       sx={{ mr: 1 }}
                       onClick={async() => {
                         try{
-                          const response =await axios.post(`/api/marketplace/request-contract/${selectedContract?.marketPlaceId}`,{withCredentials: true});
+                          const response =await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/marketplace/request-contract/${selectedContract?.marketPlaceId}`,{withCredentials: true});
                           if(response.data.success){
                             toast.success(t("Request sent successfully"));
                             navigate("/contracts")
@@ -619,7 +619,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       fullWidth
                       onClick={async() => {
                         try{
-                          const response = await axios.delete(`/api/marketplace/list-contract/${selectedContract?.marketPlaceId}`,{withCredentials:true})
+                          const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract/${selectedContract?.marketPlaceId}`,{withCredentials:true})
                           if(response.data.success) {
                             setContracts(prevContracts => 
                               prevContracts.filter(contract => contract.marketPlaceId !== selectedContract?.marketPlaceId)

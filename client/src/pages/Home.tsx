@@ -59,7 +59,7 @@ const fetcher = (url: string) =>
 
 
 const Home: React.FC = () => {
-  const { data, error } = useSWR<Data>(`/api/`, fetcher);
+  const { data, error } = useSWR<Data>(`${import.meta.env.VITE_SERVER_URL}/api/`, fetcher);
   const {t} = useTranslation('home')
   const isLoggedIn = data?.user  ? true : false;
 

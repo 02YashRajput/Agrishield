@@ -49,7 +49,7 @@ const fetcher = (url: string) =>
     .then((res) => res.data);
 const NegotiationList: React.FC = () => {
   const { t } = useTranslation(["negotiationlist", "crops"]);
-  const { data, error, isLoading } = useSWR<NegoData>(`/api/negotiations`, fetcher);
+  const { data, error, isLoading } = useSWR<NegoData>(`${import.meta.env.VITE_SERVER_URL}/api/negotiations`, fetcher);
   const isLoggedIn = data?.user ? true : false;
   const [tableData,setTableDate] = useState<Negotiation[]>([]);
   if (error) {

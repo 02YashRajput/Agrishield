@@ -65,7 +65,7 @@ const MarketPlace: React.FC = () => {
   const [distance,setDistance] = useState<number>(0);
   const [crop,setCrop] = useState<string>("");
   const { data, error, isLoading } = useSWR<Data>(
-    `/api/marketplace?page=${page}&distance=${distance}&crop=${crop}`,
+    `${import.meta.env.VITE_SERVER_URL}/api/marketplace?page=${page}&distance=${distance}&crop=${crop}`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

@@ -93,7 +93,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
     try {
       // Make the API call using axios
       const response = await axios.post(
-        "/api/marketplace/list-contract",
+        `${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract`,
         data,
         { withCredentials: true } // Ensure the request includes credentials (cookies/sessions)
       );

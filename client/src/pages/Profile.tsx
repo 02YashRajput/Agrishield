@@ -95,7 +95,7 @@ const Profile: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, error, isLoading } = useSWR<Data>(
-    `/api/profile/${id}`,
+    `${import.meta.env.VITE_SERVER_URL}/api/profile/${id}`,
     fetcher
   );
 
@@ -193,7 +193,7 @@ const Profile: React.FC = () => {
                 {
                   !profileData?.email && <Button variant="contained" onClick={async()=>{
 try{
-  const response = await axios.post(`/api/profile/start-chat/${id}`, {
+  const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/profile/start-chat/${id}`, {
     withCredentials: true, 
   });
   if(response.data.success) {

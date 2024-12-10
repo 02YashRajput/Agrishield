@@ -31,7 +31,7 @@ const fetcher = (url: string) => axios.get(url,{
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<Language | ''>('');
-  const { data: backendLanguage } = useSWR('/api/get-language', fetcher);
+  const { data: backendLanguage } = useSWR(`${import.meta.env.VITE_SERVER_URL}/api/get-language`, fetcher);
   const [isChatOpen,setIsChatOpen] = useState<boolean>(false);
   const [currentChatId, setCurrentChatId] = useState<string | null>(null);
   useEffect(() => {

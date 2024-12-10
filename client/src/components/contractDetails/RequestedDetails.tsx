@@ -151,7 +151,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaCheck />}
             onClick={async()=>{
               try{
-                const response = await axios.post(`/api/contracts/accept/${data.contractId}`,{withCredentials: true});
+                const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/contracts/accept/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
@@ -170,7 +170,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaTimes />}
             onClick={async()=>{
               try{
-                const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true});
+                const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/contracts/delete/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
@@ -192,7 +192,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaTrash />}
             onClick={async()=>{
               try{
-                const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true});
+                const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/contracts/delete/${data.contractId}`,{withCredentials: true});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
