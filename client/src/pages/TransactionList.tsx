@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React from 'react'
 import useSWR from 'swr';
 import ErrorPage from './Error';
 import { Card, CardContent, CircularProgress, Paper } from '@mui/material';

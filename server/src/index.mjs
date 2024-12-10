@@ -19,7 +19,10 @@ const app = express();
 const httpServer = http.createServer(app); 
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+  origin: [
+    process.env.CLIENT_URL,            
+    process.env.PRODUCTION_CLIENT_URL  
+  ],
   credentials: true, 
 };
 

@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch src/index.mjs"
+    "dev": "pm2 start ecosystem.config.cjs --env development",
+    "start": "pm2 reload ecosystem.config.cjs --env production",
+    "stop":"pm2 stop agrishield"
+
   },
   "keywords": [],
   "author": "",

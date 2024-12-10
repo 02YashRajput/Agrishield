@@ -15,6 +15,7 @@ module.exports = {
       error_file: './logs/app-err.log',
       out_file: './logs/app-out.log', 
       log_date_format: 'DD-MM-YYYY HH:mm:ss', 
+      node_args: '--no-warnings',
     },
   ],
 };

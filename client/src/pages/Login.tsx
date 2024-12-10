@@ -49,7 +49,6 @@ const Login:React.FC = () => {
     })
       
     
-    const user = response.data.userType
       toast.success(t("Login successful"));
       if(response.data.userType === "Admin"){
         navigate("/admin/dashboard")
