@@ -22,6 +22,7 @@ import TransactionList from './pages/TransactionList';
 import Chat from './components/chat/Chat';
 import PricePredictor from './pages/PricePredictor';
 import AgentDashboard from './pages/AgentDashboard';
+import PredictionDetails from './pages/PredictionDetails';
 
 
 const fetcher = (url:string) => axios.get(url).then((res) => res.data);
@@ -72,6 +73,7 @@ function App ()  {
         <Route path="/negotiations" element={<NegotiationList />} />
         <Route path="/transactions" element={<TransactionList />} />
         <Route path='/price-predictor' element={<PricePredictor />} />
+        <Route path='/price-predictor/:crop' element = {<PredictionDetails/>}/>
       </Route>
 
   
