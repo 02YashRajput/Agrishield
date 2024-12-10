@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { readFile } from "fs/promises";
-
+import crypto from "crypto";
 import { authMiddleware } from "../middleware/auth_middleware.mjs";
 import {
   BuyerProfile,
@@ -137,9 +137,10 @@ router.get(
   "/api/price-predictor/:commodity",
   authMiddleware,
   async (req, res) => {
+   
     try {
-      const { commodity } = req.params;
-
+      const commodity = decodeURIComponent(req.params.commodity);
+      
       let state = req.query.state || "";
       let district = req.query.district || "";
 
@@ -191,6 +192,7 @@ router.get(
         },
       });
     } catch (err) {
+      console.log(err);
       return res.status(500).json({ success: false, message: "Server Error" });
     }
   }

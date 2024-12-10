@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useSWR from "swr";
 import ErrorPage from "./Error";
 import Header from "../components/Header";
@@ -252,6 +252,7 @@ const PricePredictor: React.FC = () => {
           <Grid container spacing={2}>
             {filteredCrops.map((crop, index) => (
               <Grid item xs={12} sm={6} md={6} key={index}>
+                <Link to = {`/price-predictor/${encodeURIComponent(crop.name)}`}>
                 <Card>
                   <CardMedia
                     component="img"
@@ -266,6 +267,8 @@ const PricePredictor: React.FC = () => {
                     </Typography>
                   </CardContent>
                 </Card>
+                </Link>
+
               </Grid>
             ))}
           </Grid>
