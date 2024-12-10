@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pm2 start ecosystem.config.cjs --env development",
     "start": "pm2 reload ecosystem.config.cjs --env production",
-    "stop":"pm2 stop agrishield"
-
+    "stop": "pm2 stop agrishield"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +35,7 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
+    "pm2": "^5.4.3",
     "razorpay": "^2.9.5",
     "react-google-login": "^5.2.2",
     "socket.io": "^4.8.1",
