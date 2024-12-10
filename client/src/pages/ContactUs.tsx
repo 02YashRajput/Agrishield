@@ -106,6 +106,7 @@ const ContactUsForm: React.FC = () => {
           padding: 4,
           boxShadow: 3,
           marginTop: 5,
+          marginBottom: 5,
           display: "flex",
           flexDirection: "column",
           gap: 5,
