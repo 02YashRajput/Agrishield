@@ -10,14 +10,13 @@ interface GoogleLoginProps {
 }
 const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
   const navigate = useNavigate();
-  const serverUrl = import.meta.env.VITE_SERVER_URL;
   const onSuccess = async (credentialResponse:any) => {
    
    
     try {
       const { credential } = credentialResponse;
       const res = await axios.post(
-        `${serverUrl}/api/auth/google`, 
+        `/api/auth/google`, 
         { credential, userType },
         { withCredentials: true } // This ensures cookies are sent along with the request
       );
