@@ -5,7 +5,7 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
+  // Image,
 } from "@react-pdf/renderer";
 
 interface ContractPdfProps {
