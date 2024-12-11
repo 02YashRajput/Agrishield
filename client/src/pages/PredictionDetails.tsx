@@ -95,8 +95,11 @@ const PredictionDetails: React.FC = () => {
   }, [data]);
 
   useEffect(() => {
+    if(State === "" || District === "" ){
+   
     const newUrl = `/price-predictor/${crop}?state=${state}&district=${district}`;
     window.history.pushState({}, "", newUrl);
+    }
   }, [state, district]);
 
   if (error) {

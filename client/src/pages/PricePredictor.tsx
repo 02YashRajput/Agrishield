@@ -90,12 +90,25 @@ const PricePredictor: React.FC = () => {
   }, [state, district]);
 
 
- 
+
+  useEffect(() => {
+      const params = new URLSearchParams(location.search);
+        const newState = params.get("state");
+        const newDistrict = params.get("district");
+       
+       if (newState !== state || newDistrict !== district) {
+          setState(newState || "");
+          setDistrict(newDistrict || "");
+        }
+      }, [location.search]);
+    
+     
 
   const {
     control,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
@@ -104,6 +117,12 @@ const PricePredictor: React.FC = () => {
       districtSelect: district.split("-").join(" "),
     },
   });
+  useEffect(() => {
+    reset({
+      stateSelect: state.split("-").join(" "),
+      districtSelect: district.split("-").join(" "),
+    });
+  }, [state, district, reset]);
 
   const statesObject = t("stateanddistricts:States", {
     returnObjects: true,
@@ -261,7 +280,7 @@ const PricePredictor: React.FC = () => {
           <Grid container spacing={2}>
             {filteredCrops.map((crop, index) => (
               <Grid item xs={12} sm={6} md={6} key={index}>
-                <Link to = {`/price-predictor/${encodeURIComponent(crop.name)}`}>
+                <Link to = {`/price-predictor/${encodeURIComponent(crop.name)}?state=${state}&district=${district}`}>
                 <Card>
                   <CardMedia
                     component="img"
