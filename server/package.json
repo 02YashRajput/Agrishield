@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "pm2 start ecosystem.config.cjs --env development",
     "start": "pm2 start ecosystem.config.cjs --env production",
-    "stop": "pm2 stop agrishield"
+    "stop": "pm2 stop agrishield",
+    "prod" : "NODE_ENV=production node src/index.mjs"
   },
   "keywords": [],
   "author": "",
