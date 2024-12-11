@@ -32,26 +32,24 @@ app.use(cors(corsOptions));
 
 await connectDb();
 
-app.use(express.json());
-app.use(cookieParser(cookie_secret));
 app.use(
   session({
     secret: session_secret,
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 60000 * 60 * 24 * 30,
-      secure: true, 
-      httpOnly: true,
-      sameSite: 'None'
+      maxAge: 60000 * 60 * 24 * 30, // 30 days
+      secure: process.env.NODE_ENV === 'production', // secure cookies only in production (Render)
+      httpOnly: true, // for security purposes, the cookie cannot be accessed by JavaScript
+      sameSite: 'None', // required for cross-origin requests
     },
     store: MongoStore.create({
       client: mongoose.connection.getClient(),
     }),
-    rolling: true
+    rolling: true, // keep the session alive with each request
   })
-
 );
+
 
 app.use(passport.initialize());
 app.use(passport.session());
