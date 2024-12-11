@@ -25,7 +25,7 @@ const LogoutModal :React.FC<LogoutModalProps> = ({logoutModalOpen ,setLogoutModa
 
   const handleLogoutConfirm = async () => {
     try {
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/logout`,{withCredentials: true});
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/logout`,{},{withCredentials: true});
       toast.success("Logout successful");
       setLogoutModalOpen(false);
       setAvatarOpen(false);
