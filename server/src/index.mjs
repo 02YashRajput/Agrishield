@@ -9,11 +9,12 @@ import passport from 'passport';
 import AllRoutes from './routes/route.mjs'; 
 import { connectDb } from './config/connect-db.mjs';
 import {configureChatSockets} from "./config/socket.mjs"
+dotenv.config();
 import http from 'http'; 
 const port = process.env.PORT || 3000;
 const cookie_secret = process.env.COOKIE_SECRET ;
 const session_secret = process.env.SESSION_SECRET;
-dotenv.config();
+
 
 const app = express();
 const httpServer = http.createServer(app); 
@@ -55,6 +56,6 @@ app.use(AllRoutes);
 
 
 configureChatSockets(httpServer);
-httpServer.listen(3000, () => {
-  console.log(`Server is running on port 3000`);
+httpServer.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
