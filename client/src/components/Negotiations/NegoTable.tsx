@@ -80,7 +80,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
 
  const handleEdit = async()=>{
   const values = getValues();
-
+  console.log(values);
   try{
 
     const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true});
@@ -271,10 +271,11 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       variant="body1"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
-                      <FaRupeeSign className="mr-1/2 text-sm" />
+                    
                       {isFarmer
                         ? row.initialPaymentAmountBuyer
                         : row.initialPaymentAmountFarmer}
+                        %
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -352,7 +353,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         : "N/A"}
                     </Typography>
                     <Typography>
-                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountFarmer}
+                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountFarmer}%
                     </Typography>
                     <Typography>
                     {t('finalpayment')}: {selectedRow?.finalPaymentAmountFarmer}
@@ -389,7 +390,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         : "N/A"}
                     </Typography>
                     <Typography>
-                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountBuyer}
+                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountBuyer}%
                     </Typography>
                     <Typography>
                     {t('finalpayment')}: {selectedRow?.finalPaymentAmountBuyer}

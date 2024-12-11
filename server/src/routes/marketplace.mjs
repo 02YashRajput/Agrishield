@@ -109,21 +109,20 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
 
       let productQuantities = {};
       let districtQuantities = {};
-
       marketplaceDocs.forEach(doc => {
-        // If the product is in district crops, add it to districtQuantities
+        const quantity = parseInt(doc.productQuantity, 10); 
+        
         if (districtCrops.includes(doc.productName)) {
           if (districtQuantities[doc.productName]) {
-            districtQuantities[doc.productName] += doc.productQuantity;
+            districtQuantities[doc.productName] += quantity; 
           } else {
-            districtQuantities[doc.productName] = doc.productQuantity;
+            districtQuantities[doc.productName] = quantity; 
           }
         } else {
-          // Otherwise, add it to productQuantities
           if (productQuantities[doc.productName]) {
-            productQuantities[doc.productName] += doc.productQuantity;
+            productQuantities[doc.productName] += quantity;
           } else {
-            productQuantities[doc.productName] = doc.productQuantity;
+            productQuantities[doc.productName] = quantity;
           }
         }
       });

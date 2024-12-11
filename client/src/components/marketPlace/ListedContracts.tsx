@@ -27,50 +27,50 @@ import { useTranslation } from "react-i18next";
 const productRates: {
   [key: string]: number;
 } = {
-  Banana: 4500,
-  Maize: 2500,
-  Apple: 8500,
-  Wheat: 3000,
+  "Banana": 4500,
+  "Maize": 2500,
+  "Apple": 8500,
+  "Wheat": 3000,
   "Black Gram (Urd Beans)(Whole)": 7200,
   "Bengal Gram(Gram)(Whole)": 5000,
   "Paddy(Dhan)(Common)": 3000,
   "Ginger(Green)": 6000,
   "Green Chilli": 8000,
-  Pomegranate: 7000,
-  Tomato: 4000,
-  Onion: 2500,
-  Potato: 1800,
-  Mustard: 5300,
+  "Pomegranate": 7000,
+  "Tomato": 4000,
+  "Onion": 2500,
+  "Potato": 1800,
+  "Mustard": 5300,
   "Masur Dal": 5500,
-  Garlic: 8000,
-  Rice: 3500,
+  "Garlic": 8000,
+  "Rice": 3500,
   "Arhar (Tur/Red Gram)(Whole)": 4500,
   "Lentil (Masur)(Whole)": 5500,
-  Groundnut: 6200,
-  Capsicum: 7000,
-  Spinach: 4000,
-  Papaya: 3000,
+  "Groundnut": 6200,
+  "Capsicum": 7000,
+  "Spinach": 4000,
+  "Papaya": 3000,
   "Water Melon": 3200,
-  Carrot: 4800,
-  Cauliflower: 4500,
-  Orange: 5000,
+  "Carrot": 4800,
+  "Cauliflower": 4500,
+  "Orange": 5000,
   "Peas Wet": 4200,
-  Pineapple: 5200,
+  "Pineapple": 5200,
   "Green Peas": 7000,
   "Amla(Nelli Kai)": 5500,
   "Chikoos(Sapota)": 4800,
   "Bajra(Pearl Millet/Cumbu)": 2100,
   "Jowar(Sorghum)": 2400,
-  Turmeric: 9500,
-  Soyabean: 6200,
-  Cotton: 6200,
+  "Turmeric": 9500,
+  "Soyabean": 6200,
+  "Cotton": 6200,
   "Moath Dal": 5000,
-  Peach: 8500,
-  Turnip: 3200,
+  "Peach": 8500,
+  "Turnip": 3200,
   "Cummin Seed(Jeera)": 9000,
   "Mint(Pudina)": 7000,
   "Guar Seed(Cluster Beans Seed)": 4700,
-  "Kodo Millet(Varagu)": 3900,
+  "Kodo Millet(Varagu)": 3900
 };
 
 interface ListedContractsProps {
@@ -136,7 +136,8 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
   };
   const {
     control,
-    handleSubmit,
+    
+    getValues,
     watch,
     setValue,
     formState: { errors },
@@ -361,7 +362,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         aria-describedby="modal-description"
         className="overflow-auto"
       >
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <form onSubmit={(e)=>{
+          e.preventDefault();
+          const data = getValues()
+          handleFormSubmit(data)
+          console.log("hello")
+        }}>
           <Box
             sx={{
               position: "absolute",
@@ -483,18 +489,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   )}
 
                   {isEditable ? (
-                    <TextField
-                      color="secondary"
-                      value={
-                        Number(watch("productQuantity")) === 0
-                          ? 0
-                          : Number(watch("finalPaymentAmount") || 0) /
-                            Number(watch("productQuantity"))
-                      }
-                      label={t("ratePerQuintal")}
-                      fullWidth
-                      disabled
-                    />
+                    <Typography variant="body1" className="flex items-center">
+                      <strong>{t("rate")}</strong> <FaRupeeSign />{" "}
+                      {
+                        Number(watch("finalPaymentAmount")) /Number(watch("productQuantity"))
+                        }
+                    </Typography>
                   ) : (
                     <Typography variant="body1" className="flex items-center">
                       <strong>{t("rate")}</strong> <FaRupeeSign />{" "}
