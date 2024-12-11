@@ -2,7 +2,7 @@
     "listYourContract": "List Your Contract",
     "productName": "Product Name",
     "productQuantity": "Product Quantity in Quintal (q)",
-    "initialPaymentAmount": "Initial Payment Amount",
+    "initialPaymentAmount": "Initial Payment Amount in %",
     "finalPaymentAmount": "Final Payment Amount",
     "totalAmount": "Total Amount",
     "ratePerQuintal": "Rate per q",

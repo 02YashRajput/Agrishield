@@ -19,6 +19,16 @@ export const validateNegotiationDetails = checkSchema({
       errorMessage: 'Final Payment Amount is required',
     },
   },
+  productVariety: {
+    in: ['body'],
+    isString: {
+      errorMessage: 'Product Variety is required'
+    },
+    isLength: {
+      options: { min: 1 },
+      errorMessage: 'Product Variety is required'
+    }
+  },
   productQuantity: {
     in: ['body'],
     isString: {

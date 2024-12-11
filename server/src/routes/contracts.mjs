@@ -186,5 +186,30 @@ router.post(
     }
 })
 
+router.post("/api/contract/quality-check/:contractId",async(req,res)=>{
+  const {quality} = req.body;
+  const { contractId } = req.params;
+  try{
+   
+
+    const contract = await Contract.findOne({ contractId });
+
+    if (!contract) {
+      return res.status(404).json({ success: false, message: 'Contract not found' });
+    }
+
+    contract.qualityCheck = true;
+    contract.quality = quality;
+    await contract.save();
+    const user =await User.findById(contract.farmerId)
+    updateEmail(user.email)
+    
+    return res.status(200).json({ success: true, message: 'Contract updated successfully' });
+  }catch(error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+})
+
 
 export default router;

@@ -21,6 +21,10 @@ const negotiationsSchema = new Schema({
     type: String,
     required: true,
   },
+  productVariety:{
+    type: String,
+    required: true,
+  },
   farmerId: {
     type: Schema.Types.ObjectId,
     ref: "User",

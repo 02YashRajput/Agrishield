@@ -86,7 +86,6 @@ const PricePredictor: React.FC = () => {
   useEffect(() => {
     const newUrl = `/price-predictor?state=${state}&district=${district}`;
     window.history.pushState({}, "", newUrl);
-    console.log("called");
   }, [state, district]);
 
 

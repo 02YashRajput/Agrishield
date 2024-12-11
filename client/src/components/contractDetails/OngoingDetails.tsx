@@ -19,6 +19,11 @@ import {
   CircularProgress,
   MenuItem,
   Menu,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@mui/material";
 import { pdf } from "@react-pdf/renderer";
 type Transaction = {
@@ -54,6 +59,10 @@ interface OngoingDetailaProps {
     farmerProfileImage: string;
     farmerProfileLink: string;
     productQuantity: string;
+    productVariety: string;
+    qualityCheck:boolean;
+    quality: string;
+    createdAt: Date;
     transactions :{
       transactionId: number;
       details: string;
@@ -70,7 +79,7 @@ interface OngoingDetailaProps {
 const statusArray = [
   ["Initial Payment Pending", "Buyer"],
   ["Initial Payment Paid", "Farmer"],
-  ["Initial Payment Received", "Default"],
+  ["Initial Payment Received", "Buyer"],
   ["Product Delivery Pending", "Farmer"],
   ["Product Delivery Delivered", "Buyer"],
   ["Product Delivery Received", "Default"],
@@ -140,6 +149,8 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
   const [contractStatus, setContractStatus] = useState(data.contractStatus);
   const [activeStep, setActiveStep] = useState(0);
   const [pdfLoading, setPDFLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [quality, setQuality] = useState('');
   const { Razorpay } = useRazorpay();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // For the dropdown
 
@@ -180,7 +191,12 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
       return 0;
     };
-    setActiveStep(getStatus());
+    let status = getStatus();
+    if(data.qualityCheck === false && status === 3){
+      status -=1;
+    }
+    setActiveStep(status);
+    
   }, []);
 
   const handleCloseModal = () => {
@@ -203,7 +219,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         toast.success(t('Status updated successfully'));
         handleCloseModal();
         if (activeStep === 1 || activeStep === 4) {
-          setActiveStep(activeStep + 2);
+          setActiveStep(activeStep + 1);
         } else if (activeStep === 7) {
           setActiveStep(activeStep + 1);
           setContractStatus("Completed");
@@ -221,10 +237,19 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
   const handlePayNow = async () => {
     setLoading(true);
-    const amount =
+    let amount =
       activeStep === 0
-        ? parseInt(data.initialPaymentAmount)
-        : parseInt(data.finalPaymentAmount);
+        ? (parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) /100)
+        : (parseInt(data.finalPaymentAmount) - (parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) /100) );
+
+      if(activeStep>0 ){
+        if(quality === "Average"){
+          amount = amount * 0.9;
+        }
+        else if(quality === "Bad"){
+          amount = amount * 0.7;
+        }
+      }
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/create-order`,
@@ -261,6 +286,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
         const rzp = new Razorpay(options);
         rzp.on("payment.failed", function (response) {
+          console.log(response.error);
           toast.error(response.error.code);
           toast.error(response.error.description);
           toast.error(response.error.source);
@@ -289,6 +315,24 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       setPDFLoading(false);
     }
   }
+  const handleSubmit = async()=>{
+    try{
+
+    
+    const response = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true})
+
+      if (response.data.success) {
+        toast.success(t('Status updated successfully'));
+        setActiveStep(activeStep + 1);
+
+      }
+    }catch(err){
+      toast.error("Error Occured while updating contract status");
+    }finally{
+      setOpen(false);
+    }
+  }
 
   return (
     <div>
@@ -299,7 +343,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
       
       <Typography variant="h5" >
-        {data.productName.toUpperCase()}
+        {data.productName.toUpperCase()} - {data.productVariety.toUpperCase()}
       </Typography>
       <Button variant="contained" sx={{backgroundColor : theme.palette.blue?.main, color:"white"}} onClick={handleReport} disabled={pdfLoading} startIcon = {pdfLoading && <CircularProgress size={24} color="inherit"/>}>
         Download Report
@@ -366,32 +410,38 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
             <Typography variant="h6">{t('Product Details')}</Typography>
             <CardContent>
               <Typography variant="body1">
-                <strong>{t('Initial Payment:')}</strong> {data.initialPaymentAmount}
+                <strong>{t('Initial Payment:')}</strong> {parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) / 100}
               </Typography>
               <Typography variant="body1">
-                <strong>{t('Final Payment:')}</strong> {data.finalPaymentAmount}
+                <strong>{t('Total Payment:')}</strong> {data.finalPaymentAmount}
               </Typography>
               <Typography variant="body1">
-                <strong>{t('Total Amount:')}</strong>{" "}
-                {parseInt(data.initialPaymentAmount) +
-                  parseInt(data.finalPaymentAmount)}
+                <strong>Product Quantity:</strong> {data.productQuantity}
               </Typography>
+             
               <Typography
                 variant="body1"
                 sx={{ display: "flex", alignItems: "center" }}
               >
-                <strong>{t('Rate:')}</strong>{" "}
+                <strong>Rate: </strong>{" "}
                 {(
-                  (parseInt(data.initialPaymentAmount) +
-                    parseInt(data.finalPaymentAmount)) /
+                  
+                    parseInt(data.finalPaymentAmount) /
                   parseInt(data.productQuantity)
                 ).toFixed(2)}
                 <FaRupeeSign className="text-sm ml-2" /> / {t('quintal')}
               </Typography>
+
               <Typography variant="body1">
-                <strong>{t('Deadline:')}</strong>{" "}
+                <strong>Deadline: </strong>{" "}
                 {new Date(data.deadline).toLocaleDateString()}
               </Typography>
+              {
+                activeStep >2 && <Typography variant="body1">
+                <strong>Quality: </strong>{" "}
+                {data.quality}
+              </Typography>
+              }
             </CardContent>
           </Card>
         </Grid>
@@ -495,7 +545,12 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           >
             {t('Pay Now')}
           </Button>
-        ) : (
+        ) : 
+        activeStep === 2 ? <Button variant="contained"
+        sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
+        onClick={()=>setOpen(true)}>
+          Quality Check 
+        </Button>:
           <Button
             variant="contained"
             sx={{ backgroundColor: theme.palette.blue?.main, color: "white" }}
@@ -503,7 +558,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           >
             {t('Update Status')}
           </Button>
-        ))}
+        )}
          {
             userType === statusArray[activeStep][1] && activeStep === 3
             && <Button sx= {{color:theme.palette.blue?.main}} onClick={handleClick}>
@@ -567,6 +622,33 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
             }
           >
             {loading ? "Updating..." : "Update"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Quality Check</DialogTitle>
+        <DialogContent>
+          <FormControl component="fieldset">
+            <FormLabel component="legend" color="secondary">Rate the Quality</FormLabel>
+            <RadioGroup
+              aria-label="quality"
+              value={quality}
+              onChange={(event) => {
+                setQuality(event.target.value);
+              }}
+            >
+              <FormControlLabel value="Excellent" control={<Radio />} label="Excellent" />
+              <FormControlLabel value="Average" control={<Radio />} label="Average" />
+              <FormControlLabel value="Bad" control={<Radio />} label="Bad" />
+            </RadioGroup>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={()=>setOpen(false)} color="primary" variant="contained">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmit} color="primary" variant="contained" disabled={!quality}>
+            Submit
           </Button>
         </DialogActions>
       </Dialog>

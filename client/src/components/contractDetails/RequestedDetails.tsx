@@ -26,6 +26,7 @@ interface RequestedDetailsProps {
     farmerProfileImage:string;
     farmerProfileLink:string;
     productQuantity:string;
+    productVariety: string;
     transactions :{
       transactionId: number;
       details: string;
@@ -46,7 +47,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
       </Typography>
 
       <Typography variant="h5" sx={{ mb: 4 }}>
-        {data.productName.toUpperCase()}
+        {data.productName.toUpperCase()} - {data.productVariety.toUpperCase()}
       </Typography>
 
       <Grid container spacing={4}>
@@ -111,30 +112,29 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             <CardContent >
 
             <Typography variant="body1">
-              <strong>{t('Initial Payment:')}</strong> {data.initialPaymentAmount}
+              <strong>{t('Initial Payment:')}</strong> {parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) /100}
             </Typography>
-            <Typography variant="body1">
-              <strong>{t('Final Payment:')}</strong> {data.finalPaymentAmount}
-            </Typography>
+            
             <Typography variant="body1">
               <strong>{t('Total Amount:')}</strong>{" "}
-              {parseInt(data.initialPaymentAmount) +
+              {
                 parseInt(data.finalPaymentAmount)}
             </Typography>
             <Typography
               variant="body1"
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <strong>{t('Rate:')}</strong>{" "}
+              
+              <strong>Rate: {" "}</strong>{" "}
               {(
-                (parseInt(data.initialPaymentAmount) +
-                  parseInt(data.finalPaymentAmount)) /
+                
+                  parseInt(data.finalPaymentAmount) /
                 parseInt(data.productQuantity)
               ).toFixed(2)}
               <FaRupeeSign className="text-sm ml-2" /> / {t('quintal')}
             </Typography>
             <Typography variant="body1">
-              <strong>{t('Deadline:')}</strong>{" "}
+              <strong>Deadline: </strong>{" "}
               {new Date(data.deadline).toLocaleDateString()}
             </Typography>
             </CardContent>
@@ -151,12 +151,13 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaCheck />}
             onClick={async()=>{
               try{
-                const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/contracts/accept/${data.contractId}`,{withCredentials: true});
+                const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/contracts/accept/${data.contractId}`,{},{withCredentials: true});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
                 }
               }catch(err){
+                console.log(err);
                 toast.error(t("An error occurred while accepting contract"));
               }
             }}

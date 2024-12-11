@@ -15,7 +15,55 @@ import { Negotiations } from "../mongoose-models/negotiations.mjs";
 import { validateNegotiationDetails } from "../middleware/validation-models/start-negotiations.mjs";
 import { createChat } from "../utils/start-chat.mjs";
 import { Chat } from "../mongoose-models/chat.mjs";
+import { readFile } from "fs/promises";
+const data = JSON.parse(
+  await readFile(
+    new URL("../utils/stateDistictsAndCrops.json", import.meta.url)
+  )
+);
 
+
+
+async function getCropsDistrict(state, district) {
+  const data = JSON.parse(
+    await readFile(
+      new URL("../utils/stateDistictsAndCrops.json", import.meta.url)
+    )
+  );
+
+  // Check if the state exists in the data
+  if (data.states && data.states[state]) {
+    // Check if the district exists in the state
+    if (data.states[state][district]) {
+      return data.states[state][district]; // Return the crops array
+    } else {
+      throw new Error(`District '${district}' not found in state '${state}'.`);
+    }
+  } else {
+    throw new Error(`State '${state}' not found.`);
+  }
+}
+
+
+async function getCropsForDistrict(state, district) {
+  const data = JSON.parse(
+    await readFile(
+      new URL("../utils/stateDistictsAndCrops.json", import.meta.url)
+    )
+  );
+
+  // Check if the state exists in the data
+  if (data.states && data.states[state]) {
+    // Check if the district exists in the state
+    if (data.states[state][district]) {
+      return data.states[state][district]; // Return the crops array
+    } else {
+      throw new Error(`District '${district}' not found in state '${state}'.`);
+    }
+  } else {
+    throw new Error(`State '${state}' not found.`);
+  }
+}
 dotenv.config();
 const router = Router();
 const baseAwsUrl = process.env.AWS_S3_URL;
@@ -56,11 +104,31 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
 
       let marketplaceDocs = await MarketPlace.find().select("-_id -buyerId");
 
-      const { cropsGrown } = profile.farmDetails;
+      const districtCrops = await getCropsDistrict(profile.address.state,profile.address.district);
 
-      const suggestedCrops = marketplaceDocs
-  .filter(doc => cropsGrown.includes(doc.productName)) 
-  .slice(0, 10)
+
+      let productQuantities = {};
+      let districtQuantities = {};
+
+      marketplaceDocs.forEach(doc => {
+        // If the product is in district crops, add it to districtQuantities
+        if (districtCrops.includes(doc.productName)) {
+          if (districtQuantities[doc.productName]) {
+            districtQuantities[doc.productName] += doc.productQuantity;
+          } else {
+            districtQuantities[doc.productName] = doc.productQuantity;
+          }
+        } else {
+          // Otherwise, add it to productQuantities
+          if (productQuantities[doc.productName]) {
+            productQuantities[doc.productName] += doc.productQuantity;
+          } else {
+            productQuantities[doc.productName] = doc.productQuantity;
+          }
+        }
+      });
+
+      
 
       if (distance !== 0) {
         const calculateDistance = (loc1, loc2) => {
@@ -100,7 +168,8 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
         success: true,
         message: "Listed Items Found",
         results,
-        suggestedCrops,
+        productQuantities,
+        districtQuantities,
         user: {
           name: req.user.userName,
           id: req.user.userId,
@@ -134,6 +203,7 @@ router.post(
         deadline,
         additionalInstructions,
         productQuantity,
+        productVariety
       } = req.body;
       const user = req.user; // Assuming the user info is available from the authMiddleware
       // Determine which profile to fetch based on userType
@@ -155,6 +225,7 @@ router.post(
         deadline,
         additionalInstructions,
         productQuantity,
+        productVariety,
         location: userProfile.address.location,
       });
 
@@ -187,6 +258,7 @@ router.put(
       initialPaymentAmount,
       finalPaymentAmount,
       deadline,
+      
       additionalInstructions,
       productQuantity,
       marketPlaceId,
@@ -283,6 +355,7 @@ router.post(
         farmerProfileLink: `/profile/${req.user.userId}`,
         productImage: `${baseAwsUrl}/${marketPlaceContract.productName}.jpg`,
         productName: marketPlaceContract.productName,
+        productVariety : marketPlaceContract.productVariety,
         buyerName: marketPlaceContract.buyerName,
         buyerId: marketPlaceContract.buyerId,
         buyerProfileImage: marketPlaceContract.buyerProfileImage,
@@ -290,6 +363,7 @@ router.post(
         initialpaymentStatus: "Pending",
         finalpaymentStatus: "Pending",
         deliveryStatus: "Pending",
+        qualityCheck:false,
         deadline: new Date(marketPlaceContract.deadline),
         initialPaymentAmount: marketPlaceContract.initialPaymentAmount,
         finalPaymentAmount: marketPlaceContract.finalPaymentAmount,
@@ -373,6 +447,7 @@ router.post(
         farmerProfileLink: `/profile/${req.user.userId}`,
         productImage: `${baseAwsUrl}/${marketPlaceContract.productName}.jpg`,
         productName: marketPlaceContract.productName,
+        productVariety:marketPlaceContract.productVariety,
         buyerName: marketPlaceContract.buyerName,
         buyerId: marketPlaceContract.buyerId,
         buyerProfileImage: marketPlaceContract.buyerProfileImage,

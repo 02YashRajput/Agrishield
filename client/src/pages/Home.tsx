@@ -66,7 +66,6 @@ const Home: React.FC = () => {
   const features = t("features.contents", { returnObjects: true }) as Feature[];
   const steps = t("howItWorks.steps", { returnObjects: true }) as string[];
   const videoUrl = import.meta.env.VITE_VIDEO_URL
-  console.log(videoUrl)
   if (error) {
     return <ErrorPage />;
   }

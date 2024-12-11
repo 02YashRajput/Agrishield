@@ -35,6 +35,15 @@ const contractSchema = new Schema({
     type: String,
     enum: ["Requested","Ongoing", "Completed"],
   },
+  qualityCheck:{
+    type:Boolean,
+    required: true,
+    default: false,
+  },
+  quality:{
+    type: String,
+    
+  },
   farmerId: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -109,12 +118,16 @@ const contractSchema = new Schema({
     type: String,
     required: true
   },
+  productVariety:{
+    type: String,
+    required: true,
+  },
   transactions: [{
     type: transactionSchema, 
     required: false, 
   }]
 
-});
+},{timestamps: true});
 
 
 

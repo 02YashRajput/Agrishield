@@ -331,7 +331,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
             }}
           />
           <Typography variant="h6" sx={{ mt: 2, fontWeight: 600, ml: 4 }}>
-            {selectedRow?.productName.toUpperCase()}
+            {selectedRow?.productName.toUpperCase()} - {selectedRow?.productVariety.toUpperCase()}
           </Typography>
 
           <Box>
@@ -421,13 +421,13 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                 {t('edit')}
               </Button>
 
-              {/* Accept Button (only shown if lastUpdated !== userType) */}
+              
               {selectedRow?.lastUpdated !== userType && (
                 <Button
                   variant="contained"
                   onClick={async() => {
                     try{
-                      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/accept/${selectedRow?.negotiationsId}`,{withCredentials: true});
+                      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true});
                       if(response.data.success){
                         setData((prev) => prev.filter((negotiation) => negotiation.negotiationsId !== selectedRow?.negotiationsId));
                         handleCloseModal();

@@ -18,6 +18,17 @@ export const listContractValidator = checkSchema({
       errorMessage: 'Crops grown must only include valid crop names.',
     },
   },
+  
+  productVariety: {
+    in: ['body'],
+    isString: {
+      errorMessage: 'Product Variety is required'
+    },
+    isLength: {
+      options: { min: 1 },
+      errorMessage: 'Product Variety is required'
+    }
+  },
   initialPaymentAmount: {
     in: ['body'],
     isString: {

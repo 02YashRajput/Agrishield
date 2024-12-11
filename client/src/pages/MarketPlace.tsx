@@ -33,20 +33,14 @@ interface Data {
     initialPaymentAmount: string;
     finalPaymentAmount: string;
     productImage: string;
+    productVariety : string;
   }[];
-  suggestedCrops: {
-    marketPlaceId: number;
-    buyerName: string;
-    buyerProfileImage: string;
-    buyerProfileLink: string;
-    productName: string;
-    additionalInstructions: string;
-    productQuantity: string;
-    deadline: Date;
-    initialPaymentAmount: string;
-    finalPaymentAmount: string;
-    productImage: string;
-  }[];
+  productQuantities?: { 
+    [productName: string]: number;
+  };
+  districtQuantities?:{
+    [productName: string]: number;
+  }
 }
 const fetcher = (url: string) =>
   axios
@@ -117,7 +111,8 @@ const MarketPlace: React.FC = () => {
       handlePrevPage={handlePrevPage}
       distance={distance}
       setDistance={setDistance}
-      suggestedCrops={data?.suggestedCrops}
+      productQuantities={data?.productQuantities}
+      districtQuantities={data?.districtQuantities}
       crop={crop}
       setCrop={setCrop}
       page={page}

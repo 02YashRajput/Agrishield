@@ -39,6 +39,10 @@ interface Data {
     farmerProfileImage:string;
     farmerProfileLink:string;
     productQuantity:string;
+    productVariety: string;
+    qualityCheck:boolean;
+    quality:string;
+    createdAt:Date;
     transactions :{
       transactionId: number;
       details: string;

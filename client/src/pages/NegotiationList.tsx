@@ -39,6 +39,7 @@ export interface Negotiation {
     farmerProfileImage: string;
     farmerProfileLink: string;
     productQuantityBuyer: string;
+    productVariety: string;
 }
 
 const fetcher = (url: string) =>

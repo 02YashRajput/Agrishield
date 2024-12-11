@@ -33,7 +33,11 @@ const marketPlaceSchema = new Schema({
     type: String,
     required: true,
     enum : cropsArray
-,    
+   
+  },
+  productVariety:{
+    type: String,
+    required: true,
   },
   additionalInstructions:{
     type: String,

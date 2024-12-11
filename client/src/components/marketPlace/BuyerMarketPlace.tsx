@@ -20,6 +20,55 @@ import "react-calendar/dist/Calendar.css";
 import ListedContracts from "./ListedContracts";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+const productRates: {
+  [key: string]: number;
+} = {
+  "Banana": 4500,
+  "Maize": 2500,
+  "Apple": 8500,
+  "Wheat": 3000,
+  "Black Gram (Urd Beans)(Whole)": 7200,
+  "Bengal Gram(Gram)(Whole)": 5000,
+  "Paddy(Dhan)(Common)": 3000,
+  "Ginger(Green)": 6000,
+  "Green Chilli": 8000,
+  "Pomegranate": 7000,
+  "Tomato": 4000,
+  "Onion": 2500,
+  "Potato": 1800,
+  "Mustard": 5300,
+  "Masur Dal": 5500,
+  "Garlic": 8000,
+  "Rice": 3500,
+  "Arhar (Tur/Red Gram)(Whole)": 4500,
+  "Lentil (Masur)(Whole)": 5500,
+  "Groundnut": 6200,
+  "Capsicum": 7000,
+  "Spinach": 4000,
+  "Papaya": 3000,
+  "Water Melon": 3200,
+  "Carrot": 4800,
+  "Cauliflower": 4500,
+  "Orange": 5000,
+  "Peas Wet": 4200,
+  "Pineapple": 5200,
+  "Green Peas": 7000,
+  "Amla(Nelli Kai)": 5500,
+  "Chikoos(Sapota)": 4800,
+  "Bajra(Pearl Millet/Cumbu)": 2100,
+  "Jowar(Sorghum)": 2400,
+  "Turmeric": 9500,
+  "Soyabean": 6200,
+  "Cotton": 6200,
+  "Moath Dal": 5000,
+  "Peach": 8500,
+  "Turnip": 3200,
+  "Cummin Seed(Jeera)": 9000,
+  "Mint(Pudina)": 7000,
+  "Guar Seed(Cluster Beans Seed)": 4700,
+  "Kodo Millet(Varagu)": 3900
+};
+
 
 interface BuyerMarketPlaceProps {
   results: {
@@ -34,6 +83,7 @@ interface BuyerMarketPlaceProps {
     initialPaymentAmount: string;
     finalPaymentAmount: string;
     productImage: string;
+    productVariety: string;
   }[];
   userType: string;
   handleNextPage: () => void;
@@ -86,11 +136,42 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       deadline: null,
       additionalInstructions: "",
       productQuantity: "",
+      productVariety: ""
+
     },
   });
 
   const handleFormSubmit = async (data: any) => {
     try {
+      const productName = data.productName
+      const value =
+        Number(watch("productQuantity")) === 0
+          ? 0
+          : (Number(watch("initialPaymentAmount") || 0) +
+              Number(watch("finalPaymentAmount") || 0)) /
+            Number(watch("productQuantity"));
+      const min =
+        productRates[productName as keyof typeof productRates ] ||
+        "Rate not available";
+
+      if (isNaN(Number(min))) {
+        toast.error("Invalid minimum rate");
+        return;
+      }
+
+      if (!isNaN(value) && value < Number(min)) {
+        toast.error("Rate must be greater than the minimum rate");
+        return;
+      }
+
+      for (let i = 0; i < results.length; i++) {
+        if(results[i].productName === productName){
+          toast.error("You have already listed a contract for this product");
+          return;
+        }
+      }
+      
+
       // Make the API call using axios
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract`,
@@ -101,12 +182,12 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       if (response.data.success) {
         toast.success(t("contractListedSuccess"));
         setContracts((prev) => [...prev, response.data.newContract]);
+      window.location.reload();
+
       }
     } catch (error) {
       toast.error(t("contractListedFailure"));
-    } finally {
-      window.location.reload();
-    }
+    } 
   };
 
   useEffect(() => {
@@ -161,6 +242,24 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
 
               <Grid item xs={12} sm={6}>
                 <Controller
+                  name="productVariety"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      required
+                      
+                      color="secondary"
+                      {...field}
+                      error={!!errors.productVariety}
+                      helperText={errors.productVariety?.message}
+                      label="Product Variety"
+                      fullWidth
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Controller
                   name="productQuantity"
                   control={control}
                   render={({ field }) => (
@@ -207,7 +306,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       {...field}
                       error={!!errors.finalPaymentAmount}
                       helperText={errors.finalPaymentAmount?.message}
-                      label={t("finalPaymentAmount")}
+                      label={t("totalAmount")}
                       fullWidth
                     />
                   )}
@@ -218,23 +317,37 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                 <TextField
                   color="secondary"
                   value={
-                    Number(watch("initialPaymentAmount") || 0) +
-                    Number(watch("finalPaymentAmount") || 0)
+                    (Number(watch("initialPaymentAmount") || 0) *
+                      Number(watch("finalPaymentAmount") || 0)) /
+                    100
                   }
-                  label={t("totalAmount")}
+                  label="Initial Payment Amount"
                   fullWidth
                   disabled
                 />
               </Grid>
 
-              {/* New Rate */}
               <Grid item xs={12} sm={6}>
                 <TextField
                   color="secondary"
                   value={
-                    (Number(watch("initialPaymentAmount") || 0) +
-                      Number(watch("finalPaymentAmount") || 0)) /
-                    Number(watch("productQuantity") || 1)
+                    productRates[
+                      watch("productName") as keyof typeof productRates
+                    ] || ""
+                  }
+                  label="Minimum Rate"
+                  fullWidth
+                  disabled
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  color="secondary"
+                  value={
+                    Number(watch("productQuantity")) === 0
+                      ? 0
+                      : Number(watch("finalPaymentAmount") || 0) /
+                        Number(watch("productQuantity"))
                   }
                   label={t("ratePerQuintal")}
                   fullWidth
@@ -341,9 +454,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
               userType={userType}
             />
           ) : (
-            <Typography variant="h5">
-              {t("noDataAvailable")}
-            </Typography>
+            <Typography variant="h5">{t("noDataAvailable")}</Typography>
           )}
 
           <Box display="flex" justifyContent="space-between" mt={4}>

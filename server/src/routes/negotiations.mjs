@@ -115,6 +115,7 @@ router.post("/api/negotiations/accept/:negotiationsId",authMiddleware,async(req,
       marketPlaceId:negotiation.marketPlaceId,
       contractStatus: "Ongoing",
       farmerId: negotiation.farmerId,
+      productVariety : negotiation.productVariety,
       farmerName:negotiation.farmerName,
       farmerProfileImage: negotiation.farmerProfileImage,
       farmerProfileLink: negotiation.farmerProfileLink,
@@ -131,15 +132,33 @@ router.post("/api/negotiations/accept/:negotiationsId",authMiddleware,async(req,
       initialpaymentStatus: "Pending",
       finalpaymentStatus: "Pending",
       deliveryStatus: "Pending",
+      qualityCheck:false,
 
     })
     const savedContract = await contract.save();
+    
+    const marketPlace = await MarketPlace.findById(negotiation.marketPlaceId);
+
+    if(savedContract.productQuantity < marketPlace.productQuantity){
+      
+      marketPlace.productQuantity -= savedContract.productQuantity;
+      await marketPlace.save();
+
+    }else{
+
+  
+
     await Negotiations.deleteMany({marketPlaceId:negotiation.marketPlaceId})
+
     await Contract.deleteMany({
       marketPlaceId: savedContract.marketPlaceId,
       contractId: { $ne: savedContract.contractId },
     });
+
+    
     await MarketPlace.findByIdAndDelete(negotiation.marketPlaceId);
+    
+  }
     res
     .status(200)
     .json({ success: true, message: `Successfully Started Contract"` });

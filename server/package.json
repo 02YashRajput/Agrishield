@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pm2 start ecosystem.config.cjs --env development",
+    "dev": "node --watch src/index.mjs",
     "start": "pm2 start ecosystem.config.cjs --env production",
     "stop": "pm2 stop agrishield",
-    "prod" : "NODE_ENV=production node src/index.mjs"
+    "prod": "NODE_ENV=production node src/index.mjs"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +40,7 @@
     "razorpay": "^2.9.5",
     "react-google-login": "^5.2.2",
     "socket.io": "^4.8.1",
+    "twilio": "^5.3.7",
     "ws": "^8.18.0"
   }
 }

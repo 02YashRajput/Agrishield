@@ -9,11 +9,11 @@ import {
   Button,
   Autocomplete,
   TextField,
+
 } from "@mui/material";
 import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
 import { useTranslation } from "react-i18next";
-import SuggestedCropsCarousel from "./SuggestedCarousel";
 interface FarmerMarketPlaceProps {
   results: {
     marketPlaceId: number;
@@ -27,20 +27,15 @@ interface FarmerMarketPlaceProps {
     initialPaymentAmount: string;
     finalPaymentAmount: string;
     productImage: string;
+    productVariety:string
   }[];
-  suggestedCrops: {
-    marketPlaceId: number;
-    buyerName: string;
-    buyerProfileImage: string;
-    buyerProfileLink: string;
-    productName: string;
-    additionalInstructions: string;
-    productQuantity: string;
-    deadline: Date;
-    initialPaymentAmount: string;
-    finalPaymentAmount: string;
-    productImage: string;
-  }[];
+  productQuantities?: {
+    // Added productQuantities field
+    [productName: string]: number;
+  };
+  districtQuantities?:{
+    [productName: string]: number;
+  }
   userType: string;
   handleNextPage: () => void;
   handlePrevPage: () => void;
@@ -63,7 +58,8 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   page,
   userType,
   isLoading,
-  suggestedCrops,
+  productQuantities,
+  districtQuantities
 }) => {
   const { t } = useTranslation(["farmermarketplace", "crops"]);
   const [contracts, setContracts] = useState<FarmerMarketPlaceProps["results"]>(
@@ -81,12 +77,96 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
       setContracts(results);
     }
   }, [isLoading, page]);
-  return (
-    <div className="space-y-9">{
-      suggestedCrops.length>0 &&
-      <SuggestedCropsCarousel suggestedCrops={suggestedCrops} />
 
-    }
+  if(!productQuantities || !districtQuantities){
+    return null;
+  }
+
+  return (
+    <div className="space-y-9">
+        <Card
+      sx={{ borderRadius: 5 }}
+      className="max-w-4xl mx-auto bg-white p-8"
+    >
+      <Typography variant="h4" sx={{ fontWeight: 600, mb: 4 }}>
+        Available Crops
+      </Typography>
+
+      {/* District Quantities Section */}
+      {/* District Quantities Section */}
+<Typography variant="h5" sx={{ fontWeight: 500, mb: 2 }}>
+  District-Specific Crops
+</Typography>
+<Box component="ul" sx={{ paddingLeft: 2 }}>
+  {Object.entries(districtQuantities).map(([crop, quantity]) => (
+    <Box
+      key={crop}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        mb: 1,
+        p: 1,
+        borderRadius: 2,
+        backgroundColor: '#f9f9f9',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <Typography
+        component="span"
+        variant="body1"
+        sx={{ fontWeight: 600, color: '#2c3e50', mr: 1 }}
+      >
+        🌾 {crop}
+      </Typography>
+      <Typography
+        component="span"
+        variant="body1"
+        sx={{ color: '#7f8c8d' }}
+      >
+        {quantity} Quintal
+      </Typography>
+    </Box>
+  ))}
+</Box>
+
+{/* Product Quantities Section */}
+<Typography variant="h5" sx={{ fontWeight: 500, mt: 4, mb: 2 }}>
+  Other Crops
+</Typography>
+<Box component="ul" sx={{ paddingLeft: 2 }}>
+  {Object.entries(productQuantities).map(([product, quantity]) => (
+    <Box
+      key={product}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        mb: 1,
+        p: 1,
+        borderRadius: 2,
+        backgroundColor: '#f9f9f9',
+        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <Typography
+        component="span"
+        variant="body1"
+        sx={{ fontWeight: 600, color: '#2c3e50', mr: 1 }}
+      >
+        🌾 {product}
+      </Typography>
+      <Typography
+        component="span"
+        variant="body1"
+        sx={{ color: '#7f8c8d' }}
+      >
+        {quantity} Quintal
+      </Typography>
+    </Box>
+  ))}
+</Box>
+
+    </Card>
+
       <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
         {/* Distance Label */}
         <Typography variant="h6" color="textSecondary" mb={1}>
