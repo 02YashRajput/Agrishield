@@ -64,7 +64,7 @@ const PricePredictor: React.FC = () => {
   const [district, setDistrict] = useState(District ? District : "");
   const [updating, setUpdating] = useState(false);
   const [filter, setFilter] = useState("");
- 
+  
   const { data, error, isLoading } = useSWR<Data>(
     `${import.meta.env.VITE_SERVER_URL}/api/price-predictor?state=${state}&district=${district}`,
     fetcher
@@ -86,7 +86,11 @@ const PricePredictor: React.FC = () => {
   useEffect(() => {
     const newUrl = `/price-predictor?state=${state}&district=${district}`;
     window.history.pushState({}, "", newUrl);
+    console.log("called");
   }, [state, district]);
+
+
+ 
 
   const {
     control,
@@ -153,7 +157,7 @@ const PricePredictor: React.FC = () => {
             className="max-w-4xl mx-auto bg-white p-8 "
           >
             <Typography variant="h5" sx={{fontWeight:"bold"}}>
-          Kuch Bhi
+              Select State and District
             </Typography>
 
             <CardContent>
@@ -217,7 +221,7 @@ const PricePredictor: React.FC = () => {
                             <TextField
                               {...params}
                               color="secondary"
-                              label={t("district")}
+                              label={t("District")}
                               error={!!errors.districtSelect}
                               helperText={errors.districtSelect?.message}
                             />

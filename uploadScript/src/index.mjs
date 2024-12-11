@@ -153,17 +153,18 @@ export const getPredictions = async (state, district, commodity) => {
 };
 
 
-// async function processData(data) {
-//   for (const [state, districts] of Object.entries(data.states)) {
-//     for (const [district, commodities] of Object.entries(districts)) {
-//       for (const commodity of commodities) {
-//         console.log(
-//           `State: ${state}, District: ${district}, Commodity: ${commodity}`
-//         );
-//       }
-//     }
-//   }
-// }
+async function processData(data) {
+  for (const [state, districts] of Object.entries(data.states)) {
+    if(state !== "Uttar Pradesh"){
+      continue;
+    }
+    for (const [district, commodities] of Object.entries(districts)) {
+      for (const commodity of commodities) {
+        await getAndStorePredictions(state,district,commodity);
+      }
+    }
+  }
+}
 
 // schedule.scheduleJob('0 0 * * *', processData);
 
@@ -215,7 +216,7 @@ export const getAndStorePredictions = async (state, district, commodity) => {
 
 await connectDb()
 
-await getAndStorePredictions("Uttar Pradesh", "Bijnor", "Wheat");
+await processData(data);
 
 
 
