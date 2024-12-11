@@ -29,8 +29,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use(express.json());
 await connectDb();
+
+
+app.use(cookieParser(cookie_secret));
+
 
 app.use(
   session({
@@ -38,18 +42,16 @@ app.use(
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 60000 * 60 * 24 * 30, // 30 days
-      secure: process.env.NODE_ENV === 'production', // secure cookies only in production (Render)
-      httpOnly: true, // for security purposes, the cookie cannot be accessed by JavaScript
-      sameSite: 'None', // required for cross-origin requests
+      maxAge: 60000 * 60 * 24 * 30,
+      
     },
     store: MongoStore.create({
       client: mongoose.connection.getClient(),
     }),
-    rolling: true, // keep the session alive with each request
+    rolling: true
   })
-);
 
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -63,7 +65,7 @@ const callBody = '<Response><Say voice="woman">Thanks for trying our documentati
 // sendSms(to, body);
 // sendCall(to,body)
 
-configureChatSockets(httpServer);
+// configureChatSockets(httpServer);
 httpServer.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
