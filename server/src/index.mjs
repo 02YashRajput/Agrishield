@@ -55,6 +55,6 @@ app.use(AllRoutes);
 
 
 configureChatSockets(httpServer);
-httpServer.listen(port, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+httpServer.listen(3000, () => {
+  console.log(`Server is running on port 3000`);
 });
