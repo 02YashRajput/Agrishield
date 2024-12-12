@@ -9,7 +9,6 @@ import {
   Button,
   Autocomplete,
   TextField,
-
 } from "@mui/material";
 import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
@@ -27,15 +26,15 @@ interface FarmerMarketPlaceProps {
     initialPaymentAmount: string;
     finalPaymentAmount: string;
     productImage: string;
-    productVariety:string
+    productVariety: string;
   }[];
   productQuantities?: {
     // Added productQuantities field
     [productName: string]: number;
   };
-  districtQuantities?:{
+  districtQuantities?: {
     [productName: string]: number;
-  }
+  };
   userType: string;
   handleNextPage: () => void;
   handlePrevPage: () => void;
@@ -59,7 +58,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   userType,
   isLoading,
   productQuantities,
-  districtQuantities
+  districtQuantities,
 }) => {
   const { t } = useTranslation(["farmermarketplace", "crops"]);
   const [contracts, setContracts] = useState<FarmerMarketPlaceProps["results"]>(
@@ -78,94 +77,96 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
     }
   }, [isLoading, page]);
 
-  if(!productQuantities || !districtQuantities){
+  if (!productQuantities || !districtQuantities) {
     return null;
   }
+  const cropsObject = t("crops:cropsObject", { returnObjects: true });
+
+  const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
+    key,
+    value,
+  }));
 
   return (
     <div className="space-y-9">
-        <Card
-      sx={{ borderRadius: 5 }}
-      className="max-w-4xl mx-auto bg-white p-8"
-    >
-      <Typography variant="h4" sx={{ fontWeight: 600, mb: 4 }}>
-        Available Crops
-      </Typography>
+      <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
+        <Typography variant="h4" sx={{ fontWeight: 600, mb: 4 }}>
+          {t("Available Crops")}
+        </Typography>
 
-      {/* District Quantities Section */}
-      {/* District Quantities Section */}
-<Typography variant="h5" sx={{ fontWeight: 500, mb: 2 }}>
-  District-Specific Crops
-</Typography>
-<Box component="ul" sx={{ paddingLeft: 2 }}>
-  {Object.entries(districtQuantities).map(([crop, quantity]) => (
-    <Box
-      key={crop}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        mb: 1,
-        p: 1,
-        borderRadius: 2,
-        backgroundColor: '#f9f9f9',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{ fontWeight: 600, color: '#2c3e50', mr: 1 }}
-      >
-        🌾 {crop}
-      </Typography>
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{ color: '#7f8c8d' }}
-      >
-        {quantity} Quintal
-      </Typography>
-    </Box>
-  ))}
-</Box>
+        {/* District Quantities Section */}
+        {/* District Quantities Section */}
+        <Typography variant="h5" sx={{ fontWeight: 500, mb: 2 }}>
+          {t("District-Specific Crops")}
+        </Typography>
+        <Box component="ul" sx={{ paddingLeft: 2 }}>
+          {Object.entries(districtQuantities).map(([crop, quantity]) => (
+            <Box
+              key={crop}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 1,
+                p: 1,
+                borderRadius: 2,
+                backgroundColor: "#f9f9f9",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <Typography
+                component="span"
+                variant="body1"
+                sx={{ fontWeight: 600, color: "#2c3e50", mr: 1 }}
+              >
+                🌾 {t(`crops:cropsObject.${crop}`)}
+              </Typography>
+              <Typography
+                component="span"
+                variant="body1"
+                sx={{ color: "#7f8c8d" }}
+              >
+                {quantity} {t("Quintal")}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
 
-{/* Product Quantities Section */}
-<Typography variant="h5" sx={{ fontWeight: 500, mt: 4, mb: 2 }}>
-  Other Crops
-</Typography>
-<Box component="ul" sx={{ paddingLeft: 2 }}>
-  {Object.entries(productQuantities).map(([product, quantity]) => (
-    <Box
-      key={product}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        mb: 1,
-        p: 1,
-        borderRadius: 2,
-        backgroundColor: '#f9f9f9',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-      }}
-    >
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{ fontWeight: 600, color: '#2c3e50', mr: 1 }}
-      >
-        🌾 {product}
-      </Typography>
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{ color: '#7f8c8d' }}
-      >
-        {quantity} Quintal
-      </Typography>
-    </Box>
-  ))}
-</Box>
-
-    </Card>
+        {/* Product Quantities Section */}
+        <Typography variant="h5" sx={{ fontWeight: 500, mt: 4, mb: 2 }}>
+          {t("Other crops")}
+        </Typography>
+        <Box component="ul" sx={{ paddingLeft: 2 }}>
+          {Object.entries(productQuantities).map(([product, quantity]) => (
+            <Box
+              key={product}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 1,
+                p: 1,
+                borderRadius: 2,
+                backgroundColor: "#f9f9f9",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <Typography
+                component="span"
+                variant="body1"
+                sx={{ fontWeight: 600, color: "#2c3e50", mr: 1 }}
+              >
+                🌾 {t(`crops:cropsObject.${product}`)}
+              </Typography>
+              <Typography
+                component="span"
+                variant="body1"
+                sx={{ color: "#7f8c8d" }}
+              >
+                {quantity} {t("Quintal")}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Card>
 
       <Card sx={{ borderRadius: 5 }} className="max-w-4xl mx-auto bg-white p-8">
         {/* Distance Label */}
@@ -206,28 +207,19 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
         </Typography>
 
         <Autocomplete
-          id="crop-autocomplete"
-          value={crop}
-          onChange={(_, newValue) => {
-            handleCropChange(newValue ?? "");
-          }}
-          options={cropsArray.map(
-            (cropName) => cropName.charAt(0).toUpperCase() + cropName.slice(1)
-          )}
+          options={cropsArray}
+          getOptionLabel={(option) => option.value} // Show the crop name
+          isOptionEqualToValue={(option, value) => option.key === value?.key} // Match by key
+          value={cropsArray.find((item) => item.key === crop) || null} // Match selected crop
+          onChange={(_, data) => setCrop(data?.key || "")} // Update state with the selected crop's key
           renderInput={(params) => (
             <TextField
               {...params}
-              label={t("selectcrop")}
+              required
               color="secondary"
-              fullWidth
+              label={t("crop")}
             />
           )}
-          ListboxProps={{
-            style: {
-              maxHeight: 300, // Limit the dropdown height
-            },
-          }}
-          isOptionEqualToValue={(option, value) => option === value}
         />
       </Card>
 
