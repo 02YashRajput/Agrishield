@@ -13,7 +13,7 @@ import ContractDetails from './pages/ContractDetails';
 import NegotiationList from './pages/NegotiationList';
 import Profile from './pages/Profile';
 import ContactUs from './pages/ContactUs';
-import About from './pages/About';
+// import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
 import Verification from './pages/Verification';
 import { useEffect } from 'react';
