@@ -46,6 +46,9 @@ const Login:React.FC = () => {
     try{
      const response = await axios.post(`/api/local/login`, values,{
       withCredentials: true, 
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
       
     

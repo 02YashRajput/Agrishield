@@ -91,6 +91,9 @@ const SignUp: React.FC = () => {
 
       await axios.post(`/api/local/sign-up`, signUpData, {
         withCredentials: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        },
       });
 
       toast.success("Sign up successful");

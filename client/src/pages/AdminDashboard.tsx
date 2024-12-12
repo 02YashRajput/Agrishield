@@ -8,7 +8,9 @@ import NotFound from './NotFound';
 import toast from 'react-hot-toast';
 
 const fetcher = (url: string) =>
-  axios.get(url, { withCredentials: true }).then((res) => res.data);
+  axios.get(url, { withCredentials: true,headers: {
+    'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+  }, }).then((res) => res.data);
 
 interface User {
   _id: number;
@@ -86,6 +88,9 @@ const AdminDashboard: React.FC = () => {
     try {
        await axios.delete(`/api/admin/dashboard/user/${userId}`, {
         withCredentials: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        },
       });
 
       toast.success("user deleted successfully")
@@ -98,6 +103,9 @@ const AdminDashboard: React.FC = () => {
     try {
       await axios.delete(`/api/admin/dashboard/${contractId}`, {
         withCredentials: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        },
       });
      toast.success('contract deleted successfullt')
     } catch (error:any) {

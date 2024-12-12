@@ -214,7 +214,9 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       const response = await axios.post(
         `/api/contracts/update-status/${data.contractId}`,
         { status, transaction },
-        { withCredentials: true }
+        { withCredentials: true,headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        }, }
       );
       if (response.data.success) {
         toast.success(t('Status updated successfully'));
@@ -271,7 +273,9 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       const response = await axios.post(
         `/api/create-order`,
         { amount },
-        { withCredentials: true }
+        { withCredentials: true,headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        }, }
       );
       if (response.data.success) {
         const options: RazorpayOrderOptions = {
@@ -337,7 +341,9 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
     
     const response = await axios.post(
-      `/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true})
+      `/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true,headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },})
 
       if (response.data.success) {
         toast.success(t('Status updated successfully'));

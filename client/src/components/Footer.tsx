@@ -43,6 +43,9 @@ const Footer: React.FC = () => {
         { language: newLanguage },
         {
           withCredentials: true,
+          headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          },
         }
       );
       if (response.data.success) {

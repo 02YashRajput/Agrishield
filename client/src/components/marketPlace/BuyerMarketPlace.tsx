@@ -199,7 +199,9 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       const response = await axios.post(
         `/api/marketplace/list-contract`,
         data,
-        { withCredentials: true } // Ensure the request includes credentials (cookies/sessions)
+        { withCredentials: true,headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        }, } // Ensure the request includes credentials (cookies/sessions)
       );
       // Handle success response
       if (response.data.success) {

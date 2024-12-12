@@ -18,7 +18,9 @@ const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
       const res = await axios.post(
         `/api/auth/google`, 
         { credential, userType },
-        { withCredentials: true } // This ensures cookies are sent along with the request
+        { withCredentials: true,headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        }, } // This ensures cookies are sent along with the request
       );
       const data = res.data;
 

@@ -185,7 +185,9 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
             selectedContract?.marketPlaceId
           }`,
           data,
-          { withCredentials: true }
+          { withCredentials: true,headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          }, }
         );
         if (response.status === 200) {
           toast.success(t("Negotiation started successfully!"));
@@ -216,7 +218,9 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         const response = await axios.put(
           `/api/marketplace/list-contract`,
           data,
-          { withCredentials: true }
+          { withCredentials: true,headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          }, }
         );
         if (response.data.success) {
           toast.success(t("Contract listed successfully!"));
@@ -678,7 +682,9 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                                     selectedContract?.marketPlaceId
                                   }`,
                                   {},
-                                  { withCredentials: true }
+                                  { withCredentials: true,headers: {
+                                    'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                                  }, }
                                 );
                                 if (response.data.success) {
                                   toast.success(t("Request sent successfully"));
@@ -764,7 +770,9 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                                 }/api/marketplace/list-contract/${
                                   selectedContract?.marketPlaceId
                                 }`,
-                                { withCredentials: true }
+                                { withCredentials: true,headers: {
+                                  'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                                }, }
                               );
                               if (response.data.success) {
                                 setContracts((prevContracts) =>

@@ -10,7 +10,9 @@ import axios from 'axios';
 // Axios fetcher with credentials
 const fetcher = (url: string) =>
   axios
-    .get(url, { withCredentials: true })
+    .get(url, { withCredentials: true,headers: {
+      'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+    }, })
     .then((res) => res.data);
 
 const Verification: React.FC = () => {

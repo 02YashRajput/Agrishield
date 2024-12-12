@@ -85,7 +85,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
   console.log(values);
   try{
 
-    const response = await axios.put(`/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true});
+    const response = await axios.put(`/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true,headers: {
+      'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+    },});
     if(response.data.success){
       setData((prevData) =>
         prevData.map((negotiation) =>
@@ -440,7 +442,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                   variant="contained"
                   onClick={async() => {
                     try{
-                      const response = await axios.post(`/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true});
+                      const response = await axios.post(`/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true,headers: {
+                        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                      },});
                       if(response.data.success){
                         setData((prev) => prev.filter((negotiation) => negotiation.negotiationsId !== selectedRow?.negotiationsId));
                         handleCloseModal();

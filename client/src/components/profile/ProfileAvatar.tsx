@@ -27,8 +27,10 @@ const ProfileAvatar :React.FC<ProfileAvatarProps>= ({src,isEditable}) => {
           const response = await axios.post('/api/profile/upload-avatar', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
+              'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
             },
             withCredentials: true,
+           
           });
 
           

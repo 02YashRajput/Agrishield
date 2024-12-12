@@ -61,7 +61,10 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
           rating: newReview.rating,
           message: newReview.message,
         },{
-          withCredentials: true
+          withCredentials: true,
+          headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          },
         });
   
         if (response.status === 200) {
