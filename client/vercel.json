@@ -4,6 +4,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://776c-103-232-241-223.ngrok-free.app/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
