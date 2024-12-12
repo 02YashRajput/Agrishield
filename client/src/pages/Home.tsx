@@ -57,7 +57,7 @@ const fetcher = (url: string) =>
 
 const Home: React.FC = () => {
   const { data, error } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/`,
+    `/api/`,
     fetcher
   );
   const { t } = useTranslation("home");

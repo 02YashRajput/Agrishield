@@ -14,7 +14,7 @@ interface Data{
 }
 const AgentDashboard:React.FC = () => {
 
-  const { error } = useSWR<Data>(`${import.meta.env.VITE_SERVER_URL}/api/agent`, fetcher);
+  const { error } = useSWR<Data>(`/api/agent`, fetcher);
 
   if(error){
     return <NotFound/>

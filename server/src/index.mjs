@@ -11,7 +11,7 @@ import { connectDb } from './config/connect-db.mjs';
 import {configureChatSockets} from "./config/socket.mjs"
 dotenv.config();
 import http from 'http'; 
-import { sendCall, sendSms } from './utils/sendMessage.mjs';
+// import { sendCall, sendSms } from './utils/sendMessage.mjs';
 const port = process.env.PORT || 3000;
 const cookie_secret = process.env.COOKIE_SECRET ;
 const session_secret = process.env.SESSION_SECRET;

@@ -1,49 +1,355 @@
 {
   "cropsObject": {
-    "Banana": "Banana",
-    "Maize": "Maize",
-    "Apple": "Apple",
-    "Wheat": "Wheat",
-    "Black Gram (Urd Beans)(Whole)": "Black Gram (Urd Beans)(Whole)",
-    "Bengal Gram(Gram)(Whole)": "Bengal Gram(Gram)(Whole)",
-    "Paddy(Dhan)(Common)": "Paddy(Dhan)(Common)",
-    "Ginger(Green)": "Ginger(Green)",
-    "Green Chilli": "Green Chilli",
-    "Pomegranate": "Pomegranate",
-    "Tomato": "Tomato",
-    "Onion": "Onion",
-    "Potato": "Potato",
-    "Mustard": "Mustard",
-    "Masur Dal": "Masur Dal",
-    "Garlic": "Garlic",
-    "Rice": "Rice",
-    "Arhar (Tur/Red Gram)(Whole)": "Arhar (Tur/Red Gram)(Whole)",
-    "Lentil (Masur)(Whole)": "Lentil (Masur)(Whole)",
-    "Groundnut": "Groundnut",
-    "Capsicum": "Capsicum",
-    "Spinach": "Spinach",
-    "Papaya": "Papaya",
-    "Water Melon": "Water Melon",
-    "Carrot": "Carrot",
-    "Cauliflower": "Cauliflower",
-    "Orange": "Orange",
-    "Peas Wet": "Peas Wet",
-    "Pineapple": "Pineapple",
-    "Green Peas": "Green Peas",
-    "Amla(Nelli Kai)": "Amla(Nelli Kai)",
-    "Chikoos(Sapota)": "Chikoos(Sapota)",
-    "Bajra(Pearl Millet/Cumbu)": "Bajra(Pearl Millet/Cumbu)",
-    "Jowar(Sorghum)": "Jowar(Sorghum)",
-    "Turmeric": "Turmeric",
-    "Soyabean": "Soyabean",
-    "Cotton": "Cotton",
-    "Moath Dal": "Moath Dal",
-    "Peach": "Peach",
-    "Turnip": "Turnip",
-    "Cummin Seed(Jeera)": "Cummin Seed(Jeera)",
-    "Mint(Pudina)": "Mint(Pudina)",
-    "Guar Seed(Cluster Beans Seed)": "Guar Seed(Cluster Beans Seed)",
-    "Kodo Millet(Varagu)": "Kodo Millet(Varagu)"
-}
-
+    "Banana": {
+      "name": "Banana",
+      "variety": {
+        "Cavendish": "Cavendish",
+        "Robusta": "Robusta",
+        "Grand Nain": "Grand Nain"
+      }
+    },
+    "Maize": {
+      "name": "Maize",
+      "variety": {
+        "Dent Corn": "Dent Corn",
+        "Flint Corn": "Flint Corn",
+        "Sweet Corn": "Sweet Corn"
+      }
+    },
+    "Apple": {
+      "name": "Apple",
+      "variety": {
+        "Fuji": "Fuji",
+        "Gala": "Gala",
+        "Granny Smith": "Granny Smith"
+      }
+    },
+    "Wheat": {
+      "name": "Wheat",
+      "variety": {
+        "Durum": "Durum",
+        "Hard Red Winter": "Hard Red Winter",
+        "Soft White": "Soft White"
+      }
+    },
+    "Black Gram (Urd Beans)(Whole)": {
+      "name": "Black Gram (Urd Beans)(Whole)",
+      "variety": {
+        "PU 31": "PU 31",
+        "T 9": "T 9",
+        "PDU 1": "PDU 1"
+      }
+    },
+    "Bengal Gram(Gram)(Whole)": {
+      "name": "Bengal Gram(Gram)(Whole)",
+      "variety": {
+        "Desi": "Desi",
+        "Kabuli": "Kabuli"
+      }
+    },
+    "Paddy(Dhan)(Common)": {
+      "name": "Paddy(Dhan)(Common)",
+      "variety": {
+        "Basmati": "Basmati",
+        "IR 64": "IR 64",
+        "Sona Masuri": "Sona Masuri"
+      }
+    },
+    "Ginger(Green)": {
+      "name": "Ginger(Green)",
+      "variety": {
+        "Nadia": "Nadia",
+        "Maran": "Maran",
+        "Rio de Janeiro": "Rio de Janeiro"
+      }
+    },
+    "Green Chilli": {
+      "name": "Green Chilli",
+      "variety": {
+        "G4": "G4",
+        "Tejaswini": "Tejaswini",
+        "Pusa Jwala": "Pusa Jwala"
+      }
+    },
+    "Pomegranate": {
+      "name": "Pomegranate",
+      "variety": {
+        "Bhagwa": "Bhagwa",
+        "Ganesh": "Ganesh",
+        "Ruby": "Ruby"
+      }
+    },
+    "Tomato": {
+      "name": "Tomato",
+      "variety": {
+        "Roma": "Roma",
+        "Cherry": "Cherry",
+        "Beefsteak": "Beefsteak"
+      }
+    },
+    "Onion": {
+      "name": "Onion",
+      "variety": {
+        "Red Onion": "Red Onion",
+        "White Onion": "White Onion",
+        "Yellow Onion": "Yellow Onion"
+      }
+    },
+    "Potato": {
+      "name": "Potato",
+      "variety": {
+        "Russet": "Russet",
+        "Yukon Gold": "Yukon Gold",
+        "Red Pontiac": "Red Pontiac"
+      }
+    },
+    "Mustard": {
+      "name": "Mustard",
+      "variety": {
+        "Yellow Mustard": "Yellow Mustard",
+        "Brown Mustard": "Brown Mustard",
+        "Black Mustard": "Black Mustard"
+      }
+    },
+    "Masur Dal": {
+      "name": "Masur Dal",
+      "variety": {
+        "L4716": "L4716",
+        "IPL 316": "IPL 316",
+        "Moitree": "Moitree"
+      }
+    },
+    "Garlic": {
+      "name": "Garlic",
+      "variety": {
+        "Softneck": "Softneck",
+        "Hardneck": "Hardneck",
+        "Elephant Garlic": "Elephant Garlic"
+      }
+    },
+    "Rice": {
+      "name": "Rice",
+      "variety": {
+        "Jasmine": "Jasmine",
+        "Basmati": "Basmati",
+        "Arborio": "Arborio"
+      }
+    },
+    "Arhar (Tur/Red Gram)(Whole)": {
+      "name": "Arhar (Tur/Red Gram)(Whole)",
+      "variety": {
+        "Maruti": "Maruti",
+        "ICPL 87119": "ICPL 87119",
+        "Pusa 991": "Pusa 991"
+      }
+    },
+    "Lentil (Masur)(Whole)": {
+      "name": "Lentil (Masur)(Whole)",
+      "variety": {
+        "PL 639": "PL 639",
+        "HUL 57": "HUL 57",
+        "L 4076": "L 4076"
+      }
+    },
+    "Groundnut": {
+      "name": "Groundnut",
+      "variety": {
+        "TG 37A": "TG 37A",
+        "JL 24": "JL 24",
+        "K 6": "K 6"
+      }
+    },
+    "Capsicum": {
+      "name": "Capsicum",
+      "variety": {
+        "California Wonder": "California Wonder",
+        "Indra": "Indra",
+        "Bomby": "Bomby"
+      }
+    },
+    "Spinach": {
+      "name": "Spinach",
+      "variety": {
+        "Savoy": "Savoy",
+        "Semi-Savoy": "Semi-Savoy",
+        "Flat Leaf": "Flat Leaf"
+      }
+    },
+    "Papaya": {
+      "name": "Papaya",
+      "variety": {
+        "Red Lady": "Red Lady",
+        "Coorg Honey Dew": "Coorg Honey Dew",
+        "Pusa Dwarf": "Pusa Dwarf"
+      }
+    },
+    "Water Melon": {
+      "name": "Water Melon",
+      "variety": {
+        "Sugar Baby": "Sugar Baby",
+        "Crimson Sweet": "Crimson Sweet",
+        "Charleston Gray": "Charleston Gray"
+      }
+    },
+    "Carrot": {
+      "name": "Carrot",
+      "variety": {
+        "Nantes": "Nantes",
+        "Imperator": "Imperator",
+        "Chantenay": "Chantenay"
+      }
+    },
+    "Cauliflower": {
+      "name": "Cauliflower",
+      "variety": {
+        "Snowball": "Snowball",
+        "Early Kunwari": "Early Kunwari",
+        "Pusa Deepali": "Pusa Deepali"
+      }
+    },
+    "Orange": {
+      "name": "Orange",
+      "variety": {
+        "Mandarin": "Mandarin",
+        "Navel": "Navel",
+        "Blood Orange": "Blood Orange"
+      }
+    },
+    "Peas Wet": {
+      "name": "Peas Wet",
+      "variety": {
+        "Arkel": "Arkel",
+        "Azad P 1": "Azad P 1",
+        "Bonneville": "Bonneville"
+      }
+    },
+    "Pineapple": {
+      "name": "Pineapple",
+      "variety": {
+        "Queen": "Queen",
+        "Kew": "Kew",
+        "Mauritius": "Mauritius"
+      }
+    },
+    "Green Peas": {
+      "name": "Green Peas",
+      "variety": {
+        "Lincoln": "Lincoln",
+        "Kelvedon Wonder": "Kelvedon Wonder",
+        "Early Onward": "Early Onward"
+      }
+    },
+    "Amla(Nelli Kai)": {
+      "name": "Amla(Nelli Kai)",
+      "variety": {
+        "Chakaiya": "Chakaiya",
+        "Banarasi": "Banarasi",
+        "NA 7": "NA 7"
+      }
+    },
+    "Chikoos(Sapota)": {
+      "name": "Chikoos(Sapota)",
+      "variety": {
+        "Kalipatti": "Kalipatti",
+        "Cricket Ball": "Cricket Ball",
+        "Pala": "Pala"
+      }
+    },
+    "Bajra(Pearl Millet/Cumbu)": {
+      "name": "Bajra(Pearl Millet/Cumbu)",
+      "variety": {
+        "Hybrid 86M86": "Hybrid 86M86",
+        "HHB 67": "HHB 67",
+        "Pusa 1201": "Pusa 1201"
+      }
+    },
+    "Jowar(Sorghum)": {
+      "name": "Jowar(Sorghum)",
+      "variety": {
+        "CSH 14": "CSH 14",
+        "Maldandi": "Maldandi",
+        "CSV 15": "CSV 15"
+      }
+    },
+    "Turmeric": {
+      "name": "Turmeric",
+      "variety": {
+        "Alleppey Finger": "Alleppey Finger",
+        "Salem": "Salem",
+        "Erode": "Erode"
+      }
+    },
+    "Soyabean": {
+      "name": "Soyabean",
+      "variety": {
+        "JS 335": "JS 335",
+        "PK 472": "PK 472",
+        "MACS 450": "MACS 450"
+      }
+    },
+    "Cotton": {
+      "name": "Cotton",
+      "variety": {
+        "BT Cotton": "BT Cotton",
+        "Hybrid Cotton": "Hybrid Cotton",
+        "Desi Cotton": "Desi Cotton"
+      }
+    },
+    "Moath Dal": {
+      "name": "Moath Dal",
+      "variety": {
+        "RMO 40": "RMO 40",
+        "RMO 257": "RMO 257",
+        "RMO 225": "RMO 225"
+      }
+    },
+    "Peach": {
+      "name": "Peach",
+      "variety": {
+        "July Elberta": "July Elberta",
+        "Cresthaven": "Cresthaven",
+        "Redhaven": "Redhaven"
+      }
+    },
+    "Turnip": {
+      "name": "Turnip",
+      "variety": {
+        "Purple Top White Globe": "Purple Top White Globe",
+        "Tokyo Cross": "Tokyo Cross",
+        "Golden Ball": "Golden Ball"
+      }
+    },
+    "Cummin Seed(Jeera)": {
+      "name": "Cummin Seed(Jeera)",
+      "variety": {
+        "RZ 19": "RZ 19",
+        "RZ 209": "RZ 209",
+        "GC 4": "GC 4"
+      }
+    },
+    "Mint(Pudina)": {
+      "name": "Mint(Pudina)",
+      "variety": {
+        "Peppermint": "Peppermint",
+        "Spearmint": "Spearmint",
+        "Apple Mint": "Apple Mint"
+      }
+    },
+    "Guar Seed(Cluster Beans Seed)": {
+      "name": "Guar Seed(Cluster Beans Seed)",
+      "variety": {
+        "HG 365": "HG 365",
+        "RGC 936": "RGC 936",
+        "RGC 1003": "RGC 1003"
+      }
+    },
+    "Kodo Millet(Varagu)": {
+      "name": "Kodo Millet(Varagu)",
+      "variety": {
+        "GPUK 3": "GPUK 3",
+        "CO 3": "CO 3",
+        "TNAU 86": "TNAU 86"
+      }
+    }
+  }
 }

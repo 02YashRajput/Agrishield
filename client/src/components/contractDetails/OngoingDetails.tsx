@@ -61,6 +61,7 @@ interface OngoingDetailaProps {
     productQuantity: string;
     productVariety: string;
     qualityCheck:boolean;
+    deliveryPreference: string;
     quality: string;
     createdAt: Date;
     transactions :{
@@ -211,7 +212,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
     try {
       const status = getStatusFromNumber(activeStep + 1);
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/contracts/update-status/${data.contractId}`,
+        `/api/contracts/update-status/${data.contractId}`,
         { status, transaction },
         { withCredentials: true }
       );
@@ -268,7 +269,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/create-order`,
+        `/api/create-order`,
         { amount },
         { withCredentials: true }
       );
@@ -336,7 +337,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
     
     const response = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true})
+      `/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true})
 
       if (response.data.success) {
         toast.success(t('Status updated successfully'));
@@ -458,6 +459,10 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                 {t(data.quality)}
               </Typography>
               }
+              <Typography variant="body1">
+                            <strong>{t("Delivery Preference")}: </strong>{" "}
+                            {data.deliveryPreference}
+                          </Typography>
             </CardContent>
           </Card>
         </Grid>

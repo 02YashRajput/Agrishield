@@ -29,6 +29,16 @@ export const listContractValidator = checkSchema({
       errorMessage: 'Product Variety is required'
     }
   },
+  deliveryPreference: {
+    in: ['body'],
+    isString: {
+      errorMessage: 'Product Variety is required'
+    },
+    isIn: {
+      options: [['Farmer', 'Buyer']],
+      errorMessage: "Delivery Preference must be either 'Farmer' or 'Buyer'",
+    },
+  },
   initialPaymentAmount: {
     in: ['body'],
     isString: {

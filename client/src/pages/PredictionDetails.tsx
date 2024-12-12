@@ -81,7 +81,7 @@ const PredictionDetails: React.FC = () => {
   const [district, setDistrict] = useState(District || "");
 
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/price-predictor/${crop}?state=${state}&district=${district}`,
+    `/api/price-predictor/${crop}?state=${state}&district=${district}`,
     fetcher
   );
 

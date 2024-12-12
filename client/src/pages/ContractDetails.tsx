@@ -42,6 +42,7 @@ interface Data {
     productVariety: string;
     qualityCheck:boolean;
     quality:string;
+    deliveryPreference:string;
     createdAt:Date;
     transactions :{
       transactionId: number;
@@ -61,7 +62,7 @@ const ContractDetails :React.FC= () => {
   const location = useLocation();
   
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api${location.pathname}`,
+    `/api${location.pathname}`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

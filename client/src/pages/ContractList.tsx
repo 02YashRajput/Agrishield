@@ -53,7 +53,7 @@ const fetcher = (url: string) =>
 const ContractList :React.FC = () => {
   const { t } = useTranslation("contractlist");
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/contracts`,
+    `/api/contracts`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

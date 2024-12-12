@@ -18,6 +18,7 @@ import {
   IconButton,
   TextField,
   Popover,
+  MenuItem,
 } from "@mui/material";
 import { FaRupeeSign } from "react-icons/fa";
 import { Controller, useForm } from "react-hook-form";
@@ -73,6 +74,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
       finalPaymentAmount: "",
       deadline: null,
       productQuantity: "",
+      deliveryPreference:"",
     },
   });
 
@@ -83,7 +85,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
   console.log(values);
   try{
 
-    const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true});
+    const response = await axios.put(`/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true});
     if(response.data.success){
       setData((prevData) =>
         prevData.map((negotiation) =>
@@ -96,6 +98,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       finalPaymentAmountFarmer: values.finalPaymentAmount,
                       deadlineFarmer: new Date(values.deadline || Date.now()),
                       productQuantityFarmer: values.productQuantity,
+                      deliveryPrefernceFarmer: values.deliveryPreference,
                       lastUpdated: "Farmer",
                     }
                   : {
@@ -103,6 +106,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       finalPaymentAmountBuyer: values.finalPaymentAmount,
                       deadlineBuyer:new Date(values.deadline || Date.now()),
                       productQuantityBuyer: values.productQuantity,
+                      deliveryPrefernceBuyer : values.deliveryPreference,
                       lastUpdated: "Buyer",
                     }),
               }
@@ -120,12 +124,14 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                   finalPaymentAmountFarmer: values.finalPaymentAmount,
                   deadlineFarmer: new Date(values.deadline || Date.now()),
                   productQuantityFarmer: values.productQuantity,
+                  deliveryPrefernceFarmer: values.deliveryPreference,
                   lastUpdated: "Farmer",
                 }
               : {
                   initialPaymentAmountBuyer: values.initialPaymentAmount,
                   finalPaymentAmountBuyer: values.finalPaymentAmount,
                   deadlineBuyer: new Date(values.deadline || Date.now()),
+                  deliveryPrefernceBuyer : values.deliveryPreference,
                   productQuantityBuyer: values.productQuantity,
                   lastUpdated: "Buyer",
                 }),
@@ -370,6 +376,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         {t('viewprofile')}
                       </a>
                     </Typography>
+                    <Typography>
+                      Delivery Preference: {selectedRow?.deliveryPreferenceFarmer}
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -407,6 +416,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         {t('viewprofile')}
                       </a>
                     </Typography>
+                    <Typography>
+                      Delivery Preference: {selectedRow?.deliveryPreferenceFarmer}
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -428,7 +440,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                   variant="contained"
                   onClick={async() => {
                     try{
-                      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true});
+                      const response = await axios.post(`/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true});
                       if(response.data.success){
                         setData((prev) => prev.filter((negotiation) => negotiation.negotiationsId !== selectedRow?.negotiationsId));
                         handleCloseModal();
@@ -547,6 +559,23 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                     />
                   )}
                 />
+                <Controller
+    name="deliveryPreference"
+    control={control}
+    render={({ field }) => (
+      <TextField
+        {...field}
+        select
+        label="Delivery Preference"
+        fullWidth
+        variant="outlined"
+        color="secondary"
+      >
+        <MenuItem value="Farmer">Farmer</MenuItem>
+        <MenuItem value="Buyer">Buyer</MenuItem>
+      </TextField>
+    )}
+  />
                   <Controller
                   name="deadline"
                   control={control}

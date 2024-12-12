@@ -10,7 +10,6 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { cropsArray } from "../../utils/cropsName";
 import ListedContracts from "./ListedContracts";
 import { useTranslation } from "react-i18next";
 interface FarmerMarketPlaceProps {
@@ -27,6 +26,7 @@ interface FarmerMarketPlaceProps {
     finalPaymentAmount: string;
     productImage: string;
     productVariety: string;
+    deliveryPreference:string;
   }[];
   productQuantities?: {
     // Added productQuantities field
@@ -64,10 +64,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
   const [contracts, setContracts] = useState<FarmerMarketPlaceProps["results"]>(
     []
   );
-  const handleCropChange = (value: string) => {
-    setCrop(value);
-  };
-
+ 
   const handleDistanceChange = (newDistance: number) => {
     setDistance(newDistance);
   };
@@ -84,8 +81,10 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
 
   const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
     key,
-    value,
+    value : value.name,
   }));
+
+
 
   return (
     <div className="space-y-9">
@@ -100,7 +99,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
           {t("District-Specific Crops")}
         </Typography>
         <Box component="ul" sx={{ paddingLeft: 2 }}>
-          {Object.entries(districtQuantities).map(([crop, quantity]) => (
+          {Object.entries(districtQuantities).sort(([, aQuantity], [, bQuantity]) => bQuantity - aQuantity) .map(([crop, quantity]) => (
             <Box
               key={crop}
               sx={{
@@ -136,7 +135,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
           {t("Other crops")}
         </Typography>
         <Box component="ul" sx={{ paddingLeft: 2 }}>
-          {Object.entries(productQuantities).map(([product, quantity]) => (
+          {Object.entries(productQuantities).sort(([, aQuantity], [, bQuantity]) => bQuantity - aQuantity).map(([product, quantity]) => (
             <Box
               key={product}
               sx={{
@@ -215,7 +214,6 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
           renderInput={(params) => (
             <TextField
               {...params}
-              required
               color="secondary"
               label={t("crop")}
             />

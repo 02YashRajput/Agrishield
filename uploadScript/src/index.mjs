@@ -155,7 +155,7 @@ export const getPredictions = async (state, district, commodity) => {
 
 async function processData(data) {
   for (const [state, districts] of Object.entries(data.states)) {
-    if(state !== "Uttar Pradesh"){
+    if(state !== "Andaman and Nicobar"){
       continue;
     }
     for (const [district, commodities] of Object.entries(districts)) {

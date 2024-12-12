@@ -50,7 +50,7 @@ const fetcher = (url: string) =>
 
 const ContactUsForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { data, error } = useSWR<Data>(`${import.meta.env.VITE_SERVER_URL}/api/`, fetcher);
+  const { data, error } = useSWR<Data>(`/api/`, fetcher);
   const { t } = useTranslation("contactus");
 
   const isLoggedIn = data?.user ? true : false;

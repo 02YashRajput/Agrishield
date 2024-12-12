@@ -89,7 +89,11 @@ const contractSchema = new Schema({
     type:String,
     required:true,
   },
-
+  deliveryPreference:{
+    type: String,
+    enum: ['Buyer', 'Farmer'],
+    required: true,
+  },
   productName: {
     type: String,
     required: true,
