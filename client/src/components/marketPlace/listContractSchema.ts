@@ -18,5 +18,5 @@ export const listContractSchema = z.object({
   additionalInstructions:z.string().optional(),
   productQuantity:z.string().min(1, { message: "Product Quantity is required" }),
   productVariety:z.string().min(1, { message: "Product Variety is required" }),
-
+  deliveryPreference : z.string().min(1, { message: "Please provide a delivery preference" }),
 })

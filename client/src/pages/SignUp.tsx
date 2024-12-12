@@ -89,7 +89,7 @@ const SignUp: React.FC = () => {
     try {
       const signUpData = { ...data, userType };
 
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/local/sign-up`, signUpData, {
+      await axios.post(`/api/local/sign-up`, signUpData, {
         withCredentials: true,
       });
 

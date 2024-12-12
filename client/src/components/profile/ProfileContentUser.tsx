@@ -93,7 +93,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
     try {
       // Make the API call to update the profile
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/profile/upload-profile`, data, {
+      const response = await axios.post(`/api/profile/upload-profile`, data, {
         withCredentials: true, // Include credentials for authentication
       });
 

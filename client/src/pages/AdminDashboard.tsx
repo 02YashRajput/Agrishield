@@ -55,7 +55,7 @@ interface DashboardData {
 }
 
 const AdminDashboard: React.FC = () => {
-  const { data, error } = useSWR<DashboardData>(`${import.meta.env.VITE_SERVER_URL}/api/admin/dashboard`, fetcher);
+  const { data, error } = useSWR<DashboardData>(`/api/admin/dashboard`, fetcher);
 
   const [viewingUsers, setViewingUsers] = useState<'farmers' | 'buyers' | null>(null);
   const [viewingContracts, setViewingContracts] = useState(false);
@@ -84,7 +84,7 @@ const AdminDashboard: React.FC = () => {
   };
   const deleteUser = async (userId: number) => {
     try {
-       await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/admin/dashboard/user/${userId}`, {
+       await axios.delete(`/api/admin/dashboard/user/${userId}`, {
         withCredentials: true,
       });
 
@@ -96,7 +96,7 @@ const AdminDashboard: React.FC = () => {
   };
   const deleteContract = async (contractId: number) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/admin/dashboard/${contractId}`, {
+      await axios.delete(`/api/admin/dashboard/${contractId}`, {
         withCredentials: true,
       });
      toast.success('contract deleted successfullt')
