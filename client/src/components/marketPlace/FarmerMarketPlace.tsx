@@ -81,8 +81,10 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
 
   const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
     key,
-    value,
+    value : value.name,
   }));
+
+
 
   return (
     <div className="space-y-9">

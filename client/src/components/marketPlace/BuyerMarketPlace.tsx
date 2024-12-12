@@ -70,6 +70,11 @@ const productRates: {
   "Kodo Millet(Varagu)": 3900,
 };
 
+interface CropData {
+  name: string;
+  variety: Record<string, string>;
+}
+
 interface BuyerMarketPlaceProps {
   results: {
     marketPlaceId: number;
@@ -115,12 +120,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
     setAnchorEl(null);
   };
 
-  const cropsObject = t("crops:cropsObject", { returnObjects: true });
 
-  const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
-    key,
-    value,
-  }));
 
   const isPopoverOpen = Boolean(anchorEl);
   const {
@@ -141,6 +141,29 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       deliveryPreference: "",
     },
   });
+
+
+  const cropsObject = t("crops:cropsObject", { returnObjects: true }) as Record<
+    string,
+    CropData
+  >;
+
+  const cropsArray = Object.entries(cropsObject).map(([key, value]) => ({
+    key,
+    value: value.name,
+  }));
+
+  const selectedCrop = watch("productName");
+
+  console.log(selectedCrop);
+
+
+  const varietyOptions = selectedCrop
+    ? Object.entries(cropsObject[selectedCrop]?.variety || {}).map(
+        ([key, value]) => ({ key, value })
+      )
+    : [];
+
 
   const handleFormSubmit = async (data: any) => {
     try {
@@ -244,14 +267,29 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                   name="productVariety"
                   control={control}
                   render={({ field }) => (
-                    <TextField
-                      required
-                      color="secondary"
+                    <Autocomplete
                       {...field}
-                      error={!!errors.productVariety}
-                      helperText={errors.productVariety?.message}
-                      label="Product Variety"
-                      fullWidth
+                      disabled={!selectedCrop}
+                      options={varietyOptions}
+                      getOptionLabel={(option) => option.value} // Show the crop name
+                      isOptionEqualToValue={(option, value) =>
+                        option.key === value?.key
+                      }
+                      value={
+                        varietyOptions.find(
+                          (crop) => crop.key === field.value
+                        ) || null
+                      }
+                      onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          color="secondary"
+                          label="Product Variety"
+                          error={!!errors.productVariety}
+                          helperText={errors.productVariety?.message}
+                        />
+                      )}
                     />
                   )}
                 />
