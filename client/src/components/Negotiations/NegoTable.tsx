@@ -510,7 +510,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       {...field}
                       error={!!errors.productQuantity}
                       helperText={errors.productQuantity?.message}
-                      label="Product Quantity in Quintal (q)"
+                      label={t("Product Quantity in Quintal (q)")}
                       fullWidth
                     />
                   )}
@@ -526,7 +526,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       {...field}
                       error={!!errors.initialPaymentAmount}
                       helperText={errors.initialPaymentAmount?.message}
-                      label="Initial Payment Amount"
+                      label={t("initialpaymentamount")}
                       fullWidth
                     />
                   )}
@@ -542,7 +542,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       {...field}
                       error={!!errors.finalPaymentAmount}
                       helperText={errors.finalPaymentAmount?.message}
-                      label="Final Payment Amount"
+                      label={t("finalpaymentamount")}
                       fullWidth
                     />
                   )}
@@ -561,7 +561,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       >
                         {field.value
                           ? new Date(field.value).toLocaleDateString()
-                          : "Select Deadline *"}
+                          : t("Select Deadline *")}
                       </Button>
                       <Popover
                         open={isPopoverOpen}

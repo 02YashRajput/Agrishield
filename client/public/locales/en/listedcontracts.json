@@ -22,5 +22,11 @@
     "Request sent successfully":"Request sent successfully",
     "An error occurred while requesting the contract":"An error occurred while requesting the contract",
     "Contract deleted successfully!":"Contract deleted successfully!",
-    "Failed to delete contract":"Failed to delete contract"
+    "Failed to delete contract":"Failed to delete contract",
+    "Rate not available" : "Rate not available",
+    "Min Rate": "Min Rate",
+    "Product Quantity in Quintal (q)":"Product Quantity in Quintal (q)",
+    "Initial Payment Amount in %":"Initial Payment Amount in %",
+    "Final Payment Amount":"Final Payment Amount",
+    "Additional Instructions":"Additional Instructions"
 }

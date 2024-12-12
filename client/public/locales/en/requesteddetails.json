@@ -14,5 +14,7 @@
     "Buyer":"Buyer",
     "Farmer":"Farmer",
     "Contract accepted successfully":"Contract accepted successfully",
-    "An error occurred while accepting contract":"An error occurred while accepting contract"
+    "An error occurred while accepting contract":"An error occurred while accepting contract",
+    "Rate":"Rate",
+    "Deadline":"Deadline"
 }

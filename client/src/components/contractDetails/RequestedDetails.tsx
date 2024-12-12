@@ -47,7 +47,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
       </Typography>
 
       <Typography variant="h5" sx={{ mb: 4 }}>
-        {data.productName.toUpperCase()} - {data.productVariety.toUpperCase()}
+        {t(`crops:cropsObject.${data.productName}`)} - {data.productVariety.toUpperCase()}
       </Typography>
 
       <Grid container spacing={4}>
@@ -125,7 +125,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               sx={{ display: "flex", alignItems: "center" }}
             >
               
-              <strong>Rate: {" "}</strong>{" "}
+              <strong>{t("Rate")}: {" "}</strong>{" "}
               {(
                 
                   parseInt(data.finalPaymentAmount) /
@@ -134,7 +134,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               <FaRupeeSign className="text-sm ml-2" /> / {t('quintal')}
             </Typography>
             <Typography variant="body1">
-              <strong>Deadline: </strong>{" "}
+              <strong>{t("Deadline")}: </strong>{" "}
               {new Date(data.deadline).toLocaleDateString()}
             </Typography>
             </CardContent>

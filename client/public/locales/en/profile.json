@@ -32,5 +32,7 @@
     "Unexpected response from the server.":"Unexpected response from the server.",
     "Error updating profile":"Error updating profile",
     "messagenotification":"Message Notification",
-    "emailnotification":"Email Notification"
+    "emailnotification":"Email Notification",
+    "Name":"Name",
+    "Not Provided":"Not Provided"
 }

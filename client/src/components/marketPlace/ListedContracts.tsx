@@ -330,7 +330,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       </Typography>
                       <Typography variant="body1">
                         <strong>{t("product_name")}</strong>{" "}
-                        {contract.productName} - {contract.productVariety}
+                        {t(`crops:cropsObject.${contract.productName}`)} - {contract.productVariety}
                       </Typography>
                       <Typography variant="body1">
                         <strong>{t("quantity")}</strong>{" "}
@@ -412,7 +412,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     component="h2"
                     sx={{ fontWeight: "bold", mb: 2 }}
                   >
-                    {selectedContract.productName}-{selectedContract.productVariety}
+                    {t(`crops:cropsObject.${selectedContract.productName}`)}-{selectedContract.productVariety}
                   </Typography>
                   <Typography id="modal-description" variant="body1">
                     <strong>{t("buyer_name")}</strong>{" "}
@@ -430,7 +430,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.productQuantity}
                           helperText={errors.productQuantity?.message}
-                          label="Product Quantity in Quintal (q)"
+                          label={t("Product Quantity in Quintal (q)")}
                           fullWidth
                         />
                       )}
@@ -453,7 +453,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.initialPaymentAmount}
                           helperText={errors.initialPaymentAmount?.message}
-                          label="Initial Payment Amount in %"
+                          label={t("Initial Payment Amount in %")}
                           fullWidth
                         />
                       )}
@@ -476,7 +476,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.finalPaymentAmount}
                           helperText={errors.finalPaymentAmount?.message}
-                          label="Final Payment Amount"
+                          label={t("Final Payment Amount")}
                           fullWidth
                         />
                       )}
@@ -507,7 +507,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   {
                     <Typography variant="body1" className="flex items-center">
                       <strong>
-                        Min Rate: </strong>
+                        {t("Min Rate")}: </strong>
                       {productRates[
                         selectedContract.productName as keyof typeof productRates
                       ] || ""}
@@ -573,7 +573,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.additionalInstructions}
                           helperText={errors.additionalInstructions?.message}
-                          label="Additional Instructions"
+                          label={t("Additional Instructions")}
                           fullWidth
                         />
                       )}
