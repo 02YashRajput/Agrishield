@@ -56,6 +56,9 @@ const ChatComponent :React.FC= () => {
       fetchMessages(currentChatId);
       const newSocket = io(import.meta.env.VITE_SERVER_URL, {
         withCredentials: true,
+        extraHeaders: {
+          'ngrok-skip-browser-warning': 'any-value',  // Use extraHeaders instead of headers
+        }
       });
       
       setSocket(newSocket);
