@@ -338,7 +338,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       </Typography>
                       <Typography variant="body1">
                         <strong>{t("product_name")}</strong>{" "}
-                        {t(`crops:cropsObject.${contract.productName}`)} - {contract.productVariety}
+                        {t(`crops:cropsObject.${contract.productName}.name`)} - {contract.productVariety}
                       </Typography>
                       <Typography variant="body1">
                         <strong>{t("quantity")}</strong>{" "}
@@ -421,7 +421,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     component="h2"
                     sx={{ fontWeight: "bold", mb: 2 }}
                   >
-                    {t(`crops:cropsObject.${selectedContract.productName}`)}-{selectedContract.productVariety}
+                    {t(`crops:cropsObject.${selectedContract.productName}.name`)}-{selectedContract.productVariety}
                   </Typography>
                   <Typography id="modal-description" variant="body1">
                     <strong>{t("buyer_name")}</strong>{" "}

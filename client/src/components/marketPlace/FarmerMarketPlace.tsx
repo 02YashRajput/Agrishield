@@ -117,7 +117,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
                 variant="body1"
                 sx={{ fontWeight: 600, color: "#2c3e50", mr: 1 }}
               >
-                🌾 {t(`crops:cropsObject.${crop}`)}
+                🌾 {t(`crops:cropsObject.${crop}.name`)}
               </Typography>
               <Typography
                 component="span"
@@ -153,7 +153,7 @@ const FarmerMarketPlace: React.FC<FarmerMarketPlaceProps> = ({
                 variant="body1"
                 sx={{ fontWeight: 600, color: "#2c3e50", mr: 1 }}
               >
-                🌾 {t(`crops:cropsObject.${product}`)}
+                🌾 {t(`crops:cropsObject.${product}.name`)}
               </Typography>
               <Typography
                 component="span"

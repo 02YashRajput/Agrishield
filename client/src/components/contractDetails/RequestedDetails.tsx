@@ -48,7 +48,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
       </Typography>
 
       <Typography variant="h5" sx={{ mb: 4 }}>
-        {t(`crops:cropsObject.${data.productName}`)} - {data.productVariety.toUpperCase()}
+        {t(`crops:cropsObject.${data.productName}.name`)} - {data.productVariety.toUpperCase()}
       </Typography>
 
       <Grid container spacing={4}>

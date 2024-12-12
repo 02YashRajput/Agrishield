@@ -360,7 +360,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
       
       <Typography variant="h5" >
-      {t(`crops:cropsObject.${data.productName}`)} - {data.productVariety.toUpperCase()}
+      {t(`crops:cropsObject.${data.productName}.name`)} - {data.productVariety.toUpperCase()}
       </Typography>
       <Button variant="contained" sx={{backgroundColor : theme.palette.blue?.main, color:"white"}} onClick={handleReport} disabled={pdfLoading} startIcon = {pdfLoading && <CircularProgress size={24} color="inherit"/>}>
         {t("Download Report")}

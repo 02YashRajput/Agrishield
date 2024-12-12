@@ -904,7 +904,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   ? cropsArray.map((crop) => (
                       <Chip
                         key={crop}
-                        label={t(`crops:cropsObject.${crop}`)}
+                        label={t(`crops:cropsObject.${crop}.name`)}
                         sx={{ cursor: "pointer" }}
                         variant={
                           cropsGrown.includes(crop) ? "filled" : "outlined"
@@ -918,7 +918,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   : cropsGrown.map((crop: string) => (
                       <Chip
                         key={crop}
-                        label={t(`crops:cropsObject.${crop}`)}
+                        label={t(`crops:cropsObject.${crop}.name`)}
                         color="primary"
                         variant="filled"
                       />
