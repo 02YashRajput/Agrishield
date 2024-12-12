@@ -247,6 +247,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       }
       setIsEditable(false);
       handleCloseModal();
+      window.location.reload();
     } catch (error) {
       toast.error(t("Error updating contract"));
     }
