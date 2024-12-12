@@ -1,9 +1,14 @@
 {
     "next": "পরবর্তী",
     "previous": "পূর্ববর্তী",
-    "nodata": "কোনো ডেটা পাওয়া যায়নি",
+    "nodata": "কোনও ডেটা উপলব্ধ নেই",
     "listedcontract": "তালিকাভুক্ত চুক্তি",
     "selectcrop": "ফসল নির্বাচন করুন",
     "all": "সব",
-    "selectdistance": "দূরত্ব নির্বাচন করুন"
+    "selectdistance": "দূরত্ব নির্বাচন করুন",
+    "Available Crops": "উপলব্ধ ফসল",
+    "District-Specific Crops": "জেলা-নির্দিষ্ট ফসল",
+    "Quintal": "কুইন্টাল",
+    "Other crops": "অন্যান্য ফসল",
+    "crop": "ফসল"
 }

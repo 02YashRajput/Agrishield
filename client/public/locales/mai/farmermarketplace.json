@@ -1,9 +1,14 @@
 {
     "next": "अगिला",
     "previous": "पिछला",
-    "nodata": "कोनो डेटा उपलब्ध नै छ",
+    "nodata": "कोनो डेटा उपलब्ध नै अछि",
     "listedcontract": "सूचीकृत अनुबंध",
     "selectcrop": "फसल चुनू",
-    "all": "सब",
-    "selectdistance": "दूरी चुनू"
+    "all": "सभ",
+    "selectdistance": "दूरी चुनू",
+    "Available Crops": "उपलब्ध फसल",
+    "District-Specific Crops": "जिला-विशेष फसल",
+    "Quintal": "क्विंटल",
+    "Other crops": "अन्य फसल",
+    "crop": "फसल"
 }
