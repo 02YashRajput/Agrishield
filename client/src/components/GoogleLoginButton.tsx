@@ -15,6 +15,10 @@ const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
    
     try {
       const { credential } = credentialResponse;
+      if (!credential) {
+        toast.error('Authentication failed. No credentials received.');
+        return;
+      }
       const res = await axios.post(
         `/api/auth/google`, 
         { credential, userType },
@@ -36,13 +40,13 @@ const GoogleLoginButton:React.FC<GoogleLoginProps> = ({userType}) => {
         toast.error(data.msg); // Display error toast
       }
     } catch (error) {
-      toast.error('Login failed'); // Display error toast
+      toast.error('Please sign up first'); // Display error toast
       console.error('Login failed', error);
     }
   };
 
   const onError = () => {
-    toast.error('Login Failed'); // Display error toast
+    toast.error('Please sign up firstr'); // Display error toast
   };
 
   return (
