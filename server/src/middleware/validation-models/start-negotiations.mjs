@@ -19,6 +19,19 @@ export const validateNegotiationDetails = checkSchema({
       errorMessage: 'Final Payment Amount is required',
     },
   },
+  deliveryPreference:{
+    in: ['body'],
+    isString: {
+      errorMessage: 'Delivery Preference must be a string',
+    },
+    notEmpty: {
+      errorMessage: 'Delivery Preference is required',
+    },
+    isIn: {
+      options: [['Farmer', 'Buyer']],
+      errorMessage: 'Delivery Preference must be either "Farmer" or "Buyer"',
+    },
+  },
   
   productQuantity: {
     in: ['body'],

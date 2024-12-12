@@ -38,7 +38,7 @@ const fetcher = (url: string) =>
 
 function App ()  {
 
-  const { data: user,isLoading } = useSWR(`${import.meta.env.VITE_SERVER_URL}/api/user`, fetcher);
+  const { data: user,isLoading } = useSWR(`/api/user`, fetcher);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {

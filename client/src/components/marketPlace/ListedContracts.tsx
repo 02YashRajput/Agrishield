@@ -10,6 +10,7 @@ import {
   Button,
   TextField,
   Popover,
+  MenuItem,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
@@ -87,6 +88,7 @@ interface ListedContractsProps {
     finalPaymentAmount: string;
     productImage: string;
     productVariety: string;
+    deliveryPreference: string;
   }[];
   userType: string;
   setContracts: React.Dispatch<
@@ -104,6 +106,7 @@ interface ListedContractsProps {
         finalPaymentAmount: string;
         productImage: string;
         productVariety: string;
+        deliveryPreference:string
       }[]
     >
   >;
@@ -145,11 +148,13 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
     resolver: zodResolver(listContractSchema),
     defaultValues: {
       productName: selectedContract?.productName,
+      productVariety:selectedContract?.productVariety,
       initialPaymentAmount: selectedContract?.initialPaymentAmount,
       finalPaymentAmount: selectedContract?.finalPaymentAmount,
       deadline: selectedContract?.deadline,
       additionalInstructions: selectedContract?.additionalInstructions,
       productQuantity: selectedContract?.productQuantity,
+      deliveryPreference:selectedContract?.deliveryPreference
     },
   });
 
@@ -164,6 +169,8 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         selectedContract.additionalInstructions
       );
       setValue("productQuantity", selectedContract.productQuantity);
+      setValue("deliveryPreference", selectedContract.deliveryPreference);
+      setValue("productVariety", selectedContract.productVariety);
     }
   }, [isEditable, selectedContract]);
 
@@ -207,7 +214,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         }
 
         const response = await axios.put(
-          `${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract`,
+          `/api/marketplace/list-contract`,
           data,
           { withCredentials: true }
         );
@@ -365,6 +372,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         <form onSubmit={(e)=>{
           e.preventDefault();
           const data = getValues()
+          console.log(data)
           handleFormSubmit(data)
           console.log("hello")
         }}>
@@ -418,6 +426,30 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     <strong>{t("buyer_name")}</strong>{" "}
                     {selectedContract.buyerName}
                   </Typography>
+                  {isEditable ? (
+                   <Controller
+                   name="deliveryPreference"
+                   control={control}
+                   render={({ field }) => (
+                     <TextField
+                       {...field}
+                       select
+                       label="Delivery Preference"
+                       fullWidth
+                       variant="outlined"
+                       color="secondary"
+                     >
+                       <MenuItem value="Farmer">Farmer</MenuItem>
+                       <MenuItem value="Buyer">Buyer</MenuItem>
+                     </TextField>
+                   )}
+                 />
+                  ) : (
+                    <Typography variant="body1">
+                      <strong>Delivery Prefernce: </strong>{" "}
+                      {selectedContract.deliveryPreference}
+                    </Typography>
+                  )}
                   {isEditable ? (
                     <Controller
                       name="productQuantity"

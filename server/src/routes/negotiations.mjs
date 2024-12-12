@@ -73,6 +73,7 @@ router.put(
       finalPaymentAmount,
       deadline,
       productQuantity,
+      deliveryPreference
     } = req.body;
 
     
@@ -91,12 +92,14 @@ router.put(
         negotiation.deadlineFarmer = new Date(deadline);
         negotiation.productQuantityFarmer = productQuantity;
         negotiation.lastUpdated = "Farmer";
+        negotiation.deliveryPreferenceFarmer = deliveryPreference;
       } else {
         negotiation.initialPaymentAmountBuyer = initialPaymentAmount;
         negotiation.finalPaymentAmountBuyer = finalPaymentAmount;
         negotiation.deadlineBuyer = deadline;
         negotiation.productQuantityBuyer = productQuantity;
         negotiation.lastUpdated = "Buyer";
+        negotiation.deliveryPreferenceBuyer = deliveryPreference;
       }
 
       await negotiation.save();
@@ -156,6 +159,10 @@ router.post(
           req.user.userType === "Buyer"
             ? negotiation.productQuantityFarmer
             : negotiation.productQuantityBuyer,
+          deliveryPreference:
+          req.user.userType === "Buyer"
+            ? negotiation.deliveryPreferenceFarmer
+            : negotiation.deliveryPreferenceBuyer,
         initialpaymentStatus: "Pending",
         finalpaymentStatus: "Pending",
         deliveryStatus: "Pending",

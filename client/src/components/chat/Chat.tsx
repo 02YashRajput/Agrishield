@@ -85,7 +85,7 @@ const ChatComponent :React.FC= () => {
   }, [messages]);
   const fetchChats = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/chat`, { withCredentials: true });
+      const response = await axios.get(`/api/chat`, { withCredentials: true });
       setUser(response.data.user);
       setChats(response.data.data);
     } catch (error) {
@@ -95,7 +95,7 @@ const ChatComponent :React.FC= () => {
 
   const fetchMessages = async (chatId: string) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/chat/${chatId}`, {
+      const response = await axios.get(`/api/chat/${chatId}`, {
         withCredentials: true,
       });
       setMessages(response.data.data);

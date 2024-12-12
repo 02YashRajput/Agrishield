@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Grid,
+  MenuItem,
   Popover,
   TextField,
   Typography,
@@ -23,52 +24,51 @@ import { useTranslation } from "react-i18next";
 const productRates: {
   [key: string]: number;
 } = {
-  "Banana": 4500,
-  "Maize": 2500,
-  "Apple": 8500,
-  "Wheat": 3000,
+  Banana: 4500,
+  Maize: 2500,
+  Apple: 8500,
+  Wheat: 3000,
   "Black Gram (Urd Beans)(Whole)": 7200,
   "Bengal Gram(Gram)(Whole)": 5000,
   "Paddy(Dhan)(Common)": 3000,
   "Ginger(Green)": 6000,
   "Green Chilli": 8000,
-  "Pomegranate": 7000,
-  "Tomato": 4000,
-  "Onion": 2500,
-  "Potato": 1800,
-  "Mustard": 5300,
+  Pomegranate: 7000,
+  Tomato: 4000,
+  Onion: 2500,
+  Potato: 1800,
+  Mustard: 5300,
   "Masur Dal": 5500,
-  "Garlic": 8000,
-  "Rice": 3500,
+  Garlic: 8000,
+  Rice: 3500,
   "Arhar (Tur/Red Gram)(Whole)": 4500,
   "Lentil (Masur)(Whole)": 5500,
-  "Groundnut": 6200,
-  "Capsicum": 7000,
-  "Spinach": 4000,
-  "Papaya": 3000,
+  Groundnut: 6200,
+  Capsicum: 7000,
+  Spinach: 4000,
+  Papaya: 3000,
   "Water Melon": 3200,
-  "Carrot": 4800,
-  "Cauliflower": 4500,
-  "Orange": 5000,
+  Carrot: 4800,
+  Cauliflower: 4500,
+  Orange: 5000,
   "Peas Wet": 4200,
-  "Pineapple": 5200,
+  Pineapple: 5200,
   "Green Peas": 7000,
   "Amla(Nelli Kai)": 5500,
   "Chikoos(Sapota)": 4800,
   "Bajra(Pearl Millet/Cumbu)": 2100,
   "Jowar(Sorghum)": 2400,
-  "Turmeric": 9500,
-  "Soyabean": 6200,
-  "Cotton": 6200,
+  Turmeric: 9500,
+  Soyabean: 6200,
+  Cotton: 6200,
   "Moath Dal": 5000,
-  "Peach": 8500,
-  "Turnip": 3200,
+  Peach: 8500,
+  Turnip: 3200,
   "Cummin Seed(Jeera)": 9000,
   "Mint(Pudina)": 7000,
   "Guar Seed(Cluster Beans Seed)": 4700,
-  "Kodo Millet(Varagu)": 3900
+  "Kodo Millet(Varagu)": 3900,
 };
-
 
 interface BuyerMarketPlaceProps {
   results: {
@@ -84,6 +84,7 @@ interface BuyerMarketPlaceProps {
     finalPaymentAmount: string;
     productImage: string;
     productVariety: string;
+    deliveryPreference: string;
   }[];
   userType: string;
   handleNextPage: () => void;
@@ -136,14 +137,14 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       deadline: null,
       additionalInstructions: "",
       productQuantity: "",
-      productVariety: ""
-
+      productVariety: "",
+      deliveryPreference: "",
     },
   });
 
   const handleFormSubmit = async (data: any) => {
     try {
-      const productName = data.productName
+      const productName = data.productName;
       const value =
         Number(watch("productQuantity")) === 0
           ? 0
@@ -151,7 +152,7 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
               Number(watch("finalPaymentAmount") || 0)) /
             Number(watch("productQuantity"));
       const min =
-        productRates[productName as keyof typeof productRates ] ||
+        productRates[productName as keyof typeof productRates] ||
         "Rate not available";
 
       if (isNaN(Number(min))) {
@@ -165,16 +166,15 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       }
 
       for (let i = 0; i < results.length; i++) {
-        if(results[i].productName === productName){
+        if (results[i].productName === productName) {
           toast.error("You have already listed a contract for this product");
           return;
         }
       }
-      
 
       // Make the API call using axios
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract`,
+        `/api/marketplace/list-contract`,
         data,
         { withCredentials: true } // Ensure the request includes credentials (cookies/sessions)
       );
@@ -182,12 +182,11 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
       if (response.data.success) {
         toast.success(t("contractListedSuccess"));
         setContracts((prev) => [...prev, response.data.newContract]);
-      window.location.reload();
-
+        window.location.reload();
       }
     } catch (error) {
       toast.error(t("contractListedFailure"));
-    } 
+    }
   };
 
   useEffect(() => {
@@ -247,7 +246,6 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                   render={({ field }) => (
                     <TextField
                       required
-                      
                       color="secondary"
                       {...field}
                       error={!!errors.productVariety}
@@ -255,6 +253,25 @@ const BuyerMarketPlace: React.FC<BuyerMarketPlaceProps> = ({
                       label="Product Variety"
                       fullWidth
                     />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Controller
+                  name="deliveryPreference"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      select
+                      label="Delivery Preference"
+                      fullWidth
+                      variant="outlined"
+                      color="secondary"
+                    >
+                      <MenuItem value="Farmer">Farmer</MenuItem>
+                      <MenuItem value="Buyer">Buyer</MenuItem>
+                    </TextField>
                   )}
                 />
               </Grid>

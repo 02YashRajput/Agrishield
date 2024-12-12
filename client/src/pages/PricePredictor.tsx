@@ -66,7 +66,7 @@ const PricePredictor: React.FC = () => {
   const [filter, setFilter] = useState("");
   
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/price-predictor?state=${state}&district=${district}`,
+    `/api/price-predictor?state=${state}&district=${district}`,
     fetcher
   );
 

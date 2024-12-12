@@ -25,6 +25,16 @@ const negotiationsSchema = new Schema({
     type: String,
     required: true,
   },
+  deliveryPreferenceFarmer:{
+    type: String,
+    enum: ['Buyer', 'Farmer'],
+    required: true,
+  },
+  deliveryPreferenceBuyer:{
+    type: String,
+    enum: ['Buyer', 'Farmer'],
+    required: true,
+  },
   farmerId: {
     type: Schema.Types.ObjectId,
     ref: "User",

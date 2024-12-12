@@ -47,7 +47,7 @@ const UserForm :React.FC= () => {
 
   const onSubmit = async(data: UserFormValues) => {
     try{
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/agent/user`,data,{withCredentials:true});
+      const response = await axios.post(`/api/agent/user`,data,{withCredentials:true});
       if(response.data.success){
         toast.success("User created successfully!");
         reset({ userName: "", email: "", phone: "", password: "", userType:undefined});

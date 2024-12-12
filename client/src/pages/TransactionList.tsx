@@ -39,7 +39,7 @@ const fetcher = (url: string) =>
 const TransactionList :React.FC= () => {
 
   const { data, error, isLoading } = useSWR<TransactionsResponse>(
-    `${import.meta.env.VITE_SERVER_URL}/api/transactions`,
+    `/api/transactions`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;
