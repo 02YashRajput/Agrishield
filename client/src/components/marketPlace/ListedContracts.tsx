@@ -179,9 +179,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       data.marketPlaceId = selectedContract?.marketPlaceId;
       if (userType === "Farmer") {
         const response = await axios.post(
-          `${
-            import.meta.env.VITE_SERVER_URL
-          }/api/marketplace/start-negotiations/${
+          `/api/marketplace/start-negotiations/${
             selectedContract?.marketPlaceId
           }`,
           data,
@@ -676,9 +674,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                             onClick={async () => {
                               try {
                                 const response = await axios.post(
-                                  `${
-                                    import.meta.env.VITE_SERVER_URL
-                                  }/api/marketplace/request-contract/${
+                                  `/api/marketplace/request-contract/${
                                     selectedContract?.marketPlaceId
                                   }`,
                                   {},
@@ -765,14 +761,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           onClick={async () => {
                             try {
                               const response = await axios.delete(
-                                `${
-                                  import.meta.env.VITE_SERVER_URL
-                                }/api/marketplace/list-contract/${
+                                `/api/marketplace/list-contract/${
                                   selectedContract?.marketPlaceId
                                 }`,
                                 { withCredentials: true,headers: {
-                                  'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
-                                }, }
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      }, }
                               );
                               if (response.data.success) {
                                 setContracts((prevContracts) =>
