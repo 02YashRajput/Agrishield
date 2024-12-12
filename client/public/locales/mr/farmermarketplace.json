@@ -2,8 +2,13 @@
     "next": "पुढे",
     "previous": "मागे",
     "nodata": "माहिती उपलब्ध नाही",
-    "listedcontract": "यादीबद्ध करार",
-    "selectcrop": "पीक निवडा",
+    "listedcontract": "सूचीत असलेले करार",
+    "selectcrop": "पिक निवडा",
     "all": "सर्व",
-    "selectdistance": "अंतर निवडा"
+    "selectdistance": "अंतर निवडा",
+    "Available Crops": "उपलब्ध पिके",
+    "District-Specific Crops": "जिल्हा-विशिष्ट पिके",
+    "Quintal": "क्विंटल",
+    "Other crops": "इतर पिके",
+    "crop": "पिक"
 }

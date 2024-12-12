@@ -1,9 +1,14 @@
 {
     "next": "ಮುಂದೆ",
     "previous": "ಹಿಂದೆ",
-    "nodata": "ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ",
-    "listedcontract": "ಪಟ್ಟಿ ಮಾಡಲಾದ ಒಪ್ಪಂದಗಳು",
+    "nodata": "ದತ್ತಾಂಶ ಲಭ್ಯವಿಲ್ಲ",
+    "listedcontract": "ಪಟ್ಟಿಯಲ್ಲಿರುವ ಒಪ್ಪಂದಗಳು",
     "selectcrop": "ಬೆಳೆ ಆಯ್ಕೆಮಾಡಿ",
     "all": "ಎಲ್ಲಾ",
-    "selectdistance": "ದೂರವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+    "selectdistance": "ಅಂತರ ಆಯ್ಕೆಮಾಡಿ",
+    "Available Crops": "ಲಭ್ಯವಿರುವ ಬೆಳೆಗಳು",
+    "District-Specific Crops": "ಜಿಲ್ಲಾ-ನಿರ್ದಿಷ್ಟ ಬೆಳೆಗಳು",
+    "Quintal": "ಕ್ವಿಂಟಾಲ್",
+    "Other crops": "ಇತರ ಬೆಳೆಗಳು",
+    "crop": "ಬೆಳೆ"
 }

@@ -1,9 +1,14 @@
 {
-    "next": "পৰৱর্তী",
-    "previous": "পূৰ্বৱৰ্তী",
+    "next": "পৰবৰ্তী",
+    "previous": "পূৰ্ববৰ্তী",
     "nodata": "ডাটা উপলব্ধ নাই",
     "listedcontract": "তালিকাভুক্ত চুক্তিসমূহ",
-    "selectcrop": "শস্য বাছনি কৰক",
+    "selectcrop": "শস্য নিৰ্বাচন কৰক",
     "all": "সকলো",
-    "selectdistance": "দূৰত্ব বাছনি কৰক"
+    "selectdistance": "দূৰত্ব নিৰ্বাচন কৰক",
+    "Available Crops": "উপলব্ধ শস্যসমূহ",
+    "District-Specific Crops": "জিলা-বিশেষ শস্যসমূহ",
+    "Quintal": "কুইন্টল",
+    "Other crops": "অন্যান্য শস্যসমূহ",
+    "crop": "শস্য"
 }

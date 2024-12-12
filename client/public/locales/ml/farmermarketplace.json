@@ -1,9 +1,14 @@
 {
     "next": "അടുത്തത്",
-    "previous": "മുൻപ്",
-    "nodata": "ഡാറ്റ ലഭ്യമല്ല",
-    "listedcontract": "ലിസ്റ്റുചെയ്ത കരാറുകൾ",
+    "previous": "മുൻപത്തെ",
+    "nodata": "ഡേറ്റ ഇല്ല",
+    "listedcontract": "പട്ടികയിലുളള കരാറുകൾ",
     "selectcrop": "വിളകൾ തിരഞ്ഞെടുക്കുക",
     "all": "എല്ലാം",
-    "selectdistance": "ദൂരം തിരഞ്ഞെടുക്കുക"
+    "selectdistance": "ദൂരം തിരഞ്ഞെടുക്കുക",
+    "Available Crops": "ലഭ്യമായ വിളകൾ",
+    "District-Specific Crops": "ജില്ലാ-സെൻട്രിക് വിളകൾ",
+    "Quintal": "ക്വിന്റൽ",
+    "Other crops": "മറ്റ് വിളകൾ",
+    "crop": "വിള"
 }

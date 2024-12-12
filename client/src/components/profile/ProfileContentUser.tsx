@@ -881,7 +881,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 <Typography variant="body1">
                   {profileData?.farmDetails?.farmSize === ""
                     ? t("Not Provided")
-                    : `${profileData?.farmDetails?.farmSize} ${profileData?.farmDetails?.sizeUnit}`}
+                    : `${profileData?.farmDetails?.farmSize} ${profileData?.farmDetails &&  t(profileData?.farmDetails?.sizeUnit.toLowerCase())}`}
                 </Typography>
               )}
             </Box>
