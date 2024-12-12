@@ -400,7 +400,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   {...field}
                   disabled = {!selectedState}
                   options={districtsOptions}
-                  getOptionLabel={(option) => option.value} // Show the crop name
+                  getOptionLabel={(option) => option.value} 
                   isOptionEqualToValue={(option, value) =>
                     option.key === value?.key
                   }
@@ -408,7 +408,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                     districtsOptions.find((district) => district.key === field.value) ||
                     null
                   } 
-                  onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+                  onChange={(_, data) => field.onChange(data?.key || "")} 
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -881,7 +881,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 <Typography variant="body1">
                   {profileData?.farmDetails?.farmSize === ""
                     ? t("Not Provided")
-                    : `${profileData?.farmDetails?.farmSize} ${profileData?.farmDetails?.sizeUnit}`}
+                    : `${profileData?.farmDetails?.farmSize} ${profileData?.farmDetails &&  t(profileData?.farmDetails?.sizeUnit.toLowerCase())}`}
                 </Typography>
               )}
             </Box>

@@ -1,9 +1,14 @@
 {
     "next": "ਅਗਲਾ",
     "previous": "ਪਿਛਲਾ",
-    "nodata": "ਕੋਈ ਡਾਟਾ ਉਪਲਬਧ ਨਹੀਂ",
-    "listedcontract": "ਲਿਸਟ ਕੀਤੇ ਗਏ ਕਰਾਰ",
+    "nodata": "ਕੋਈ ਡੇਟਾ ਉਪਲਬਧ ਨਹੀਂ",
+    "listedcontract": "ਲਿਸਟ ਕੀਤੀਆਂ ਚੁੱਕਤੀਆਂ",
     "selectcrop": "ਫਸਲ ਚੁਣੋ",
     "all": "ਸਭ",
-    "selectdistance": "ਦੂਰੀ ਚੁਣੋ"
+    "selectdistance": "ਦੂਰੀ ਚੁਣੋ",
+    "Available Crops": "ਉਪਲਬਧ ਫਸਲਾਂ",
+    "District-Specific Crops": "ਜਿਲ੍ਹਾ-ਵਿਸ਼ੇਸ਼ ਫਸਲਾਂ",
+    "Quintal": "ਕੁਇੰਟਲ",
+    "Other crops": "ਹੋਰ ਫਸਲਾਂ",
+    "crop": "ਫਸਲ"
 }
