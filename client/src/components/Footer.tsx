@@ -82,11 +82,11 @@ const Footer: React.FC = () => {
                 {t("home")}
               </Link>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Link href="/about" color="inherit" variant="body2">
                 {t("about_us")}
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Link href="/contact-us" color="inherit" variant="body2">
                 {t("contact")}

@@ -89,7 +89,7 @@ function App ()  {
   
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/contact-us" element={<ContactUs />} />
-      <Route path="/about" element={<About />} />
+      {/* <Route path="/about" element={<About />} /> */}
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
       <Route path="/agent/dashboard" element={<AgentDashboard />} />
       <Route path="/verify-email" element={<Verification />} />
