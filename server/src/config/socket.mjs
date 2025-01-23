@@ -7,7 +7,7 @@ dotenv.config();
 export const configureChatSockets = (httpServer) => {
     const io = new Server(httpServer, {
         cors: {
-            origin: ["http://localhost:5173","https://agrishield.vercel.app"], 
+            origin: ["http://localhost:5173","https://agrishieldz.vercel.app"], 
             credentials: true,
         },
     });
