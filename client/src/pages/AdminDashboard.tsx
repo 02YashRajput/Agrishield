@@ -8,7 +8,9 @@ import NotFound from './NotFound';
 import toast from 'react-hot-toast';
 
 const fetcher = (url: string) =>
-  axios.get(url, { withCredentials: true }).then((res) => res.data);
+  axios.get(url, { withCredentials: true,headers: {
+    'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+  }, }).then((res) => res.data);
 
 interface User {
   _id: number;
@@ -55,7 +57,7 @@ interface DashboardData {
 }
 
 const AdminDashboard: React.FC = () => {
-  const { data, error } = useSWR<DashboardData>(`${import.meta.env.VITE_SERVER_URL}/api/admin/dashboard`, fetcher);
+  const { data, error } = useSWR<DashboardData>(`/api/admin/dashboard`, fetcher);
 
   const [viewingUsers, setViewingUsers] = useState<'farmers' | 'buyers' | null>(null);
   const [viewingContracts, setViewingContracts] = useState(false);
@@ -84,8 +86,11 @@ const AdminDashboard: React.FC = () => {
   };
   const deleteUser = async (userId: number) => {
     try {
-       await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/admin/dashboard/user/${userId}`, {
+       await axios.delete(`/api/admin/dashboard/user/${userId}`, {
         withCredentials: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        },
       });
 
       toast.success("user deleted successfully")
@@ -96,8 +101,11 @@ const AdminDashboard: React.FC = () => {
   };
   const deleteContract = async (contractId: number) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/admin/dashboard/${contractId}`, {
+      await axios.delete(`/api/admin/dashboard/${contractId}`, {
         withCredentials: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        },
       });
      toast.success('contract deleted successfullt')
     } catch (error:any) {

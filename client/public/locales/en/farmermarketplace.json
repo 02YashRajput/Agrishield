@@ -5,5 +5,10 @@
     "listedcontract":"Listed Contracts",
     "selectcrop":"Select Crop",
     "all":"All",
-    "selectdistance":"Select Distance"
+    "selectdistance":"Select Distance",
+    "Available Crops":"Available Crops",
+    "District-Specific Crops":"District-Specific Crops",
+    "Quintal":"Quintal",
+    "Other crops":"Other crops",
+    "crop":"crop"
 }

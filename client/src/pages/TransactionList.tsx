@@ -34,12 +34,15 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 const TransactionList :React.FC= () => {
 
   const { data, error, isLoading } = useSWR<TransactionsResponse>(
-    `${import.meta.env.VITE_SERVER_URL}/api/transactions`,
+    `/api/transactions`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

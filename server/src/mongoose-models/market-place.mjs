@@ -49,6 +49,7 @@ const marketPlaceSchema = new Schema({
     required: true
   },
 
+
   
   deadline:{
     type: Date,
@@ -62,6 +63,12 @@ const marketPlaceSchema = new Schema({
   finalPaymentAmount:{
     type: String,
     required: true
+  },
+
+  deliveryPreference:{
+    type: String,
+    enum: ['Buyer', 'Farmer'],
+    required: true,
   },
 
   location: {

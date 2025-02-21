@@ -11,7 +11,7 @@ import { connectDb } from './config/connect-db.mjs';
 import {configureChatSockets} from "./config/socket.mjs"
 dotenv.config();
 import http from 'http'; 
-import { sendCall, sendSms } from './utils/sendMessage.mjs';
+// import { sendCall, sendSms } from './utils/sendMessage.mjs';
 const port = process.env.PORT || 3000;
 const cookie_secret = process.env.COOKIE_SECRET ;
 const session_secret = process.env.SESSION_SECRET;
@@ -65,9 +65,9 @@ const body = "Hello, world!"
 const callBody = '<Response><Say voice="woman">Thanks for trying our documentation. Enjoy!</Say><Play>http://demo.twilio.com/docs/classic.mp3</Play></Response>';
 
 // sendSms(to, body);
-// sendCall(to,body)
+// sendCall(to,body);
 
-// configureChatSockets(httpServer);
+configureChatSockets(httpServer);
 httpServer.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

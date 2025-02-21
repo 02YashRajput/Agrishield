@@ -52,12 +52,15 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 
 const Home: React.FC = () => {
   const { data, error } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/`,
+    `/api/`,
     fetcher
   );
   const { t } = useTranslation("home");

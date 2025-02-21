@@ -10,6 +10,7 @@ import {
   Button,
   TextField,
   Popover,
+  MenuItem,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
@@ -27,50 +28,50 @@ import { useTranslation } from "react-i18next";
 const productRates: {
   [key: string]: number;
 } = {
-  Banana: 4500,
-  Maize: 2500,
-  Apple: 8500,
-  Wheat: 3000,
+  "Banana": 4500,
+  "Maize": 2500,
+  "Apple": 8500,
+  "Wheat": 3000,
   "Black Gram (Urd Beans)(Whole)": 7200,
   "Bengal Gram(Gram)(Whole)": 5000,
   "Paddy(Dhan)(Common)": 3000,
   "Ginger(Green)": 6000,
   "Green Chilli": 8000,
-  Pomegranate: 7000,
-  Tomato: 4000,
-  Onion: 2500,
-  Potato: 1800,
-  Mustard: 5300,
+  "Pomegranate": 7000,
+  "Tomato": 4000,
+  "Onion": 2500,
+  "Potato": 1800,
+  "Mustard": 5300,
   "Masur Dal": 5500,
-  Garlic: 8000,
-  Rice: 3500,
+  "Garlic": 8000,
+  "Rice": 3500,
   "Arhar (Tur/Red Gram)(Whole)": 4500,
   "Lentil (Masur)(Whole)": 5500,
-  Groundnut: 6200,
-  Capsicum: 7000,
-  Spinach: 4000,
-  Papaya: 3000,
+  "Groundnut": 6200,
+  "Capsicum": 7000,
+  "Spinach": 4000,
+  "Papaya": 3000,
   "Water Melon": 3200,
-  Carrot: 4800,
-  Cauliflower: 4500,
-  Orange: 5000,
+  "Carrot": 4800,
+  "Cauliflower": 4500,
+  "Orange": 5000,
   "Peas Wet": 4200,
-  Pineapple: 5200,
+  "Pineapple": 5200,
   "Green Peas": 7000,
   "Amla(Nelli Kai)": 5500,
   "Chikoos(Sapota)": 4800,
   "Bajra(Pearl Millet/Cumbu)": 2100,
   "Jowar(Sorghum)": 2400,
-  Turmeric: 9500,
-  Soyabean: 6200,
-  Cotton: 6200,
+  "Turmeric": 9500,
+  "Soyabean": 6200,
+  "Cotton": 6200,
   "Moath Dal": 5000,
-  Peach: 8500,
-  Turnip: 3200,
+  "Peach": 8500,
+  "Turnip": 3200,
   "Cummin Seed(Jeera)": 9000,
   "Mint(Pudina)": 7000,
   "Guar Seed(Cluster Beans Seed)": 4700,
-  "Kodo Millet(Varagu)": 3900,
+  "Kodo Millet(Varagu)": 3900
 };
 
 interface ListedContractsProps {
@@ -87,6 +88,7 @@ interface ListedContractsProps {
     finalPaymentAmount: string;
     productImage: string;
     productVariety: string;
+    deliveryPreference: string;
   }[];
   userType: string;
   setContracts: React.Dispatch<
@@ -104,6 +106,7 @@ interface ListedContractsProps {
         finalPaymentAmount: string;
         productImage: string;
         productVariety: string;
+        deliveryPreference:string
       }[]
     >
   >;
@@ -136,7 +139,8 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
   };
   const {
     control,
-    handleSubmit,
+    
+    getValues,
     watch,
     setValue,
     formState: { errors },
@@ -144,11 +148,13 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
     resolver: zodResolver(listContractSchema),
     defaultValues: {
       productName: selectedContract?.productName,
+      productVariety:selectedContract?.productVariety,
       initialPaymentAmount: selectedContract?.initialPaymentAmount,
       finalPaymentAmount: selectedContract?.finalPaymentAmount,
       deadline: selectedContract?.deadline,
       additionalInstructions: selectedContract?.additionalInstructions,
       productQuantity: selectedContract?.productQuantity,
+      deliveryPreference:selectedContract?.deliveryPreference
     },
   });
 
@@ -163,6 +169,8 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         selectedContract.additionalInstructions
       );
       setValue("productQuantity", selectedContract.productQuantity);
+      setValue("deliveryPreference", selectedContract.deliveryPreference);
+      setValue("productVariety", selectedContract.productVariety);
     }
   }, [isEditable, selectedContract]);
 
@@ -171,13 +179,13 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       data.marketPlaceId = selectedContract?.marketPlaceId;
       if (userType === "Farmer") {
         const response = await axios.post(
-          `${
-            import.meta.env.VITE_SERVER_URL
-          }/api/marketplace/start-negotiations/${
+          `/api/marketplace/start-negotiations/${
             selectedContract?.marketPlaceId
           }`,
           data,
-          { withCredentials: true }
+          { withCredentials: true,headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          }, }
         );
         if (response.status === 200) {
           toast.success(t("Negotiation started successfully!"));
@@ -206,9 +214,11 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         }
 
         const response = await axios.put(
-          `${import.meta.env.VITE_SERVER_URL}/api/marketplace/list-contract`,
+          `/api/marketplace/list-contract`,
           data,
-          { withCredentials: true }
+          { withCredentials: true,headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          }, }
         );
         if (response.data.success) {
           toast.success(t("Contract listed successfully!"));
@@ -239,6 +249,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
       }
       setIsEditable(false);
       handleCloseModal();
+      window.location.reload();
     } catch (error) {
       toast.error(t("Error updating contract"));
     }
@@ -329,7 +340,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                       </Typography>
                       <Typography variant="body1">
                         <strong>{t("product_name")}</strong>{" "}
-                        {contract.productName} - {contract.productVariety}
+                        {t(`crops:cropsObject.${contract.productName}.name`)} - {contract.productVariety}
                       </Typography>
                       <Typography variant="body1">
                         <strong>{t("quantity")}</strong>{" "}
@@ -361,7 +372,13 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
         aria-describedby="modal-description"
         className="overflow-auto"
       >
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <form onSubmit={(e)=>{
+          e.preventDefault();
+          const data = getValues()
+          console.log(data)
+          handleFormSubmit(data)
+          console.log("hello")
+        }}>
           <Box
             sx={{
               position: "absolute",
@@ -406,12 +423,36 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                     component="h2"
                     sx={{ fontWeight: "bold", mb: 2 }}
                   >
-                    {selectedContract.productName}-{selectedContract.productVariety}
+                    {t(`crops:cropsObject.${selectedContract.productName}.name`)}-{selectedContract.productVariety}
                   </Typography>
                   <Typography id="modal-description" variant="body1">
                     <strong>{t("buyer_name")}</strong>{" "}
                     {selectedContract.buyerName}
                   </Typography>
+                  {isEditable ? (
+                   <Controller
+                   name="deliveryPreference"
+                   control={control}
+                   render={({ field }) => (
+                     <TextField
+                       {...field}
+                       select
+                       label="Delivery Preference"
+                       fullWidth
+                       variant="outlined"
+                       color="secondary"
+                     >
+                       <MenuItem value="Farmer">Farmer</MenuItem>
+                       <MenuItem value="Buyer">Buyer</MenuItem>
+                     </TextField>
+                   )}
+                 />
+                  ) : (
+                    <Typography variant="body1">
+                      <strong>Delivery Prefernce: </strong>{" "}
+                      {selectedContract.deliveryPreference}
+                    </Typography>
+                  )}
                   {isEditable ? (
                     <Controller
                       name="productQuantity"
@@ -424,7 +465,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.productQuantity}
                           helperText={errors.productQuantity?.message}
-                          label="Product Quantity in Quintal (q)"
+                          label={t("Product Quantity in Quintal (q)")}
                           fullWidth
                         />
                       )}
@@ -447,7 +488,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.initialPaymentAmount}
                           helperText={errors.initialPaymentAmount?.message}
-                          label="Initial Payment Amount in %"
+                          label={t("Initial Payment Amount in %")}
                           fullWidth
                         />
                       )}
@@ -470,7 +511,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.finalPaymentAmount}
                           helperText={errors.finalPaymentAmount?.message}
-                          label="Final Payment Amount"
+                          label={t("Final Payment Amount")}
                           fullWidth
                         />
                       )}
@@ -483,18 +524,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   )}
 
                   {isEditable ? (
-                    <TextField
-                      color="secondary"
-                      value={
-                        Number(watch("productQuantity")) === 0
-                          ? 0
-                          : Number(watch("finalPaymentAmount") || 0) /
-                            Number(watch("productQuantity"))
-                      }
-                      label={t("ratePerQuintal")}
-                      fullWidth
-                      disabled
-                    />
+                    <Typography variant="body1" className="flex items-center">
+                      <strong>{t("rate")}</strong> <FaRupeeSign />{" "}
+                      {
+                        Number(watch("finalPaymentAmount")) /Number(watch("productQuantity"))
+                        }
+                    </Typography>
                   ) : (
                     <Typography variant="body1" className="flex items-center">
                       <strong>{t("rate")}</strong> <FaRupeeSign />{" "}
@@ -507,7 +542,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                   {
                     <Typography variant="body1" className="flex items-center">
                       <strong>
-                        Min Rate: </strong>
+                        {t("Min Rate")}: </strong>
                       {productRates[
                         selectedContract.productName as keyof typeof productRates
                       ] || ""}
@@ -573,7 +608,7 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           {...field}
                           error={!!errors.additionalInstructions}
                           helperText={errors.additionalInstructions?.message}
-                          label="Additional Instructions"
+                          label={t("Additional Instructions")}
                           fullWidth
                         />
                       )}
@@ -639,13 +674,13 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                             onClick={async () => {
                               try {
                                 const response = await axios.post(
-                                  `${
-                                    import.meta.env.VITE_SERVER_URL
-                                  }/api/marketplace/request-contract/${
+                                  `/api/marketplace/request-contract/${
                                     selectedContract?.marketPlaceId
                                   }`,
                                   {},
-                                  { withCredentials: true }
+                                  { withCredentials: true,headers: {
+                                    'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                                  }, }
                                 );
                                 if (response.data.success) {
                                   toast.success(t("Request sent successfully"));
@@ -726,12 +761,12 @@ const ListedContracts: React.FC<ListedContractsProps> = ({
                           onClick={async () => {
                             try {
                               const response = await axios.delete(
-                                `${
-                                  import.meta.env.VITE_SERVER_URL
-                                }/api/marketplace/list-contract/${
+                                `/api/marketplace/list-contract/${
                                   selectedContract?.marketPlaceId
                                 }`,
-                                { withCredentials: true }
+                                { withCredentials: true,headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      }, }
                               );
                               if (response.data.success) {
                                 setContracts((prevContracts) =>

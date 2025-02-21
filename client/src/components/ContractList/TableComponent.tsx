@@ -90,7 +90,7 @@ const TableComponent: React.FC<TableComponentProps> = ({ contracts }) => {
               <TableCell>
                 {new Date(contract.deadline).toLocaleDateString()}
               </TableCell>
-              <TableCell>{contract.productName}</TableCell>
+              <TableCell>{t(`crops:cropsObject.${contract.productName}.name`)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

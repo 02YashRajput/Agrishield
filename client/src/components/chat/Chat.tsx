@@ -56,6 +56,9 @@ const ChatComponent :React.FC= () => {
       fetchMessages(currentChatId);
       const newSocket = io(import.meta.env.VITE_SERVER_URL, {
         withCredentials: true,
+        extraHeaders: {
+          'ngrok-skip-browser-warning': 'any-value',  // Use extraHeaders instead of headers
+        }
       });
       
       setSocket(newSocket);
@@ -85,7 +88,9 @@ const ChatComponent :React.FC= () => {
   }, [messages]);
   const fetchChats = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/chat`, { withCredentials: true });
+      const response = await axios.get(`/api/chat`, { withCredentials: true ,headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },});
       setUser(response.data.user);
       setChats(response.data.data);
     } catch (error) {
@@ -95,8 +100,11 @@ const ChatComponent :React.FC= () => {
 
   const fetchMessages = async (chatId: string) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/chat/${chatId}`, {
+      const response = await axios.get(`/api/chat/${chatId}`, {
         withCredentials: true,
+        headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        },
       });
       setMessages(response.data.data);
     } catch (error) {

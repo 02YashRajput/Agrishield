@@ -96,7 +96,7 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
       });
     } else {
       const profile = await FarmerProfile.findOne({ userId: req.user.id });
-      if (!profile || !profile.address || !profile.address.location) {
+      if (!profile) {
         return res.status(401).json({ message: "User Profile not found" });
       }
       
@@ -109,21 +109,20 @@ router.get("/api/marketplace", authMiddleware, async (req, res) => {
 
       let productQuantities = {};
       let districtQuantities = {};
-
       marketplaceDocs.forEach(doc => {
-        // If the product is in district crops, add it to districtQuantities
+        const quantity = parseInt(doc.productQuantity, 10); 
+        
         if (districtCrops.includes(doc.productName)) {
           if (districtQuantities[doc.productName]) {
-            districtQuantities[doc.productName] += doc.productQuantity;
+            districtQuantities[doc.productName] += quantity; 
           } else {
-            districtQuantities[doc.productName] = doc.productQuantity;
+            districtQuantities[doc.productName] = quantity; 
           }
         } else {
-          // Otherwise, add it to productQuantities
           if (productQuantities[doc.productName]) {
-            productQuantities[doc.productName] += doc.productQuantity;
+            productQuantities[doc.productName] += quantity;
           } else {
-            productQuantities[doc.productName] = doc.productQuantity;
+            productQuantities[doc.productName] = quantity;
           }
         }
       });
@@ -203,7 +202,8 @@ router.post(
         deadline,
         additionalInstructions,
         productQuantity,
-        productVariety
+        productVariety,
+        deliveryPreference
       } = req.body;
       const user = req.user; // Assuming the user info is available from the authMiddleware
       // Determine which profile to fetch based on userType
@@ -222,6 +222,7 @@ router.post(
         productImage: `${baseAwsUrl}/${productName.split("/").join(" ")}.jpg`,
         initialPaymentAmount,
         finalPaymentAmount,
+        deliveryPreference,
         deadline,
         additionalInstructions,
         productQuantity,
@@ -258,7 +259,7 @@ router.put(
       initialPaymentAmount,
       finalPaymentAmount,
       deadline,
-      
+      deliveryPreference,
       additionalInstructions,
       productQuantity,
       marketPlaceId,
@@ -270,6 +271,7 @@ router.put(
           initialPaymentAmount,
           finalPaymentAmount,
           deadline,
+          deliveryPreference,
           additionalInstructions,
           productQuantity,
         },
@@ -363,6 +365,7 @@ router.post(
         initialpaymentStatus: "Pending",
         finalpaymentStatus: "Pending",
         deliveryStatus: "Pending",
+        deliveryPreference:marketPlaceContract.deliveryPreference,
         qualityCheck:false,
         deadline: new Date(marketPlaceContract.deadline),
         initialPaymentAmount: marketPlaceContract.initialPaymentAmount,
@@ -437,6 +440,7 @@ router.post(
         finalPaymentAmount,
         productQuantity,
         deadline,
+        deliveryPreference,
       } = req.body;
       const buyer = await User.findById(marketPlaceContract.buyerId);
       const negotiations = new Negotiations({
@@ -448,6 +452,8 @@ router.post(
         productImage: `${baseAwsUrl}/${marketPlaceContract.productName}.jpg`,
         productName: marketPlaceContract.productName,
         productVariety:marketPlaceContract.productVariety,
+        deliveryPreferenceBuyer : marketPlaceContract.deliveryPreference,
+        deliveryPreferenceFarmer: deliveryPreference,
         buyerName: marketPlaceContract.buyerName,
         buyerId: marketPlaceContract.buyerId,
         buyerProfileImage: marketPlaceContract.buyerProfileImage,

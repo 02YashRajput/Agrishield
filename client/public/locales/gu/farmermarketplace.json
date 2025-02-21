@@ -1,9 +1,14 @@
 {
     "next": "આગલું",
-    "previous": "પાછળનું",
-    "nodata": "કોઈ માહિતી ઉપલબ્ધ નથી",
-    "listedcontract": "સૂચિબદ્ધ કરાર",
+    "previous": "પાછલું",
+    "nodata": "કોઈ ડેટા ઉપલબ્ધ નથી",
+    "listedcontract": "સૂચીબદ્ધ કરાર",
     "selectcrop": "પાક પસંદ કરો",
     "all": "બધા",
-    "selectdistance": "અંતર પસંદ કરો"
+    "selectdistance": "અંતર પસંદ કરો",
+    "Available Crops": "ઉપલબ્ધ પાક",
+    "District-Specific Crops": "જિલ્લા-વિશિષ્ટ પાક",
+    "Quintal": "ક્વિન્ટલ",
+    "Other crops": "અન્ય પાક",
+    "crop": "પાક"
 }

@@ -10,7 +10,9 @@ import axios from 'axios';
 // Axios fetcher with credentials
 const fetcher = (url: string) =>
   axios
-    .get(url, { withCredentials: true })
+    .get(url, { withCredentials: true,headers: {
+      'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+    }, })
     .then((res) => res.data);
 
 const Verification: React.FC = () => {
@@ -22,7 +24,7 @@ const Verification: React.FC = () => {
     return <ErrorPage />;
   }
 
-  const { data, error } = useSWR(`${import.meta.env.VITE_SERVER_URL}/api/verify-email?token=${token}`, fetcher);
+  const { data, error } = useSWR(`/api/verify-email?token=${token}`, fetcher);
 
   if (error) {
     return <ErrorPage />;

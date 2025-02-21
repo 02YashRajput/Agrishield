@@ -61,6 +61,7 @@ interface OngoingDetailaProps {
     productQuantity: string;
     productVariety: string;
     qualityCheck:boolean;
+    deliveryPreference: string;
     quality: string;
     createdAt: Date;
     transactions :{
@@ -211,9 +212,11 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
     try {
       const status = getStatusFromNumber(activeStep + 1);
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/contracts/update-status/${data.contractId}`,
+        `/api/contracts/update-status/${data.contractId}`,
         { status, transaction },
-        { withCredentials: true }
+        { withCredentials: true,headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        }, }
       );
       if (response.data.success) {
         toast.success(t('Status updated successfully'));
@@ -241,6 +244,14 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
       activeStep === 0
         ? (parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) /100)
         : (parseInt(data.finalPaymentAmount) - (parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) /100) );
+        let si ;
+        if (new Date() > new Date(data.deadline)) {
+          // Calculate the number of months late
+          const currentDate = new Date().getTime(); // Convert to milliseconds
+          const deadlineDate = new Date(data.deadline).getTime(); // Convert to milliseconds
+          const monthsLate = Math.floor((currentDate - deadlineDate) / (1000 * 60 * 60 * 24 * 30)); // Calculate months
+          si = amount * 8 * monthsLate /100; 
+        }
 
       if(activeStep>0 ){
         if(quality === "Average"){
@@ -250,11 +261,21 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
           amount = amount * 0.7;
         }
       }
+      if(si){
+        amount = amount + si;
+      }
+      const gst = amount * 0.12;
+      amount +=gst
+      
+
+
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/create-order`,
+        `/api/create-order`,
         { amount },
-        { withCredentials: true }
+        { withCredentials: true,headers: {
+          'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+        }, }
       );
       if (response.data.success) {
         const options: RazorpayOrderOptions = {
@@ -320,7 +341,9 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
     
     const response = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true})
+      `/api/contract/quality-check/${data.contractId}`,{quality},{withCredentials:true,headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },})
 
       if (response.data.success) {
         toast.success(t('Status updated successfully'));
@@ -343,10 +366,10 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
 
       
       <Typography variant="h5" >
-        {data.productName.toUpperCase()} - {data.productVariety.toUpperCase()}
+      {t(`crops:cropsObject.${data.productName}.name`)} - {data.productVariety.toUpperCase()}
       </Typography>
       <Button variant="contained" sx={{backgroundColor : theme.palette.blue?.main, color:"white"}} onClick={handleReport} disabled={pdfLoading} startIcon = {pdfLoading && <CircularProgress size={24} color="inherit"/>}>
-        Download Report
+        {t("Download Report")}
       </Button>
       </Box>
       <Grid container spacing={4}>
@@ -413,17 +436,17 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                 <strong>{t('Initial Payment:')}</strong> {parseInt(data.initialPaymentAmount) * parseInt(data.finalPaymentAmount) / 100}
               </Typography>
               <Typography variant="body1">
-                <strong>{t('Total Payment:')}</strong> {data.finalPaymentAmount}
+                <strong>{t('Total Amount:')}</strong> {data.finalPaymentAmount}
               </Typography>
               <Typography variant="body1">
-                <strong>Product Quantity:</strong> {data.productQuantity}
+                <strong>{t("Product Quantity")}:</strong> {data.productQuantity}
               </Typography>
              
               <Typography
                 variant="body1"
                 sx={{ display: "flex", alignItems: "center" }}
               >
-                <strong>Rate: </strong>{" "}
+                <strong>{t("Rate")}: </strong>{" "}
                 {(
                   
                     parseInt(data.finalPaymentAmount) /
@@ -433,15 +456,19 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
               </Typography>
 
               <Typography variant="body1">
-                <strong>Deadline: </strong>{" "}
+                <strong>{t("Deadline")}: </strong>{" "}
                 {new Date(data.deadline).toLocaleDateString()}
               </Typography>
               {
                 activeStep >2 && <Typography variant="body1">
-                <strong>Quality: </strong>{" "}
-                {data.quality}
+                <strong>{t("Quality")}: </strong>{" "}
+                {t(data.quality)}
               </Typography>
               }
+              <Typography variant="body1">
+                            <strong>{t("Delivery Preference")}: </strong>{" "}
+                            {data.deliveryPreference}
+                          </Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -522,7 +549,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
                     whiteSpace: isVertical ? "nowrap" : "normal", // Prevent text wrap only when vertical
                   }}
                 >
-                  {status}
+                  {t(status)}
                 </Typography>
               </Box>
             </Step>
@@ -562,7 +589,7 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
          {
             userType === statusArray[activeStep][1] && activeStep === 3
             && <Button sx= {{color:theme.palette.blue?.main}} onClick={handleClick}>
-              Need Help with Delivery?
+              {t("Need Help with Delivery")}?
             </Button>
 
             
@@ -577,16 +604,16 @@ const OngoingDetails: React.FC<OngoingDetailaProps> = ({
         }}
       >
         <MenuItem onClick={() => handleSelect("https://www.delhivery.com/")}>
-          Delhivery
+          {t("Delhivery")}
         </MenuItem>
         <MenuItem onClick={() => handleSelect("https://www.bluedart.com/")}>
-          Blue Dart
+          {t("Blue Dart")}
         </MenuItem>
         <MenuItem onClick={() => handleSelect("http://www.ekartlogistics.com/")}>
-          Ekart Logistics
+          {t("Ekart Logistics")}
         </MenuItem>
         <MenuItem onClick={() => handleSelect("https://www.ecomexpress.in")}>
-          Ecom Express
+          {t("Ecom Express")}
         </MenuItem>
       </Menu>
 

@@ -42,6 +42,7 @@ interface Data {
     productVariety: string;
     qualityCheck:boolean;
     quality:string;
+    deliveryPreference:string;
     createdAt:Date;
     transactions :{
       transactionId: number;
@@ -55,13 +56,16 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 const ContractDetails :React.FC= () => {
   const location = useLocation();
   
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api${location.pathname}`,
+    `/api${location.pathname}`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

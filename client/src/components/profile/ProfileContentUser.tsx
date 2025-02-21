@@ -93,7 +93,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
 
     try {
       // Make the API call to update the profile
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/profile/upload-profile`, data, {
+      const response = await axios.post(`/api/profile/upload-profile`, data, {
         withCredentials: true, // Include credentials for authentication
       });
 
@@ -267,7 +267,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               ) : (
                 <Typography variant="body1">
                   {profileData?.adhaar === ""
-                    ? "Not Provided"
+                    ? t("Not Provided")
                     : profileData?.adhaar}
                 </Typography>
               )}
@@ -328,7 +328,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             ) : (
               <Typography variant="body1">
                 {profileData?.address.name === ""
-                  ? "Not Provided"
+                  ? t("Not Provided")
                   : profileData?.address.name}
               </Typography>
             )}
@@ -376,8 +376,8 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             ) : (
               <Typography variant="body1">
                 {profileData?.address.state === ""
-                  ? "Not Provided"
-                  : profileData?.address.state}
+                  ? t("Not Provided")
+                  : t(`stateanddistricts:States.${profileData?.address.state}.name`)}
               </Typography>
             )}
           </Box>
@@ -400,7 +400,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   {...field}
                   disabled = {!selectedState}
                   options={districtsOptions}
-                  getOptionLabel={(option) => option.value} // Show the crop name
+                  getOptionLabel={(option) => option.value} 
                   isOptionEqualToValue={(option, value) =>
                     option.key === value?.key
                   }
@@ -408,7 +408,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                     districtsOptions.find((district) => district.key === field.value) ||
                     null
                   } 
-                  onChange={(_, data) => field.onChange(data?.key || "")} // Store the key in the form state
+                  onChange={(_, data) => field.onChange(data?.key || "")} 
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -425,8 +425,8 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             ) : (
               <Typography variant="body1">
                 {profileData?.address.district === ""
-                  ? "Not Provided"
-                  : profileData?.address.district}
+                  ? t("Not Provided")
+                  : t(`stateanddistricts:States.${profileData?.address.state}.districts.${profileData.address.district}`)}
               </Typography>
             )}
           </Box>
@@ -459,7 +459,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
             ) : (
               <Typography variant="body1">
                 {profileData?.address.pincode === ""
-                  ? "Not Provided"
+                  ? t("Not Provided")
                   : profileData?.address.pincode}
               </Typography>
             )}
@@ -544,7 +544,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   <Typography variant="body1">
                     {profileData?.paymentInformation?.bankDetails
                       ?.accountNumber === ""
-                      ? "Not Available"
+                      ? t("Not Provided")
                       : profileData?.paymentInformation?.bankDetails
                           ?.accountNumber}
                   </Typography>
@@ -586,7 +586,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   <Typography variant="body1">
                     {profileData?.paymentInformation?.bankDetails
                       ?.accountHolderName === ""
-                      ? "Not Available"
+                      ? t("Not Provided")
                       : profileData?.paymentInformation?.bankDetails
                           ?.accountHolderName}
                   </Typography>
@@ -626,7 +626,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   <Typography variant="body1">
                     {profileData?.paymentInformation?.bankDetails?.bankName ===
                     ""
-                      ? "Not Available"
+                      ? t("Not Provided")
                       : profileData?.paymentInformation?.bankDetails?.bankName}
                   </Typography>
                 )}
@@ -665,7 +665,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   <Typography variant="body1">
                     {profileData?.paymentInformation?.bankDetails?.IFSCCode ===
                     ""
-                      ? "Not Available"
+                      ? t("Not Provided")
                       : profileData?.paymentInformation?.bankDetails?.IFSCCode}
                   </Typography>
                 )}
@@ -725,7 +725,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 ) : (
                   <Typography variant="body1">
                     {profileData?.paymentInformation?.upiDetails?.upiId === ""
-                      ? "Not Available"
+                      ? t("Not Provided")
                       : profileData?.paymentInformation?.upiDetails?.upiId}
                   </Typography>
                 )}
@@ -755,7 +755,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                 ) : (
                   <Typography variant="body1">
                     {profileData?.paymentInformation?.upiDetails?.upiName === ""
-                      ? "Not Available"
+                      ? t("Not Provided")
                       : profileData?.paymentInformation?.upiDetails?.upiName}
                   </Typography>
                 )}
@@ -818,7 +818,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               ) : (
                 <Typography variant="body1">
                   {profileData?.farmDetails?.farmAddress === ""
-                    ? "Not Available"
+                    ? t("Not Provided")
                     : profileData?.farmDetails?.farmAddress}
                 </Typography>
               )}
@@ -880,8 +880,8 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
               ) : (
                 <Typography variant="body1">
                   {profileData?.farmDetails?.farmSize === ""
-                    ? "Not Available"
-                    : `${profileData?.farmDetails?.farmSize} ${profileData?.farmDetails?.sizeUnit}`}
+                    ? t("Not Provided")
+                    : `${profileData?.farmDetails?.farmSize} ${profileData?.farmDetails &&  t(profileData?.farmDetails?.sizeUnit.toLowerCase())}`}
                 </Typography>
               )}
             </Box>
@@ -904,7 +904,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   ? cropsArray.map((crop) => (
                       <Chip
                         key={crop}
-                        label={crop}
+                        label={t(`crops:cropsObject.${crop}.name`)}
                         sx={{ cursor: "pointer" }}
                         variant={
                           cropsGrown.includes(crop) ? "filled" : "outlined"
@@ -918,7 +918,7 @@ const ProfileContentUser: React.FC<ProfileContentUserProps> = ({
                   : cropsGrown.map((crop: string) => (
                       <Chip
                         key={crop}
-                        label={crop}
+                        label={t(`crops:cropsObject.${crop}.name`)}
                         color="primary"
                         variant="filled"
                       />

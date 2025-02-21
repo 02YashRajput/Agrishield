@@ -57,11 +57,14 @@ const ReviewsAndRatings: React.FC<ReviewsAndRatingsProps> = ({
   const handleReviewSubmit = async () => {
     if (newReview.message.trim() && newReview.rating > 0) {
       try {
-        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/profile/add-review/${id}`, {
+        const response = await axios.post(`/api/profile/add-review/${id}`, {
           rating: newReview.rating,
           message: newReview.message,
         },{
-          withCredentials: true
+          withCredentials: true,
+          headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          },
         });
   
         if (response.status === 200) {

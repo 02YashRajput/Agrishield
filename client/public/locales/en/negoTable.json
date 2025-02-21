@@ -10,7 +10,7 @@
     "farmer":"Farmer",
     "deadline":"Deadline",
     "initialpayment":"Initial Payment",
-    "finalpayment":"Final Payment",
+    "finalpayment":"Total Payment",
     "productquantity":"Product Quantity",
     "viewprofile":"View Profile",
     "buyer":"Buyer",
@@ -18,5 +18,7 @@
     "accept":"Accept",
     "Successfully updated":"Successfully updated",
     "Error Updating":"Error Updating",
-    "Error activating Contract":"Error activating Contract"
+    "Error activating Contract":"Error activating Contract",
+    "Product Quantity in Quintal (q)":"Product Quantity in Quintal (q)",
+    "Select Deadline *":"Select Deadline *"
 }

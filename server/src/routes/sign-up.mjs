@@ -36,7 +36,7 @@ router.post("/api/local/sign-up", signUpLocalSchema, async (req, res) => {
 
     const jwt_secret = process.env.JWT_SECRET
     const token = jwt.sign({userId:savedUser.userId},jwt_secret);
-    sendVerifcationEmail(savedUser.email,token);
+    await sendVerifcationEmail(savedUser.email,token);
     return res
         .status(201)
         .json({ msg: "User created and logged in successfully",success:true });

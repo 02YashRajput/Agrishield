@@ -13,7 +13,7 @@ import ContractDetails from './pages/ContractDetails';
 import NegotiationList from './pages/NegotiationList';
 import Profile from './pages/Profile';
 import ContactUs from './pages/ContactUs';
-import About from './pages/About';
+// import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
 import Verification from './pages/Verification';
 import { useEffect } from 'react';
@@ -29,6 +29,9 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 
@@ -38,7 +41,7 @@ const fetcher = (url: string) =>
 
 function App ()  {
 
-  const { data: user,isLoading } = useSWR(`${import.meta.env.VITE_SERVER_URL}/api/user`, fetcher);
+  const { data: user,isLoading } = useSWR(`/api/user`, fetcher);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -86,7 +89,7 @@ function App ()  {
   
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/contact-us" element={<ContactUs />} />
-      <Route path="/about" element={<About />} />
+      {/* <Route path="/about" element={<About />} /> */}
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
       <Route path="/agent/dashboard" element={<AgentDashboard />} />
       <Route path="/verify-email" element={<Verification />} />

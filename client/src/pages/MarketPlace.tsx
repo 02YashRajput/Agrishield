@@ -34,6 +34,7 @@ interface Data {
     finalPaymentAmount: string;
     productImage: string;
     productVariety : string;
+    deliveryPreference: string;
   }[];
   productQuantities?: { 
     [productName: string]: number;
@@ -46,6 +47,9 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 
@@ -59,7 +63,7 @@ const MarketPlace: React.FC = () => {
   const [distance,setDistance] = useState<number>(0);
   const [crop,setCrop] = useState<string>("");
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/marketplace?page=${page}&distance=${distance}&crop=${crop}`,
+    `/api/marketplace?page=${page}&distance=${distance}&crop=${crop}`,
     fetcher
   );
   const isLoggedIn = data?.user ? true : false;

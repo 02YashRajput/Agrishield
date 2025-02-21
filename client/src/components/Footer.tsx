@@ -39,10 +39,13 @@ const Footer: React.FC = () => {
   const handleLanguageChange = async (newLanguage: Language) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/get-language`,
+        `/api/get-language`,
         { language: newLanguage },
         {
           withCredentials: true,
+          headers: {
+            'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+          },
         }
       );
       if (response.data.success) {
@@ -79,11 +82,11 @@ const Footer: React.FC = () => {
                 {t("home")}
               </Link>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Link href="/about" color="inherit" variant="body2">
                 {t("about_us")}
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Link href="/contact-us" color="inherit" variant="body2">
                 {t("contact")}

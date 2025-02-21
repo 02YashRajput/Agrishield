@@ -47,6 +47,9 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 const PricePredictor: React.FC = () => {
@@ -66,7 +69,7 @@ const PricePredictor: React.FC = () => {
   const [filter, setFilter] = useState("");
   
   const { data, error, isLoading } = useSWR<Data>(
-    `${import.meta.env.VITE_SERVER_URL}/api/price-predictor?state=${state}&district=${district}`,
+    `/api/price-predictor?state=${state}&district=${district}`,
     fetcher
   );
 

@@ -25,7 +25,9 @@ const LogoutModal :React.FC<LogoutModalProps> = ({logoutModalOpen ,setLogoutModa
 
   const handleLogoutConfirm = async () => {
     try {
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/logout`,{},{withCredentials: true});
+      await axios.post(`/api/logout`,{},{withCredentials: true,headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },});
       toast.success("Logout successful");
       setLogoutModalOpen(false);
       setAvatarOpen(false);

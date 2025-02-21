@@ -18,6 +18,7 @@ import {
   IconButton,
   TextField,
   Popover,
+  MenuItem,
 } from "@mui/material";
 import { FaRupeeSign } from "react-icons/fa";
 import { Controller, useForm } from "react-hook-form";
@@ -73,6 +74,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
       finalPaymentAmount: "",
       deadline: null,
       productQuantity: "",
+      deliveryPreference:"",
     },
   });
 
@@ -80,10 +82,12 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
 
  const handleEdit = async()=>{
   const values = getValues();
-
+  console.log(values);
   try{
 
-    const response = await axios.put(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true});
+    const response = await axios.put(`/api/negotiations/update/${selectedRow?.negotiationsId}`,values,{withCredentials:true,headers: {
+      'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+    },});
     if(response.data.success){
       setData((prevData) =>
         prevData.map((negotiation) =>
@@ -96,6 +100,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       finalPaymentAmountFarmer: values.finalPaymentAmount,
                       deadlineFarmer: new Date(values.deadline || Date.now()),
                       productQuantityFarmer: values.productQuantity,
+                      deliveryPrefernceFarmer: values.deliveryPreference,
                       lastUpdated: "Farmer",
                     }
                   : {
@@ -103,6 +108,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       finalPaymentAmountBuyer: values.finalPaymentAmount,
                       deadlineBuyer:new Date(values.deadline || Date.now()),
                       productQuantityBuyer: values.productQuantity,
+                      deliveryPrefernceBuyer : values.deliveryPreference,
                       lastUpdated: "Buyer",
                     }),
               }
@@ -120,12 +126,14 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                   finalPaymentAmountFarmer: values.finalPaymentAmount,
                   deadlineFarmer: new Date(values.deadline || Date.now()),
                   productQuantityFarmer: values.productQuantity,
+                  deliveryPrefernceFarmer: values.deliveryPreference,
                   lastUpdated: "Farmer",
                 }
               : {
                   initialPaymentAmountBuyer: values.initialPaymentAmount,
                   finalPaymentAmountBuyer: values.finalPaymentAmount,
                   deadlineBuyer: new Date(values.deadline || Date.now()),
+                  deliveryPrefernceBuyer : values.deliveryPreference,
                   productQuantityBuyer: values.productQuantity,
                   lastUpdated: "Buyer",
                 }),
@@ -271,10 +279,11 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       variant="body1"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
-                      <FaRupeeSign className="mr-1/2 text-sm" />
+                    
                       {isFarmer
                         ? row.initialPaymentAmountBuyer
                         : row.initialPaymentAmountFarmer}
+                        %
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -352,7 +361,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         : "N/A"}
                     </Typography>
                     <Typography>
-                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountFarmer}
+                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountFarmer}%
                     </Typography>
                     <Typography>
                     {t('finalpayment')}: {selectedRow?.finalPaymentAmountFarmer}
@@ -368,6 +377,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       >
                         {t('viewprofile')}
                       </a>
+                    </Typography>
+                    <Typography>
+                      Delivery Preference: {selectedRow?.deliveryPreferenceFarmer}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -389,7 +401,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                         : "N/A"}
                     </Typography>
                     <Typography>
-                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountBuyer}
+                    {t('initialpayment')}: {selectedRow?.initialPaymentAmountBuyer}%
                     </Typography>
                     <Typography>
                     {t('finalpayment')}: {selectedRow?.finalPaymentAmountBuyer}
@@ -405,6 +417,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       >
                         {t('viewprofile')}
                       </a>
+                    </Typography>
+                    <Typography>
+                      Delivery Preference: {selectedRow?.deliveryPreferenceFarmer}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -427,7 +442,9 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                   variant="contained"
                   onClick={async() => {
                     try{
-                      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true});
+                      const response = await axios.post(`/api/negotiations/accept/${selectedRow?.negotiationsId}`,{},{withCredentials: true,headers: {
+                        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                      },});
                       if(response.data.success){
                         setData((prev) => prev.filter((negotiation) => negotiation.negotiationsId !== selectedRow?.negotiationsId));
                         handleCloseModal();
@@ -509,7 +526,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       {...field}
                       error={!!errors.productQuantity}
                       helperText={errors.productQuantity?.message}
-                      label="Product Quantity in Quintal (q)"
+                      label={t("Product Quantity in Quintal (q)")}
                       fullWidth
                     />
                   )}
@@ -525,7 +542,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       {...field}
                       error={!!errors.initialPaymentAmount}
                       helperText={errors.initialPaymentAmount?.message}
-                      label="Initial Payment Amount"
+                      label={t("initialpaymentamount")}
                       fullWidth
                     />
                   )}
@@ -541,11 +558,28 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       {...field}
                       error={!!errors.finalPaymentAmount}
                       helperText={errors.finalPaymentAmount?.message}
-                      label="Final Payment Amount"
+                      label={t("finalpaymentamount")}
                       fullWidth
                     />
                   )}
                 />
+                <Controller
+    name="deliveryPreference"
+    control={control}
+    render={({ field }) => (
+      <TextField
+        {...field}
+        select
+        label="Delivery Preference"
+        fullWidth
+        variant="outlined"
+        color="secondary"
+      >
+        <MenuItem value="Farmer">Farmer</MenuItem>
+        <MenuItem value="Buyer">Buyer</MenuItem>
+      </TextField>
+    )}
+  />
                   <Controller
                   name="deadline"
                   control={control}
@@ -560,7 +594,7 @@ const NegoTable: React.FC<NegoTableProps> = ({ data,setData, userType }) => {
                       >
                         {field.value
                           ? new Date(field.value).toLocaleDateString()
-                          : "Select Deadline *"}
+                          : t("Select Deadline *")}
                       </Button>
                       <Popover
                         open={isPopoverOpen}

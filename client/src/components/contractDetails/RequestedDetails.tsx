@@ -27,6 +27,7 @@ interface RequestedDetailsProps {
     farmerProfileLink:string;
     productQuantity:string;
     productVariety: string;
+    deliveryPreference:string;
     transactions :{
       transactionId: number;
       details: string;
@@ -47,7 +48,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
       </Typography>
 
       <Typography variant="h5" sx={{ mb: 4 }}>
-        {data.productName.toUpperCase()} - {data.productVariety.toUpperCase()}
+        {t(`crops:cropsObject.${data.productName}.name`)} - {data.productVariety.toUpperCase()}
       </Typography>
 
       <Grid container spacing={4}>
@@ -125,7 +126,7 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               sx={{ display: "flex", alignItems: "center" }}
             >
               
-              <strong>Rate: {" "}</strong>{" "}
+              <strong>{t("Rate")}: {" "}</strong>{" "}
               {(
                 
                   parseInt(data.finalPaymentAmount) /
@@ -134,8 +135,12 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
               <FaRupeeSign className="text-sm ml-2" /> / {t('quintal')}
             </Typography>
             <Typography variant="body1">
-              <strong>Deadline: </strong>{" "}
+              <strong>{t("Deadline")}: </strong>{" "}
               {new Date(data.deadline).toLocaleDateString()}
+            </Typography>
+            <Typography variant="body1">
+              <strong>{t("Delivery Preference")}: </strong>{" "}
+              {data.deliveryPreference}
             </Typography>
             </CardContent>
 
@@ -151,7 +156,9 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaCheck />}
             onClick={async()=>{
               try{
-                const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/contracts/accept/${data.contractId}`,{},{withCredentials: true});
+                const response = await axios.post(`/api/contracts/accept/${data.contractId}`,{},{withCredentials: true,headers: {
+                  'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                },});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
@@ -171,7 +178,9 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaTimes />}
             onClick={async()=>{
               try{
-                const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/contracts/delete/${data.contractId}`,{withCredentials: true});
+                const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true,headers: {
+                  'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                },});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")
@@ -193,7 +202,9 @@ const RequestedDetails: React.FC<RequestedDetailsProps> = ({ data,userType }) =>
             startIcon={<FaTrash />}
             onClick={async()=>{
               try{
-                const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/contracts/delete/${data.contractId}`,{withCredentials: true});
+                const response = await axios.delete(`/api/contracts/delete/${data.contractId}`,{withCredentials: true,headers: {
+                  'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+                },});
                 if(response.data.success){
                   toast.success(t("Contract accepted successfully"));
                   navigate("/contracts")

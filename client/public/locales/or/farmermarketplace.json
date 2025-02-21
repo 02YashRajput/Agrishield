@@ -1,9 +1,14 @@
 {
-    "next": "ଆଗକୁ",
-    "previous": "ପଛକୁ",
+    "next": "ପରବର୍ତ୍ତୀ",
+    "previous": "ପୂର୍ବର୍ତ୍ତୀ",
     "nodata": "କୌଣସି ତଥ୍ୟ ଉପଲବ୍ଧ ନାହିଁ",
-    "listedcontract": "ତାଲିକାଭୁକ୍ତ ଚୁକ୍ତିସମୂହ",
+    "listedcontract": "ତାଲିକାଭୁକ୍ତ ଚୁକ୍ତିନାମା",
     "selectcrop": "ଶସ୍ୟ ଚୟନ କରନ୍ତୁ",
-    "all": "ସବୁ",
-    "selectdistance": "ଦୂରତା ଚୟନ କରନ୍ତୁ"
+    "all": "ସମସ୍ତ",
+    "selectdistance": "ଦୂରତା ଚୟନ କରନ୍ତୁ",
+    "Available Crops": "ଉପଲବ୍ଧ ଫସଲ",
+    "District-Specific Crops": "ଜିଲ୍ଲା-ନିର୍ଦ୍ଦିଷ୍ଟ ଫସଲ",
+    "Quintal": "କୁଇଣ୍ଟାଲ୍",
+    "Other crops": "ଅନ୍ୟ ଫସଲ",
+    "crop": "ଫସଲ"
 }

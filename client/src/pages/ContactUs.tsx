@@ -45,12 +45,15 @@ const fetcher = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
+      headers: {
+        'ngrok-skip-browser-warning': 'any-value',  // Add the custom header here
+      },
     })
     .then((res) => res.data);
 
 const ContactUsForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { data, error } = useSWR<Data>(`${import.meta.env.VITE_SERVER_URL}/api/`, fetcher);
+  const { data, error } = useSWR<Data>(`/api/`, fetcher);
   const { t } = useTranslation("contactus");
 
   const isLoggedIn = data?.user ? true : false;
