@@ -15,7 +15,7 @@ import http from 'http';
 const port = process.env.PORT || 3000;
 const cookie_secret = process.env.COOKIE_SECRET ;
 const session_secret = process.env.SESSION_SECRET;
-
+const isProd = process.env.NODE_ENV === 'production';
 
 const app = express();
 const httpServer = http.createServer(app); 
@@ -40,19 +40,20 @@ app.use(cookieParser(cookie_secret));
 
 app.use(
   session({
-    secret: session_secret,
+    secret: process.env.SESSION_SECRET, 
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 60000 * 60 * 24 * 30,
-      
+      maxAge: 60000 * 60 * 24 * 30, 
+      secure: isProd, 
+      sameSite: isProd ? 'none' : 'lax', 
+      httpOnly: true, 
     },
     store: MongoStore.create({
       client: mongoose.connection.getClient(),
     }),
-    rolling: true
+    rolling: true,
   })
-
 );
 
 app.use(passport.initialize());
@@ -66,7 +67,7 @@ const callBody = '<Response><Say voice="woman">Thanks for trying our documentati
 
 // sendSms(to, body);
 // sendCall(to,body);
-
+// console.log(isProd)
 configureChatSockets(httpServer);
 httpServer.listen(port, () => {
   console.log(`Server is running on port ${port}`);
