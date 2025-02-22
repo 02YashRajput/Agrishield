@@ -129,8 +129,10 @@ const contractSchema = new Schema({
   transactions: [{
     type: transactionSchema, 
     required: false, 
-  }]
-
+  }],
+  blockchainAddress:{
+    type: String,
+  }
 },{timestamps: true});
 
 

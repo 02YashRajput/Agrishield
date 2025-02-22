@@ -7,6 +7,7 @@ import {check,validationResult} from "express-validator"
 import {MarketPlace} from "../mongoose-models/market-place.mjs"
 import dotenv from "dotenv"
 import { Negotiations } from "../mongoose-models/negotiations.mjs";
+import { createFarmingContract } from "../utils/contract-service.mjs";
 dotenv.config()
 const router = Router();
 
@@ -85,6 +86,18 @@ router.post("/api/contracts/accept/:contractId",authMiddleware,async(req,res)=>{
     });
     await Negotiations.deleteMany({marketPlaceId: contract.marketPlaceId})
     const farmerProfile = await User.findById(contract.farmerId);
+
+    // const blockchainAddress = await createFarmingContract(
+    //   contract.finalPaymentAmount,
+    //   contract.deadline,
+    //   contract.farmerName,
+    //   contract.buyerName
+    // );
+    // console.log("blockchainAddress: ", blockchainAddress)
+
+    // contract.blockchainAddress = blockchainAddress;
+    // await contract.save();
+    
 
 
     const url = `${process.env.CLIENT_URL}/contracts/${contract.contractId}`
